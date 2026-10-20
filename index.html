@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ravinder Gupta | Data Analyst & BI Specialist Portfolio</title>
+  <meta name="description" content="Portfolio of Ravinder Gupta - Data Analyst specializing in Power BI, Advanced SQL, Python Analytics, DAX Semantic Modeling, and FastMCP AI workflows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #090d16;
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.25s ease-in-out;
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px -10px rgba(37, 99, 235, 0.2);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .badge-filter.active {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #3b82f6;
+      box-shadow: 0 0 16px rgba(37, 99, 235, 0.45);
+    }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #090d16; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+  </style>
+</head>
+<body class="antialiased min-h-screen selection:bg-blue-600 selection:text-white">
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+  <div class="fixed bottom-0 right-1/4 w-[600px] h-[600px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#090d16]/80 border-b border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/25">
+          RG
+        </div>
+        <span class="font-bold text-lg tracking-tight text-white">Ravinder Gupta<span class="text-blue-500">.</span></span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+        <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
+        <a href="#skills" class="hover:text-blue-400 transition-colors">Technical Skills</a>
+        <a href="#projects" class="hover:text-blue-400 transition-colors">Projects Suite</a>
+        <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="https://github.com/ravinder0710" target="_blank" rel="noopener" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="GitHub Profile">
+          <i data-lucide="github" class="w-5 h-5"></i>
+        </a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="LinkedIn Profile">
+          <i data-lucide="linkedin" class="w-5 h-5"></i>
+        </a>
+        <a href="mailto:iamravindergupta17@gmail.com" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/30">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Let's Talk
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Open to Data Analyst Roles & Immediate Availability
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
+          Translating Complex Data into <span class="gradient-text">Executive Intelligence</span>.
+        </h1>
+
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-normal">
+          I'm a business-driven <strong>Data Analyst</strong> specializing in Star/Snowflake dimensional modeling, DAX time-intelligence frameworks, advanced relational SQL, and AI-augmented analytics workflows (FastMCP + Claude). Focused on solving revenue leakage, credit risk, operational transit bottlenecks, and retention dynamics.
+        </p>
+
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-lg shadow-blue-600/25">
+            <i data-lucide="layout-grid" class="w-4 h-4"></i> View 10 Production BI Projects
+          </a>
+          <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+            <i data-lucide="send" class="w-4 h-4"></i> Get In Touch
+          </a>
+        </div>
+
+        <!-- Quick Proof Metrics -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
+          <div class="glass-card rounded-2xl p-4">
+            <div class="text-2xl font-black text-white">10</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Flagship BI Repos</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4">
+            <div class="text-2xl font-black text-blue-400">550K+</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Records Modeled</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4">
+            <div class="text-2xl font-black text-indigo-400">100%</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Open Source on Git</div>
+          </div>
+          <div class="glass-card rounded-2xl p-4">
+            <div class="text-2xl font-black text-emerald-400">Gurugram</div>
+            <div class="text-xs text-slate-400 font-medium mt-0.5">Delhi-NCR, India</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-16 border-t border-slate-800/80 bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div>
+        <h2 class="text-xs font-bold uppercase tracking-wider text-blue-400">Technical Competencies</h2>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Core Analytics & BI Stack</h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Card 1 -->
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+            <i data-lucide="bar-chart-3" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">Business Intelligence</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Power BI Desktop, DAX Studio, Tabular Modeling, Power Query (M), Advanced Excel Power Pivot (xVelocity Engine), Executive UI Layouts.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+            <i data-lucide="database" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">Databases & SQL</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            PostgreSQL, MySQL, Complex Joins, CTEs, Window Functions (<code class="text-blue-300">DENSE_RANK</code>, <code class="text-blue-300">LAG/LEAD</code>), Star & Snowflake Schema Architecture.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <i data-lucide="code-2" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">Python Data Analytics</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Pandas, NumPy, Seaborn, Matplotlib, Exploratory Data Analysis (EDA), Cohort Analysis, Correlation Matrices, Jupyter Notebook.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="glass-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </div>
+          <h4 class="font-bold text-white text-base">AI & FastMCP Workflows</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            FastMCP Claude Analytics Servers, Automated Forensic Analysis, LLM Prompt Engineering, Git Version Control, GitHub Open-Source.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 border-t border-slate-800/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h2 class="text-xs font-bold uppercase tracking-wider text-blue-400">Proof of Capability</h2>
+          <h3 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">10 Production Analytics Projects</h3>
+          <p class="text-sm text-slate-400 mt-2 max-w-2xl">
+            Each project features full data pipelines, clean dimensional schemas, live dashboards, and verifiable commercial impact.
+          </p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex flex-wrap gap-2">
+          <button onclick="filterProjects('all')" class="badge-filter active px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">All (10)</button>
+          <button onclick="filterProjects('powerbi')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Power BI (6)</button>
+          <button onclick="filterProjects('sql')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">SQL (3)</button>
+          <button onclick="filterProjects('python')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Python (2)</button>
+          <button onclick="filterProjects('excel')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Excel (2)</button>
+        </div>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-7">
+
+        <!-- Project 1: Bank Loan -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi sql python">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/bank-loan-analysis-sql-powerbi-python_pipeline.png', 'Bank Loan Data Architecture & Analytical Workflow')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/bank-loan-analysis-sql-powerbi-python/main/dashboard_summary_view.png" alt="Bank Loan Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">MySQL</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Python</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Bank Loan Portfolio Risk & Liquidity Analytics</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Cleaned raw loan data via Python, engineered 37 validated SQL queries for DTI & default ratios, and built a 3-page Power BI dashboard isolating capital adequacy.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 38.6K Loans · $435.8M Disbursed · 86.2% Good Loan Surplus · 56.9% Recovery Rate
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/bank-loan-analysis-sql-powerbi-python_pipeline.png', 'Bank Loan Pipeline')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2: Fraud Intelligence -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/fraud-intelligence-dashboard-powerbi_pipeline.png', 'Financial Fraud Behavioral Risk Architecture')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/fraud-intelligence-dashboard-powerbi-calude-MCP/main/dashboard_overview_page.png" alt="Fraud Intelligence Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">FastMCP</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Claude AI</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">DAX</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Financial Fraud Behavioral Risk & Anomaly Intelligence</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Modeled 37.9K transactional logs into an enterprise forensic model with a custom FastMCP server generating real-time AI anomaly narratives.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 37.9K Logs · 924 Fraud Cases · ₦19M Compromised · 10.2x Foreign IP Risk Uplift
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-calude-MCP" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/fraud-intelligence-dashboard-powerbi_pipeline.png', 'Fraud Architecture')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3: Personal Finance -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/personal-financial-analytics-powerbi_pipeline.png', 'Personal Finance Star Schema')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/personal-financial-analytics-powerbi/main/page_1_financial_overview.png" alt="Personal Finance Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX Time-Intel</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Star Schema</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Personal Finance & Wealth Cash-Flow Intelligence</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Engineered an interactive household cash-flow suite with dynamic SVG linear gauge indicators and automated 30% savings threshold tracking.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 2,216 Entries · $1.82M Flow · $538K Surplus · 29.57% Savings Velocity
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/personal-financial-analytics-powerbi_pipeline.png', 'Personal Finance Schema')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4: AdventureWorks DW -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="excel">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/adventure-works-sales-profit-excel_pipeline.png', 'AdventureWorks xVelocity Architecture')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/adventure-works-sales-profit-excel/main/dashboard_time_analysis.png" alt="AdventureWorks Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Excel Power Pivot</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">xVelocity Engine</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Global Retail Sales & Profit (AdventureWorks DW)</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Modeled 60,400 orders in-memory inside Excel with zero external BI dependencies, designing 25+ DAX calculated measures and territory drilldowns.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 60.4K Orders · $307.1M Revenue · $126.3M Profit · 41.1% Operating Margin
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/adventure-works-sales-profit-excel_pipeline.png', 'AdventureWorks Architecture')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5: Public Transit Fleet -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="excel">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/public-transit-fleet-operations-excel_pipeline.png', 'Public Transit Relational Architecture')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP/main/transport_transaction_dashboard.png" alt="Transit Fleet Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Excel</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Claude AI MCP</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Power Pivot</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Public Transit & Fleet Operations Dashboard</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Orchestrated a relational transit model tracking 6,585 passenger trips with AI-assisted capacity diagnostic analysis for peak congestion corridors.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 6,585 Passenger Trips · 4 Transit Corridors · >92% Peak Capacity · 3 Bottlenecks
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/public-transit-fleet-operations-excel_pipeline.png', 'Transit Pipeline')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6: Coffee Shop Sales -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi sql">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/coffee-shop-sales-sql-powerbi_pipeline.png', 'Coffee Shop Market Expansion Architecture')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/coffee-shop-sales-sql-powerbi/main/assets/coffee_shop_sales_dashboard.png" alt="Coffee Shop Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">SQL CTEs</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Coffee Shop Sales & Market Expansion Intelligence</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Synthesized 149K POS transactions and benchmarked 14 Indian metro markets using a 10-query SQL framework (<code class="text-blue-300">DENSE_RANK</code>, <code class="text-blue-300">LAG</code>) to rank expansion targets.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 149.1K POS Trans · 14 Metros · Top 3: Pune, Delhi, Jaipur · 42% Rush Share
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/coffee-shop-sales-sql-powerbi_pipeline.png', 'Coffee Shop Pipeline')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 7: Customer Churn -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="python">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/customer-churn-analysis-python_pipeline.png', 'Customer Churn EDA Pipeline')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/customer-churn-analysis-python/main/customer_distribution_by_churn_risk.png" alt="Customer Churn Risk Distribution" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Python</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Pandas</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Seaborn</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Statistical EDA</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Customer Churn Behavioral Analytics & Retention Engine</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Evaluated 10,000 subscribers and modeled tenure cohorts, uncovering months 1-12 as the vulnerability window with 48%+ contract churn.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 10K Subscribers · 27.27% Churn · 72.73% Retention · $73.3K Monthly MRR at Risk
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/customer-churn-analysis-python_pipeline.png', 'Churn Pipeline')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 8: Meta Ad Campaigns -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi sql">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/meta-ad-campaign-performance-powerbi_pipeline.png', 'Meta Ads Snowflake Architecture')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/meta-ad-campaign-performance-powerbi/main/assets/meta_ad_facebook_dashboard.png" alt="Meta Ad Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Snowflake Schema</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Meta Ad Campaign Performance & Marketing Intelligence</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Modeled 400K ad logs across Facebook & Instagram for a $2.54M spend, proving Stories format outperforms Feed placements with a 5.69% CVR.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 400K Events · $2.54M Spend · 11.79% CTR · 5.69% Stories CVR (vs 3.42% Feeds)
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/meta-ad-campaign-performance-powerbi_pipeline.png', 'Meta Ads Pipeline')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 9: Emperor Restaurant -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/emperor-restaurant-analytics-powerbi_pipeline.png', 'Emperor Restaurant Star Schema Architecture')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/emperor-restaurant-analytics-powerbi/main/page_01_overview.png" alt="Emperor Restaurant Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI (24 Pages)</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">Star Schema (11 Dims)</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Emperor Cuisine Restaurant Enterprise BI Platform</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                24-page analytical BI platform supported by 11 dimensions and 12 fact tables, formulating an actionable RM799K management value pipeline.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> RM20.69M Sales · 5 Branches · 103.5% Target Achieved · RM799K Action Plan
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/emperor-restaurant-analytics-powerbi_pipeline.png', 'Emperor Schema')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 10: HR Workforce -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi">
+          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/hr-workforce-intelligence-powerbi_pipeline.png', 'HR Workforce Decision Engine Pipeline')">
+            <img src="https://raw.githubusercontent.com/ravinder0710/hr-workforce-intelligence-powerbi/main/hr_dashboard_page_1.png" alt="HR Workforce Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI (6 Pages)</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX Rule Engine</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Power Query</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">HR Workforce Intelligence & Decision Support Dashboard</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Diagnosed attrition patterns across 2,925 employee records, utilizing automated DAX rule engines to isolate 144 promotion-ready and 234 retrenchment-review staff.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-blue-400 font-bold">KPIs:</span> 2,925 Headcount · 16.82% Attrition · 144 Promotion Ready · 234 Retrenchment Review
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/hr-workforce-intelligence-powerbi_pipeline.png', 'HR Decision Model')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  Pipeline
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Footer -->
+  <footer id="contact" class="py-16 border-t border-slate-800/80 bg-slate-950">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="space-y-2">
+          <h3 class="text-2xl font-black text-white">Let's Build Impactful Data Systems Together.</h3>
+          <p class="text-sm text-slate-400">Available for full-time Data Analyst and Business Intelligence positions.</p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/25">
+            <i data-lucide="mail" class="w-4 h-4"></i> iamravindergupta17@gmail.com
+          </a>
+          <a href="https://github.com/ravinder0710" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+            <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
+          </a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+            <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="pt-8 border-t border-slate-800/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div>© 2026 Ravinder Gupta. Hosted on GitHub Pages.</div>
+        <div class="flex items-center gap-1.5">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-blue-400"></i> Gurugram (Delhi-NCR), India
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Architecture Modal Popup -->
+  <div id="archModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+        <h4 id="modalTitle" class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+          <i data-lucide="git-branch" class="w-4 h-4 text-blue-400"></i> Data Architecture & Pipeline Model
+        </h4>
+        <button onclick="closeArchModal()" class="w-8 h-8 rounded-lg bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="p-6 overflow-y-auto flex items-center justify-center bg-slate-950/60">
+        <img id="modalImg" src="" alt="Architecture Pipeline" class="max-w-full max-h-[70vh] object-contain rounded-xl border border-slate-800 bg-white p-3">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function filterProjects(category) {
+      document.querySelectorAll('.badge-filter').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const cards = document.querySelectorAll('#projectsGrid article');
+      cards.forEach(card => {
+        const cats = card.getAttribute('data-category');
+        if (category === 'all' || cats.includes(category)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openArchModal(imgUrl, title) {
+      document.getElementById('modalImg').src = imgUrl;
+      document.getElementById('modalTitle').innerHTML = '<i data-lucide="git-branch" class="w-4 h-4 text-blue-400"></i> ' + title;
+      document.getElementById('archModal').classList.remove('hidden');
+      document.getElementById('archModal').classList.add('flex');
+      lucide.createIcons();
+    }
+
+    function closeArchModal() {
+      document.getElementById('archModal').classList.remove('flex');
+      document.getElementById('archModal').classList.add('hidden');
+    }
+
+    document.getElementById('archModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeArchModal();
+      }
+    });
+  </script>
+</body>
+</html>
