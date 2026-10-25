@@ -121,7 +121,7 @@
 
         <div class="flex flex-wrap gap-3 pt-2">
           <a href="#projects" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-lg shadow-blue-600/25">
-            <i data-lucide="layout-grid" class="w-4 h-4"></i> View 10 Production BI Projects
+            <i data-lucide="layout-grid" class="w-4 h-4"></i> View 11 Production BI Projects
           </a>
           <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
             <i data-lucide="send" class="w-4 h-4"></i> Get In Touch
@@ -131,7 +131,7 @@
         <!-- Quick Proof Metrics -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8">
           <div class="glass-card rounded-2xl p-4">
-            <div class="text-2xl font-black text-white">10</div>
+            <div class="text-2xl font-black text-white">11</div>
             <div class="text-xs text-slate-400 font-medium mt-0.5">Flagship BI Repos</div>
           </div>
           <div class="glass-card rounded-2xl p-4">
@@ -213,7 +213,7 @@
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
           <h2 class="text-xs font-bold uppercase tracking-wider text-blue-400">Proof of Capability</h2>
-          <h3 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">10 Production Analytics Projects</h3>
+          <h3 class="text-2xl sm:text-4xl font-extrabold text-white mt-1">11 Production Analytics Projects</h3>
           <p class="text-sm text-slate-400 mt-2 max-w-2xl">
             Each project features full data pipelines, clean dimensional schemas, live dashboards, and verifiable commercial impact.
           </p>
@@ -221,9 +221,9 @@
 
         <!-- Category Filters -->
         <div class="flex flex-wrap gap-2">
-          <button onclick="filterProjects('all')" class="badge-filter active px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">All (10)</button>
-          <button onclick="filterProjects('powerbi')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Power BI (6)</button>
-          <button onclick="filterProjects('sql')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">SQL (3)</button>
+          <button onclick="filterProjects('all')" class="badge-filter active px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">All (11)</button>
+          <button onclick="filterProjects('powerbi')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Power BI (7)</button>
+          <button onclick="filterProjects('sql')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">SQL (4)</button>
           <button onclick="filterProjects('python')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Python (2)</button>
           <button onclick="filterProjects('excel')" class="badge-filter px-3.5 py-1.5 rounded-xl text-xs font-bold border border-slate-700 bg-slate-900 text-slate-300 transition-all">Excel (2)</button>
         </div>
@@ -231,6 +231,49 @@
 
       <!-- Project Cards Grid -->
       <div id="projectsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-7">
+
+        <!-- Project 0: Honda Two-Wheelers Flagship Enterprise Pipeline -->
+        <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between border-2 border-red-500/30 relative" data-category="powerbi sql python">
+          <div class="absolute top-3 right-3 z-10">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40 backdrop-blur-md flex items-center gap-1 shadow-lg shadow-red-950/40">
+              <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span> Flagship Pipeline
+            </span>
+          </div>
+          <div class="relative group cursor-pointer" onclick="openArchModal('assets/honda/dashboard_2_overview.png', 'Honda Two-Wheelers Operational Cockpit')">
+            <img src="assets/honda/dashboard_2_overview.png" alt="Honda Two-Wheelers Executive Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-red-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="eye" class="w-4 h-4"></i> Click to Enlarge Dashboard View
+            </div>
+          </div>
+          <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
+            <div class="space-y-2">
+              <div class="flex flex-wrap items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20">Honda Enterprise</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI DirectQuery</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">Neon PostgreSQL</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">n8n Automation</span>
+                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX</span>
+              </div>
+              <h3 class="text-lg font-bold text-white">Honda Two-Wheelers Automated Sales Intelligence Pipeline</h3>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Zero-cost cloud pipeline syncing nationwide dealership telemetry. Engineered serverless Neon PostgreSQL schemas, automated n8n workflows, and a 4-page Power BI DirectQuery cockpit tracking intraday margins and regional velocity.
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
+                <span class="text-red-400 font-bold">KPIs:</span> ₹59.63 Cr Revenue · 5,617 Units · Activa 6G #1 (38% Vol) · 100% Free-Tier Cloud
+              </div>
+              <div class="flex items-center gap-2">
+                <a href="https://github.com/ravinder0710/honda-sales-analytics-powerbi-n8n" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+                </a>
+                <a href="honda-dashboard.html" target="_blank" rel="noopener" class="px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 transition-all border border-red-500/30 flex items-center gap-1">
+                  <i data-lucide="play" class="w-3.5 h-3.5"></i> Live Motion Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
 
         <!-- Project 1: Bank Loan -->
         <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi sql python">
