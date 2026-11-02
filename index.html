@@ -103,7 +103,7 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="relative pt-12 pb-20 md:pt-20 md:pb-28">
+  <section id="about" class="relative pt-12 pb-20 md:pt-20 md:pb-28 scroll-mt-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl space-y-6">
         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
@@ -152,7 +152,7 @@
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="py-16 border-t border-slate-800/80 bg-slate-950/40">
+  <section id="skills" class="py-16 border-t border-slate-800/80 bg-slate-950/40 scroll-mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <div>
         <h2 class="text-xs font-bold uppercase tracking-wider text-blue-400">Technical Competencies</h2>
@@ -208,7 +208,7 @@
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-20 border-t border-slate-800/80">
+  <section id="projects" class="py-20 border-t border-slate-800/80 scroll-mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
@@ -646,7 +646,7 @@
   </section>
 
   <!-- Contact & Footer -->
-  <footer id="contact" class="py-16 border-t border-slate-800/80 bg-slate-950">
+  <footer id="contact" class="py-16 border-t border-slate-800/80 bg-slate-950 scroll-mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div class="space-y-2">
@@ -697,7 +697,10 @@
 
     function filterProjects(category) {
       document.querySelectorAll('.badge-filter').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      const e = (typeof event !== 'undefined' ? event : window.event);
+      if (e && e.target) {
+        (e.target.closest('.badge-filter') || e.target).classList.add('active');
+      }
 
       const cards = document.querySelectorAll('#projectsGrid article');
       cards.forEach(card => {
