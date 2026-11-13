@@ -225,13 +225,22 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (2 Views) -->
+      <!-- Dashboard Tabs Switcher (5 Views) -->
       <div class="flex flex-wrap gap-2">
         <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
           <i data-lucide="wallet" class="w-3.5 h-3.5 text-emerald-400"></i> View 1: Financial Overview
         </button>
         <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
           <i data-lucide="piggy-bank" class="w-3.5 h-3.5 text-teal-400"></i> View 2: Savings Tracker (30%)
+        </button>
+        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="users" class="w-3.5 h-3.5 text-sky-400"></i> View 3: Member Tooltip
+        </button>
+        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-400"></i> View 4: Need vs Want Tooltip
+        </button>
+        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-purple-400"></i> View 5: Financial Details
         </button>
       </div>
 
@@ -259,7 +268,7 @@
 
           <!-- Bottom-Right Label -->
           <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="dashboardImgLabel">View 1 of 2: Family Financial Overview</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="dashboardImgLabel">View 1 of 5: Family Financial Overview</span>
           </div>
         </div>
 
@@ -699,7 +708,7 @@ DIVIDE(
     const dashboardData = [
       {
         img: 'assets/finance/page_1_financial_overview.png',
-        label: 'View 1 of 2: Family Financial Overview',
+        label: 'View 1 of 5: Family Financial Overview',
         title: 'Executive Cash-Flow Overview & Net Savings Balance',
         subtitle: '$1.82M Income • $1.28M Expense • $538K Surplus',
         desc: 'Macro household console auditing 2,216 transactions across 4 members. Visualizes $1.82M total income against $1.28M expenses, establishing $538,264 in cumulative net savings and 2-year monthly run-rate trajectory.',
@@ -709,13 +718,43 @@ DIVIDE(
       },
       {
         img: 'assets/finance/page_2_savings_tracker.png',
-        label: 'View 2 of 2: Savings & Balance Tracker (30% Target)',
+        label: 'View 2 of 5: Savings & Balance Tracker (30% Target)',
         title: 'Savings Benchmark Tracking & YTD Time Intelligence',
         subtitle: '30.0% Analytical Target • +8.88% pts YoY Improvement',
         desc: 'Tracks real-time saving rates against the 30% threshold with SVG progress gauges. 2024 achieved 33.86% saving rate (+$318.6K balance), surging past the 2023 baseline of 24.98%.',
         kpi1: '33.86% Rate (2024)',
         kpi2: '30.0% Target Met',
         kpi3: '+$318.6K Surplus'
+      },
+      {
+        img: 'assets/finance/page_3_tooltip_01_member.png',
+        label: 'View 3 of 5: Family Member Profile Tooltip',
+        title: 'Individual Member Profile & Contribution Telemetry',
+        subtitle: 'Mary, Jake, Ella & John Hover Context Cards',
+        desc: 'Dedicated hover canvas (351×366 px) isolating individual family member avatars, gross income contributions, expenditure breakdowns, and individual saving rate performance.',
+        kpi1: 'Mary 33.0% (Lead)',
+        kpi2: 'Jake 30.5% Target',
+        kpi3: 'John 25.1% Focus'
+      },
+      {
+        img: 'assets/finance/page_3_tooltip_02_categories.png',
+        label: 'View 4 of 5: Need vs Want & Top-10 Outflows Tooltip',
+        title: 'Top-10 Expense Outflows & Need vs. Want Categorization',
+        subtitle: '51% Discretionary Want vs 49% Essential Need Split',
+        desc: 'Micro-analytical hover card ranking top household expenditure drivers: Insurance Premiums ($66.4K), Car Rentals ($63.8K), Membership Fees ($61.9K), and Pharmaceuticals ($61.8K).',
+        kpi1: '$654K Discretionary',
+        kpi2: '$628K Essential',
+        kpi3: 'Top-10 Outflows'
+      },
+      {
+        img: 'assets/finance/page_4_financial_details.png',
+        label: 'View 5 of 5: Family Financial Details Audit Ledger',
+        title: 'Operational Audit Ledger & Transaction Matrix',
+        subtitle: 'Granular Row-Level Inspection • Dynamic Date Slicers',
+        desc: 'Full operational ledger equipped with member slicers, category filters, and dynamic date hierarchy selectors (Month / StartOfMonth / Week / Day) auditing all 2,216 line items.',
+        kpi1: '2,216 Records',
+        kpi2: 'Granular Slicers',
+        kpi3: 'Audit Verified'
       }
     ];
 
