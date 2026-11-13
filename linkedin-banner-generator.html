@@ -94,7 +94,7 @@
           <span><strong>Safe-Zone Verified:</strong> Left circular cutout marks where your LinkedIn Profile Photo (DP) sits. Skills, Name, and Monogram are safely placed in the visible viewing zone!</span>
         </div>
         <div class="font-mono text-cyan-400">
-          6 Luxury Color Themes Available
+          Official Vector Logos for Excel, Power BI, MySQL, Python, Pandas &amp; FastMCP
         </div>
       </div>
 
@@ -104,18 +104,18 @@
     <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
       
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-        <div class="text-cyan-400 font-bold font-mono text-xs uppercase mb-1">01. 5 Core Stack Highlights</div>
-        <h3 class="text-white font-bold text-sm mb-2">2-Line Large Badge Stack</h3>
+        <div class="text-cyan-400 font-bold font-mono text-xs uppercase mb-1">01. Official Tech Logos</div>
+        <h3 class="text-white font-bold text-sm mb-2">Vector Brand Icons</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Features: <strong>Advance Excel</strong>, <strong>Power BI</strong>, <strong>MySQL</strong>, <strong>Python with Pandas</strong>, and <strong>Power BI MCP Server</strong> with high-visibility tech icons.
+          Replaced all emojis with authentic vector brand logos for <strong>Microsoft Excel</strong>, <strong>Power BI</strong>, <strong>MySQL</strong>, <strong>Python</strong>, <strong>Pandas</strong>, and <strong>Power BI MCP Server</strong>.
         </p>
       </div>
 
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-        <div class="text-purple-400 font-bold font-mono text-xs uppercase mb-1">02. Executive Word Replaced</div>
-        <h3 class="text-white font-bold text-sm mb-2">Enterprise Data Intelligence</h3>
+        <div class="text-purple-400 font-bold font-mono text-xs uppercase mb-1">02. Python &amp; Pandas Separated</div>
+        <h3 class="text-white font-bold text-sm mb-2">Distinct Skill Identifiers</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Replaced "Executive" with <strong>"Enterprise Data Intelligence &amp; Business Architecture"</strong> — representing production data warehousing and industrial-scale modeling.
+          Separated Python and Pandas into their own distinct chips with official dual-color snake logo and multi-bar dataframe emblem.
         </p>
       </div>
 
@@ -233,6 +233,175 @@
       renderBanner();
     }
 
+    // ==========================================
+    // OFFICIAL VECTOR BRAND LOGOS DRAWING ENGINE
+    // ==========================================
+
+    function drawLogoExcel(c, x, y, size) {
+      c.save();
+      // Base green sheet
+      c.fillStyle = '#107c41';
+      roundRect(c, x + size * 0.35, y + size * 0.08, size * 0.58, size * 0.84, size * 0.14, true, false);
+      // Grid lines
+      c.fillStyle = '#21a366';
+      c.fillRect(x + size * 0.52, y + size * 0.22, size * 0.32, size * 0.1);
+      c.fillRect(x + size * 0.52, y + size * 0.45, size * 0.32, size * 0.1);
+      c.fillRect(x + size * 0.52, y + size * 0.68, size * 0.32, size * 0.1);
+      // Front green tile with white X
+      c.fillStyle = '#0e5c2f';
+      roundRect(c, x + size * 0.04, y + size * 0.16, size * 0.58, size * 0.68, size * 0.14, true, false);
+      c.fillStyle = '#ffffff';
+      c.font = `900 ${Math.round(size * 0.44)}px "Plus Jakarta Sans"`;
+      c.textAlign = 'center';
+      c.textBaseline = 'middle';
+      c.fillText('X', x + size * 0.33, y + size * 0.51);
+      c.restore();
+    }
+
+    function drawLogoPowerBI(c, x, y, size) {
+      c.save();
+      // 3 ascending rounded bars (Official Power BI bar chart)
+      const barW = size * 0.22;
+      const rad = size * 0.08;
+      // Bar 1 (Short - light yellow)
+      c.fillStyle = '#f6d743';
+      roundRect(c, x + size * 0.1, y + size * 0.55, barW, size * 0.38, rad, true, false);
+      // Bar 2 (Medium - gold)
+      c.fillStyle = '#f2c811';
+      roundRect(c, x + size * 0.38, y + size * 0.32, barW, size * 0.61, rad, true, false);
+      // Bar 3 (Tall - deep amber)
+      c.fillStyle = '#d99b00';
+      roundRect(c, x + size * 0.66, y + size * 0.08, barW, size * 0.85, rad, true, false);
+      c.restore();
+    }
+
+    function drawLogoMySQL(c, x, y, size) {
+      c.save();
+      // Navy tile
+      c.fillStyle = '#005e86';
+      roundRect(c, x + size * 0.05, y + size * 0.05, size * 0.9, size * 0.9, size * 0.22, true, false);
+      // Dolphin arc (Orange/Gold)
+      c.fillStyle = '#f29111';
+      c.beginPath();
+      c.arc(x + size * 0.52, y + size * 0.48, size * 0.32, Math.PI * 0.8, Math.PI * 1.95, false);
+      c.lineWidth = size * 0.14;
+      c.strokeStyle = '#f29111';
+      c.stroke();
+      // Dolphin fin & snout
+      c.fillStyle = '#f29111';
+      c.beginPath();
+      c.moveTo(x + size * 0.58, y + size * 0.24);
+      c.lineTo(x + size * 0.82, y + size * 0.32);
+      c.lineTo(x + size * 0.65, y + size * 0.42);
+      c.closePath();
+      c.fill();
+      c.fillStyle = '#ffffff';
+      c.beginPath();
+      c.arc(x + size * 0.35, y + size * 0.62, size * 0.06, 0, Math.PI * 2);
+      c.fill();
+      c.restore();
+    }
+
+    function drawLogoPython(c, x, y, size) {
+      c.save();
+      // Official Python interlocking blue & yellow snakes
+      // Blue upper snake
+      c.fillStyle = '#387eb8';
+      c.beginPath();
+      c.moveTo(x + size * 0.5, y + size * 0.08);
+      c.lineTo(x + size * 0.65, y + size * 0.08);
+      c.arc(x + size * 0.65, y + size * 0.25, size * 0.17, -Math.PI / 2, 0);
+      c.lineTo(x + size * 0.82, y + size * 0.38);
+      c.arc(x + size * 0.65, y + size * 0.38, size * 0.17, 0, Math.PI / 2);
+      c.lineTo(x + size * 0.35, y + size * 0.55);
+      c.lineTo(x + size * 0.35, y + size * 0.42);
+      c.arc(x + size * 0.5, y + size * 0.42, size * 0.15, Math.PI, -Math.PI / 2);
+      c.lineTo(x + size * 0.5, y + size * 0.08);
+      c.closePath();
+      c.fill();
+      // Blue eye
+      c.fillStyle = '#ffffff';
+      c.beginPath();
+      c.arc(x + size * 0.44, y + size * 0.18, size * 0.05, 0, Math.PI * 2);
+      c.fill();
+
+      // Yellow lower snake
+      c.fillStyle = '#ffe052';
+      c.beginPath();
+      c.moveTo(x + size * 0.5, y + size * 0.92);
+      c.lineTo(x + size * 0.35, y + size * 0.92);
+      c.arc(x + size * 0.35, y + size * 0.75, size * 0.17, Math.PI / 2, Math.PI);
+      c.lineTo(x + size * 0.18, y + size * 0.62);
+      c.arc(x + size * 0.35, y + size * 0.62, size * 0.17, Math.PI, -Math.PI / 2);
+      c.lineTo(x + size * 0.65, y + size * 0.45);
+      c.lineTo(x + size * 0.65, y + size * 0.58);
+      c.arc(x + size * 0.5, y + size * 0.58, size * 0.15, 0, Math.PI / 2);
+      c.lineTo(x + size * 0.5, y + size * 0.92);
+      c.closePath();
+      c.fill();
+      // Yellow eye
+      c.fillStyle = '#020617';
+      c.beginPath();
+      c.arc(x + size * 0.56, y + size * 0.82, size * 0.05, 0, Math.PI * 2);
+      c.fill();
+      c.restore();
+    }
+
+    function drawLogoPandas(c, x, y, size) {
+      c.save();
+      // Navy base tile
+      c.fillStyle = '#150458';
+      roundRect(c, x + size * 0.05, y + size * 0.05, size * 0.9, size * 0.9, size * 0.22, true, false);
+      // 4 official Pandas color bars
+      const bw = size * 0.12;
+      const rad = size * 0.05;
+      // Bar 1: Magenta
+      c.fillStyle = '#e70488';
+      roundRect(c, x + size * 0.2, y + size * 0.35, bw, size * 0.42, rad, true, false);
+      // Bar 2: Yellow
+      c.fillStyle = '#ffcf00';
+      roundRect(c, x + size * 0.36, y + size * 0.22, bw, size * 0.55, rad, true, false);
+      // Bar 3: Cyan
+      c.fillStyle = '#00ffff';
+      roundRect(c, x + size * 0.52, y + size * 0.45, bw, size * 0.32, rad, true, false);
+      // Bar 4: White
+      c.fillStyle = '#ffffff';
+      roundRect(c, x + size * 0.68, y + size * 0.28, bw, size * 0.49, rad, true, false);
+      c.restore();
+    }
+
+    function drawLogoMCP(c, x, y, size) {
+      c.save();
+      // Dark purple tile
+      c.fillStyle = '#1e1b4b';
+      roundRect(c, x + size * 0.05, y + size * 0.05, size * 0.9, size * 0.9, size * 0.22, true, false);
+      // FastMCP terracotta neural knot
+      c.fillStyle = '#ea580c';
+      c.beginPath();
+      c.moveTo(x + size * 0.5, y + size * 0.16);
+      c.lineTo(x + size * 0.78, y + size * 0.32);
+      c.lineTo(x + size * 0.78, y + size * 0.68);
+      c.lineTo(x + size * 0.5, y + size * 0.84);
+      c.lineTo(x + size * 0.22, y + size * 0.68);
+      c.lineTo(x + size * 0.22, y + size * 0.32);
+      c.closePath();
+      c.fill();
+      // Inner core node
+      c.fillStyle = '#facc15';
+      c.beginPath();
+      c.arc(x + size * 0.5, y + size * 0.5, size * 0.16, 0, Math.PI * 2);
+      c.fill();
+      c.fillStyle = '#ffffff';
+      c.beginPath();
+      c.arc(x + size * 0.5, y + size * 0.5, size * 0.07, 0, Math.PI * 2);
+      c.fill();
+      c.restore();
+    }
+
+    // ==========================================
+    // MAIN BANNER RENDER PIPELINE
+    // ==========================================
+
     function renderBanner() {
       const th = themes[currentTheme];
       const w = 1584;
@@ -268,14 +437,12 @@
       ctx.restore();
 
       // 3. Ambient Glowing Spotlight Orbs
-      // Orb 1: Near Center/Right
       const orb1 = ctx.createRadialGradient(980, 180, 20, 980, 180, 380);
       orb1.addColorStop(0, th.glow);
       orb1.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = orb1;
       ctx.fillRect(0, 0, w, h);
 
-      // Orb 2: Top Right Corner
       const orb2 = ctx.createRadialGradient(1450, 60, 10, 1450, 60, 250);
       orb2.addColorStop(0, th.glow);
       orb2.addColorStop(1, 'rgba(0,0,0,0)');
@@ -335,19 +502,19 @@
       ctx.fillText('Star Schema Data Warehousing • DirectQuery Cockpits • Serverless Analytics Pipelines', contentX, 188);
 
       // ==========================================
-      // 5 CORE SKILLS IN 2 LINES (BIGGER FONT & ICONS)
-      // Requested by user:
-      // "advance excel, power bi, mysql, python with panda, power bi mcp server"
-      // ==========================================
-
+      // 6 CORE SKILLS IN 2 LINES (WITH OFFICIAL LOGOS)
       // Line 1: Advance Excel, Power BI, MySQL
-      const line1Y = 214;
+      // Line 2: Python, Pandas, Power BI MCP Server + Immediate Joiner
+      // ==========================================
       const chipHeight = 44;
+      const logoSize = 24;
 
+      // LINE 1
+      const line1Y = 214;
       const line1Chips = [
-        { icon: '📊', name: 'Advance Excel', color: '#10b981', w: 185 },
-        { icon: '⚡', name: 'Power BI', color: '#f59e0b', w: 145 },
-        { icon: '🐬', name: 'MySQL', color: '#38bdf8', w: 135 }
+        { name: 'Advance Excel', color: '#10b981', w: 180, draw: drawLogoExcel },
+        { name: 'Power BI', color: '#f59e0b', w: 140, draw: drawLogoPowerBI },
+        { name: 'MySQL', color: '#38bdf8', w: 130, draw: drawLogoMySQL }
       ];
 
       let lx1 = contentX;
@@ -359,21 +526,25 @@
         ctx.lineWidth = 1.5;
         roundRect(ctx, lx1, line1Y, c.w, chipHeight, 12, false, true);
 
-        // Content
+        // Draw Official Logo
+        c.draw(ctx, lx1 + 12, line1Y + 10, logoSize);
+
+        // Text
         ctx.fillStyle = '#ffffff';
         ctx.font = '800 15px "Plus Jakarta Sans"';
         ctx.textAlign = 'left';
-        ctx.fillText(c.icon + ' ' + c.name, lx1 + 16, line1Y + 28);
+        ctx.textBaseline = 'middle';
+        ctx.fillText(c.name, lx1 + 12 + logoSize + 10, line1Y + chipHeight / 2);
 
         lx1 += c.w + 14;
       });
 
-      // Line 2: Python with Pandas, Power BI MCP Server + Immediate Joiner
+      // LINE 2
       const line2Y = 268;
-
       const line2Chips = [
-        { icon: '🐍', name: 'Python with Pandas', color: '#60a5fa', w: 220 },
-        { icon: '🤖', name: 'Power BI MCP Server', color: '#f43f5e', w: 235 }
+        { name: 'Python', color: '#60a5fa', w: 135, draw: drawLogoPython },
+        { name: 'Pandas', color: '#e70488', w: 135, draw: drawLogoPandas },
+        { name: 'Power BI MCP Server', color: '#f43f5e', w: 235, draw: drawLogoMCP }
       ];
 
       let lx2 = contentX;
@@ -385,17 +556,21 @@
         ctx.lineWidth = 1.5;
         roundRect(ctx, lx2, line2Y, c.w, chipHeight, 12, false, true);
 
-        // Content
+        // Draw Official Logo
+        c.draw(ctx, lx2 + 12, line2Y + 10, logoSize);
+
+        // Text
         ctx.fillStyle = '#ffffff';
         ctx.font = '800 15px "Plus Jakarta Sans"';
         ctx.textAlign = 'left';
-        ctx.fillText(c.icon + ' ' + c.name, lx2 + 16, line2Y + 28);
+        ctx.textBaseline = 'middle';
+        ctx.fillText(c.name, lx2 + 12 + logoSize + 10, line2Y + chipHeight / 2);
 
         lx2 += c.w + 14;
       });
 
       // Immediate Joiner Pill (Next to Line 2)
-      const joinerW = 210;
+      const joinerW = 205;
       ctx.fillStyle = 'rgba(16, 185, 129, 0.16)';
       roundRect(ctx, lx2, line2Y, joinerW, chipHeight, 12, true, false);
       ctx.strokeStyle = '#10b981';
@@ -405,12 +580,14 @@
       ctx.fillStyle = '#34d399';
       ctx.font = '800 13px "JetBrains Mono"';
       ctx.textAlign = 'center';
-      ctx.fillText('● 0 Days Notice (Joiner)', lx2 + joinerW / 2, line2Y + 27);
+      ctx.textBaseline = 'middle';
+      ctx.fillText('● 0 Days Notice (Joiner)', lx2 + joinerW / 2, line2Y + chipHeight / 2);
 
       // ==========================================
       // G. LIVE PORTFOLIO & GITHUB URLS (BOTTOM BAR)
       // ==========================================
       const bottomY = 352;
+      ctx.textBaseline = 'alphabetic'; // reset
       ctx.fillStyle = '#94a3b8';
       ctx.font = '700 13px "JetBrains Mono"';
       ctx.textAlign = 'left';
@@ -489,6 +666,7 @@
       ctx.fillStyle = '#ffffff';
       ctx.font = '900 68px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
+      ctx.textBaseline = 'alphabetic';
       ctx.shadowColor = th.accent;
       ctx.shadowBlur = 18;
       ctx.fillText('RG', badgeCenterX, badgeCenterY + 24);
