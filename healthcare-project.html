@@ -14,7 +14,7 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
-      background-color: #040d12;
+      background-color: #030a0d;
       color: #f1f5f9;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       overflow-x: hidden;
@@ -44,14 +44,19 @@
       color: #ffffff;
       box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
     }
+
+    /* Custom Codeblock styling */
+    pre code {
+      font-family: 'JetBrains Mono', monospace;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
 
-  <!-- 2.2-Second Luxury Clinical Emerald Curtain Preloader -->
+  <!-- 2.8-Second Luxury Clinical Emerald Curtain Preloader -->
   <div id="healthcarePreloader" class="fixed inset-0 z-50 bg-[#020b0e] flex flex-col items-center justify-center border-b border-emerald-500/30">
     <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
-      <!-- Glowing Medical Caduceus / RG Themed Badge -->
+      <!-- Glowing Medical / RG Themed Badge -->
       <div class="relative">
         <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-400 p-[2px] shadow-2xl shadow-emerald-500/50">
           <div class="w-full h-full bg-[#031518] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
@@ -71,14 +76,14 @@
           Healthcare Provider Analytics<span class="text-emerald-400">.</span>
         </h1>
         <p class="text-xs text-emerald-300/80 font-mono tracking-wide">
-          £3.36M Billing Reconciliation &bull; Star Schema &bull; 5,000 Patient Encounters
+          £3.36M Billing Reconciliation • Star Schema • 5,000 Patient Encounters
         </p>
       </div>
 
       <!-- Progress Bar & Counter -->
       <div class="w-64 space-y-2 pt-2">
         <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
-          <span class="text-emerald-400 font-bold" id="preloaderStatus">Ingesting 5,000 Patient Encounters</span>
+          <span class="text-emerald-400 font-bold" id="preloaderStatus">Ingesting 5,000 Patient Encounters...</span>
           <span class="text-white font-extrabold" id="preloaderCount">0%</span>
         </div>
         <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800">
@@ -163,12 +168,12 @@
         <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
           <div class="text-[11px] font-mono text-slate-400 uppercase">Total Patient Encounters</div>
           <div class="text-2xl sm:text-3xl font-black text-white">5,000</div>
-          <div class="text-[11px] text-emerald-400 font-semibold">3,768 Outpatient &bull; 1,232 Admitted</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">3,768 Outpatient • 1,232 Admitted</div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive 6-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <!-- Interactive 6-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
     <section class="space-y-6">
       <!-- Header with Interactive Slider Controls -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
@@ -184,7 +189,7 @@
           <!-- Autoplay / Pause Toggle -->
           <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all cursor-pointer">
             <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
           </button>
 
           <!-- Prev & Next Clickable Controls -->
@@ -198,7 +203,7 @@
         </div>
       </div>
 
-      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
       <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
@@ -244,7 +249,7 @@
           <!-- Top-Left Status Pill -->
           <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-emerald-400 font-mono flex items-center gap-2 border border-emerald-500/20">
             <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
           </div>
 
           <!-- Bottom-Right Label -->
@@ -254,16 +259,21 @@
         </div>
 
         <!-- Dynamic Page Insights Banner -->
-        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs">
+        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <span class="font-bold text-emerald-400 flex items-center gap-2" id="insightTitle">
               <i data-lucide="sparkles" class="w-4 h-4"></i> Details Executive Cockpit (Light Theme)
             </span>
-            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">Field Parameters &bull; £3.36M Billing Reconciliation</span>
+            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">Field Parameters • £3.36M Billing Reconciliation</span>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
             Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.
           </p>
+          <div class="flex flex-wrap gap-2 pt-1" id="insightKpiTags">
+            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" id="insightKpi1">£3.36M Gross Billing</span>
+            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-teal-500/10 text-teal-400 border border-teal-500/20" id="insightKpi2">5,000 Total Encounters</span>
+            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" id="insightKpi3">Field Parameter Slicing</span>
+          </div>
         </div>
       </div>
     </section>
@@ -309,6 +319,89 @@
           <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">4</div>
           <strong class="text-white text-sm block">Power BI Dual-Theme & Tooltips</strong>
           <p class="text-slate-400 leading-relaxed">Built seamless Light/Dark mode switcher with bookmark toggles, dynamic Field Parameters for metric slicing, and physician drill-through report card tooltips.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dimensional Modeling & Star Schema Deep Dive -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+          <i data-lucide="database" class="w-3.5 h-3.5"></i> Dimensional Architecture & Schema Design
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Power BI Model View & Table Relationships</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Strict 1-to-many dimensional filtering connecting master dimensions to central fact tables, preventing circular ambiguity and ensuring sub-second DAX evaluation across 5,000 encounters.
+        </p>
+      </div>
+
+      <!-- Model View & Relationships Side-by-Side Images -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+            <span class="text-emerald-400 font-bold flex items-center gap-1.5"><i data-lucide="layout-grid" class="w-4 h-4"></i> Star Schema Model View</span>
+            <span class="text-slate-500">Power BI Model Canvas</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-emerald-500/40 transition-colors">
+            <img src="assets/healthcare/healthcare_model_view.png" alt="Healthcare Star Schema Model View" class="w-full h-auto object-contain max-h-[380px] rounded-xl">
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Central `fact_visits` connected via single-directional 1-to-many keys to `dim_patients`, `dim_doctors`, `dim_departments`, and `dim_date`.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+            <span class="text-sky-400 font-bold flex items-center gap-1.5"><i data-lucide="link" class="w-4 h-4"></i> Cardinality & Filter Direction</span>
+            <span class="text-slate-500">1-to-Many Relationships</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-sky-500/40 transition-colors">
+            <img src="assets/healthcare/healthcare_relationships.png" alt="Healthcare Dimensional Relationships" class="w-full h-auto object-contain max-h-[380px] rounded-xl">
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Eliminates bi-directional filtering hazards, ensuring predictable filter context propagation from doctor profiles and department hierarchies down to individual billing line items.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Field Parameters Showcase -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
+          <i data-lucide="sliders" class="w-3.5 h-3.5"></i> Modern Power BI Feature Engineering
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Dynamic Field Parameters (Measures & Calendar Hierarchy)</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Implemented native Power BI Field Parameters allowing executive users to toggle visual dimensions and metrics dynamically without duplicating charts or reports.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+            <span class="text-purple-400 font-bold flex items-center gap-1.5"><i data-lucide="layers" class="w-4 h-4"></i> Dynamic Measure Parameters</span>
+            <span class="text-slate-500">Revenue, LOS & Patient Slicing</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-purple-500/40 transition-colors">
+            <img src="assets/healthcare/healthcare_field_parameter_measures.png" alt="Healthcare Field Parameter Measures" class="w-full h-auto object-contain max-h-[340px] rounded-xl">
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Users can instantly swap chart metrics between Total Billing Amount, Patient Insurance Coverage, and Out-of-Pocket liabilities with a single slicer touch.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
+            <span class="text-indigo-400 font-bold flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4"></i> Calendar Dynamic Granularity</span>
+            <span class="text-slate-500">Day • Week • Month • Quarter</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-indigo-500/40 transition-colors">
+            <img src="assets/healthcare/healthcare_field_parameter_calendar.png" alt="Healthcare Field Parameter Calendar" class="w-full h-auto object-contain max-h-[340px] rounded-xl">
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Dynamic calendar field parameter empowers clinical department heads to pivot trend lines across Monthly, Weekly, and Daily views seamlessly.
+          </p>
         </div>
       </div>
     </section>
@@ -408,7 +501,7 @@ AVERAGEX(
 
   <!-- Footer -->
   <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div>© 2026 Ravinder Gupta &bull; Healthcare Provider Analytics & RCM Pipeline</div>
+    <div>© 2026 Ravinder Gupta • Healthcare Provider Analytics & RCM Pipeline</div>
     <div class="flex items-center gap-4 font-mono">
       <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
       <a href="healthcare-resume.html" class="hover:text-white transition-colors">Healthcare Resume</a>
@@ -426,7 +519,7 @@ AVERAGEX(
     lucide.createIcons();
 
     // ==========================================
-    // 2.2-Second Luxury Clinical Curtain Preloader Engine
+    // 2.8-Second Luxury Clinical Curtain Preloader Engine
     // ==========================================
     (function() {
       const preloader = document.getElementById('healthcarePreloader');
@@ -457,7 +550,7 @@ AVERAGEX(
 
       preloader.addEventListener('click', dismissPreloader);
 
-      const stepDuration = 25; // 2.2s progression
+      const stepDuration = 28; // ~2.8s total
       const interval = setInterval(() => {
         current += Math.floor(Math.random() * 3) + 1;
         if (current >= 100) {
@@ -489,7 +582,8 @@ AVERAGEX(
     })();
 
     // ==========================================
-    // Interactive 6-Tab 2.2-Second Auto-Slider Engine
+    // Interactive 6-Tab 5.0-Second Auto-Slider Engine
+    // (Explicit User Customization: SLIDE_DURATION = 5000)
     // ==========================================
     const dashboardData = [
       {
@@ -497,49 +591,72 @@ AVERAGEX(
         label: 'View 1 of 6: Details (Light Mode)',
         title: 'Details Executive Cockpit (Light Theme)',
         subtitle: 'Field Parameters • £3.36M Billing Reconciliation',
-        desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.'
+        desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.',
+        kpi1: '£3.36M Gross Billing',
+        kpi2: '5,000 Total Encounters',
+        kpi3: 'Field Parameter Slicing'
       },
       {
         img: 'assets/healthcare/healthcare_details_dark.png',
         label: 'View 2 of 6: Details (Dark Mode)',
         title: 'Details Executive Cockpit (Dark Theme)',
         subtitle: 'High Contrast Mode • £2.23M Payor Coverage',
-        desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.'
+        desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.',
+        kpi1: '66.4% Insured Ratio',
+        kpi2: '£2.23M Institutional Pay',
+        kpi3: '£1.13M Patient Liability'
       },
       {
         img: 'assets/healthcare/healthcare_trend_light.jpg',
         label: 'View 3 of 6: Monthly & Department Trends (Light)',
         title: 'Monthly Inpatient Billing Trend (Actual vs Prior Month)',
         subtitle: 'MoM DAX Iterators • Department vs Weekday Billing',
-        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.'
+        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.',
+        kpi1: '£1.66M Q1 Peak Volume',
+        kpi2: 'Cardiology Tariff Lead',
+        kpi3: 'Weekday vs Weekend Mix'
       },
       {
         img: 'assets/healthcare/healthcare_trend_dark.jpg',
         label: 'View 4 of 6: Monthly Trends (Dark Mode)',
         title: 'Monthly Trends & Department Velocity (Dark Theme)',
         subtitle: 'MoM Waterfall • Orthopedics & Pediatrics Telemetry',
-        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.'
+        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.',
+        kpi1: 'Seasonality Diagnostics',
+        kpi2: 'Pediatrics Capacity',
+        kpi3: 'Orthopedics Velocity'
       },
       {
         img: 'assets/healthcare/healthcare_provider_details.jpg',
         label: 'View 5 of 6: Provider Clinical Performance & Doctor Ratings',
         title: 'Physician Performance, Length of Stay (LOS) & Outpatient Triage',
         subtitle: '5,000 Visits • Emergency (39%) vs Non-Emergency (61%)',
-        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.'
+        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.',
+        kpi1: '3,768 Outpatient Visits',
+        kpi2: '1,232 Inpatient Admitted',
+        kpi3: '5.05 Dr. Grek Benchmark'
       },
       {
         img: 'assets/healthcare/healthcare_provider_tooltip.jpg',
         label: 'View 6 of 6: Physician Drilldown Tooltip Card',
         title: 'Physician Report Card & Patient Satisfaction Metric',
         subtitle: 'Doctor Scorecard • 4,973 Attended Encounters',
-        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).'
+        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).',
+        kpi1: '4,973 Attended Cases',
+        kpi2: '4.21 Satisfaction Score',
+        kpi3: 'Drill-Through Telemetry'
       }
     ];
 
     let currentTabIndex = 0;
     let autoPlayActive = true;
-    const SLIDE_DURATION = 2200; // 2.2 seconds
+    
+    // User Explicit Setting: 5.0 Seconds Slider Animation Duration
+    const SLIDE_DURATION = 5000; // 5.0 seconds
+    const PROGRESS_STEP = 50;    // updates every 50ms
     let slideTimer = null;
+    let progressTimer = null;
+    let progressPercent = 0;
 
     function renderSlide(index) {
       currentTabIndex = index;
@@ -554,9 +671,10 @@ AVERAGEX(
       const d = dashboardData[index];
       const img = document.getElementById('dashboardImg');
       if (img) {
-        img.style.opacity = '0';
+        img.style.opacity = '0.2';
         setTimeout(() => {
           img.src = d.img;
+          img.alt = d.title;
           img.style.opacity = '1';
         }, 120);
       }
@@ -573,20 +691,23 @@ AVERAGEX(
       const descEl = document.getElementById('insightDesc');
       if (descEl) descEl.innerText = d.desc;
 
+      const kpi1 = document.getElementById('insightKpi1');
+      if (kpi1) kpi1.innerText = d.kpi1;
+      const kpi2 = document.getElementById('insightKpi2');
+      if (kpi2) kpi2.innerText = d.kpi2;
+      const kpi3 = document.getElementById('insightKpi3');
+      if (kpi3) kpi3.innerText = d.kpi3;
+
       lucide.createIcons();
+
+      progressPercent = 0;
+      updateProgressBar();
     }
 
-    function resetProgressBar() {
+    function updateProgressBar() {
       const bar = document.getElementById('slideProgressBar');
       if (bar) {
-        bar.style.transition = 'none';
-        bar.style.width = '0%';
-        setTimeout(() => {
-          if (autoPlayActive && bar) {
-            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
-            bar.style.width = '100%';
-          }
-        }, 30);
+        bar.style.width = progressPercent + '%';
       }
     }
 
@@ -613,7 +734,19 @@ AVERAGEX(
 
     function startAutoPlayTimer() {
       clearInterval(slideTimer);
-      resetProgressBar();
+      clearInterval(progressTimer);
+
+      progressPercent = 0;
+      updateProgressBar();
+
+      progressTimer = setInterval(() => {
+        if (autoPlayActive) {
+          progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
+          if (progressPercent > 100) progressPercent = 100;
+          updateProgressBar();
+        }
+      }, PROGRESS_STEP);
+
       slideTimer = setInterval(() => {
         nextDashboardTab();
       }, SLIDE_DURATION);
@@ -624,19 +757,17 @@ AVERAGEX(
       const icon = document.getElementById('playPauseIcon');
       const text = document.getElementById('playPauseText');
       const pill = document.getElementById('sliderStatusPill');
-      const bar = document.getElementById('slideProgressBar');
 
       if (autoPlayActive) {
         if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
-        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
+        if (pill) pill.innerText = '5.0s Live Auto-Slider';
         startAutoPlayTimer();
       } else {
         clearInterval(slideTimer);
-        if (bar) {
-          bar.style.transition = 'none';
-          bar.style.width = '0%';
-        }
+        clearInterval(progressTimer);
+        progressPercent = 0;
+        updateProgressBar();
         if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
         if (text) text.innerText = 'Paused (Click to Resume)';
         if (pill) pill.innerText = 'Auto-Slider Paused';
@@ -644,14 +775,13 @@ AVERAGEX(
       lucide.createIcons();
     }
 
-    // Pause auto-slider on hover, resume on leave
+    // Pause auto-slider on container hover, resume on leave
     const container = document.getElementById('dashboardSlideContainer');
     if (container) {
       container.addEventListener('mouseenter', () => {
         if (autoPlayActive) {
           clearInterval(slideTimer);
-          const bar = document.getElementById('slideProgressBar');
-          if (bar) bar.style.transition = 'none';
+          clearInterval(progressTimer);
           const pill = document.getElementById('sliderStatusPill');
           if (pill) pill.innerText = 'Hovered (Paused)';
         }
@@ -659,7 +789,7 @@ AVERAGEX(
       container.addEventListener('mouseleave', () => {
         if (autoPlayActive) {
           const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          if (pill) pill.innerText = '5.0s Live Auto-Slider';
           startAutoPlayTimer();
         }
       });
