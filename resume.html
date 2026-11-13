@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ravinder Gupta — Data Analyst Resume</title>
+  <title>Ravinder Gupta — Official Data Analyst Resume</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
@@ -20,39 +20,66 @@
     }
   </style>
 </head>
-<body class="antialiased min-h-screen py-8 px-4 sm:px-6">
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
 
   <!-- Top Action Bar -->
-  <div class="no-print max-w-4xl mx-auto mb-6 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
+  <div class="no-print max-w-5xl mx-auto mb-6 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
     <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all">
       <i data-lucide="arrow-left" class="w-4 h-4 text-blue-400"></i> Back to Portfolio
     </a>
-    <div class="flex items-center gap-2.5">
-      <button onclick="window.print()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all">
-        <i data-lucide="printer" class="w-3.5 h-3.5"></i> Print / Save as PDF
-      </button>
-      <a href="assets/Ravinder_Gupta_Data_Analyst_Resume_ATS.docx" download="Ravinder_Gupta_Data_Analyst_Resume.docx" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
-        <i data-lucide="download" class="w-3.5 h-3.5"></i> Download ATS DOCX
+    <div class="flex flex-wrap items-center gap-2.5">
+      <a href="assets/Ravinder_Gupta_Data_Analyst_Resume.pdf" download="Ravinder_Gupta_Data_Analyst_Resume.pdf" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> Download Official PDF
       </a>
+      <a href="assets/Ravinder_Gupta_Data_Analyst_Resume.pdf" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
+        <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Open Fullscreen
+      </a>
+      <button onclick="window.print()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all">
+        <i data-lucide="printer" class="w-3.5 h-3.5"></i> Print
+      </button>
     </div>
   </div>
 
-  <!-- Printable Resume Paper Container -->
-  <div class="print-container max-w-4xl mx-auto bg-slate-950/90 text-slate-200 border border-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-2xl space-y-7">
+  <!-- Embedded PDF Viewer (Official Document) -->
+  <div class="no-print max-w-5xl mx-auto mb-8 bg-slate-900/90 border border-slate-800 rounded-3xl p-3 sm:p-4 shadow-2xl">
+    <div class="flex items-center justify-between px-3 py-2 pb-3 border-b border-slate-800/80 text-xs">
+      <div class="flex items-center gap-2 font-semibold text-slate-200">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Official Resume (PDF Preview)</span>
+        <span class="text-[11px] text-slate-500 font-mono hidden sm:inline">&bull; 1-Page Gold Standard</span>
+      </div>
+      <a href="assets/Ravinder_Gupta_Data_Analyst_Resume.pdf" download="Ravinder_Gupta_Data_Analyst_Resume.pdf" class="text-sky-400 hover:text-sky-300 font-medium text-xs flex items-center gap-1 transition-colors">
+        <i data-lucide="download" class="w-3.5 h-3.5"></i> Direct Download
+      </a>
+    </div>
+    <div class="mt-3 rounded-2xl overflow-hidden border border-slate-800 bg-slate-950 shadow-inner">
+      <iframe src="assets/Ravinder_Gupta_Data_Analyst_Resume.pdf#view=FitH" class="w-full h-[85vh] sm:h-[90vh] bg-slate-900" title="Ravinder Gupta Official Resume PDF">
+        <div class="p-8 text-center text-slate-300 space-y-4">
+          <p>Your browser doesn't support inline PDF preview.</p>
+          <a href="assets/Ravinder_Gupta_Data_Analyst_Resume.pdf" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs">
+            <i data-lucide="external-link" class="w-4 h-4"></i> Click to Open / Download PDF
+          </a>
+        </div>
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Printable Resume Paper Container (ATS Accessible Clean Copy) -->
+  <div class="print-container max-w-5xl mx-auto bg-slate-950/90 text-slate-200 border border-slate-800/80 rounded-3xl p-8 sm:p-12 shadow-2xl space-y-7">
 
     <!-- Header Section -->
     <div class="border-b border-slate-800 pb-6 text-center space-y-2">
       <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-white uppercase">Ravinder Gupta</h1>
       <p class="text-xs sm:text-sm font-bold tracking-wider text-blue-400 uppercase">
-        Data Analyst &bull; Power BI &bull; Advanced SQL &bull; Python &bull; Star Schema Modeling &bull; Excel
+        Data Analyst &bull; Power BI &bull; SQL &bull; Python &bull; Excel
       </p>
       <div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs text-slate-400 pt-2 font-mono">
         <span>📍 Gurugram (Delhi-NCR), India</span>
         <span>📞 +91 9982637026</span>
         <a href="mailto:iamravindergupta17@gmail.com" class="text-sky-400 hover:underline">iamravindergupta17@gmail.com</a>
-        <a href="https://linkedin.com/in/ravinder-gupta-da" target="_blank" class="text-sky-400 hover:underline">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/ravinder-gupta-da" target="_blank" class="text-sky-400 hover:underline">LinkedIn</a>
         <a href="https://github.com/ravinder0710" target="_blank" class="text-sky-400 hover:underline">GitHub</a>
-        <a href="https://ravinder0710.github.io" target="_blank" class="text-sky-400 hover:underline">Portfolio (12 Live Projects)</a>
+        <a href="https://ravinder0710.github.io" target="_blank" class="text-sky-400 hover:underline">Portfolio Website</a>
       </div>
     </div>
 
@@ -60,104 +87,116 @@
     <div class="space-y-2">
       <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Professional Summary</h2>
       <p class="text-xs sm:text-sm text-slate-300 leading-relaxed text-justify">
-        Business-driven <strong>Data Analyst</strong> with hands-on experience delivering 12 production analytics projects across healthcare RCM, automotive dealership telematics, banking credit risk, financial fraud detection, and multi-branch retail dining. Skilled in star/snowflake dimensional modeling, advanced DAX time-intelligence frameworks, complex relational SQL (Window Functions, CTEs, Joins), and Python EDA. Proven track record auditing transactional ledgers, mitigating credit exposure, and engineering executive BI dashboards for immediate decision support.
+        I'm a <strong>Data Analyst</strong> looking for my first full-time role. For about a year, I've worked with business clients, alongside building 10+ projects of my own across banking, retail, food, marketing, operations and healthcare. I mostly work in Power BI and SQL, with Python, Excel and Tableau where the project needs them. I connect the data sources, clean the data in Power Query or Python, build the data model, then write the SQL and DAX. I also write an MS Word report for every project, and on two of them I used Model Context Protocol (MCP) servers to speed up the modeling.
       </p>
     </div>
 
     <!-- Technical Skills Grid -->
     <div class="space-y-2">
-      <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Technical Skills & Competencies</h2>
+      <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Technical Skills</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-        <div><strong class="text-white">BI & Visualization:</strong> Power BI Desktop (DAX, Power Query M, Field Parameters, DirectQuery), DAX Studio, Excel Pivot/Dashboards</div>
-        <div><strong class="text-white">Databases & SQL:</strong> MySQL, PostgreSQL (CTEs, Window Functions, DENSE_RANK, LAG, Subqueries, Staging DDL & Views)</div>
-        <div><strong class="text-white">Data Modeling:</strong> Star & Snowflake Schema Architecture, Fact/Dimension Tables, Inactive Relationships, Cardinality Management</div>
-        <div><strong class="text-white">Python Analytics:</strong> Pandas, NumPy, Matplotlib, Seaborn, Exploratory Data Analysis (EDA), Cohort Analysis, Telemetry Ingestion</div>
-        <div><strong class="text-white">Spreadsheets & Engines:</strong> Advanced MS Excel, Power Pivot (xVelocity In-Memory Engine), What-If Analysis, Multi-Dimensional Modeling</div>
-        <div><strong class="text-white">Automation & Modern Tools:</strong> FastMCP + Claude AI Semantic Automation, n8n Automated ETL Pipelines, Git/GitHub Version Control</div>
+        <div><strong class="text-white">BI & Visualization:</strong> Power BI, Excel (pivot tables, formulas, dashboards) and Tableau</div>
+        <div><strong class="text-white">Databases:</strong> MySQL, PostgreSQL (local and Neon), SQL Server. Joins, CTEs, window functions, subqueries, aggregations</div>
+        <div><strong class="text-white">Python Analytics:</strong> Pandas, NumPy, Matplotlib, Seaborn, EDA</div>
+        <div><strong class="text-white">Data Modeling:</strong> Star schema, DAX, Power Query, Power Pivot</div>
+        <div class="sm:col-span-2"><strong class="text-white">Tools & Modern Workflows:</strong> Power BI Modeling MCP, Excel MCP, n8n (Postgres node), Git, GitHub</div>
       </div>
     </div>
 
-    <!-- Featured Production Projects -->
+    <!-- Projects Section -->
     <div class="space-y-4">
-      <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Featured Production BI Projects (12 Live Repos)</h2>
+      <div class="flex items-center justify-between border-b border-slate-800 pb-1">
+        <h2 class="text-xs font-black uppercase tracking-wider text-blue-400">Featured Projects</h2>
+        <a href="https://ravinder0710.github.io" target="_blank" class="text-[11px] text-sky-400 hover:underline font-mono">See all 12 BI projects: ravinder0710.github.io &rarr;</a>
+      </div>
 
-      <!-- Project 1: Healthcare RCM -->
+      <!-- Project 1: Emperor Cuisine -->
       <div class="space-y-1">
         <div class="flex flex-wrap items-center justify-between text-xs font-bold text-white">
-          <span>Healthcare Provider Analytics & Revenue Cycle Management (RCM)</span>
-          <span class="text-slate-400 font-normal font-mono">Power BI &bull; Advanced DAX &bull; Star/Snowflake Schema &bull; SQL</span>
+          <span>1. Emperor Cuisine Restaurant Analytics</span>
+          <span class="text-slate-400 font-normal font-mono">Power BI &bull; Star Schema &bull; DAX &bull; Power Query</span>
         </div>
         <ul class="list-disc list-inside text-xs text-slate-300 space-y-1 pl-1">
-          <li>Architected a Star/Snowflake dimensional model across 5,000 UK patient encounters, linking 8 normalized relational entities with active/inactive date relationships for admission cohort analysis.</li>
-          <li>Engineered dynamic DAX iterators (`SUMX`) for daily bed room charges, calculating £3.36M in gross billing, £2.23M (66.4%) in payor settlements, and £1.13M in patient out-of-pocket liabilities.</li>
-          <li>Built dual-theme (Light & Dark) executive cockpits featuring dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.</li>
+          <li>Built a 24-page Power BI report for a restaurant group with 5 branches, using a star schema with 11 dimension tables and 12 fact tables.</li>
+          <li>Wrote DAX measures for branch sales against target, table reservations, customer recency and loyalty wallets, plus measures tracking chatbot performance.</li>
+          <li>Total sales came to RM20.7M against RM20M target (103.5%), ~13K table bookings, and chatbot achieved a 78% resolution success rate.</li>
         </ul>
       </div>
 
-      <!-- Project 2: Honda Two-Wheelers -->
+      <!-- Project 2: Global Retail Sales & Profit Analysis -->
       <div class="space-y-1">
         <div class="flex flex-wrap items-center justify-between text-xs font-bold text-white">
-          <span>Honda Two-Wheelers Automated Sales Intelligence Pipeline</span>
-          <span class="text-slate-400 font-normal font-mono">Power BI DirectQuery &bull; Neon PostgreSQL &bull; n8n &bull; Python</span>
+          <span>2. Global Retail Sales & Profit Analysis</span>
+          <span class="text-slate-400 font-normal font-mono">Microsoft Excel &bull; Power Pivot &bull; DAX &bull; Power Query &bull; Star Schema</span>
         </div>
         <ul class="list-disc list-inside text-xs text-slate-300 space-y-1 pl-1">
-          <li>Constructed a ₹0.00/month automated cloud ETL pipeline synchronizing nationwide dealership CSV telemetry into serverless Neon PostgreSQL.</li>
-          <li>Delivered a 4-page Power BI DirectQuery cockpit monitoring ₹59.63 Cr across 5,617 unit sales, isolating Activa 6G as anchor volume driver (38.4%).</li>
+          <li>Built a sales model in Excel using Power Pivot and a star schema (5 dims, 1 fact) covering 60k+ orders across 6 markets ($307M revenue, 41% profit margin).</li>
+          <li>Analyzed 606 products and identified 448 (74%) had no sales; isolated that products priced >$150 generated $120.5M in profit (95.4% of total).</li>
+          <li>Replaced VLOOKUP formulas with DAX measures and engineered a 2-page dashboard with interactive slicers and macro reset controls.</li>
         </ul>
       </div>
 
-      <!-- Project 3: Bank Loan Analytics -->
+      <!-- Project 3: Customer Churn Analysis -->
       <div class="space-y-1">
         <div class="flex flex-wrap items-center justify-between text-xs font-bold text-white">
-          <span>Bank Loan Portfolio Risk & Liquidity Analytics</span>
-          <span class="text-slate-400 font-normal font-mono">MySQL &bull; Power BI &bull; Python (Pandas) &bull; DAX</span>
+          <span>3. Customer Churn Analysis</span>
+          <span class="text-slate-400 font-normal font-mono">Python &bull; Pandas &bull; NumPy &bull; Seaborn &bull; EDA</span>
         </div>
         <ul class="list-disc list-inside text-xs text-slate-300 space-y-1 pl-1">
-          <li>Analyzed 38,576 loan records via 37 validated MySQL queries (CTEs, text-date normalization) to classify Good vs. Bad loan tranches ($435.8M funded, 86.2% surplus).</li>
-          <li>Quantified a $28.25M capital impairment on Charged-Off loans with a 56.9% recovery benchmark across a 3-page interactive Power BI dashboard.</li>
+          <li>Joined 3 datasets in Pandas across 10,000 customers and 4,600+ support records, aggregating multi-row tickets into one unified record per customer.</li>
+          <li>Cleaned data, imputed missing countries, corrected referral errors, and engineered churn flag, tenure in days, and risk tiers using `np.where()` and `pd.cut()`.</li>
+          <li>Isolated ~27% churn (2,727 customers) risking ~$73K monthly revenue; identified highest churn concentration in month-to-month contracts under 12 months.</li>
         </ul>
       </div>
 
-      <!-- Project 4: Financial Fraud Intelligence -->
+      <!-- Project 4: Bank Loan Analytics -->
       <div class="space-y-1">
         <div class="flex flex-wrap items-center justify-between text-xs font-bold text-white">
-          <span>Financial Fraud Behavioral Risk & Anomaly Intelligence</span>
-          <span class="text-slate-400 font-normal font-mono">Power BI &bull; FastMCP AI &bull; DAX &bull; Security Analytics</span>
+          <span>4. Bank Loan Analytics</span>
+          <span class="text-slate-400 font-normal font-mono">MySQL &bull; Power BI &bull; Python &bull; Tableau &bull; DAX</span>
         </div>
         <ul class="list-disc list-inside text-xs text-slate-300 space-y-1 pl-1">
-          <li>Audited 37,901 transactions to isolate high-risk behavior: foreign-IP logins produced a 24.8% fraud rate (10.2x uplift) and ₹19M in exposed capital.</li>
-          <li>Designed an operational risk cockpit with automated DAX scoring rules to triage suspicious user sessions with 92.7 vs. 48.3 risk separation.</li>
+          <li>Authored 35+ MySQL queries across 38K+ loan records to track MoM portfolio health and segregate good loans (86%, $436M funded) from bad debt tranches.</li>
+          <li>Constructed a 3-page interactive Power BI dashboard with calibrated DAX measures and cross-validated KPIs against source SQL and Tableau builds.</li>
+          <li>Uncovered $28M unrecovered on charged-off loans (57% recovery rate) and engineered a Python validation pipeline to benchmark liquidity ratios.</li>
         </ul>
       </div>
 
-      <!-- Project 5: Emperor Cuisine -->
+      <!-- Project 5: Fraud Intelligence Dashboard -->
       <div class="space-y-1">
         <div class="flex flex-wrap items-center justify-between text-xs font-bold text-white">
-          <span>Emperor Cuisine Enterprise Restaurant Platform</span>
-          <span class="text-slate-400 font-normal font-mono">Power BI &bull; Star Schema (11 Dims, 12 Facts) &bull; DAX</span>
+          <span>5. Fraud Intelligence Dashboard</span>
+          <span class="text-slate-400 font-normal font-mono">Power BI &bull; Power BI Modeling MCP &bull; DAX</span>
         </div>
         <ul class="list-disc list-inside text-xs text-slate-300 space-y-1 pl-1">
-          <li>Designed a 24-page analytical BI platform for a 5-branch dining enterprise, tracking RM20.69M in sales against RM20M target (103.5%).</li>
+          <li>Engineered a Power BI dashboard leveraging Claude with an MCP server for schema relationships and DAX authoring, designing executive visuals manually.</li>
+          <li>Audited 37.9K transactions isolating foreign-IP logins producing a 25% fraud rate (10x uplift over 2.4% baseline) and &ge;3 failed logins yielding 16% fraud rate.</li>
+          <li>Validated all automated DAX measures against ground truth to prioritize high-risk forensic investigations for enterprise risk mitigation.</li>
         </ul>
       </div>
     </div>
 
-    <!-- Education & Training -->
+    <!-- Relevant Training & Education -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
       <div class="space-y-1.5">
-        <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Education</h2>
-        <div class="text-xs space-y-0.5">
-          <strong class="text-white">B.Tech, Mechanical Engineering</strong>
-          <p class="text-slate-400">Rajasthan Technical University (RTU), India &bull; 2017</p>
-          <p class="text-slate-400">CBSE Secondary & Senior Secondary (Science)</p>
+        <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Relevant Training & Coursework</h2>
+        <div class="text-xs space-y-1 text-slate-300">
+          <p>&bull; <strong>Microsoft Excel:</strong> Data Analysis & Dashboards (Data with Decision)</p>
+          <p>&bull; <strong>SQL:</strong> Complete Bootcamp (Ankit Bansal & Sumit Mittal)</p>
+          <p>&bull; <strong>Power BI:</strong> Business Intelligence & Data Visualization (Data with Decision)</p>
         </div>
       </div>
       <div class="space-y-1.5">
-        <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Certifications & Training</h2>
-        <div class="text-xs space-y-0.5 text-slate-300">
-          <p>&bull; <strong>SQL Complete Bootcamp:</strong> Ankit Bansal</p>
-          <p>&bull; <strong>Power BI Data Analyst & Visualization:</strong> Coursera / Industry Prep</p>
-          <p>&bull; <strong>Advanced Excel & Business Analytics:</strong> MS Excel Power Tools</p>
+        <h2 class="text-xs font-black uppercase tracking-wider text-blue-400 border-b border-slate-800 pb-1">Education</h2>
+        <div class="text-xs space-y-1">
+          <div>
+            <strong class="text-white">B.Tech, Mechanical Engineering</strong>
+            <p class="text-slate-400">Rajasthan Technical University (RTU), Rajasthan, India</p>
+          </div>
+          <div>
+            <strong class="text-white">Senior Secondary (Class XII, Science) & Secondary (Class X)</strong>
+            <p class="text-slate-400">CBSE, Rajasthan, India</p>
+          </div>
         </div>
       </div>
     </div>
