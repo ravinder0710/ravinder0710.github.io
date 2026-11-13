@@ -4,7 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ravinder Gupta | Data Analyst & BI Specialist Portfolio</title>
-  <meta name="description" content="Portfolio of Ravinder Gupta - Data Analyst specializing in Power BI, Advanced SQL, Python Analytics, DAX Semantic Modeling, and FastMCP AI workflows.">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production portfolio of Ravinder Gupta featuring 12 enterprise BI projects across Healthcare RCM, Automotive Telematics, Banking, and Financial Fraud using Power BI, Advanced SQL, Python, and Star/Snowflake schemas.">
+  <meta name="author" content="Ravinder Gupta">
+
+  <!-- Open Graph / LinkedIn / WhatsApp / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ravinder0710.github.io/">
+  <meta property="og:site_name" content="Ravinder Gupta Portfolio">
+  <meta property="og:title" content="Ravinder Gupta | Data Analyst & BI Specialist (12 Production Projects)">
+  <meta property="og:description" content="Production portfolio featuring 12 enterprise BI projects across Healthcare RCM, Automotive Telematics, Banking, and Fraud Intelligence with Star/Snowflake schemas, DAX, and SQL.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ravinder0710/healthcare-provider-analytics-powerbi/main/screenshots/healthcare_dashboard_light.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://ravinder0710.github.io/">
+  <meta name="twitter:title" content="Ravinder Gupta | Data Analyst & BI Specialist (12 Projects)">
+  <meta name="twitter:description" content="12 production BI projects across Healthcare RCM, Banking, Telematics & Fraud Intelligence.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/ravinder0710/healthcare-provider-analytics-powerbi/main/screenshots/healthcare_dashboard_light.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -165,6 +184,9 @@
         <a href="https://www.linkedin.com/in/ravinder-gupta-da" target="_blank" rel="noopener" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all" title="LinkedIn Profile">
           <i data-lucide="linkedin" class="w-5 h-5"></i>
         </a>
+        <button onclick="copyToClipboard('iamravindergupta17@gmail.com', 'Email copied: iamravindergupta17@gmail.com')" class="p-2 rounded-xl text-slate-400 hover:text-sky-400 hover:bg-slate-800 transition-all" title="Copy Email to Clipboard">
+          <i data-lucide="copy" class="w-4 h-4"></i>
+        </button>
         <a href="mailto:iamravindergupta17@gmail.com" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/30">
           <i data-lucide="mail" class="w-3.5 h-3.5"></i> Let's Talk
         </a>
@@ -793,6 +815,12 @@
           <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-md shadow-blue-600/25">
             <i data-lucide="mail" class="w-4 h-4"></i> iamravindergupta17@gmail.com
           </a>
+          <button onclick="copyToClipboard('iamravindergupta17@gmail.com', 'Email copied: iamravindergupta17@gmail.com')" class="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all" title="Copy Email">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy Email
+          </button>
+          <button onclick="copyToClipboard('+919982637026', 'Phone copied: +91 9982637026')" class="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 transition-all" title="Copy Phone">
+            <i data-lucide="phone" class="w-3.5 h-3.5"></i> +91 9982637026
+          </button>
           <a href="assets/Ravinder_Gupta_Data_Analyst_Resume.pdf" download="Ravinder_Gupta_Data_Analyst_Resume.pdf" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
             <i data-lucide="download" class="w-4 h-4"></i> Resume (PDF)
           </a>
@@ -842,6 +870,70 @@
     });
 
     lucide.createIcons();
+
+    // 1-Click Copy to Clipboard Engine
+    function copyToClipboard(text, msg) {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function() {
+          showToast(msg || 'Copied to clipboard!');
+        }).catch(function() {
+          fallbackCopy(text, msg);
+        });
+      } else {
+        fallbackCopy(text, msg);
+      }
+    }
+
+    function fallbackCopy(text, msg) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(msg || 'Copied to clipboard!');
+      } catch (err) {
+        showToast('Value: ' + text);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('copyToast');
+      var toastText = document.getElementById('copyToastText');
+      if (!toast || !toastText) return;
+      toastText.innerText = msg;
+      toast.classList.remove('opacity-0', 'translate-y-3', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(window._toastTimeout);
+      window._toastTimeout = setTimeout(function() {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-3', 'pointer-events-none');
+      }, 2500);
+    }
+
+    // Floating Back to Top Button Observer
+    window.addEventListener('scroll', function() {
+      var btn = document.getElementById('backToTopBtn');
+      if (!btn) return;
+      if (window.scrollY > 400) {
+        btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+        btn.classList.add('opacity-100', 'translate-y-0');
+      } else {
+        btn.classList.remove('opacity-100', 'translate-y-0');
+        btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+      }
+    });
+
+    // Keyboard Accessibility (ESC to close Architecture Modal)
+    window.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeArchModal();
+      }
+    });
 
     function filterProjects(category) {
       document.querySelectorAll('.badge-filter').forEach(btn => btn.classList.remove('active'));
@@ -1137,5 +1229,16 @@
       });
     })();
   </script>
+  <!-- 1-Click Copy Toast Notification -->
+  <div id="copyToast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 ease-out flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-slate-900/95 border border-sky-500/50 text-white text-xs font-semibold shadow-2xl backdrop-blur-md">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <span id="copyToastText">Copied to clipboard!</span>
+  </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="backToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 z-40 p-3 rounded-2xl bg-slate-900/90 text-sky-400 border border-slate-800 hover:border-sky-500/40 hover:bg-slate-800/90 shadow-2xl backdrop-blur-md transition-all duration-300 opacity-0 pointer-events-none translate-y-3 group" title="Back to top">
+    <i data-lucide="arrow-up" class="w-5 h-5 group-hover:-translate-y-0.5 transition-transform"></i>
+  </button>
+
 </body>
 </html>
