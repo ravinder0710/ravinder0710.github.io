@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HR Workforce Intelligence & Decision Support | Executive Case Study & 6-Page Suite</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: HR Workforce Intelligence & Decision Support Dashboard. 2,925 employees, 16.82% attrition diagnostic modeling, rule-based screening for Promotion (144) and Retrenchment (234), and Power BI 6-page suite.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="HR Workforce Intelligence & Decision Support Dashboard">
+  <meta property="og:description" content="Explore enterprise people analytics, attrition diagnostics across 2,925 employees, and rule-based decision support with custom 5-second auto-slider.">
+  <meta property="og:image" content="assets/hr/hr_dashboard_page_1.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #070814;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Electric Magenta & Coral Curtain Preloader */
+    #hrPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(236, 72, 153, 0.35);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(244, 114, 182, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(236, 72, 153, 0.6), 0 0 40px rgba(244, 63, 94, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(236, 72, 153, 0.22);
+      border-color: rgba(236, 72, 153, 0.65);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(236, 72, 153, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.8-Second Luxury Electric Magenta & Coral Curtain Preloader -->
+  <div id="hrPreloader" class="fixed inset-0 z-50 bg-[#04040a] flex flex-col items-center justify-center border-b border-pink-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing HR People Shield / RG Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pink-600 via-rose-500 to-indigo-500 p-[2px] shadow-2xl shadow-pink-500/50">
+          <div class="w-full h-full bg-[#100918] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-pink-500/20 blur-xl rounded-full -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-2">
+        <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+          HR Workforce Intelligence & Decision Support
+        </h2>
+        <p class="text-xs sm:text-sm text-pink-400/90 font-mono tracking-wide">
+          2,925 Employees · 16.82% Attrition · Promotion & Retrenchment
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-64 space-y-2">
+        <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-pink-500/20">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-pink-600 via-rose-500 to-indigo-500 rounded-full w-0 transition-all duration-[2400ms] ease-out"></div>
+        </div>
+        <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
+          <span>Initializing Human Capital Decision Engine</span>
+          <span id="preloaderCount" class="text-pink-300 font-bold">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Canvas Particle Background -->
+  <canvas id="trailCanvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
+  <div id="cursorRing" class="fixed pointer-events-none z-50 rounded-full border border-pink-400/60 bg-pink-500/5 transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2 hidden md:block" style="width: 34px; height: 34px;"></div>
+  <div id="cursorDot" class="fixed pointer-events-none z-50 w-2 h-2 rounded-full bg-pink-400 transition-transform duration-0 ease-out -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-pink-400/80 hidden md:block"></div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="max-w-7xl mx-auto mb-8">
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-pink-400 transition-colors group">
+          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+          Back to Portfolio
+        </a>
+        <span class="text-slate-700">|</span>
+        <span class="text-xs font-mono text-pink-400 font-semibold flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-pink-400 animate-pulse"></span>
+          People Analytics & Decision Engine
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-pink-500/40">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+        </a>
+        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 border border-pink-500/30 transition-all">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline Diagram
+        </a>
+        <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-pink-600 hover:bg-pink-500 text-white shadow-lg shadow-pink-600/30 transition-all">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Contact Ravinder
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-7xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="space-y-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-pink-500/10 text-pink-400 border border-pink-500/20">Power BI (6 Pages)</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">Power Query (M)</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">Advanced DAX</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Workforce Decision Rules</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">2,925 Headcount Master</span>
+      </div>
+
+      <div class="space-y-4">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          HR Workforce Intelligence & Decision Support Dashboard
+        </h1>
+        <p class="text-base sm:text-lg text-slate-400 max-w-4xl leading-relaxed">
+          Enterprise human capital analytics solution developed in <strong class="text-white">Microsoft Power BI</strong> across a master population of <strong class="text-white">2,925 personnel</strong>. Integrates two foundational talent pillars: granular <strong class="text-pink-400">16.82% (492 exits) attrition diagnostics</strong> across departments, roles, and tenure bands, coupled with an operational <strong class="text-rose-400">rule-based decision support engine</strong> surfacing objective screening cohorts for <strong class="text-white">Promotion Reviews (144 staff)</strong> and <strong class="text-white">Retrenchment Reviews (234 staff)</strong>.
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Total Headcount</div>
+          <div class="text-2xl sm:text-3xl font-black text-pink-400">2,925 Staff</div>
+          <p class="text-xs text-slate-400">2,433 active personnel (83.2% operational retention rate).</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Overall Attrition</div>
+          <div class="text-2xl sm:text-3xl font-black text-rose-400">16.82%</div>
+          <p class="text-xs text-slate-400">492 employee exits (R&D drives 57.3% and Sales drives 37.8%).</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Promotion Stagnation</div>
+          <div class="text-2xl sm:text-3xl font-black text-amber-400">144 Staff (4.9%)</div>
+          <p class="text-xs text-slate-400">Employees with 10–15 years since last advancement (high flight risk).</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Retrenchment Review</div>
+          <div class="text-2xl sm:text-3xl font-black text-indigo-400">234 Staff (8.0%)</div>
+          <p class="text-xs text-slate-400">Extended service cohort (≥18 years at company) for succession review.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 6-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
+    <section class="space-y-6">
+      <!-- Header with Interactive Slider Controls (Custom 5-Second Interval) -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="users" class="w-6 h-6 text-pink-400"></i>
+            Executive 6-Page Interactive Talent Showcase
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400">
+            Interactive <strong class="text-pink-300">5-second rotation</strong> cycling through Attrition Diagnostics, Role Headwinds, and Rule-Based Decision Lists.
+          </p>
+        </div>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 border border-pink-500/30 transition-all">
+            <i id="playPauseIcon" data-lucide="pause" class="w-3.5 h-3.5"></i>
+            <span id="playPauseText">Pause 5s Auto-Slider</span>
+          </button>
+          <!-- Prev & Next Clickable Controls -->
+          <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
+            <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 6</span>
+            <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-pink-600 via-rose-500 to-indigo-500 rounded-full transition-all ease-linear" style="width: 0%;"></div>
+      </div>
+
+      <!-- Dashboard Tabs Switcher (6 Views) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2" id="tabContainer">
+        <button onclick="switchTab(0)" class="tab-btn active px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 1</div>
+          <div class="text-white font-bold truncate">Attrition Overview</div>
+        </button>
+
+        <button onclick="switchTab(1)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 2</div>
+          <div class="text-white font-bold truncate">Job Role Diagnostics</div>
+        </button>
+
+        <button onclick="switchTab(2)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 3</div>
+          <div class="text-white font-bold truncate">Age & Gender Cohorts</div>
+        </button>
+
+        <button onclick="switchTab(3)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 4</div>
+          <div class="text-white font-bold truncate">Workforce Health</div>
+        </button>
+
+        <button onclick="switchTab(4)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 5</div>
+          <div class="text-white font-bold truncate">HR Action Lists</div>
+        </button>
+
+        <button onclick="switchTab(5)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 6</div>
+          <div class="text-white font-bold truncate">Workforce Detail Matrix</div>
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl space-y-4">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div class="relative group/view rounded-2xl overflow-hidden border border-slate-800/90 bg-[#100a18]/90 min-h-[420px] sm:min-h-[580px] flex items-center justify-center">
+          <img id="dashboardImg" src="assets/hr/hr_dashboard_page_1.png" alt="HR Workforce Attrition Overview Dashboard" class="w-full h-auto max-h-[720px] object-contain transition-opacity duration-300">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-pink-600 hover:scale-105 shadow-2xl">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-pink-600 hover:scale-105 shadow-2xl">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/80 flex items-center gap-2 text-xs font-mono text-pink-300">
+            <span class="w-2 h-2 rounded-full bg-pink-400 animate-pulse"></span>
+            <span id="viewStatusBadge">Page 1: Attrition Overview (Executive Summary)</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-400">
+            5.0s Auto-Slider active ➔
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center gap-2 text-xs font-mono text-pink-400 uppercase tracking-wider font-semibold">
+            <i data-lucide="sparkles" class="w-4 h-4 text-pink-400"></i>
+            <span id="insightTitle">Attrition Diagnostic: Departmental & Career Tenure Vulnerability</span>
+          </div>
+          <p id="insightDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            Out of 2,925 total personnel, 492 departures establish an enterprise baseline attrition rate of 16.82%. R&D represents the primary vulnerability zone accounting for 57.3% (282 exits), followed by Sales at 37.8% (186 exits), with acute concentration in early career tenure (0–10 years).
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-mono pt-1 text-slate-400">
+            <div><span class="text-pink-400 font-bold">Total Headcount:</span> <span id="insightKpi1">2,925 Staff (2,433 Active)</span></div>
+            <div><span class="text-rose-400 font-bold">Top Attrition:</span> <span id="insightKpi2">R&D (282 Exits / 57.3%)</span></div>
+            <div><span class="text-amber-400 font-bold">Tenure Risk:</span> <span id="insightKpi3">0–10 Years Tenure Cliff</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Transparent Business Rules & Decision Support Framework -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-pink-400 font-bold tracking-wider uppercase">
+          <i data-lucide="scale" class="w-4 h-4"></i>
+          Workforce Decision Support Architecture
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Rule-Based Screening Filters & Operational Criteria
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Automated talent screening parameters translating corporate HR governance guidelines into objective candidate pools for managerial review.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Rule 1: Promotion -->
+        <div class="bg-slate-900/90 border border-amber-500/30 rounded-2xl p-6 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 font-mono">RULE 1 · CAREER PROGRESSION</span>
+            <span class="text-xs text-amber-300 font-mono font-bold">144 Candidates (4.92%)</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Promotion Stagnation Alert</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Identifies experienced active personnel who have served <strong class="text-amber-300">between 10 and 15 years since their last promotion</strong>. Unchecked tenure stagnation without title or scope advancement creates acute flight risks among high-skill senior contributors.
+          </p>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-[11px] font-mono text-amber-300">
+            <code>Years Since Last Promotion &gt;= 10 AND &lt;= 15</code>
+          </div>
+          <p class="text-xs text-slate-400">
+            <strong>Action:</strong> Prioritize for immediate talent council review, lateral leadership transfers, or salary scope realignment.
+          </p>
+        </div>
+
+        <!-- Rule 2: Retrenchment -->
+        <div class="bg-slate-900/90 border border-indigo-500/30 rounded-2xl p-6 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 font-mono">RULE 2 · WORKFORCE PLANNING</span>
+            <span class="text-xs text-indigo-300 font-mono font-bold">234 Candidates (8.00%)</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Retrenchment & Succession Cohort</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Surfaces senior employees possessing <strong class="text-indigo-300">18 or more years of continuous company service</strong>. Forms the basis for organizational restructuring audits, voluntary separation schemes (VSS), and phased retirement knowledge transfer.
+          </p>
+          <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 text-[11px] font-mono text-indigo-300">
+            <code>Years At Company &gt;= 18</code>
+          </div>
+          <p class="text-xs text-slate-400">
+            <strong>Action:</strong> Audit succession readiness and stage structured transition plans to prevent institutional knowledge loss.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section -->
+    <section id="pipeline" class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-pink-400 font-bold tracking-wider uppercase">
+          <i data-lucide="git-merge" class="w-4 h-4"></i>
+          System Architecture & Data Engineering
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Data Cleansing, Banding & Decision Engine Flow
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          End-to-end data pipeline transforming 2,925 raw human resource records across 35 dimensional attributes into an executive Power BI decision system.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/90 p-4 shadow-2xl backdrop-blur-md">
+        <img src="assets/hr/data_architecture_pipeline.png" alt="HR Workforce Decision Engine Pipeline Architecture" class="w-full h-auto rounded-2xl border border-slate-800/80">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center font-bold text-pink-400 text-sm">1</div>
+          <h3 class="font-bold text-white text-sm">Master Ingestion</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Consolidates 2,925 employee records covering compensation, appraisal scores, tenure history, job roles, and commute distances.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-bold text-rose-400 text-sm">2</div>
+          <h3 class="font-bold text-white text-sm">Power Query Banding</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Derives standardized analytical bands for Age Groups (18–25 through 56+), Commute Distance, and Years Since Last Promotion.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center font-bold text-indigo-400 text-sm">3</div>
+          <h3 class="font-bold text-white text-sm">DAX Decision Logic</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Implements strict string-predicate logic (<code class="text-indigo-300">[Promotion Status] = "1"</code>) to calculate candidate pools without type coercion errors.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-bold text-purple-400 text-sm">4</div>
+          <h3 class="font-bold text-white text-sm">Executive Reporting</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Deploys 6 specialized interactive report pages supporting multi-dimensional cross-filtering by department, role, gender, and rating.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key DAX Measures -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-pink-400 font-bold tracking-wider uppercase">
+          <i data-lucide="code" class="w-4 h-4"></i>
+          Production DAX Formulations
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Workforce Decision Support & Attrition DAX Measures
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          DAX calculations engineered for strict type safety, dynamic headcount evaluation, and policy screening rates.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- DAX 1 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Headcount & Cumulative Attrition Rate</span>
+            <span class="text-[10px] font-mono text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded border border-pink-500/20">Baseline KPIs</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-pink-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Total Employees = COUNTROWS('HR Master Data')
+
+Total Attrition = 
+CALCULATE(
+    [Total Employees],
+    'HR Master Data'[Attrition] = "Yes"
+)
+
+Attrition Rate = 
+DIVIDE([Total Attrition], [Total Employees], 0)
+-- Output: 16.82% (492 Exits across 2,925 Staff)</code></pre>
+          <p class="text-xs text-slate-400">
+            Computes active versus departed headcount dynamics across all demographic and organizational filters.
+          </p>
+        </div>
+
+        <!-- DAX 2 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Due for Promotion Screening Measure</span>
+            <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Promotion Rule</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-amber-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Due for Promotion = 
+CALCULATE(
+    [Total Employees],
+    'HR Master Data'[Promotion Status] = "1"
+)
+
+Promotion % = 
+DIVIDE([Due for Promotion], [Total Employees], 0)
+-- Output: 144 Candidates (4.92% of Staff)</code></pre>
+          <p class="text-xs text-slate-400">
+            Filters staff waiting 10–15 years for advancement. Resolves string-typing mismatches with strict text evaluation.
+          </p>
+        </div>
+
+        <!-- DAX 3 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Due for Retrenchment Screening Measure</span>
+            <span class="text-[10px] font-mono text-indigo-400 bg-indigo-500/10 px-2 py-0.5 rounded border border-indigo-500/20">Retrenchment Rule</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-indigo-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Due for Retrenchment = 
+CALCULATE(
+    [Total Employees],
+    'HR Master Data'[Retrenchment Status] = "1"
+)
+
+Retrenchment % = 
+DIVIDE([Due for Retrenchment], [Total Employees], 0)
+-- Output: 234 Candidates (8.00% of Staff)</code></pre>
+          <p class="text-xs text-slate-400">
+            Isolates senior staff with ≥18 years service for restructuring analysis and severance budgeting.
+          </p>
+        </div>
+
+        <!-- DAX 4 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Active Workforce Representation</span>
+            <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Active Headcount</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-purple-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Active Employees = 
+CALCULATE(
+    [Total Employees],
+    'HR Master Data'[Attrition] = "No"
+)
+
+Active Retention % = 
+DIVIDE([Active Employees], [Total Employees], 0)
+-- Output: 2,433 Personnel (83.18% Active Base)</code></pre>
+          <p class="text-xs text-slate-400">
+            Serves as the clean denominator for operational headcount ratios and workforce productivity calculations.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategic Talent Recommendations -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-pink-400 font-bold tracking-wider uppercase">
+          <i data-lucide="briefcase" class="w-4 h-4"></i>
+          Strategic Talent Interventions
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Data-Driven Human Capital Interventions
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Actionable organizational strategies formulated to stem high-turnover role attrition and de-risk talent progression pipelines.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-bold">
+            <i data-lucide="flask-conical" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">R&D Lab Tech Compensation</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Conduct urgent industry wage benchmarking for Laboratory Technicians and Research Scientists, who account for 57.3% of all exits.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold">
+            <i data-lucide="award" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">Prioritize 144 Stagnant Staff</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Fast-track the 144 personnel stuck 10–15 years without advancement into leadership review councils to prevent immediate high-cost resignation.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 font-bold">
+            <i data-lucide="user-minus" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">Succession & Knowledge Transfer</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Formulate structured phased retirement schemes for the 234 senior veterans (≥18 yrs tenure) ensuring institutional lore is preserved.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">
+            <i data-lucide="trending-up" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">Junior Tenure Pathways</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Implement structured 18-month career progression steps for junior employees to arrest the acute attrition cliff in years 0 to 10.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-8 border-t border-slate-800/80 text-center space-y-4">
+      <div class="flex items-center justify-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center font-bold text-xs text-pink-400">
+          RG
+        </div>
+        <span class="text-sm font-bold text-white">Ravinder Gupta · Data Analyst & BI Specialist</span>
+      </div>
+      <p class="text-xs text-slate-500">
+        Gurugram (Delhi-NCR), India · People Analytics & Workforce Decision Modeling · 2026
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Interactive 5-Second Slider Script & Dynamic Insights Logic -->
+  <script>
+    // Lucide Icons Initialization
+    lucide.createIcons();
+
+    // 2.8-Second Curtain Preloader Animation
+    window.addEventListener('DOMContentLoaded', () => {
+      const bar = document.getElementById('preloaderBar');
+      const count = document.getElementById('preloaderCount');
+      const preloader = document.getElementById('hrPreloader');
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 4;
+        if (progress > 100) progress = 100;
+        count.innerText = progress + '%';
+        bar.style.width = progress + '%';
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            preloader.style.transform = 'translateY(-100%)';
+            setTimeout(() => preloader.style.display = 'none', 750);
+          }, 300);
+        }
+      }, 95); // ~2.8s total duration
+    });
+
+    // 6 Selected Showcase Views
+    const views = [
+      {
+        id: 0,
+        title: "Page 1: Attrition Overview (Executive Summary)",
+        img: "assets/hr/hr_dashboard_page_1.png",
+        insightTitle: "Attrition Diagnostic: Departmental & Career Tenure Vulnerability",
+        insightDesc: "Out of 2,925 total personnel, 492 departures establish an enterprise baseline attrition rate of 16.82%. R&D represents the primary vulnerability zone accounting for 57.3% (282 exits), followed by Sales at 37.8% (186 exits), with acute concentration in early career tenure (0–10 years).",
+        kpi1: "2,925 Total Staff (2,433 Active)",
+        kpi2: "R&D Lead: 282 Exits (57.3%)",
+        kpi3: "0–10 Years Tenure Cliff"
+      },
+      {
+        id: 1,
+        title: "Page 2: Job Role Diagnostics",
+        img: "assets/hr/hr_dashboard_page_2.png",
+        insightTitle: "Role Headwinds: Laboratory Technicians & Sales Executives",
+        insightDesc: "Granular job role analysis reveals acute departure volumes concentrated in technical and client-facing roles: Laboratory Technicians (126 exits), Sales Executives (114 exits), and Research Scientists (94 exits) represent 67.9% of all corporate attrition.",
+        kpi1: "Lab Techs: 126 Exits",
+        kpi2: "Sales Execs: 114 Exits",
+        kpi3: "Research Scientists: 94 Exits"
+      },
+      {
+        id: 2,
+        title: "Page 3: Age & Gender Cohorts",
+        img: "assets/hr/hr_dashboard_page_3.png",
+        insightTitle: "Demographic Trends: 26–35 Cohort & Gender Distribution",
+        insightDesc: "Male employees recorded 312 exits (17.79% rate) while female employees recorded 180 exits (15.37% rate). The 26–35 age group accounts for 44.7% of total departures, highlighting critical mid-career transition risks.",
+        kpi1: "Male: 312 Exits (17.8%)",
+        kpi2: "Female: 180 Exits (15.4%)",
+        kpi3: "26–35 Age Band: 44.7% Exits"
+      },
+      {
+        id: 3,
+        title: "Page 4: Workforce Health",
+        img: "assets/hr/hr_dashboard_page_4.png",
+        insightTitle: "Workforce Composition: Active Staff & Review Proportions",
+        insightDesc: "Active workforce monitor tracking 2,433 active personnel across gender splits (1,754 Male / 1,171 Female). Establishes institutional baseline ratios for promotion candidates (4.92%) and retrenchment candidates (8.00%).",
+        kpi1: "2,433 Active Personnel (83.2%)",
+        kpi2: "4.92% Due for Promotion Review",
+        kpi3: "8.00% Due for Retrenchment"
+      },
+      {
+        id: 4,
+        title: "Page 5: HR Action Lists",
+        img: "assets/hr/hr_dashboard_page_5.png",
+        insightTitle: "Operational Action: Rule-Based Screening Rosters",
+        insightDesc: "Provides transparent candidate rosters for executive decision-makers: 144 personnel flagged for Promotion Review (stagnant 10–15 years since advancement) and 234 personnel flagged for Retrenchment Review (≥18 years company service).",
+        kpi1: "144 Promotion Candidates",
+        kpi2: "234 Retrenchment Candidates",
+        kpi3: "Transparent Policy Rules"
+      },
+      {
+        id: 5,
+        title: "Page 6: Workforce Detail Matrix",
+        img: "assets/hr/hr_dashboard_page_6.png",
+        insightTitle: "Multi-Dimensional Deep Dive: Overtime & Job Satisfaction",
+        insightDesc: "Cross-tabulates candidate review pools against overtime frequency and job satisfaction quadrants. Personnel working frequent overtime coupled with low job satisfaction exhibit 3.2× higher likelihood of departure.",
+        kpi1: "Overtime Correlated Attrition",
+        kpi2: "Job Satisfaction Quadrants",
+        kpi3: "Cross-Functional Slicing"
+      }
+    ];
+
+    let currentSlide = 0;
+    let autoPlayTimer = null;
+    let isPlaying = true;
+    let progressTimer = null;
+    let progressPercent = 0;
+    
+    // Explicit User Requirement: 5.0 Seconds Slider Duration!
+    const SLIDE_DURATION = 5000; // 5.0 Seconds
+    const PROGRESS_STEP = 50;
+
+    function renderSlide(index) {
+      currentSlide = index;
+      const v = views[index];
+
+      // Update image with smooth fade
+      const imgEl = document.getElementById('dashboardImg');
+      imgEl.style.opacity = '0.3';
+      setTimeout(() => {
+        imgEl.src = v.img;
+        imgEl.alt = v.title;
+        imgEl.style.opacity = '1';
+      }, 150);
+
+      // Update badges & text
+      document.getElementById('viewStatusBadge').innerText = v.title;
+      document.getElementById('slideIndicator').innerText = (index + 1) + " / " + views.length;
+      document.getElementById('insightTitle').innerText = v.insightTitle;
+      document.getElementById('insightDesc').innerText = v.insightDesc;
+      document.getElementById('insightKpi1').innerText = v.kpi1;
+      document.getElementById('insightKpi2').innerText = v.kpi2;
+      document.getElementById('insightKpi3').innerText = v.kpi3;
+
+      // Update Tab Buttons
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Reset Progress Bar
+      progressPercent = 0;
+      updateProgressBar();
+    }
+
+    function updateProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.width = progressPercent + '%';
+      }
+    }
+
+    function startAutoSlider() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (progressTimer) clearInterval(progressTimer);
+
+      progressPercent = 0;
+      progressTimer = setInterval(() => {
+        progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
+        if (progressPercent > 100) progressPercent = 100;
+        updateProgressBar();
+      }, PROGRESS_STEP);
+
+      autoPlayTimer = setInterval(() => {
+        nextSlide();
+      }, SLIDE_DURATION);
+    }
+
+    function stopAutoSlider() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (progressTimer) clearInterval(progressTimer);
+      progressPercent = 0;
+      updateProgressBar();
+    }
+
+    function toggleAutoPlay() {
+      isPlaying = !isPlaying;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+
+      if (isPlaying) {
+        icon.setAttribute('data-lucide', 'pause');
+        text.innerText = 'Pause 5s Auto-Slider';
+        startAutoSlider();
+      } else {
+        icon.setAttribute('data-lucide', 'play');
+        text.innerText = 'Resume 5s Auto-Slider';
+        stopAutoSlider();
+      }
+      lucide.createIcons();
+    }
+
+    function switchTab(index) {
+      renderSlide(index);
+      if (isPlaying) {
+        startAutoSlider();
+      }
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % views.length;
+      renderSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentSlide - 1 + views.length) % views.length;
+      renderSlide(prevIndex);
+    }
+
+    // Initialize slider on load
+    window.addEventListener('load', () => {
+      renderSlide(0);
+      startAutoSlider();
+    });
+
+    // 60 FPS Cursor Particle Trail Effect in Electric Magenta & Coral Glow
+    (function initCursorTrail() {
+      const canvas = document.getElementById('trailCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const ring = document.getElementById('cursorRing');
+      const dot = document.getElementById('cursorDot');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      let mouseX = width / 2;
+      let mouseY = height / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+      let lastX = mouseX;
+      let lastY = mouseY;
+
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.radius = Math.random() * 2.5 + 1.2;
+          this.alpha = 1;
+          this.vx = (Math.random() - 0.5) * 1.4;
+          this.vy = (Math.random() - 0.5) * 1.4;
+          this.decay = Math.random() * 0.03 + 0.02;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(244, 114, 182, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#ec4899';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(244, 114, 182, 0.9)';
+          ring.style.backgroundColor = 'rgba(236, 72, 153, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(244, 114, 182, 0.6)';
+          ring.style.backgroundColor = 'rgba(236, 72, 153, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>

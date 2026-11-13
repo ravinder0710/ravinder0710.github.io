@@ -846,12 +846,12 @@
 
         <!-- Project 10: HR Workforce -->
         <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi">
-          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/hr-workforce-intelligence-powerbi_pipeline.png', 'HR Workforce Decision Engine Pipeline')">
-            <img src="https://raw.githubusercontent.com/ravinder0710/hr-workforce-intelligence-powerbi/main/hr_dashboard_page_1.png" alt="HR Workforce Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
-            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
-              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+          <a href="hr-project.html" target="_blank" class="relative group block cursor-pointer">
+            <img src="assets/hr/hr_dashboard_page_1.png" alt="HR Workforce Intelligence Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-pink-600/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="layout" class="w-4 h-4"></i> Open HR Workforce Case Study & Live 6-Page Suite ➔
             </div>
-          </div>
+          </a>
           <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
             <div class="space-y-2">
               <div class="flex flex-wrap items-center gap-1.5">
@@ -859,7 +859,12 @@
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX Rule Engine</span>
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Power Query</span>
               </div>
-              <h3 class="text-lg font-bold text-white">HR Workforce Intelligence & Decision Support Dashboard</h3>
+              <a href="hr-project.html" target="_blank" class="group/title block">
+                <h3 class="text-lg font-bold text-white group-hover/title:text-pink-400 transition-colors flex items-center gap-1.5">
+                  HR Workforce Intelligence & Decision Support Dashboard
+                  <i data-lucide="arrow-up-right" class="w-4 h-4 opacity-0 group-hover/title:opacity-100 transition-opacity"></i>
+                </h3>
+              </a>
               <p class="text-xs text-slate-400 leading-relaxed">
                 Diagnosed attrition patterns across 2,925 employee records, utilizing automated DAX rule engines to isolate 144 promotion-ready and 234 retrenchment-review staff.
               </p>
@@ -875,7 +880,7 @@
                 <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/hr-workforce-intelligence-powerbi_pipeline.png', 'HR Workforce Decision Engine Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
                   <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
                 </button>
-                <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#readme" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30">
+                <a href="hr-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-pink-600/20 hover:bg-pink-600/30 text-pink-300 hover:text-white border border-pink-500/30">
                   <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
                 </a>
                 <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'hr', 'https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30"><i data-lucide="play" class="w-3.5 h-3.5"></i> Demo Video</a>
