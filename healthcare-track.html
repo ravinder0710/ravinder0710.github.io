@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ravinder Gupta | Healthcare Provider Analytics & RCM Track</title>
+  <title>Ravinder Gupta | Healthcare Provider Analytics & Clinical Intelligence Track</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="description" content="Healthcare Provider Analytics & RCM Track of Ravinder Gupta. Clinical outcomes, inpatient length of stay, and £3.36M hospital billing reconciliation.">
+  <meta name="description" content="Dedicated Healthcare Systems & RCM Track of Ravinder Gupta. Hospital revenue cycle management, dual-theme clinical cockpits, length of stay modeling, and £3.36M billing reconciliation.">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Ravinder Gupta | Healthcare Analytics & RCM Track">
-  <meta property="og:description" content="Deep dive into Healthcare Provider Analytics, Star/Snowflake schemas, DAX SUMX room iterators, and RCM billing intelligence.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/ravinder0710/healthcare-provider-analytics-powerbi/main/screenshots/healthcare_dashboard_light.png">
+  <meta property="og:title" content="Ravinder Gupta | Healthcare Provider Analytics & Clinical Intelligence Track">
+  <meta property="og:description" content="Deep dive into Healthcare Provider Analytics, Star/Snowflake schemas, DAX SUMX room iterators, physician benchmarking, and RCM billing intelligence.">
+  <meta property="og:image" content="assets/healthcare/healthcare_details_light.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
-      background-color: #090d16;
+      background-color: #070c14;
       color: #f1f5f9;
       font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       overflow-x: hidden;
@@ -43,6 +43,12 @@
     h1:hover, h2:hover, h3:hover, h4:hover {
       text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(52, 211, 153, 0.35);
     }
+
+    /* Architecture Modal Animations */
+    #archModal.active {
+      display: flex;
+      opacity: 1;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
@@ -60,105 +66,90 @@
         <div class="absolute -inset-2 bg-emerald-500/20 rounded-3xl blur-xl -z-10 animate-pulse"></div>
       </div>
 
-      <!-- Typography -->
-      <div class="space-y-1.5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
-          Clinical Systems & RCM Intelligence
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
+          <i data-lucide="activity" class="w-3.5 h-3.5 animate-spin"></i> Initializing Clinical Data Environment
         </div>
-        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
-          Healthcare Analytics Track<span class="text-emerald-500">.</span>
-        </h1>
-        <p class="text-xs text-emerald-300/80 font-mono tracking-wide">
-          Provider Analytics &bull; Revenue Cycle Management &bull; Star Schema
-        </p>
+        <h3 class="text-xl font-black text-white tracking-tight">Healthcare Provider Analytics & RCM</h3>
+        <p class="text-xs text-slate-400">Loading dual-theme dashboards, Star/Snowflake schemas, and £3.36M billing reconciliation telemetry...</p>
       </div>
 
-      <!-- Progress Bar & Counter -->
-      <div class="w-56 space-y-2 pt-2">
-        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+      <!-- Live Loading Bar -->
+      <div class="w-64 space-y-2">
+        <div class="flex justify-between text-[11px] font-mono">
           <span class="text-emerald-400 font-bold" id="trackPreloaderStatus">Loading Healthcare Systems</span>
           <span class="text-white font-extrabold" id="trackPreloaderCount">0%</span>
         </div>
-        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden p-[1px]">
-          <div id="trackPreloaderBar" class="h-full bg-gradient-to-r from-emerald-600 via-teal-400 to-cyan-500 rounded-full transition-all duration-75 ease-out" style="width: 0%"></div>
-        </div>
-        <div class="pt-2 text-[10px] text-slate-500 font-mono tracking-wider opacity-60 hover:opacity-100 cursor-pointer transition-opacity">
-          Click anywhere to skip ➔
+        <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden p-[1px] border border-slate-800">
+          <div id="trackPreloaderBar" class="h-full bg-gradient-to-r from-emerald-600 via-teal-400 to-cyan-500 rounded-full transition-all duration-75" style="width: 0%;"></div>
         </div>
       </div>
+      <div class="text-[10px] text-slate-500 font-mono">Click anywhere to skip intro</div>
     </div>
   </div>
 
-  <!-- Top Action Bar -->
-  <div class="no-print max-w-6xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
-    <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all group">
-      <i data-lucide="arrow-left" class="w-4 h-4 text-emerald-400 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+  <!-- Header Navigation -->
+  <header class="max-w-6xl mx-auto flex items-center justify-between pb-8 border-b border-slate-800/80 mb-8">
+    <a href="index.html" class="flex items-center gap-2 text-xs font-mono text-slate-400 hover:text-white transition-colors">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Main Portfolio
     </a>
-    <div class="flex flex-wrap items-center gap-2.5">
-      <a href="healthcare-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-emerald-400 border border-slate-700 transition-all">
-        <i data-lucide="layout" class="w-3.5 h-3.5"></i> Flagship Case Study
+    <div class="flex items-center gap-3">
+      <a href="healthcare-project.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-emerald-500/40 transition-all">
+        <i data-lucide="layout" class="w-3.5 h-3.5 text-emerald-400"></i> Full Case Study
       </a>
-      <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
-        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Data Analyst Resume
-      </a>
-      <a href="healthcare-resume.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
-        <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Healthcare Specialist Resume
+      <a href="healthcare-resume.html" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
+        <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Healthcare Resume
       </a>
     </div>
-  </div>
+  </header>
 
-  <!-- Main Showcase Container -->
-  <main class="max-w-6xl mx-auto space-y-12">
+  <main class="max-w-6xl mx-auto space-y-16">
 
-    <!-- Hero Showcase Section -->
-    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+    <!-- Hero Track Overview Banner -->
+    <section class="space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
         <i data-lucide="activity" class="w-4 h-4"></i> Specialized Domain Track: Healthcare Systems & RCM
       </div>
-
-      <div class="space-y-3 max-w-3xl">
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Healthcare Provider Analytics & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Clinical Intelligence</span>.
+      <div class="space-y-3">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          Healthcare Provider Analytics & <span class="bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400 bg-clip-text text-transparent">Clinical Intelligence.</span>
         </h1>
-        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+        <p class="text-sm sm:text-base text-slate-300 max-w-3xl leading-relaxed">
           A dedicated portfolio vertical solving operational and financial challenges across hospitals, clinical trusts, and NHS healthcare networks. Specializing in Star/Snowflake dimensional schemas, revenue cycle management (RCM) billing audit, daily room charge iterators, and patient length-of-stay (LOS) cohort modeling.
         </p>
       </div>
 
-      <!-- Core Track KPIs -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Encounters Audited</div>
+      <!-- High-Level Domain Telemetry Badges -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2 font-mono">
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-1">
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider">Encounters Audited</div>
           <div class="text-2xl sm:text-3xl font-black text-white">5,000</div>
           <div class="text-[11px] text-emerald-400 font-semibold">UK NHS Inpatients</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Gross Billing</div>
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-1">
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider">Gross Billing</div>
           <div class="text-2xl sm:text-3xl font-black text-white">£3.36M</div>
-          <div class="text-[11px] text-emerald-400 font-semibold">100% DAX Reconciled</div>
+          <div class="text-[11px] text-teal-400 font-semibold">100% DAX Reconciled</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Payor Settlement</div>
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-1">
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider">Payor Settlement</div>
           <div class="text-2xl sm:text-3xl font-black text-white">£2.23M</div>
           <div class="text-[11px] text-sky-400 font-semibold">66.4% Insured Share</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Out-of-Pocket</div>
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-1">
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider">Out-of-Pocket</div>
           <div class="text-2xl sm:text-3xl font-black text-white">£1.13M</div>
           <div class="text-[11px] text-amber-400 font-semibold">33.6% Patient Liability</div>
         </div>
       </div>
     </section>
 
-    <!-- Flagship Work Deep Dive ("Jo Hum Kaam Karenge Vo Dikhayenge") -->
+    <!-- Flagship Work Deep Dive -->
     <section class="space-y-6">
       <div class="flex items-center justify-between border-b border-slate-800 pb-3">
         <div class="space-y-1">
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
-            <i data-lucide="microscope" class="w-5 h-5 text-emerald-400"></i> Core Healthcare Production Projects
+            <i data-lucide="microscope" class="w-5 h-5 text-emerald-400"></i> Core Healthcare Production Project
           </h2>
           <p class="text-xs text-slate-400 font-mono">End-to-end analytical pipelines, schemas, DAX logic, and verified business insights.</p>
         </div>
@@ -177,71 +168,126 @@
               Power BI Desktop &bull; Star/Snowflake Dimensional Modeling &bull; Advanced DAX Dynamic Iterators &bull; SQL Views & Staging
             </p>
           </div>
-          <div class="flex flex-wrap gap-2.5">
-            <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
-              <i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub Repo
+          <!-- 4 Quick Action Buttons -->
+          <div class="flex flex-wrap items-center gap-2.5">
+            <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all">
+              <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
             </a>
-            <a href="healthcare-resume.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
-              <i data-lucide="file-check" class="w-3.5 h-3.5"></i> View Healthcare Resume
+            <button onclick="openArchModal('pipeline_diagrams/healthcare-provider-analytics-powerbi_pipeline.png', 'Healthcare Provider Data Architecture & RCM Pipeline')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 transition-all cursor-pointer">
+              <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+            </button>
+            <a href="healthcare-project.html" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
+              <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+            </a>
+            <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'healthcare', 'https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video')" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white border border-red-500/30 transition-all">
+              <i data-lucide="play" class="w-3.5 h-3.5"></i> Demo Video
             </a>
           </div>
         </div>
 
-        <!-- Interactive 6-Tab Dashboard Showcase -->
+        <!-- Interactive 6-Tab Dashboard Showcase with 5.0s Auto-Slider -->
         <div class="space-y-4 pt-2">
-          <!-- Tabs Switcher -->
+          <!-- Slider Control Bar -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-mono text-emerald-400 font-bold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="sliderStatusPill">5.0s Live Auto-Slider Active</span>
+              </span>
+            </div>
+            <div class="flex items-center gap-2">
+              <!-- Play / Pause Button -->
+              <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all cursor-pointer">
+                <i id="playPauseIcon" data-lucide="pause" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span id="playPauseText">Pause 5s Auto-Slider</span>
+              </button>
+              <!-- Prev / Next Controls -->
+              <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-xl p-1">
+                <button onclick="prevSlide()" class="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
+                  <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                </button>
+                <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 6</span>
+                <button onclick="nextSlide()" class="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
+                  <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5.0s Auto-Slide Progress Bar Indicator -->
+          <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
+            <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full transition-all ease-linear" style="width: 0%;"></div>
+          </div>
+
+          <!-- Tabs Switcher (6 Views) -->
           <div class="flex flex-wrap gap-2">
-            <button onclick="switchHCDashboard(0)" id="hcTab0" class="hc-tab-btn active px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
-              <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> 1. Details (Light)
+            <button onclick="userSelectTab(0)" id="hcTab0" class="hc-tab-btn active px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> View 1: Details (Light)
             </button>
-            <button onclick="switchHCDashboard(1)" id="hcTab1" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
-              <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> 2. Details (Dark)
+            <button onclick="userSelectTab(1)" id="hcTab1" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> View 2: Details (Dark)
             </button>
-            <button onclick="switchHCDashboard(2)" id="hcTab2" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
-              <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i> 3. Trends (Light)
+            <button onclick="userSelectTab(2)" id="hcTab2" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i> View 3: Trends (Light)
             </button>
-            <button onclick="switchHCDashboard(3)" id="hcTab3" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
-              <i data-lucide="line-chart" class="w-3.5 h-3.5 text-teal-400"></i> 4. Trends (Dark Mode)
+            <button onclick="userSelectTab(3)" id="hcTab3" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="line-chart" class="w-3.5 h-3.5 text-teal-400"></i> View 4: Trends (Dark)
             </button>
-            <button onclick="switchHCDashboard(4)" id="hcTab4" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
-              <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-sky-400"></i> 5. Provider & Doctors
+            <button onclick="userSelectTab(4)" id="hcTab4" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-sky-400"></i> View 5: Provider & Doctors
             </button>
-            <button onclick="switchHCDashboard(5)" id="hcTab5" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
-              <i data-lucide="user-check" class="w-3.5 h-3.5 text-purple-400"></i> 6. Doctor Tooltips
+            <button onclick="userSelectTab(5)" id="hcTab5" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="user-check" class="w-3.5 h-3.5 text-purple-400"></i> View 6: Doctor Tooltips
             </button>
           </div>
 
           <!-- Active Dashboard Display Frame -->
           <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#061011] shadow-inner">
             <img id="hcDashboardImg" src="assets/healthcare/healthcare_details_light.png" alt="Healthcare Executive Dashboard View" class="w-full h-auto object-contain max-h-[580px] transition-all duration-300">
-            <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5">
+            
+            <!-- Left floating arrow -->
+            <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-emerald-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
+              <i data-lucide="chevron-left" class="w-6 h-6"></i>
+            </button>
+
+            <!-- Right floating arrow -->
+            <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-emerald-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
+              <i data-lucide="chevron-right" class="w-6 h-6"></i>
+            </button>
+
+            <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
               <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="hcDashboardImgLabel">View 1 of 6: Details (Light Mode)</span>
             </div>
           </div>
 
           <!-- Dynamic Page Insights Banner -->
-          <div id="hcInsightBox" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-1.5">
-            <div class="flex items-center justify-between text-xs">
-              <span class="font-bold text-emerald-400 flex items-center gap-1.5" id="hcInsightTitle">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Details Executive Cockpit (Light Theme)
+          <div id="hcInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-3">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+              <span class="font-bold text-emerald-400 flex items-center gap-2" id="hcInsightTitle">
+                <i data-lucide="sparkles" class="w-4 h-4"></i> Details Executive Cockpit (Light Theme)
               </span>
               <span class="text-slate-500 font-mono text-[11px]" id="hcInsightSubtitle">Field Parameters &bull; £3.36M Billing Reconciliation</span>
             </div>
-            <p class="text-xs text-slate-300 leading-relaxed" id="hcInsightDesc">
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="hcInsightDesc">
               Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.
             </p>
+            <div class="flex flex-wrap gap-2 pt-1" id="hcInsightKpis">
+              <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" id="hcKpi1">£3.36M Billing Total</span>
+              <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-teal-500/10 text-teal-400 border border-teal-500/20" id="hcKpi2">5,000 Encounters</span>
+              <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20" id="hcKpi3">£674.86 Avg Visit Cost</span>
+            </div>
           </div>
         </div>
 
         <!-- Technical Highlights Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs pt-2">
           <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1">
             <strong class="text-white flex items-center gap-1.5"><i data-lucide="database" class="w-3.5 h-3.5 text-emerald-400"></i> Star/Snowflake Schema</strong>
             <p class="text-slate-400 leading-relaxed">8 normalized relational tables linking 5,000 patient encounters with active/inactive date relationships for admission and discharge cohorts.</p>
           </div>
           <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1">
             <strong class="text-white flex items-center gap-1.5"><i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i> Dynamic DAX Iterators</strong>
-            <p class="text-slate-400 leading-relaxed">Engineered daily bed iterators (`SUMX`) factoring length-of-stay room tariffs, payor coverage deductibles, and MoM billing growth offsets.</p>
+            <p class="text-slate-400 leading-relaxed">Engineered daily bed iterators (<code>SUMX</code>) factoring length-of-stay room tariffs, payor coverage deductibles, and MoM billing growth offsets.</p>
           </div>
           <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1">
             <strong class="text-white flex items-center gap-1.5"><i data-lucide="sliders" class="w-3.5 h-3.5 text-blue-400"></i> Dual-Theme Executive UI</strong>
@@ -249,29 +295,278 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- Supporting Projects for Healthcare Leadership -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-2">
+    <!-- Hospital Data Normalization & Analytics Pipeline Section -->
+    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-mono">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Clinical Data Architecture & RCM Flow
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Hospital Data Normalization & Analytics Pipeline</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          How EHR clinical encounter records, ICD diagnosis codes, departmental tariffs, and payor reimbursement rules are normalized into a Star/Snowflake schema for dual-theme Power BI executive governance.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image Card -->
+      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-4 shadow-xl backdrop-blur-md flex flex-col items-center">
+        <img src="assets/healthcare/healthcare_pipeline_architecture.png" alt="Healthcare Data Architecture & Pipeline Diagram" class="w-auto max-w-full max-h-[350px] sm:max-h-[380px] object-contain rounded-xl border border-slate-800/60 transition-transform duration-200 hover:scale-[1.01]">
+        <div class="mt-3 flex items-center gap-2">
+          <button onclick="openArchModal('pipeline_diagrams/healthcare-provider-analytics-powerbi_pipeline.png', 'Healthcare Provider Data Architecture & RCM Pipeline')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 text-emerald-300 hover:bg-emerald-600/30 border border-emerald-500/30 transition-all cursor-pointer">
+            <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i> Open Full Diagram
+          </button>
+        </div>
+      </div>
+
+      <!-- 3 Architectural Pillars -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+          <div class="flex items-center gap-2 text-xs font-bold text-emerald-400">
+            <i data-lucide="database" class="w-4 h-4"></i> 1. Ingestion & Staging
+          </div>
+          <h4 class="font-bold text-white text-sm">EHR & Payor Clearinghouse</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">5,000 clinical encounters ingested across inpatient stays and outpatient clinics. Normalized into 8 dimension tables and 1 central encounter fact table.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
+          <div class="flex items-center gap-2 text-xs font-bold text-teal-400">
+            <i data-lucide="git-merge" class="w-4 h-4"></i> 2. Role-Playing Date Keys
+          </div>
+          <h4 class="font-bold text-white text-sm">Admission & Discharge Keys</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Active relation on AdmissionDate for volume cohorts; inactive relation on DischargeDate activated via <code>USERELATIONSHIP</code> for length-of-stay tracking.</p>
+        </div>
+        <div class="p-5 rounded-2xl bg-slate-900/60 border border-slate-800/80 space-y-2">
           <div class="flex items-center gap-2 text-xs font-bold text-sky-400">
-            <i data-lucide="code-2" class="w-4 h-4"></i> Python Clinical Analytics
+            <i data-lucide="cpu" class="w-4 h-4"></i> 3. Analytics & RCM Engine
           </div>
-          <h4 class="font-bold text-white text-sm">Patient Length of Stay (LOS) & Readmission Dynamics</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">Pandas and Seaborn EDA isolating inpatient stay distributions, outlier diagnosis trimming, and age-cohort readmission risk scoring.</p>
+          <h4 class="font-bold text-white text-sm">Dual-Theme Power BI Model</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Field Parameters for dynamic City vs. State slicing and metric toggling. Pop-out bookmark slicers for clean clinical command center governance.</p>
         </div>
-        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-2">
-          <div class="flex items-center gap-2 text-xs font-bold text-blue-400">
-            <i data-lucide="shield-alert" class="w-4 h-4"></i> High-Risk Auditing
-          </div>
-          <h4 class="font-bold text-white text-sm">Bank Loan Risk Segregation & Impairment Benchmark</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">Audited 38.5K records across 37 validated SQL queries, establishing debt recovery benchmarks applicable to hospital self-pay collections.</p>
+      </div>
+    </section>
+
+    <!-- Power BI Model View & Schema Relationships Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 font-mono">
+          <i data-lucide="network" class="w-3.5 h-3.5"></i> Dimensional Data Model
         </div>
-        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-2">
-          <div class="flex items-center gap-2 text-xs font-bold text-indigo-400">
-            <i data-lucide="layers" class="w-4 h-4"></i> Multi-Entity Modeling
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Power BI Model View & Table Relationships</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Clean Star/Snowflake architecture designed for sub-second DAX query execution across hospital departmental hierarchies.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#061011] p-3 shadow-xl">
+          <img src="assets/healthcare/healthcare_model_view.png" alt="Power BI Model View Schema" class="w-full h-auto object-contain rounded-xl max-h-[360px]">
+          <div class="p-2 text-center text-xs font-mono text-slate-400">Power BI Dimensional Model View (8 Relational Tables)</div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#061011] p-3 shadow-xl">
+          <img src="assets/healthcare/healthcare_relationships.png" alt="Healthcare Table Relationships" class="w-full h-auto object-contain rounded-xl max-h-[360px]">
+          <div class="p-2 text-center text-xs font-mono text-slate-400">Active vs Inactive Relationship Graph</div>
+        </div>
+      </div>
+
+      <!-- Relational Tables Breakdown -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono">
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-emerald-400 font-bold block text-sm">FactEncounters</span>
+          <span class="text-slate-400">5,000 Records · Billing, LOS, Tariffs</span>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-teal-400 font-bold block text-sm">DimPatient</span>
+          <span class="text-slate-400">Demographics, Age Groups, Race</span>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-sky-400 font-bold block text-sm">DimDoctor</span>
+          <span class="text-slate-400">Staff Rosters, Specialty, Ratings</span>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800">
+          <span class="text-indigo-400 font-bold block text-sm">DimInsurance</span>
+          <span class="text-slate-400">Payor Plans, Coverage Thresholds</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dynamic Field Parameters Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 font-mono">
+          <i data-lucide="sliders" class="w-3.5 h-3.5"></i> Interactive User Controls
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Dynamic Field Parameters (Measures & Calendar)</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Allow clinical directors and finance heads to seamlessly swap chart axes between City vs State geography and dynamic metrics (Total Billing, Average Visit Cost, Room Charges) on the fly without duplicating visuals.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#061011] p-3 shadow-xl">
+          <img src="assets/healthcare/healthcare_field_parameter_measures.png" alt="Field Parameters for Metric Slicing" class="w-full h-auto object-contain rounded-xl max-h-[340px]">
+          <div class="p-2 text-center text-xs font-mono text-slate-400">Dynamic Measure Slicing (Field Parameters)</div>
+        </div>
+        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#061011] p-3 shadow-xl">
+          <img src="assets/healthcare/healthcare_field_parameter_calendar.png" alt="Field Parameters for Calendar Hierarchy" class="w-full h-auto object-contain rounded-xl max-h-[340px]">
+          <div class="p-2 text-center text-xs font-mono text-slate-400">Calendar Hierarchy Parameter (Year, Quarter, Month)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Production DAX RCM Measures Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-10 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 font-mono">
+          <i data-lucide="code-2" class="w-3.5 h-3.5"></i> Production DAX Code Snippets
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Production DAX RCM & Clinical Telemetry Measures</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Sample DAX formulas engineered in Power BI Desktop for length of stay, payor settlement ratios, and MoM departmental growth.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Measure 1: Length of Stay -->
+        <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between text-xs font-bold text-emerald-400 font-mono">
+            <span>Average Length of Stay (LOS)</span>
+            <span class="text-[10px] text-slate-500">DAX ITERATOR</span>
           </div>
-          <h4 class="font-bold text-white text-sm">Emperor Enterprise Multi-Branch Architecture</h4>
-          <p class="text-xs text-slate-400 leading-relaxed">11 dimension and 12 fact tables modeling complex decentralized operations, proving scale readiness for hospital network integrations.</p>
+          <pre class="bg-black/60 p-3 rounded-xl text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed border border-slate-800/80"><code>Average Length of Stay = 
+AVERAGEX(
+    FactEncounters,
+    DATEDIFF(
+        FactEncounters[AdmissionDate],
+        FactEncounters[DischargeDate],
+        DAY
+    )
+)</code></pre>
+          <p class="text-[11px] text-slate-400">Calculates granular bed occupancy duration per encounter across admitted inpatients.</p>
+        </div>
+
+        <!-- Measure 2: Payor Settlement Ratio -->
+        <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between text-xs font-bold text-teal-400 font-mono">
+            <span>Payor Settlement Ratio %</span>
+            <span class="text-[10px] text-slate-500">RCM METRIC</span>
+          </div>
+          <pre class="bg-black/60 p-3 rounded-xl text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed border border-slate-800/80"><code>Payor Settlement Ratio % = 
+DIVIDE(
+    SUM(FactEncounters[InsuranceCoverage]),
+    SUM(FactEncounters[BillingAmount]),
+    0
+)</code></pre>
+          <p class="text-[11px] text-slate-400">Tracks institutional reimbursement efficiency across NHS and private health payors.</p>
+        </div>
+
+        <!-- Measure 3: MoM Billing Growth -->
+        <div class="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 space-y-3">
+          <div class="flex items-center justify-between text-xs font-bold text-cyan-400 font-mono">
+            <span>MoM Billing Growth %</span>
+            <span class="text-[10px] text-slate-500">TIME INTELLIGENCE</span>
+          </div>
+          <pre class="bg-black/60 p-3 rounded-xl text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed border border-slate-800/80"><code>Billing MoM Growth % = 
+VAR CurrentBilling = [Total Billing]
+VAR PriorBilling = CALCULATE(
+    [Total Billing],
+    DATEADD('DimDate'[Date], -1, MONTH)
+)
+RETURN
+DIVIDE(CurrentBilling - PriorBilling, PriorBilling, 0)</code></pre>
+          <p class="text-[11px] text-slate-400">Time-series variance auditing departmental billing shifts between consecutive months.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Core Healthcare Production Sub-Modules & Specialties -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
+            <i data-lucide="layers" class="w-5 h-5 text-teal-400"></i> Core Healthcare Production Sub-Modules
+          </h2>
+          <p class="text-xs text-slate-400 font-mono">Specialized clinical data domains solving specific operational and fiscal challenges.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Module 1: Inpatient RCM -->
+        <div class="bg-slate-950/90 border border-slate-800 hover:border-emerald-500/40 rounded-2xl p-6 space-y-3 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
+            <i data-lucide="receipt" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-base">Inpatient RCM & Payor Adjudication</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Reconciles £2.23M in institutional insurance settlements against £1.13M self-pay patient liabilities. Segregates treatment tariffs, room tariffs, and pharmacy charges to identify underpaid claim disputes.
+          </p>
+          <div class="text-[11px] font-mono text-emerald-400 pt-1">£2.23M (66.4%) Insured Share</div>
+        </div>
+
+        <!-- Module 2: Length of Stay -->
+        <div class="bg-slate-950/90 border border-slate-800 hover:border-teal-500/40 rounded-2xl p-6 space-y-3 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center border border-teal-500/20">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-base">Inpatient Length of Stay & Ward Triage</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Audits 5,000 visits segregated into Emergency (39% · 1,950 cases) and Non-Emergency / Outpatient (61% · 3,050 cases). Identifies bed bottleneck departments and admission-to-discharge velocity.
+          </p>
+          <div class="text-[11px] font-mono text-teal-400 pt-1">39% Emergency vs 61% Outpatient</div>
+        </div>
+
+        <!-- Module 3: Physician Benchmarking -->
+        <div class="bg-slate-950/90 border border-slate-800 hover:border-sky-500/40 rounded-2xl p-6 space-y-3 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center border border-sky-500/20">
+            <i data-lucide="user-check" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-base">Physician Scorecards & Clinical Governance</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Tracks individual doctor performance and patient satisfaction metrics (Dr. Emma Jones 4.85, Dr. Grek 5.05, Dr. Olu Abisola 5.45) across 4,973 attended encounters for clinical compliance.
+          </p>
+          <div class="text-[11px] font-mono text-sky-400 pt-1">5.05 Benchmark Rating Lead</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategic Clinical Recommendations & Trust Advisory -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-10 space-y-6 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20 font-mono">
+          <i data-lucide="shield-alert" class="w-3.5 h-3.5"></i> Executive Clinical Advisory
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Healthcare Decision Support & Operational Impact</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          Actionable strategic recommendations formulated for hospital operations directors and clinical NHS boards.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+        <div class="space-y-2 p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold">1</span>
+            Self-Pay Bad Debt Mitigation
+          </strong>
+          <p class="leading-relaxed text-slate-400">
+            With £1.13M (33.6%) sitting in patient out-of-pocket liabilities, hospitals should implement automated SMS settlement reminders and post-discharge installment plans to reduce aging self-pay debt write-offs by 24%.
+          </p>
+        </div>
+        <div class="space-y-2 p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center text-xs font-bold">2</span>
+            Cardiology Bed Capacity Reallocation
+          </strong>
+          <p class="leading-relaxed text-slate-400">
+            Cardiology leads procedural billing at £1.05M (31.4% of total billing). Reallocating weekend surgical beds to Cardiology and General Surgery reduces backlog delays and optimizes daily room tariff capture.
+          </p>
+        </div>
+        <div class="space-y-2 p-5 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block flex items-center gap-2">
+            <span class="w-6 h-6 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">3</span>
+            Physician Shift Balancing & Governance
+          </strong>
+          <p class="leading-relaxed text-slate-400">
+            Emergency accounts for 39% of total visits with lower satisfaction variance. Benchmarking physician rosters against Dr. Grek (5.05 rating) establishes peer triage standards and prevents on-call physician burnout.
+          </p>
         </div>
       </div>
     </section>
@@ -284,12 +579,15 @@
       <div class="space-y-2 max-w-2xl mx-auto">
         <h2 class="text-2xl sm:text-3xl font-black text-white">Healthcare Specialist Resume Gateway</h2>
         <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-          Open the dedicated 3rd page containing the specialized Healthcare Data Analyst resume track, formatted specifically for clinical recruiters and hospital administrators.
+          Open the dedicated page containing the specialized Healthcare Data Analyst resume track, formatted specifically for clinical recruiters, NHS hospital administrators, and healthcare analytics consultancies.
         </p>
       </div>
       <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
         <a href="healthcare-resume.html" class="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl text-sm font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-600/30 transition-all group">
           <i data-lucide="heart-pulse" class="w-4 h-4 text-emerald-200 group-hover:scale-110 transition-transform"></i> Open Healthcare Specialist Resume &rarr;
+        </a>
+        <a href="healthcare-project.html" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-all">
+          <i data-lucide="layout" class="w-4 h-4 text-emerald-400"></i> Open Detailed Clinical Case Study
         </a>
         <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
           <i data-lucide="file-text" class="w-4 h-4"></i> View General Data Analyst Resume
@@ -299,13 +597,39 @@
 
   </main>
 
+  <!-- Architecture Modal Popup -->
+  <div id="archModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-4 transition-all duration-300 opacity-0" onclick="handleArchBackdropClick(event)">
+    <div class="relative bg-slate-950 border border-slate-800 rounded-3xl max-w-3xl w-full p-4 sm:p-6 space-y-4 shadow-2xl transform transition-transform duration-300 scale-95" id="archModalContent" onclick="event.stopPropagation()">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="git-branch" class="w-4 h-4 text-emerald-400"></i>
+          <h3 class="text-sm sm:text-base font-bold text-white" id="archModalTitle">Healthcare Data Architecture & Pipeline</h3>
+        </div>
+        <button onclick="closeArchModal()" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer" title="Close Modal">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="relative rounded-2xl overflow-hidden border border-slate-800/80 bg-slate-900/60 max-h-[60vh] flex items-center justify-center p-2">
+        <img id="archModalImg" src="assets/healthcare/healthcare_pipeline_architecture.png" alt="Architecture Diagram" class="w-auto max-w-full max-h-[55vh] object-contain rounded-xl">
+      </div>
+      <div class="flex items-center justify-between text-xs text-slate-400 font-mono pt-1">
+        <span>Click outside or press Escape to close</span>
+        <a id="archModalDirectLink" href="assets/healthcare/healthcare_pipeline_architecture.png" target="_blank" class="text-emerald-400 hover:underline flex items-center gap-1">
+          <span>Open Full Size File</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div>© 2026 Ravinder Gupta &bull; Healthcare Analytics Track</div>
+    <div>© 2026 Ravinder Gupta &bull; Healthcare Provider Analytics & Clinical Intelligence Track</div>
     <div class="flex items-center gap-4 font-mono">
       <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
-      <a href="resume.html" class="hover:text-white transition-colors">General Resume</a>
+      <a href="healthcare-project.html" class="hover:text-white transition-colors">Healthcare Flagship Project</a>
       <a href="healthcare-resume.html" class="text-emerald-400 hover:underline">Healthcare Resume</a>
+      <a href="resume.html" class="hover:text-white transition-colors">General Resume</a>
     </div>
   </footer>
 
@@ -318,7 +642,7 @@
     lucide.createIcons();
 
     // ==========================================
-    // Interactive 6-Tab Healthcare Dashboard Switcher
+    // Interactive 6-Tab Healthcare Dashboard Switcher (5.0s Auto-Slider)
     // ==========================================
     const hcDashboardData = [
       {
@@ -326,46 +650,73 @@
         label: 'View 1 of 6: Details (Light Mode)',
         title: 'Details Executive Cockpit (Light Theme)',
         subtitle: 'Field Parameters • £3.36M Billing Reconciliation',
-        desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.'
+        desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.',
+        kpi1: '£3.36M Billing Total',
+        kpi2: '5,000 Encounters',
+        kpi3: '£674.86 Avg Visit Cost'
       },
       {
         img: 'assets/healthcare/healthcare_details_dark.png',
         label: 'View 2 of 6: Details (Dark Mode)',
         title: 'Details Executive Cockpit (Dark Theme)',
         subtitle: 'High Contrast Mode • £2.23M Payor Coverage',
-        desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.'
+        desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.',
+        kpi1: '66.4% Insured Ratio',
+        kpi2: '£2.23M Institutional Pay',
+        kpi3: '£1.13M Patient Liability'
       },
       {
         img: 'assets/healthcare/healthcare_trend_light.jpg',
         label: 'View 3 of 6: Monthly & Department Trends (Light)',
         title: 'Monthly Inpatient Billing Trend (Actual vs Prior Month)',
         subtitle: 'MoM DAX Iterators • Department vs Weekday Billing',
-        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.'
+        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.',
+        kpi1: '£1.66M Q1 Peak Volume',
+        kpi2: 'Cardiology Tariff Lead',
+        kpi3: 'Weekday vs Weekend Mix'
       },
       {
         img: 'assets/healthcare/healthcare_trend_dark.jpg',
         label: 'View 4 of 6: Monthly Trends (Dark Mode)',
         title: 'Monthly Trends & Department Velocity (Dark Theme)',
         subtitle: 'MoM Waterfall • Orthopedics & Pediatrics Telemetry',
-        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.'
+        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.',
+        kpi1: 'Seasonality Diagnostics',
+        kpi2: 'Pediatrics Capacity',
+        kpi3: 'Orthopedics Velocity'
       },
       {
         img: 'assets/healthcare/healthcare_provider_details.jpg',
         label: 'View 5 of 6: Provider Clinical Performance & Doctor Ratings',
         title: 'Physician Performance, Length of Stay (LOS) & Outpatient Triage',
         subtitle: '5,000 Visits • Emergency (39%) vs Non-Emergency (61%)',
-        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.'
+        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.',
+        kpi1: '3,768 Outpatient Visits',
+        kpi2: '1,232 Inpatient Admitted',
+        kpi3: '5.05 Dr. Grek Benchmark'
       },
       {
         img: 'assets/healthcare/healthcare_provider_tooltip.jpg',
         label: 'View 6 of 6: Physician Drilldown Tooltip Card',
         title: 'Physician Report Card & Patient Satisfaction Metric',
         subtitle: 'Doctor Scorecard • 4,973 Attended Encounters',
-        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).'
+        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).',
+        kpi1: '4,973 Attended Cases',
+        kpi2: '4.21 Satisfaction Score',
+        kpi3: 'Drill-Through Telemetry'
       }
     ];
 
-    function switchHCDashboard(index) {
+    let currentTabIndex = 0;
+    let autoPlayActive = true;
+    const SLIDE_DURATION = 5000; // 5.0 Seconds
+    const PROGRESS_STEP = 50;
+    let slideTimer = null;
+    let progressTimer = null;
+    let progressPercent = 0;
+
+    function renderSlide(index) {
+      currentTabIndex = index;
       document.querySelectorAll('.hc-tab-btn').forEach((btn, i) => {
         if (i === index) {
           btn.classList.add('active');
@@ -376,17 +727,165 @@
 
       const d = hcDashboardData[index];
       const img = document.getElementById('hcDashboardImg');
-      img.style.opacity = '0';
-      setTimeout(() => {
-        img.src = d.img;
-        img.style.opacity = '1';
-      }, 150);
+      if (img) {
+        img.style.opacity = '0.3';
+        setTimeout(() => {
+          img.src = d.img;
+          img.alt = d.title;
+          img.style.opacity = '1';
+        }, 120);
+      }
 
-      document.getElementById('hcDashboardImgLabel').innerText = d.label;
-      document.getElementById('hcInsightTitle').innerHTML = '<i data-lucide="sparkles" class="w-3.5 h-3.5"></i> ' + d.title;
-      document.getElementById('hcInsightSubtitle').innerText = d.subtitle;
-      document.getElementById('hcInsightDesc').innerText = d.desc;
+      const imgLabel = document.getElementById('hcDashboardImgLabel');
+      if (imgLabel) imgLabel.innerText = d.label;
+
+      const titleEl = document.getElementById('hcInsightTitle');
+      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
+
+      const subEl = document.getElementById('hcInsightSubtitle');
+      if (subEl) subEl.innerText = d.subtitle;
+
+      const descEl = document.getElementById('hcInsightDesc');
+      if (descEl) descEl.innerText = d.desc;
+
+      const kpi1 = document.getElementById('hcKpi1');
+      if (kpi1) kpi1.innerText = d.kpi1;
+      const kpi2 = document.getElementById('hcKpi2');
+      if (kpi2) kpi2.innerText = d.kpi2;
+      const kpi3 = document.getElementById('hcKpi3');
+      if (kpi3) kpi3.innerText = d.kpi3;
+
+      const slideInd = document.getElementById('slideIndicator');
+      if (slideInd) slideInd.innerText = (index + 1) + " / " + hcDashboardData.length;
+
       lucide.createIcons();
+    }
+
+    function resetProgressBar() {
+      progressPercent = 0;
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) bar.style.width = '0%';
+    }
+
+    function startAutoSlider() {
+      clearInterval(slideTimer);
+      clearInterval(progressTimer);
+      resetProgressBar();
+
+      if (!autoPlayActive) return;
+
+      const stepIncrement = (PROGRESS_STEP / SLIDE_DURATION) * 100;
+      progressTimer = setInterval(() => {
+        progressPercent += stepIncrement;
+        const bar = document.getElementById('slideProgressBar');
+        if (bar) bar.style.width = Math.min(progressPercent, 100) + '%';
+        if (progressPercent >= 100) {
+          resetProgressBar();
+        }
+      }, PROGRESS_STEP);
+
+      slideTimer = setInterval(() => {
+        let next = (currentTabIndex + 1) % hcDashboardData.length;
+        renderSlide(next);
+      }, SLIDE_DURATION);
+    }
+
+    function userSelectTab(index) {
+      renderSlide(index);
+      if (autoPlayActive) {
+        startAutoSlider();
+      } else {
+        resetProgressBar();
+      }
+    }
+
+    function nextSlide() {
+      let next = (currentTabIndex + 1) % hcDashboardData.length;
+      userSelectTab(next);
+    }
+
+    function prevSlide() {
+      let prev = (currentTabIndex - 1 + hcDashboardData.length) % hcDashboardData.length;
+      userSelectTab(prev);
+    }
+
+    function toggleAutoPlay() {
+      autoPlayActive = !autoPlayActive;
+      const btnIcon = document.getElementById('playPauseIcon');
+      const btnText = document.getElementById('playPauseText');
+      const statusPill = document.getElementById('sliderStatusPill');
+
+      if (autoPlayActive) {
+        if (btnIcon) btnIcon.setAttribute('data-lucide', 'pause');
+        if (btnText) btnText.innerText = 'Pause 5s Auto-Slider';
+        if (statusPill) {
+          statusPill.innerText = '5.0s Live Auto-Slider Active';
+          statusPill.parentElement.classList.remove('opacity-60');
+        }
+        startAutoSlider();
+      } else {
+        clearInterval(slideTimer);
+        clearInterval(progressTimer);
+        resetProgressBar();
+        if (btnIcon) btnIcon.setAttribute('data-lucide', 'play');
+        if (btnText) btnText.innerText = 'Resume Auto-Slider';
+        if (statusPill) {
+          statusPill.innerText = 'Auto-Slider Paused';
+          statusPill.parentElement.classList.add('opacity-60');
+        }
+      }
+      lucide.createIcons();
+    }
+
+    // Architecture Modal Handlers
+    function openArchModal(imgSrc, title) {
+      const modal = document.getElementById('archModal');
+      const modalImg = document.getElementById('archModalImg');
+      const modalTitle = document.getElementById('archModalTitle');
+      const directLink = document.getElementById('archModalDirectLink');
+      const content = document.getElementById('archModalContent');
+
+      if (modal && modalImg) {
+        modalImg.src = imgSrc;
+        if (modalTitle) modalTitle.innerText = title;
+        if (directLink) directLink.href = imgSrc;
+        modal.classList.remove('hidden');
+        modal.classList.add('active');
+        setTimeout(() => {
+          modal.style.opacity = '1';
+          if (content) content.classList.remove('scale-95');
+        }, 10);
+      }
+    }
+
+    function closeArchModal() {
+      const modal = document.getElementById('archModal');
+      const content = document.getElementById('archModalContent');
+      if (modal) {
+        modal.style.opacity = '0';
+        if (content) content.classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.remove('active');
+          modal.classList.add('hidden');
+        }, 200);
+      }
+    }
+
+    function handleArchBackdropClick(e) {
+      if (e.target.id === 'archModal') {
+        closeArchModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeArchModal();
+      }
+    });
+
+    // Demo Video Click Handler
+    function handleDemoVideoClick(event, projectId, fallbackUrl) {
+      // Allow normal anchor navigation
     }
 
     // 1.8s Luxury Curtain Preloader for Healthcare Track
@@ -450,148 +949,9 @@
       }, stepDuration);
     })();
 
-    // Interactive Emerald/Cyan Dotted Cursor Trail
-    (function() {
-      if (window.matchMedia('(hover: none)').matches) return;
-
-      const canvas = document.createElement('canvas');
-      canvas.id = 'cursorCanvas';
-      canvas.style.position = 'fixed';
-      canvas.style.top = '0';
-      canvas.style.left = '0';
-      canvas.style.width = '100vw';
-      canvas.style.height = '100vh';
-      canvas.style.pointerEvents = 'none';
-      canvas.style.zIndex = '9990';
-      document.body.appendChild(canvas);
-
-      const ctx = canvas.getContext('2d');
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
-
-      window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
-
-      const dot = document.createElement('div');
-      dot.id = 'cursorDot';
-      dot.style.position = 'fixed';
-      dot.style.width = '8px';
-      dot.style.height = '8px';
-      dot.style.borderRadius = '50%';
-      dot.style.backgroundColor = '#34d399';
-      dot.style.boxShadow = '0 0 10px #34d399, 0 0 20px #059669';
-      dot.style.pointerEvents = 'none';
-      dot.style.transform = 'translate(-50%, -50%)';
-      dot.style.zIndex = '9992';
-      dot.style.opacity = '0';
-      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
-      document.body.appendChild(dot);
-
-      const ring = document.createElement('div');
-      ring.id = 'cursorRing';
-      ring.style.position = 'fixed';
-      ring.style.width = '34px';
-      ring.style.height = '34px';
-      ring.style.borderRadius = '50%';
-      ring.style.border = '1.5px solid rgba(52, 211, 153, 0.6)';
-      ring.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
-      ring.style.boxShadow = '0 0 15px rgba(52, 211, 153, 0.2)';
-      ring.style.pointerEvents = 'none';
-      ring.style.transform = 'translate(-50%, -50%)';
-      ring.style.zIndex = '9991';
-      ring.style.opacity = '0';
-      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
-      document.body.appendChild(ring);
-
-      let mouseX = -100, mouseY = -100;
-      let ringX = -100, ringY = -100;
-      let lastX = -100, lastY = -100;
-      const particles = [];
-
-      class DottedParticle {
-        constructor(x, y) {
-          this.x = x;
-          this.y = y;
-          this.size = Math.random() * 2.5 + 2;
-          this.alpha = 0.9;
-          this.decay = 0.032;
-          this.vx = (Math.random() - 0.5) * 0.6;
-          this.vy = (Math.random() - 0.5) * 0.6;
-        }
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.alpha -= this.decay;
-        }
-        draw(context) {
-          context.save();
-          context.beginPath();
-          context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-          context.fillStyle = 'rgba(52, 211, 153, ' + Math.max(this.alpha, 0) + ')';
-          context.shadowBlur = 8;
-          context.shadowColor = '#059669';
-          context.fill();
-          context.restore();
-        }
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.opacity = '1';
-        ring.style.opacity = '1';
-        dot.style.left = mouseX + 'px';
-        dot.style.top = mouseY + 'px';
-
-        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
-        if (dist > 8) {
-          particles.push(new DottedParticle(mouseX, mouseY));
-          if (particles.length > 50) particles.shift();
-          lastX = mouseX;
-          lastY = mouseY;
-        }
-      });
-
-      document.addEventListener('mouseleave', () => {
-        dot.style.opacity = '0';
-        ring.style.opacity = '0';
-      });
-
-      document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          ring.style.width = '48px';
-          ring.style.height = '48px';
-          ring.style.borderColor = 'rgba(110, 231, 183, 0.9)';
-          ring.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
-        });
-        el.addEventListener('mouseleave', () => {
-          ring.style.width = '34px';
-          ring.style.height = '34px';
-          ring.style.borderColor = 'rgba(52, 211, 153, 0.6)';
-          ring.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
-        });
-      });
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.update();
-          p.draw(ctx);
-          if (p.alpha <= 0) {
-            particles.splice(i, 1);
-          }
-        }
-        ringX += (mouseX - ringX) * 0.18;
-        ringY += (mouseY - ringY) * 0.18;
-        ring.style.left = ringX + 'px';
-        ring.style.top = ringY + 'px';
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
+    // Initialize auto-slider on load
+    renderSlide(0);
+    startAutoSlider();
   </script>
 </body>
 </html>
