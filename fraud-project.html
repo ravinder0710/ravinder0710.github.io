@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Fraud Behavioral Risk & Anomaly Intelligence | Executive Case Study & Surveillance Cockpit</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: Financial Fraud Behavioral Risk & Anomaly Intelligence. 37,901 transactional records, ₦784M volume, ₦19M fraud exposure, 10.2× foreign IP risk uplift, and P1/P2/P3 control framework.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Financial Fraud Behavioral Risk & Anomaly Intelligence">
+  <meta property="og:description" content="Explore full-scale FinTech transaction surveillance, Star Schema modeling, 10.2x anomaly signal isolation, and P1/P2/P3 control governance across ₦784M volume.">
+  <meta property="og:image" content="assets/fraud/dashboard_overview_page.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #07050d;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Cyber Crimson & Gold Curtain Preloader */
+    #fraudPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(239, 68, 68, 0.35);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(248, 113, 113, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(239, 68, 68, 0.6), 0 0 40px rgba(245, 158, 11, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(239, 68, 68, 0.22);
+      border-color: rgba(239, 68, 68, 0.65);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(239, 68, 68, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.2-Second Luxury Cyber Crimson & Gold Curtain Preloader -->
+  <div id="fraudPreloader" class="fixed inset-0 z-50 bg-[#040208] flex flex-col items-center justify-center border-b border-red-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Fraud Surveillance Shield / RG Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-red-600 via-amber-500 to-yellow-400 p-[2px] shadow-2xl shadow-red-500/50">
+          <div class="w-full h-full bg-[#12050b] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-red-500/20 blur-xl rounded-full -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-2">
+        <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+          Financial Fraud Intelligence & Surveillance
+        </h2>
+        <p class="text-xs sm:text-sm text-red-400/90 font-mono tracking-wide">
+          37,901 Transactions · ₦784M Flow · 10.2× Anomaly Uplift
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-64 space-y-2">
+        <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-red-500/20">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 rounded-full w-0 transition-all duration-[2200ms] ease-out"></div>
+        </div>
+        <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
+          <span>Initializing Surveillance Cockpit</span>
+          <span id="preloaderCount" class="text-amber-300 font-bold">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Canvas Particle Background -->
+  <canvas id="trailCanvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
+  <div id="cursorRing" class="fixed pointer-events-none z-50 rounded-full border border-red-400/60 bg-red-500/5 transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2 hidden md:block" style="width: 34px; height: 34px;"></div>
+  <div id="cursorDot" class="fixed pointer-events-none z-50 w-2 h-2 rounded-full bg-red-400 transition-transform duration-0 ease-out -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-red-400/80 hidden md:block"></div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="max-w-7xl mx-auto mb-8">
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-red-400 transition-colors group">
+          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+          Back to Portfolio
+        </a>
+        <span class="text-slate-700">|</span>
+        <span class="text-xs font-mono text-red-400 font-semibold flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+          FinTech Surveillance Architecture
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <a href="https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-red-500/40">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+        </a>
+        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline Diagram
+        </a>
+        <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-600/30 transition-all">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Contact Ravinder
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-7xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="space-y-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Power BI Desktop</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-red-500/10 text-red-400 border border-red-500/20">Power Query (M)</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-orange-500/10 text-orange-400 border border-orange-500/20">Advanced DAX</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-yellow-500/10 text-yellow-400 border border-yellow-500/20">Claude FastMCP</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Star Schema</span>
+      </div>
+
+      <div class="space-y-4">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Financial Fraud Behavioral Risk & Anomaly Intelligence
+        </h1>
+        <p class="text-base sm:text-lg text-slate-400 max-w-4xl leading-relaxed">
+          Enterprise fraud surveillance platform analyzing <strong class="text-white">37,901 financial transactions</strong> totaling <strong class="text-amber-400">₦784 Million in volume</strong> across 8,878 accounts. Engineered an in-memory Star Schema model augmented with Claude AI via Power BI FastMCP Server, isolating <strong class="text-red-400">10.2× risk uplifts in foreign IP sessions</strong> and structuring a prioritized <strong class="text-white">P1 / P2 / P3 control framework</strong> to safeguard exposed capital.
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Capital Exposed</div>
+          <div class="text-2xl sm:text-3xl font-black text-red-400">₦19,000,000</div>
+          <p class="text-xs text-slate-400">Direct monetary volume compromised across 924 confirmed attacks.</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Confirmed Fraud Rate</div>
+          <div class="text-2xl sm:text-3xl font-black text-amber-400">2.44%</div>
+          <p class="text-xs text-slate-400">Baseline institutional incident frequency across 37,901 transactions.</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Foreign IP Anomaly</div>
+          <div class="text-2xl sm:text-3xl font-black text-yellow-400">10.2× Uplift</div>
+          <p class="text-xs text-slate-400">Foreign IP accounts show a 24.8% fraud rate vs 2.44% domestic baseline.</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Model Risk Separation</div>
+          <div class="text-2xl sm:text-3xl font-black text-white font-mono">+44.4 Pt Gap</div>
+          <p class="text-xs text-slate-400">Average 92.7 Fraud Risk score vs 48.3 Legitimate score (+44.4 pts separation).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 3-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <section class="space-y-6">
+      <!-- Header with Interactive Slider Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="shield-check" class="w-6 h-6 text-red-400"></i>
+            Executive Power BI Surveillance Cockpit
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400">
+            Automated 2.2-second rotation cycling through the Executive Monitoring Cockpit, P1/P2/P3 Recommendations, and Relational Star Schema.
+          </p>
+        </div>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all">
+            <i id="playPauseIcon" data-lucide="pause" class="w-3.5 h-3.5"></i>
+            <span id="playPauseText">Pause 2.2s Auto-Slider</span>
+          </button>
+          <!-- Prev & Next Clickable Controls -->
+          <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
+            <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 3</span>
+            <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 rounded-full transition-all ease-linear" style="width: 0%;"></div>
+      </div>
+
+      <!-- Dashboard Tabs Switcher (3 Views) -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="tabContainer">
+        <button onclick="switchTab(0)" class="tab-btn active px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 1</div>
+          <div class="text-white font-bold truncate">Executive Monitoring Cockpit</div>
+        </button>
+
+        <button onclick="switchTab(1)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 2</div>
+          <div class="text-white font-bold truncate">Prioritized P1 / P2 / P3 Governance</div>
+        </button>
+
+        <button onclick="switchTab(2)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 3</div>
+          <div class="text-white font-bold truncate">Star Schema & FastMCP Architecture</div>
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl space-y-4">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div class="relative group/view rounded-2xl overflow-hidden border border-slate-800/90 bg-[#0d0711]/90 min-h-[420px] sm:min-h-[580px] flex items-center justify-center">
+          <img id="dashboardImg" src="assets/fraud/dashboard_overview_page.png" alt="Executive Fraud Intelligence Dashboard" class="w-full h-auto max-h-[720px] object-contain transition-opacity duration-300">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-red-600 hover:scale-105 shadow-2xl">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-red-600 hover:scale-105 shadow-2xl">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/80 flex items-center gap-2 text-xs font-mono text-red-300">
+            <span class="w-2 h-2 rounded-full bg-red-400 animate-pulse"></span>
+            <span id="viewStatusBadge">View 1: Executive Monitoring Cockpit</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-400">
+            Click tabs below to switch ➔
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center gap-2 text-xs font-mono text-amber-400 uppercase tracking-wider font-semibold">
+            <i data-lucide="sparkles" class="w-4 h-4 text-amber-400"></i>
+            <span id="insightTitle">Surveillance Insight: Institutional Anomaly Baseline</span>
+          </div>
+          <p id="insightDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            Out of 37,901 transactions totaling ₦784M, the platform flagged 924 confirmed attacks compromising ₦19M (2.42% of volume). Real-time channel analysis reveals direct fund transfers account for 47.9% of all fraud incidents, representing the primary cash-out rail.
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-mono pt-1 text-slate-400">
+            <div><span class="text-red-400 font-bold">Monitored Flow:</span> <span id="insightKpi1">37,901 Txns · ₦784M Volume</span></div>
+            <div><span class="text-amber-400 font-bold">Vulnerability:</span> <span id="insightKpi2">Direct Transfers (47.9% of Fraud)</span></div>
+            <div><span class="text-yellow-400 font-bold">Impact:</span> <span id="insightKpi3">864 Unique Victims Identified</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Critical Behavioral Risk Signals & Observed Uplift Table -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-red-400 font-bold tracking-wider uppercase">
+          <i data-lucide="radar" class="w-4 h-4"></i>
+          Behavioral Anomaly Profiling
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Empirical Risk Signals & Statistical Uplift Multipliers
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Granular comparison of baseline institutional transaction rates (2.44%) against elevated behavioral attributes, identifying precise threat attack vectors.
+        </p>
+      </div>
+
+      <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md shadow-2xl">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="border-b border-slate-800 bg-slate-950/80 font-mono text-slate-400">
+              <th class="p-4 font-bold text-white uppercase tracking-wider">Risk Signal Attribute</th>
+              <th class="p-4 font-bold text-red-400 uppercase tracking-wider">Observed Fraud Rate</th>
+              <th class="p-4 font-bold text-slate-400 uppercase tracking-wider">Baseline Rate</th>
+              <th class="p-4 font-bold text-amber-400 uppercase tracking-wider">Statistical Uplift</th>
+              <th class="p-4 font-bold text-slate-300 uppercase tracking-wider">Operational Fraud Mechanism</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/80 text-slate-300">
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-bold text-white flex items-center gap-2">
+                <span class="text-base">🌐</span> Foreign IP Activity
+              </td>
+              <td class="p-4 font-bold text-red-400 font-mono text-sm">24.8%</td>
+              <td class="p-4 font-mono text-slate-400">2.44%</td>
+              <td class="p-4"><span class="px-2 py-1 rounded bg-red-500/20 text-red-300 font-mono font-bold border border-red-500/30">10.2× Uplift</span></td>
+              <td class="p-4 text-slate-400">Cross-border proxy/VPN credential stuffing bypasses geolocation checks.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-bold text-white flex items-center gap-2">
+                <span class="text-base">🔑</span> 3+ Failed Login Attempts
+              </td>
+              <td class="p-4 font-bold text-red-400 font-mono text-sm">16.1%</td>
+              <td class="p-4 font-mono text-slate-400">2.44%</td>
+              <td class="p-4"><span class="px-2 py-1 rounded bg-amber-500/20 text-amber-300 font-mono font-bold border border-amber-500/30">6.6× Uplift</span></td>
+              <td class="p-4 text-slate-400">Automated brute-force password spraying preceding account takeover.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-bold text-white flex items-center gap-2">
+                <span class="text-base">👤</span> First-Time Beneficiary Transfers
+              </td>
+              <td class="p-4 font-bold text-red-400 font-mono text-sm">8.7%</td>
+              <td class="p-4 font-mono text-slate-400">2.44%</td>
+              <td class="p-4"><span class="px-2 py-1 rounded bg-yellow-500/20 text-yellow-300 font-mono font-bold border border-yellow-500/30">3.6× Uplift</span></td>
+              <td class="p-4 text-slate-400">Rapid outbound liquidation directly to newly created third-party mule accounts.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-bold text-white flex items-center gap-2">
+                <span class="text-base">⏳</span> New Accounts (&lt; 30 Days Old)
+              </td>
+              <td class="p-4 font-bold text-red-400 font-mono text-sm">8.2%</td>
+              <td class="p-4 font-mono text-slate-400">2.44%</td>
+              <td class="p-4"><span class="px-2 py-1 rounded bg-orange-500/20 text-orange-300 font-mono font-bold border border-orange-500/30">3.4× Uplift</span></td>
+              <td class="p-4 text-slate-400">Synthetic identity creation and fast-exit accounts opened with forged KYC.</td>
+            </tr>
+            <tr class="hover:bg-slate-800/40 transition-colors">
+              <td class="p-4 font-bold text-white flex items-center gap-2">
+                <span class="text-base">📱</span> USSD Payment Channel
+              </td>
+              <td class="p-4 font-bold text-red-400 font-mono text-sm">3.44%</td>
+              <td class="p-4 font-mono text-slate-400">2.44%</td>
+              <td class="p-4"><span class="px-2 py-1 rounded bg-slate-700 text-slate-200 font-mono font-bold border border-slate-600">1.4× Uplift</span></td>
+              <td class="p-4 text-slate-400">Unencrypted telecom channel vulnerability exploited via social engineering & SIM-swaps.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section -->
+    <section id="pipeline" class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-red-400 font-bold tracking-wider uppercase">
+          <i data-lucide="git-merge" class="w-4 h-4"></i>
+          System Architecture & Data Engineering
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Relational Star Schema & Claude FastMCP Surveillance Flow
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          High-performance analytics pipeline coupling a 37,901-row transactional fact table with an in-memory Calendar dimension and programmatically validated via FastMCP AI.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/90 p-4 shadow-2xl backdrop-blur-md">
+        <img src="assets/fraud/data_architecture_pipeline.png" alt="Star Schema Architecture & FastMCP Surveillance Pipeline" class="w-full h-auto rounded-2xl border border-slate-800/80">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center font-bold text-red-400 text-sm">1</div>
+          <h3 class="font-bold text-white text-sm">Transactional Ingestion</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Ingests 37,901 Highbridge banking logs totaling ₦784M gross transactional flow across mobile, POS, USSD, and web channels.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center font-bold text-amber-400 text-sm">2</div>
+          <h3 class="font-bold text-white text-sm">Power Query Cleansing</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Normalizes transaction timestamps, validates IP geolocation formats, classifies account tenure tiers, and establishes clean binary fraud flags.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-yellow-500/10 border border-yellow-500/20 flex items-center justify-center font-bold text-yellow-400 text-sm">3</div>
+          <h3 class="font-bold text-white text-sm">Star Schema Modeling</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Connects <code class="text-yellow-300">FraudTransactions</code> fact table via 1:N relationship to an in-memory DAX <code class="text-yellow-300">Calendar</code> dimension table.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-bold text-purple-400 text-sm">4</div>
+          <h3 class="font-bold text-white text-sm">FastMCP AI Validation</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Augments Power BI with Claude AI FastMCP Server for automated DAX syntax verification, anomaly hypothesis generation, and P1/P2/P3 rule synthesis.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key DAX Surveillance Measures -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-red-400 font-bold tracking-wider uppercase">
+          <i data-lucide="code" class="w-4 h-4"></i>
+          Production DAX Formulations
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          High-Performance Surveillance DAX Measures
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          DAX calculations engineered for low-latency in-memory query processing, dynamic risk separation scoring, and monetary exposure evaluation.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- DAX 1 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Confirmed Fraud Cases & Rate</span>
+            <span class="text-[10px] font-mono text-red-400 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">DAX Aggregation</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-red-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Confirmed Fraud Cases = 
+CALCULATE(
+    COUNTROWS(FraudTransactions),
+    FraudTransactions[is_fraud] = TRUE()
+)
+
+Confirmed Fraud Rate = 
+DIVIDE([Confirmed Fraud Cases], [Total Transactions])</code></pre>
+          <p class="text-xs text-slate-400">
+            Computes verified malicious actions (924 cases) against the 37,901 transaction baseline (2.44% baseline incidence).
+          </p>
+        </div>
+
+        <!-- DAX 2 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Monetary Value Exposed to Fraud</span>
+            <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Capital Exposure</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-amber-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Value Exposed to Fraud = 
+CALCULATE(
+    SUM(FraudTransactions[transaction_amount_ngn]),
+    FraudTransactions[is_fraud] = TRUE()
+)
+
+Value Exposed Rate = 
+DIVIDE([Value Exposed to Fraud], [Total Transaction Volume])</code></pre>
+          <p class="text-xs text-slate-400">
+            Measures exact currency compromised (₦19,000,000) representing 2.42% of total transactional liquidity.
+          </p>
+        </div>
+
+        <!-- DAX 3 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Dynamic Model Risk Separation Score</span>
+            <span class="text-[10px] font-mono text-yellow-400 bg-yellow-500/10 px-2 py-0.5 rounded border border-yellow-500/20">Model Diagnostic</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-yellow-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Risk Separation Label = 
+VAR FraudScore = CALCULATE(
+    AVERAGE(FraudTransactions[risk_score]),
+    FraudTransactions[is_fraud] = TRUE()
+)
+VAR LegitScore = CALCULATE(
+    AVERAGE(FraudTransactions[risk_score]),
+    FraudTransactions[is_fraud] = FALSE()
+)
+VAR Diff = ABS(FraudScore - LegitScore)
+RETURN
+    SWITCH(
+        TRUE(),
+        Diff >= 20, "Strong separation (" & FORMAT(Diff, "0.0") & " pts)",
+        Diff >= 10, "Moderate separation",
+        "Weak separation"
+    )</code></pre>
+          <p class="text-xs text-slate-400">
+            Validates predictive separation: 92.7 Fraud vs 48.3 Legitimate (+44.4 points delta) earns "Strong separation" status.
+          </p>
+        </div>
+
+        <!-- DAX 4 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Behavioral Anomaly Risk Uplift Multiplier</span>
+            <span class="text-[10px] font-mono text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Risk Multiplier</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-purple-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>Foreign IP Risk Uplift = 
+VAR ForeignFraudRate = CALCULATE(
+    [Confirmed Fraud Rate],
+    FraudTransactions[is_foreign_ip] = TRUE()
+)
+VAR BaselineRate = [Confirmed Fraud Rate]
+RETURN
+    DIVIDE(ForeignFraudRate, BaselineRate)
+-- Output: 10.16x (Formatted as 10.2x Uplift)</code></pre>
+          <p class="text-xs text-slate-400">
+            Dynamically recalculates threat multipliers as transactional streams filter across geographic and channel slices.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prioritized Control Actions (P1 / P2 / P3 Governance) -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-red-400 font-bold tracking-wider uppercase">
+          <i data-lucide="shield-alert" class="w-4 h-4"></i>
+          Governance & Action Framework
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Prioritized Operational Controls (P1 / P2 / P3 Matrix)
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Actionable management framework directly mapping statistical risk uplifts into concrete engineering safeguards and business policy enforcements.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- P1 Priority -->
+        <div class="bg-slate-900/90 border border-red-500/30 rounded-2xl p-6 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-red-500/20 text-red-400 border border-red-500/30 font-mono">PRIORITY 1</span>
+            <span class="text-xs text-slate-400 font-mono">Immediate Hard Controls</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Automated Defense Enforcements</h3>
+          <ul class="space-y-3 text-xs text-slate-300 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-red-400 shrink-0 mt-0.5"></i>
+              <span><strong>Mandatory Step-Up MFA for Foreign IPs:</strong> Enforce biometric or hardware token verification for all non-domestic sessions (10.2× risk uplift).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-red-400 shrink-0 mt-0.5"></i>
+              <span><strong>Brute-Force Rate Limiting:</strong> Auto-lock transaction sessions after 3 failed login attempts (6.6× risk uplift).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-red-400 shrink-0 mt-0.5"></i>
+              <span><strong>Direct Transfer Throttles:</strong> Implement stepped holds on consecutive outbound transfers (accounts for 47.9% of all fraud).</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- P2 Priority -->
+        <div class="bg-slate-900/90 border border-amber-500/30 rounded-2xl p-6 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 font-mono">PRIORITY 2</span>
+            <span class="text-xs text-slate-400 font-mono">Medium-Term Interventions</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Account Velocity & Beneficiary Rules</h3>
+          <ul class="space-y-3 text-xs text-slate-300 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span><strong>First-Time Beneficiary Cooling:</strong> Enforce a 2-hour delay on outbound transfers to newly registered payees (3.6× risk uplift).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span><strong>New Account Velocity Caps:</strong> Restrict daily withdrawal thresholds on accounts &lt; 30 days old (3.4× risk uplift) until identity seasoning.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-400 shrink-0 mt-0.5"></i>
+              <span><strong>Mule Account Graph Analysis:</strong> Deploy heuristic graph mapping to identify shared beneficiary clusters across synthetic IDs.</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- P3 Priority -->
+        <div class="bg-slate-900/90 border border-yellow-500/30 rounded-2xl p-6 space-y-4 shadow-xl">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 font-mono">PRIORITY 3</span>
+            <span class="text-xs text-slate-400 font-mono">Channel Hardening</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">USSD & Telco Modernization</h3>
+          <ul class="space-y-3 text-xs text-slate-300 leading-relaxed">
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-yellow-400 shrink-0 mt-0.5"></i>
+              <span><strong>Real-Time SIM-Swap APIs:</strong> Query telecom operator APIs during USSD transactions to flag recently swapped SIM cards (1.4× uplift).</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-yellow-400 shrink-0 mt-0.5"></i>
+              <span><strong>Location Triangulation:</strong> Check cell tower location proximity against registered billing address for high-value mobile transfers.</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-yellow-400 shrink-0 mt-0.5"></i>
+              <span><strong>Continuous FastMCP Tuning:</strong> Run weekly AI model auditing via FastMCP server to identify newly emerging behavioral patterns.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-8 border-t border-slate-800/80 text-center space-y-4">
+      <div class="flex items-center justify-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center font-bold text-xs text-red-400">
+          RG
+        </div>
+        <span class="text-sm font-bold text-white">Ravinder Gupta · Data Analyst & BI Specialist</span>
+      </div>
+      <p class="text-xs text-slate-500">
+        Gurugram (Delhi-NCR), India · FinTech Fraud Surveillance & Behavioral Analytics · 2026
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Interactive 2.2-Second Slider Script & Dynamic Insights Logic -->
+  <script>
+    // Lucide Icons Initialization
+    lucide.createIcons();
+
+    // 2.2-Second Curtain Preloader Animation
+    window.addEventListener('DOMContentLoaded', () => {
+      const bar = document.getElementById('preloaderBar');
+      const count = document.getElementById('preloaderCount');
+      const preloader = document.getElementById('fraudPreloader');
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 4;
+        if (progress > 100) progress = 100;
+        count.innerText = progress + '%';
+        bar.style.width = progress + '%';
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            preloader.style.transform = 'translateY(-100%)';
+            setTimeout(() => preloader.style.display = 'none', 750);
+          }, 300);
+        }
+      }, 75); // ~2.2s total duration
+    });
+
+    // 3-View Showcase Data Model
+    const views = [
+      {
+        id: 0,
+        title: "View 1: Executive Monitoring Cockpit",
+        img: "assets/fraud/dashboard_overview_page.png",
+        insightTitle: "Surveillance Insight: Institutional Anomaly Baseline",
+        insightDesc: "Out of 37,901 transactions totaling ₦784M, the platform flagged 924 confirmed attacks compromising ₦19M (2.42% of volume). Real-time channel analysis reveals direct fund transfers account for 47.9% of all fraud incidents, representing the primary cash-out rail.",
+        kpi1: "37,901 Txns · ₦784M Volume",
+        kpi2: "Direct Transfers (47.9% of Fraud)",
+        kpi3: "864 Unique Victims Identified"
+      },
+      {
+        id: 1,
+        title: "View 2: Prioritized P1 / P2 / P3 Governance",
+        img: "assets/fraud/dashboard_descriptions_page.png",
+        insightTitle: "Action Framework: Prioritized Rule Governance",
+        insightDesc: "Transforms behavioral risk anomalies into operational rules: P1 mandates MFA on Foreign IPs (10.2× risk) and rate-limiting after 3 failed logins; P2 applies 2-hour cooling periods on new beneficiaries (3.6× risk); P3 secures USSD channels against SIM swaps.",
+        kpi1: "P1: Foreign IP MFA (10.2× Uplift)",
+        kpi2: "P2: 2-Hr Beneficiary Cooling",
+        kpi3: "P3: Real-Time SIM-Swap APIs"
+      },
+      {
+        id: 2,
+        title: "View 3: Star Schema & FastMCP Architecture",
+        img: "assets/fraud/data_architecture_pipeline.png",
+        insightTitle: "Data Architecture: High-Performance In-Memory Modeling",
+        insightDesc: "Optimized relational Star Schema linking 37,901 transactional fact rows to an in-memory Calendar dimension table via 1:N relationship. Integrated with Claude AI FastMCP Server for automated DAX validation and real-time anomaly discovery.",
+        kpi1: "Star Schema 1:N Architecture",
+        kpi2: "Power Query M ETL Engine",
+        kpi3: "Claude AI FastMCP Validated"
+      }
+    ];
+
+    let currentSlide = 0;
+    let autoPlayTimer = null;
+    let isPlaying = true;
+    let progressTimer = null;
+    let progressPercent = 0;
+    const SLIDE_DURATION = 2200; // 2.2 Seconds
+    const PROGRESS_STEP = 50;
+
+    function renderSlide(index) {
+      currentSlide = index;
+      const v = views[index];
+
+      // Update image with smooth fade
+      const imgEl = document.getElementById('dashboardImg');
+      imgEl.style.opacity = '0.3';
+      setTimeout(() => {
+        imgEl.src = v.img;
+        imgEl.alt = v.title;
+        imgEl.style.opacity = '1';
+      }, 150);
+
+      // Update badges & text
+      document.getElementById('viewStatusBadge').innerText = v.title;
+      document.getElementById('slideIndicator').innerText = (index + 1) + " / " + views.length;
+      document.getElementById('insightTitle').innerText = v.insightTitle;
+      document.getElementById('insightDesc').innerText = v.insightDesc;
+      document.getElementById('insightKpi1').innerText = v.kpi1;
+      document.getElementById('insightKpi2').innerText = v.kpi2;
+      document.getElementById('insightKpi3').innerText = v.kpi3;
+
+      // Update Tab Buttons
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Reset Progress Bar
+      progressPercent = 0;
+      updateProgressBar();
+    }
+
+    function updateProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.width = progressPercent + '%';
+      }
+    }
+
+    function startAutoSlider() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (progressTimer) clearInterval(progressTimer);
+
+      progressPercent = 0;
+      progressTimer = setInterval(() => {
+        progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
+        if (progressPercent > 100) progressPercent = 100;
+        updateProgressBar();
+      }, PROGRESS_STEP);
+
+      autoPlayTimer = setInterval(() => {
+        nextSlide();
+      }, SLIDE_DURATION);
+    }
+
+    function stopAutoSlider() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (progressTimer) clearInterval(progressTimer);
+      progressPercent = 0;
+      updateProgressBar();
+    }
+
+    function toggleAutoPlay() {
+      isPlaying = !isPlaying;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+
+      if (isPlaying) {
+        icon.setAttribute('data-lucide', 'pause');
+        text.innerText = 'Pause 2.2s Auto-Slider';
+        startAutoSlider();
+      } else {
+        icon.setAttribute('data-lucide', 'play');
+        text.innerText = 'Resume 2.2s Auto-Slider';
+        stopAutoSlider();
+      }
+      lucide.createIcons();
+    }
+
+    function switchTab(index) {
+      renderSlide(index);
+      if (isPlaying) {
+        startAutoSlider();
+      }
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % views.length;
+      renderSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentSlide - 1 + views.length) % views.length;
+      renderSlide(prevIndex);
+    }
+
+    // Initialize slider on load
+    window.addEventListener('load', () => {
+      renderSlide(0);
+      startAutoSlider();
+    });
+
+    // 60 FPS Cursor Particle Trail Effect in Cyber Crimson & Gold Neon Glow
+    (function initCursorTrail() {
+      const canvas = document.getElementById('trailCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const ring = document.getElementById('cursorRing');
+      const dot = document.getElementById('cursorDot');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      let mouseX = width / 2;
+      let mouseY = height / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+      let lastX = mouseX;
+      let lastY = mouseY;
+
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.radius = Math.random() * 2.5 + 1.2;
+          this.alpha = 1;
+          this.vx = (Math.random() - 0.5) * 1.4;
+          this.vy = (Math.random() - 0.5) * 1.4;
+          this.decay = Math.random() * 0.03 + 0.02;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(239, 68, 68, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#f59e0b';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(239, 68, 68, 0.9)';
+          ring.style.backgroundColor = 'rgba(239, 68, 68, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(239, 68, 68, 0.6)';
+          ring.style.backgroundColor = 'rgba(239, 68, 68, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
