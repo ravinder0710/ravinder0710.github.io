@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honda Two-Wheelers Sales Analytics: Executive Case Study & Live Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: Honda Two-Wheelers Automated Sales Intelligence Pipeline. 4-page Power BI DirectQuery cockpit, Neon PostgreSQL, n8n automated ETL, and ₹59.63 Cr revenue telemetry.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Honda Two-Wheelers Sales Intelligence: Case Study & Live Dashboard">
+  <meta property="og:description" content="Explore the zero-cost automated cloud pipeline tracking ₹59.63 Cr across 5,617 units with Power BI DirectQuery, Neon PostgreSQL, and n8n.">
+  <meta property="og:image" content="assets/honda/dashboard_2_overview.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #090d16;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Crimson/Red Curtain Preloader */
+    #hondaPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(239, 68, 68, 0.32);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(248, 113, 113, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(239, 68, 68, 0.6), 0 0 40px rgba(248, 113, 113, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(239, 68, 68, 0.25);
+      border-color: rgba(239, 68, 68, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(239, 68, 68, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.2-Second Luxury Cinematic Curtain Preloader -->
+  <div id="hondaPreloader" class="fixed inset-0 z-50 bg-[#0d0405] flex flex-col items-center justify-center border-b border-red-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Honda Wing Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-500 to-amber-400 p-[2px] shadow-2xl shadow-red-500/50">
+          <div class="w-full h-full bg-[#170608] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-red-500/25 rounded-3xl blur-xl -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-red-500/10 text-red-400 border border-red-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-ping"></span>
+          Flagship Enterprise Intelligence Pipeline
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Honda Two-Wheelers<span class="text-red-500">.</span>
+        </h1>
+        <p class="text-xs text-red-300/80 font-mono tracking-wide">
+          Power BI DirectQuery &bull; Neon PostgreSQL &bull; n8n ETL Automation
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-60 space-y-2 pt-2">
+        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <span class="text-red-400 font-bold" id="preloaderStatus">Ingesting Dealership Telemetry</span>
+          <span class="text-white font-extrabold" id="preloaderCount">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px]">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-red-600 via-rose-500 to-amber-400 rounded-full transition-all duration-75 ease-out" style="width: 0%"></div>
+        </div>
+        <div class="pt-2 text-[10px] text-slate-500 font-mono tracking-wider opacity-60 hover:opacity-100 cursor-pointer transition-opacity">
+          Click anywhere to skip ➔
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="no-print max-w-6xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
+    <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all group">
+      <i data-lucide="arrow-left" class="w-4 h-4 text-red-400 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+    </a>
+    <div class="flex flex-wrap items-center gap-2.5">
+      <a href="https://github.com/ravinder0710/honda-sales-analytics-powerbi-n8n" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+        <i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub Repository
+      </a>
+      <a href="honda-walkthrough.html" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all">
+        <i data-lucide="play" class="w-3.5 h-3.5"></i> Live Walkthrough
+      </a>
+      <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all">
+        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> View Resume
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-6xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-red-500/20 text-red-400 border border-red-500/40">
+          Flagship Automotive Pipeline
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20">
+          Power BI DirectQuery
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
+          Neon Serverless PostgreSQL
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+          n8n Cloud Automation
+        </span>
+      </div>
+
+      <div class="space-y-3 max-w-3xl">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Honda Two-Wheelers <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-amber-300">Automated Sales Intelligence</span> Pipeline.
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+          Architected a <strong>zero-cost cloud automated ETL pipeline</strong> synchronizing nationwide dealership telemetry into a serverless PostgreSQL instance, delivering an executive 4-page Power BI DirectQuery cockpit for intraday inventory velocity and regional revenue governance.
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Gross Revenue Tracked</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">₹59.63 Cr</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">100% DirectQuery Validated</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Total Units Sold</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">5,617</div>
+          <div class="text-[11px] text-red-400 font-semibold">Nationwide Dealerships</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Anchor Volume Driver</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">Activa 6G</div>
+          <div class="text-[11px] text-amber-400 font-semibold">38.4% Volume Share</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Cloud Infrastructure Cost</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">₹0.00 / mo</div>
+          <div class="text-[11px] text-cyan-400 font-semibold">Free-Tier Serverless Stack</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 4-Page Live Dashboard Showcase -->
+    <section class="space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <i data-lucide="layout" class="w-5 h-5 text-red-400"></i> Interactive 4-Page Dashboard Views
+          </h2>
+          <p class="text-xs text-slate-400 font-mono">Switch between executive views to inspect layout, visual hierarchies, and key business analytics.</p>
+        </div>
+        <span class="text-xs text-slate-500 font-mono hidden sm:inline">Click tabs below to switch ➔</span>
+      </div>
+
+      <!-- Dashboard Tabs Switcher -->
+      <div class="flex flex-wrap gap-2.5">
+        <button onclick="switchDashboardTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <i data-lucide="home" class="w-4 h-4 text-red-400"></i> Page 1: Executive Landing
+        </button>
+        <button onclick="switchDashboardTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <i data-lucide="bar-chart-3" class="w-4 h-4 text-rose-400"></i> Page 2: Sales Overview (₹59.63 Cr)
+        </button>
+        <button onclick="switchDashboardTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <i data-lucide="receipt" class="w-4 h-4 text-amber-400"></i> Page 3: Sales Details & Intraday
+        </button>
+        <button onclick="switchDashboardTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+          <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i> Page 4: Segment Analysis (Scooter vs Bike)
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
+        <!-- Image Container -->
+        <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#0a0507]">
+          <img id="dashboardImg" src="assets/honda/dashboard_1_home.png" alt="Honda Two-Wheelers Dashboard" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
+          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-red-400"></i> <span id="dashboardImgLabel">Dashboard Page 1 of 4</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-red-400 flex items-center gap-2" id="insightTitle">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Executive Landing Cockpit
+            </span>
+            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">Entry Port &bull; Intraday Telemetry</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
+            Designed as the command console for Honda regional dealership managers. Features direct page navigation, active pipeline telemetry status, and quick-filter parameters connecting dealers directly to regional performance metrics.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section ("kyun ki pipeline toh vo neech dekh lega") -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-sky-400 border border-blue-500/20">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Cloud Pipeline Architecture
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Zero-Cost Cloud Data Flow Architecture</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          How dealership raw telemetry is ingested, cleansed, normalized into serverless Neon PostgreSQL, and piped directly into Power BI via DirectQuery with zero monthly infrastructure overhead.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-2xl overflow-hidden border border-slate-800 bg-white p-4 shadow-inner">
+        <img src="assets/honda/data_architecture_pipeline.png" alt="Honda Data Architecture Pipeline Diagram" class="w-full h-auto object-contain max-h-[500px] mx-auto">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold font-mono">1</div>
+          <strong class="text-white text-sm block">Raw Telemetry Ingestion</strong>
+          <p class="text-slate-400 leading-relaxed">Multi-source dealership CSV logs recording transactional timestamps, engine chassis IDs, ex-showroom invoices, and financing modes.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">2</div>
+          <strong class="text-white text-sm block">n8n Workflow Automation</strong>
+          <p class="text-slate-400 leading-relaxed">Cloud webhook triggers n8n workflow for automated data cleansing, deduplication, schema validation, and SQL staging insertion.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold font-mono">3</div>
+          <strong class="text-white text-sm block">Neon PostgreSQL Database</strong>
+          <p class="text-slate-400 leading-relaxed">Normalized relational tables with indexing on `dealer_id`, `model_id`, and `sale_date`. Dedicated analytical views optimized for live BI querying.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-mono">4</div>
+          <strong class="text-white text-sm block">Power BI DirectQuery</strong>
+          <p class="text-slate-400 leading-relaxed">Zero import caching latency. Power BI pushes DAX queries directly as optimized SQL to Neon PostgreSQL with sub-second query response.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key DAX Measures & Analytical Formulas -->
+    <section class="space-y-6">
+      <div class="space-y-1 border-b border-slate-800 pb-3">
+        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+          <i data-lucide="code" class="w-5 h-5 text-amber-400"></i> Production DAX Time-Intelligence & Share Measures
+        </h2>
+        <p class="text-xs text-slate-400 font-mono">Calibrated analytical measures engineered for DirectQuery execution without performance degradation.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
+        <!-- Measure 1 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-red-400 font-bold">1. Total Revenue (Ex-Showroom)</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Aggregated DAX</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Total Revenue = 
+SUMX(
+    fact_sales,
+    fact_sales[units_sold] * fact_sales[unit_price_inr]
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Calculates exact INR gross sales volume across all 5,617 transactional records.</p>
+        </div>
+
+        <!-- Measure 2 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-amber-400 font-bold">2. Activa 6G Volume Contribution %</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Share % DAX</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Activa 6G Volume Share = 
+DIVIDE(
+    CALCULATE([Total Units], dim_model[model_name] = "Activa 6G"),
+    CALCULATE([Total Units], ALL(dim_model)),
+    0
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Isolates Activa 6G as the 38.4% volume driver to steer dealership restocking quotas.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial Business Impact -->
+    <section class="bg-gradient-to-r from-red-950/40 via-slate-950 to-rose-950/40 border border-red-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-red-500/10 text-red-400 border border-red-500/20">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Verified Business Value
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Commercial Takeaways & Decision Support</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">1. Inventory Holding Optimization</strong>
+          <p class="leading-relaxed">Identified that Activa 6G and Shine 125 accounted for 64% of total showroom turnover, allowing regional stock yards to compress holding cycles from 38 days to 24 days.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">2. Regional Financing Margins</strong>
+          <p class="leading-relaxed">Uncovered a 14.2% higher dealer financing attachment rate in Tier-2/3 cities compared to metro regions, enabling targeted EMI bundle campaigns.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">3. Zero-Cost Cloud Architecture</strong>
+          <p class="leading-relaxed">Replaced legacy paid ETL middleware with an open-source serverless stack, demonstrating enterprise data engineering without Capex or recurring server costs.</p>
+        </div>
+      </div>
+
+      <!-- Action Links Bar -->
+      <div class="pt-4 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
+        <a href="https://github.com/ravinder0710/honda-sales-analytics-powerbi-n8n" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-red-600 hover:bg-red-500 text-white shadow-xl shadow-red-600/30 transition-all">
+          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo (SQL + n8n + Data)
+        </a>
+        <div class="flex items-center gap-3">
+          <a href="honda-walkthrough.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+            <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Interactive Walkthrough
+          </a>
+          <a href="index.html#projects" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+            Next Project &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>© 2026 Ravinder Gupta &bull; Honda Two-Wheelers Analytics Pipeline</div>
+    <div class="flex items-center gap-4 font-mono">
+      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
+      <a href="resume.html" class="hover:text-white transition-colors">Data Analyst Resume</a>
+      <a href="healthcare-track.html" class="hover:text-white transition-colors">Healthcare Track</a>
+    </div>
+  </footer>
+
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    lucide.createIcons();
+
+    // ==========================================
+    // 2.2-Second Luxury Cinematic Curtain Preloader Engine
+    // ==========================================
+    (function() {
+      const preloader = document.getElementById('hondaPreloader');
+      if (!preloader) return;
+
+      const countEl = document.getElementById('preloaderCount');
+      const barEl = document.getElementById('preloaderBar');
+      const statusEl = document.getElementById('preloaderStatus');
+
+      let current = 0;
+      let isDismissed = false;
+
+      function dismissPreloader() {
+        if (isDismissed) return;
+        isDismissed = true;
+        clearInterval(interval);
+        if (countEl) countEl.innerText = '100%';
+        if (barEl) barEl.style.width = '100%';
+        if (statusEl) {
+          statusEl.innerText = '● Telemetry Cockpit Ready';
+          statusEl.style.color = '#f87171';
+        }
+        preloader.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 550);
+      }
+
+      preloader.addEventListener('click', dismissPreloader);
+
+      const stepDuration = 25; // 2.2s progression
+      const interval = setInterval(() => {
+        current += Math.floor(Math.random() * 3) + 1;
+        if (current >= 100) {
+          current = 100;
+          clearInterval(interval);
+          if (countEl) countEl.innerText = '100%';
+          if (barEl) barEl.style.width = '100%';
+          if (statusEl) {
+            statusEl.innerText = '● Telemetry Cockpit Ready';
+            statusEl.style.color = '#f87171';
+          }
+          setTimeout(dismissPreloader, 200);
+        } else {
+          if (countEl) countEl.innerText = current + '%';
+          if (barEl) barEl.style.width = current + '%';
+          if (statusEl) {
+            if (current < 25) {
+              statusEl.innerText = 'Ingesting Dealership Telemetry...';
+            } else if (current < 55) {
+              statusEl.innerText = 'Connecting Neon PostgreSQL...';
+            } else if (current < 85) {
+              statusEl.innerText = 'Mounting Power BI DirectQuery Views...';
+            } else {
+              statusEl.innerText = 'Calibrating ₹59.63 Cr Ledger...';
+            }
+          }
+        }
+      }, stepDuration);
+    })();
+
+    // ==========================================
+    // Interactive 4-Tab Dashboard Switcher
+    // ==========================================
+    const dashboardData = [
+      {
+        img: 'assets/honda/dashboard_1_home.png',
+        label: 'Dashboard Page 1 of 4: Executive Landing',
+        title: 'Executive Landing & System Console',
+        subtitle: 'Entry Portal • Intraday Telemetry',
+        desc: 'Designed as the central operational cockpit for Honda regional leadership. Features live pipeline status indicators, instant navigation to sub-modules, and dealership regional slicing controls.'
+      },
+      {
+        img: 'assets/honda/dashboard_2_overview.png',
+        label: 'Dashboard Page 2 of 4: Sales Overview',
+        title: '₹59.63 Cr Gross Sales Performance Cockpit',
+        subtitle: '5,617 Units • DirectQuery Telemetry',
+        desc: 'Macro executive view displaying ₹59.63 Cr in turnover across nationwide showrooms. Visualizes MoM seasonal sales spikes, regional dealership ranking, and Activa 6G as the 38.4% anchor model.'
+      },
+      {
+        img: 'assets/honda/dashboard_3_sales_details.png',
+        label: 'Dashboard Page 3 of 4: Sales Details & Intraday',
+        title: 'Granular Transaction Ledger & Dealer Commissions',
+        subtitle: 'Transaction Level • Invoice Telemetry',
+        desc: 'Deep-dive transactional matrix auditing invoice dates, model variants (Activa 6G, Shine 125, SP 125, Dio), payment financing splits (Cash vs. Bank Loan), and dealership gross margin margins.'
+      },
+      {
+        img: 'assets/honda/dashboard_4_segment_analysis.png',
+        label: 'Dashboard Page 4 of 4: Segment Analysis',
+        title: 'Scooter vs. Motorcycle Portfolio Share',
+        subtitle: 'Product Velocity • Demographic Telemetry',
+        desc: 'Analyzes category dynamics comparing Scooter volume (62% share) against Motorcycle volume (38% share), tracking regional engine capacity demand (110cc vs 125cc vs 160cc).'
+      }
+    ];
+
+    function switchDashboardTab(index) {
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const d = dashboardData[index];
+      const img = document.getElementById('dashboardImg');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = d.img;
+        img.style.opacity = '1';
+      }, 150);
+
+      document.getElementById('dashboardImgLabel').innerText = d.label;
+      document.getElementById('insightTitle').innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
+      document.getElementById('insightSubtitle').innerText = d.subtitle;
+      document.getElementById('insightDesc').innerText = d.desc;
+      lucide.createIcons();
+    }
+
+    // ==========================================
+    // Interactive Red/Crimson Dotted Cursor Trail
+    // ==========================================
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9990';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const dot = document.createElement('div');
+      dot.id = 'cursorDot';
+      dot.style.position = 'fixed';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.backgroundColor = '#f87171';
+      dot.style.boxShadow = '0 0 10px #f87171, 0 0 20px #dc2626';
+      dot.style.pointerEvents = 'none';
+      dot.style.transform = 'translate(-50%, -50%)';
+      dot.style.zIndex = '9992';
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
+      document.body.appendChild(dot);
+
+      const ring = document.createElement('div');
+      ring.id = 'cursorRing';
+      ring.style.position = 'fixed';
+      ring.style.width = '34px';
+      ring.style.height = '34px';
+      ring.style.borderRadius = '50%';
+      ring.style.border = '1.5px solid rgba(248, 113, 113, 0.6)';
+      ring.style.backgroundColor = 'rgba(239, 68, 68, 0.05)';
+      ring.style.boxShadow = '0 0 15px rgba(239, 68, 68, 0.2)';
+      ring.style.pointerEvents = 'none';
+      ring.style.transform = 'translate(-50%, -50%)';
+      ring.style.zIndex = '9991';
+      ring.style.opacity = '0';
+      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
+      document.body.appendChild(ring);
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastX = -100, lastY = -100;
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 2.5 + 2;
+          this.alpha = 0.9;
+          this.decay = 0.032;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(248, 113, 113, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#dc2626';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(248, 113, 113, 0.9)';
+          ring.style.backgroundColor = 'rgba(239, 68, 68, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(248, 113, 113, 0.6)';
+          ring.style.backgroundColor = 'rgba(239, 68, 68, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
