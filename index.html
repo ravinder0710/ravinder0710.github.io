@@ -445,12 +445,12 @@
 
         <!-- Project 1: Bank Loan -->
         <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi sql python">
-          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/bank-loan-analysis-sql-powerbi-python_pipeline.png', 'Bank Loan Data Architecture & Analytical Workflow')">
-            <img src="https://raw.githubusercontent.com/ravinder0710/bank-loan-analysis-sql-powerbi-python/main/dashboard_summary_view.png" alt="Bank Loan Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
-            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
-              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+          <a href="bank-loan-project.html" target="_blank" class="relative group block cursor-pointer">
+            <img src="assets/bank-loan/dashboard_summary_view.png" alt="Bank Loan Analytics Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-blue-600/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="layout" class="w-4 h-4"></i> Open Bank Loan Case Study & Live 6-View Dashboard ➔
             </div>
-          </div>
+          </a>
           <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
             <div class="space-y-2">
               <div class="flex flex-wrap items-center gap-1.5">
@@ -459,7 +459,12 @@
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Python</span>
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX</span>
               </div>
-              <h3 class="text-lg font-bold text-white">Bank Loan Portfolio Risk & Liquidity Analytics</h3>
+              <a href="bank-loan-project.html" target="_blank" class="group/title block">
+                <h3 class="text-lg font-bold text-white group-hover/title:text-sky-400 transition-colors flex items-center gap-1.5">
+                  Bank Loan Portfolio Risk & Liquidity Analytics
+                  <i data-lucide="arrow-up-right" class="w-4 h-4 opacity-0 group-hover/title:opacity-100 transition-opacity"></i>
+                </h3>
+              </a>
               <p class="text-xs text-slate-400 leading-relaxed">
                 Cleaned raw loan data via Python, engineered 37 validated SQL queries for DTI & default ratios, and built a 3-page Power BI dashboard isolating capital adequacy.
               </p>
@@ -472,12 +477,16 @@
                 <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python" target="_blank" rel="noopener" class="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
                   <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
                 </a>
+                <a href="bank-loan-project.html" target="_blank" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30 transition-all flex items-center gap-1.5">
+                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                </a>
                 <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/bank-loan-analysis-sql-powerbi-python_pipeline.png', 'Bank Loan Pipeline')" class="px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
                   Pipeline
                 </button>
               </div>
             </div>
           </div>
+        </article>
         </article>
 
         <!-- Project 2: Fraud Intelligence -->

@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Loan Analytics & Portfolio Credit Risk Intelligence | Executive Case Study & Live Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: Bank Loan Analytics & Portfolio Credit Risk Intelligence System. 38,576 loan records, $435.76M funded capital, $473.07M cash collections, MySQL 8.0 engine, Python EDA, and Power BI 3-page cockpit.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bank Loan Analytics & Credit Risk: Case Study & Live Dashboard">
+  <meta property="og:description" content="Explore $435.76M loan disbursements, +$37.31M liquidity surplus, 86.2% Good Loan vs 13.8% Bad Loan default reconciliation, and MySQL/Python pipelines.">
+  <meta property="og:image" content="assets/bank-loan/dashboard_summary_view.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #030712;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Royal Blue/Fintech Curtain Preloader */
+    #bankLoanPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(37, 99, 235, 0.6), 0 0 40px rgba(56, 189, 248, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(37, 99, 235, 0.25);
+      border-color: rgba(37, 99, 235, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(37, 99, 235, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.2-Second Luxury Fintech Blue & Gold Curtain Preloader -->
+  <div id="bankLoanPreloader" class="fixed inset-0 z-50 bg-[#020617] flex flex-col items-center justify-center border-b border-blue-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Vault / RG Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 via-sky-400 to-amber-400 p-[2px] shadow-2xl shadow-blue-500/50">
+          <div class="w-full h-full bg-[#0a1128] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-blue-500/25 rounded-3xl blur-xl -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-blue-500/10 text-sky-400 border border-blue-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-ping"></span>
+          Enterprise FinTech & Credit Risk Intelligence
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Bank Loan Portfolio Analytics<span class="text-blue-500">.</span>
+        </h1>
+        <p class="text-xs text-blue-300/80 font-mono tracking-wide">
+          $435.76M Disbursed &bull; MySQL 8.0 &bull; 38,576 Credit Transactions
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-64 space-y-2 pt-2">
+        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <span class="text-sky-400 font-bold" id="preloaderStatus">Reconciling 38,576 Credit Ledgers</span>
+          <span class="text-white font-extrabold" id="preloaderCount">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-400 rounded-full transition-all duration-75 ease-out" style="width: 0%"></div>
+        </div>
+        <div class="pt-2 text-[10px] text-slate-500 font-mono tracking-wider opacity-60 hover:opacity-100 cursor-pointer transition-opacity">
+          Click anywhere to skip ➔
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="no-print max-w-6xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
+    <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all group">
+      <i data-lucide="arrow-left" class="w-4 h-4 text-blue-400 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+    </a>
+    <div class="flex flex-wrap items-center gap-2.5">
+      <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+        <i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub Repository
+      </a>
+      <a href="honda-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all">
+        <i data-lucide="gauge" class="w-3.5 h-3.5"></i> Honda Pipeline
+      </a>
+      <a href="healthcare-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
+        <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Healthcare Project
+      </a>
+      <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all">
+        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> View Resume
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-6xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-blue-500/20 text-sky-400 border border-blue-500/40">
+          Flagship Banking & Credit Risk System
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
+          MySQL 8.0 Engine (37 Production Queries)
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20">
+          Power BI Executive Suite
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+          Python EDA (Pandas & Plotly)
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+          Liquidity Reconciliation (+$37.31M Net)
+        </span>
+      </div>
+
+      <div class="space-y-3 max-w-3xl">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Bank Loan Analytics & <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-amber-300">Portfolio Credit Risk Intelligence</span>.
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+          Architected a <strong>"SQL-First as the Source of Truth"</strong> banking intelligence pipeline auditing <strong>38,576 loan facilities totaling $435.76M in capital disbursements</strong> and <strong>$473.07M in cash collections</strong> across FY2021. Established automated risk reconciliation across MySQL (37 production CTE & window queries), Python exploratory models, and Power BI C-suite dashboards.
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Capital Disbursed</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">$435.76M</div>
+          <div class="text-[11px] text-sky-400 font-semibold">38,576 Facilities Reconciled</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Cash Collected (Inflow)</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">$473.07M</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">+$37.31M Net Cash Liquidity</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Good Loan Cash Surplus</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">86.18%</div>
+          <div class="text-[11px] text-amber-400 font-semibold">+$65.56M Net Quality Margin</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Bad Loan Default Write-off</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">13.82%</div>
+          <div class="text-[11px] text-red-400 font-semibold">-$28.25M Net Impairment Leak</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 6-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <section class="space-y-6">
+      <!-- Header with Interactive Slider Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <i data-lucide="layout" class="w-5 h-5 text-blue-400"></i> Interactive 6-View Portfolio Risk & Analytics Showcase
+          </h2>
+          <p class="text-xs text-slate-400 font-mono">Switch between executive Power BI dashboards, dimensional loan slicers, and Python EDA risk distributions.</p>
+        </div>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-blue-500/30 bg-blue-500/10 hover:bg-blue-500/20 text-sky-300 transition-all cursor-pointer">
+            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
+            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+          </button>
+
+          <!-- Prev & Next Clickable Controls -->
+          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-blue-500/40 bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30 transition-all cursor-pointer">
+            <span>Next View</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
+      </div>
+
+      <!-- Dashboard Tabs Switcher (6 Views) -->
+      <div class="flex flex-wrap gap-2">
+        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-400"></i> View 1: Summary (C-Suite Lending)
+        </button>
+        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-400"></i> View 2: Overview (Dimensional Slicing)
+        </button>
+        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="table" class="w-3.5 h-3.5 text-emerald-400"></i> View 3: Granular Details Grid
+        </button>
+        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-purple-400"></i> View 4: Python Regional Exposure
+        </button>
+        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5 text-cyan-400"></i> View 5: Python Monthly Trend
+        </button>
+        <button onclick="userSelectTab(5)" id="tabBtn5" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="donut" class="w-3.5 h-3.5 text-rose-400"></i> View 6: Python Term Donut
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#020617]">
+          <img id="dashboardImg" src="assets/bank-loan/dashboard_summary_view.png" alt="Bank Loan Analytics Dashboard View" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-blue-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-blue-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-sky-400 font-mono flex items-center gap-2 border border-blue-500/20">
+            <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-blue-400"></i> <span id="dashboardImgLabel">View 1 of 6: Summary (C-Suite Lending)</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-sky-400 flex items-center gap-2" id="insightTitle">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> C-Suite Lending KPIs & Good/Bad Risk Splits
+            </span>
+            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">$435.76M Disbursed &bull; 86.18% Good vs 13.82% Bad Loan Split</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
+            Macro lending health console auditing 38,576 applications. Visualizes $435.76M in funded capital against $473.07M cash received, isolating +$65.56M in good loan profits against the -$28.25M charged-off impairment write-off.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-sky-400 border border-blue-500/20">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Banking Data Architecture & Reconciliation Pipeline
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">"SQL-First as the Source of Truth" Analytical Pipeline</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          How 38,576 loan records are ingested, cleaned for date formatting anomalies in MySQL, statistically audited across Python Jupyter workflows, and surfaced to C-suite leadership via Power BI.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#061021] p-4 shadow-inner">
+        <img src="assets/bank-loan/data_architecture_pipeline.png" alt="Bank Loan Data Architecture Pipeline Diagram" class="w-full h-auto object-contain max-h-[500px] mx-auto rounded-xl">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-blue-500/20 text-sky-400 flex items-center justify-center font-bold font-mono">1</div>
+          <strong class="text-white text-sm block">Raw Transactional Ledger</strong>
+          <p class="text-slate-400 leading-relaxed">38,576 retail banking loan facilities with text-encoded dates, annual incomes, DTI ratios, FICO grades (A to G), and verification statuses.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">2</div>
+          <strong class="text-white text-sm block">MySQL 8.0 Reconciliation</strong>
+          <p class="text-slate-400 leading-relaxed">37 production queries enforcing date sanitization (`STR_TO_DATE`), multi-period MoM CTEs, and conditional aggregations for Good vs Bad loan ratios.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-mono">3</div>
+          <strong class="text-white text-sm block">Python Exploratory Modeling</strong>
+          <p class="text-slate-400 leading-relaxed">Statistical analysis in Pandas, Matplotlib, Seaborn, and Plotly: evaluating term exposure (36 vs 60 mos), homeownership treemaps, and state funding.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono">4</div>
+          <strong class="text-white text-sm block">Power BI Executive Cockpit</strong>
+          <p class="text-slate-400 leading-relaxed">3-page suite (Summary, Overview, Details Grid) with dynamic measure formatting, cross-filtering, and institutional liquidity health benchmarks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key SQL & DAX Measures & Formulations -->
+    <section class="space-y-6">
+      <div class="space-y-1 border-b border-slate-800 pb-3">
+        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+          <i data-lucide="code" class="w-5 h-5 text-sky-400"></i> Production SQL Queries & Banking Risk Formulas
+        </h2>
+        <p class="text-xs text-slate-400 font-mono">Mathematical formulations and queries powering portfolio liquidity auditing and charge-off default modeling.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
+        <!-- SQL 1 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-sky-400 font-bold">1. Multi-Period MoM CTE (Month-over-Month Surge)</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">MySQL CTE</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>WITH mtd AS (
+    SELECT SUM(loan_amount) AS MTD FROM financial_loan
+    WHERE MONTH(STR_TO_DATE(issue_date, '%d-%m-%Y')) = 12
+      AND YEAR(STR_TO_DATE(issue_date, '%d-%m-%Y')) = 2021
+),
+pmtd AS (
+    SELECT SUM(loan_amount) AS PMTD FROM financial_loan
+    WHERE MONTH(STR_TO_DATE(issue_date, '%d-%m-%Y')) = 11
+      AND YEAR(STR_TO_DATE(issue_date, '%d-%m-%Y')) = 2021
+)
+SELECT CONCAT(ROUND((MTD - PMTD) / PMTD * 100, 2), '%') AS MoM_Growth
+FROM mtd CROSS JOIN pmtd;</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Quantifies the +13.04% year-end surge in capital disbursements ($53.98M funded in December).</p>
+        </div>
+
+        <!-- SQL 2 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-amber-400 font-bold">2. Conditional Good vs Bad Loan Segmentation</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Risk Tiering SQL</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>WITH CTE AS (
+    SELECT 
+        COUNT(CASE WHEN loan_status IN ('Fully Paid', 'Current') THEN id END) AS Good_Loans,
+        COUNT(CASE WHEN loan_status = 'Charged Off' THEN id END) AS Bad_Loans,
+        COUNT(id) AS Total_Loans
+    FROM financial_loan
+)
+SELECT 
+    ROUND((Good_Loans / Total_Loans) * 100, 2) AS Good_Loan_Pct,
+    ROUND((Bad_Loans / Total_Loans) * 100, 2) AS Bad_Loan_Pct
+FROM CTE;</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Establishes 86.18% healthy performing assets ($435.79M collected) vs 13.82% default risk cohort.</p>
+        </div>
+
+        <!-- SQL 3 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-red-400 font-bold">3. Bad Loan Capital Impairment & Recovery Ratio</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Loss Write-Off</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>SELECT 
+    SUM(loan_amount) AS Bad_Loan_Funded,
+    SUM(total_payment) AS Bad_Loan_Recovered,
+    (SUM(loan_amount) - SUM(total_payment)) AS Unrecovered_Write_Off,
+    ROUND((SUM(total_payment) / SUM(loan_amount)) * 100, 2) AS Recovery_Rate_Pct
+FROM financial_loan
+WHERE loan_status = 'Charged Off';</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Identifies the $28.25M capital loss ($37.28M recovered against $65.53M funded = 56.9% recovery).</p>
+        </div>
+
+        <!-- DAX 4 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-emerald-400 font-bold">4. Weighted Portfolio Yield & DTI Solvency Ratio</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Financial DAX</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Avg Portfolio Interest Rate = 
+AVERAGEX(
+    financial_loan,
+    financial_loan[int_rate]
+)
+
+Avg Debt To Income = 
+AVERAGEX(
+    financial_loan,
+    financial_loan[dti]
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Tracks 12.05% portfolio APR yield and 13.33% DTI ratio, well within institutional risk limits.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial & Strategic Banking Business Impact -->
+    <section class="bg-gradient-to-r from-blue-950/40 via-slate-950 to-amber-950/40 border border-blue-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-sky-400 border border-blue-500/20">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Strategic Financial Governance
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Banking Decision Support & Capital Allocation</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">1. Containing the $28.25M Charge-Off Leak</strong>
+          <p class="leading-relaxed">Discovered that lower grades (E, F, G) account for disproportionate default rates. Recommended adjusting risk-based pricing and requiring collateral attachments for DTI > 18%.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">2. 36-Month Term Cash Flow Velocity</strong>
+          <p class="leading-relaxed">36-month loan terms represent 73.2% of application volume (28,237 loans) with superior repayment velocity compared to 60-month facilities, boosting liquidity reinvestment turnover.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">3. Debt Consolidation Restructuring</strong>
+          <p class="leading-relaxed">Identified Debt Consolidation as the primary lending purpose. Formulated targeted balance-transfer promotions for grade A/B borrowers with lower credit utilization.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>© 2026 Ravinder Gupta &bull; Bank Loan Portfolio Risk & Intelligence Pipeline</div>
+    <div class="flex items-center gap-4 font-mono">
+      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
+      <a href="honda-project.html" class="hover:text-white transition-colors">Honda Flagship Pipeline</a>
+      <a href="healthcare-project.html" class="hover:text-white transition-colors">Healthcare Flagship Project</a>
+      <a href="resume.html" class="hover:text-white transition-colors">Data Analyst Resume</a>
+    </div>
+  </footer>
+
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    lucide.createIcons();
+
+    // ==========================================
+    // 2.2-Second Luxury Fintech Curtain Preloader Engine
+    // ==========================================
+    (function() {
+      const preloader = document.getElementById('bankLoanPreloader');
+      if (!preloader) return;
+
+      const countEl = document.getElementById('preloaderCount');
+      const barEl = document.getElementById('preloaderBar');
+      const statusEl = document.getElementById('preloaderStatus');
+
+      let current = 0;
+      let isDismissed = false;
+
+      function dismissPreloader() {
+        if (isDismissed) return;
+        isDismissed = true;
+        clearInterval(interval);
+        if (countEl) countEl.innerText = '100%';
+        if (barEl) barEl.style.width = '100%';
+        if (statusEl) {
+          statusEl.innerText = '● Banking Risk Cockpit Ready';
+          statusEl.style.color = '#38bdf8';
+        }
+        preloader.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 550);
+      }
+
+      preloader.addEventListener('click', dismissPreloader);
+
+      const stepDuration = 25; // 2.2s progression
+      const interval = setInterval(() => {
+        current += Math.floor(Math.random() * 3) + 1;
+        if (current >= 100) {
+          current = 100;
+          clearInterval(interval);
+          if (countEl) countEl.innerText = '100%';
+          if (barEl) barEl.style.width = '100%';
+          if (statusEl) {
+            statusEl.innerText = '● Banking Risk Cockpit Ready';
+            statusEl.style.color = '#38bdf8';
+          }
+          setTimeout(dismissPreloader, 200);
+        } else {
+          if (countEl) countEl.innerText = current + '%';
+          if (barEl) barEl.style.width = current + '%';
+          if (statusEl) {
+            if (current < 25) {
+              statusEl.innerText = 'Reconciling 38,576 Credit Ledgers...';
+            } else if (current < 55) {
+              statusEl.innerText = 'Auditing $435.76M Disbursed vs $473.07M Collected...';
+            } else if (current < 85) {
+              statusEl.innerText = 'Computing Good vs Bad Risk Splits (86.2% / 13.8%)...';
+            } else {
+              statusEl.innerText = 'Calibrating Portfolio Risk Cockpit...';
+            }
+          }
+        }
+      }, stepDuration);
+    })();
+
+    // ==========================================
+    // Interactive 6-Tab 2.2-Second Auto-Slider Engine
+    // ==========================================
+    const dashboardData = [
+      {
+        img: 'assets/bank-loan/dashboard_summary_view.png',
+        label: 'View 1 of 6: Summary (C-Suite Lending)',
+        title: 'C-Suite Lending KPIs & Good/Bad Risk Splits',
+        subtitle: '$435.76M Disbursed • 86.18% Good vs 13.82% Bad Loan Split',
+        desc: 'Macro lending health console auditing 38,576 applications. Visualizes $435.76M in funded capital against $473.07M cash received, isolating +$65.56M in good loan profits against the -$28.25M charged-off impairment write-off.'
+      },
+      {
+        img: 'assets/bank-loan/dashboard_overview_view.png',
+        label: 'View 2 of 6: Overview (Dimensional Slicing)',
+        title: 'Dimensional Portfolio Risk Slicing & Geospatial Telemetry',
+        subtitle: 'State Concentration • 36 vs 60 Month Term • Purpose Breakdown',
+        desc: 'Executive slice-and-dice analyzing monthly disbursement trends, regional concentration across CA, NY, and TX, and loan purpose splits where Debt Consolidation drives 70%+ of borrowing volume.'
+      },
+      {
+        img: 'assets/bank-loan/dashboard_details_grid.png',
+        label: 'View 3 of 6: Granular Details Grid',
+        title: 'Granular Transaction Ledger & Borrower Credit Grades',
+        subtitle: 'Facility Level Audit • FICO Grade A through G • DTI Matrix',
+        desc: 'Deep-dive operational matrix auditing individual loan IDs, employment tenures, verification flags, annual incomes, interest rates, and loan statuses for underwriting compliance.'
+      },
+      {
+        img: 'assets/bank-loan/python_state_funding.png',
+        label: 'View 4 of 6: Python Regional Exposure',
+        title: 'State-wise Capital Allocation & Regional Concentration',
+        subtitle: 'Python Matplotlib/Seaborn • Geographic Lending Limits',
+        desc: 'Exploratory statistical modeling mapping state-level lending saturation. Highlights California, New York, Florida, and Texas as prime geographic capital centers for risk-hedging strategies.'
+      },
+      {
+        img: 'assets/bank-loan/python_monthly_trend.png',
+        label: 'View 5 of 6: Python Monthly Funded Trend',
+        title: 'Monthly Funded Amount Trajectory & Year-End Surge',
+        subtitle: 'Seaborn Spline with Shaded Area • December $53.98M Peak',
+        desc: 'Time-series trajectory visualizing capital expansion throughout FY2021, culminating in December peak originations (+13.04% MoM) requiring active year-end liquidity management.'
+      },
+      {
+        img: 'assets/bank-loan/python_term_donut.png',
+        label: 'View 6 of 6: Python Term Donut',
+        title: 'Portfolio Term Duration Share (36 vs 60 Months)',
+        subtitle: '73.2% Short-Term • 26.8% Long-Term Donut Distribution',
+        desc: 'Evaluates duration risk confirming 36-month short-term loans account for 73.2% (28,237 loans) of originations, offering higher cash turnover and significantly lower delinquency rates.'
+      }
+    ];
+
+    let currentTabIndex = 0;
+    let autoPlayActive = true;
+    const SLIDE_DURATION = 2200; // 2.2 seconds
+    let slideTimer = null;
+
+    function renderSlide(index) {
+      currentTabIndex = index;
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const d = dashboardData[index];
+      const img = document.getElementById('dashboardImg');
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = d.img;
+          img.style.opacity = '1';
+        }, 120);
+      }
+
+      const imgLabel = document.getElementById('dashboardImgLabel');
+      if (imgLabel) imgLabel.innerText = d.label;
+
+      const titleEl = document.getElementById('insightTitle');
+      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
+
+      const subEl = document.getElementById('insightSubtitle');
+      if (subEl) subEl.innerText = d.subtitle;
+
+      const descEl = document.getElementById('insightDesc');
+      if (descEl) descEl.innerText = d.desc;
+
+      lucide.createIcons();
+    }
+
+    function resetProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        setTimeout(() => {
+          if (autoPlayActive && bar) {
+            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+            bar.style.width = '100%';
+          }
+        }, 30);
+      }
+    }
+
+    function switchDashboardTab(index) {
+      renderSlide(index);
+      if (autoPlayActive) {
+        startAutoPlayTimer();
+      }
+    }
+
+    function userSelectTab(index) {
+      switchDashboardTab(index);
+    }
+
+    function nextDashboardTab() {
+      const next = (currentTabIndex + 1) % dashboardData.length;
+      switchDashboardTab(next);
+    }
+
+    function prevDashboardTab() {
+      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
+      switchDashboardTab(prev);
+    }
+
+    function startAutoPlayTimer() {
+      clearInterval(slideTimer);
+      resetProgressBar();
+      slideTimer = setInterval(() => {
+        nextDashboardTab();
+      }, SLIDE_DURATION);
+    }
+
+    function toggleAutoPlay() {
+      autoPlayActive = !autoPlayActive;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+      const pill = document.getElementById('sliderStatusPill');
+      const bar = document.getElementById('slideProgressBar');
+
+      if (autoPlayActive) {
+        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
+        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        startAutoPlayTimer();
+      } else {
+        clearInterval(slideTimer);
+        if (bar) {
+          bar.style.transition = 'none';
+          bar.style.width = '0%';
+        }
+        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Paused (Click to Resume)';
+        if (pill) pill.innerText = 'Auto-Slider Paused';
+      }
+      lucide.createIcons();
+    }
+
+    // Pause auto-slider on hover, resume on leave
+    const container = document.getElementById('dashboardSlideContainer');
+    if (container) {
+      container.addEventListener('mouseenter', () => {
+        if (autoPlayActive) {
+          clearInterval(slideTimer);
+          const bar = document.getElementById('slideProgressBar');
+          if (bar) bar.style.transition = 'none';
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = 'Hovered (Paused)';
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        if (autoPlayActive) {
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          startAutoPlayTimer();
+        }
+      });
+    }
+
+    // Initialize auto-play on load
+    startAutoPlayTimer();
+
+    // ==========================================
+    // Interactive Royal Blue & Gold Dotted Cursor Trail
+    // ==========================================
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9990';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const dot = document.createElement('div');
+      dot.id = 'cursorDot';
+      dot.style.position = 'fixed';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.backgroundColor = '#38bdf8';
+      dot.style.boxShadow = '0 0 10px #38bdf8, 0 0 20px #2563eb';
+      dot.style.pointerEvents = 'none';
+      dot.style.transform = 'translate(-50%, -50%)';
+      dot.style.zIndex = '9992';
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
+      document.body.appendChild(dot);
+
+      const ring = document.createElement('div');
+      ring.id = 'cursorRing';
+      ring.style.position = 'fixed';
+      ring.style.width = '34px';
+      ring.style.height = '34px';
+      ring.style.borderRadius = '50%';
+      ring.style.border = '1.5px solid rgba(56, 189, 248, 0.6)';
+      ring.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+      ring.style.boxShadow = '0 0 15px rgba(37, 99, 235, 0.2)';
+      ring.style.pointerEvents = 'none';
+      ring.style.transform = 'translate(-50%, -50%)';
+      ring.style.zIndex = '9991';
+      ring.style.opacity = '0';
+      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
+      document.body.appendChild(ring);
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastX = -100, lastY = -100;
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 2.5 + 2;
+          this.alpha = 0.9;
+          this.decay = 0.032;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(56, 189, 248, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#2563eb';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(56, 189, 248, 0.9)';
+          ring.style.backgroundColor = 'rgba(37, 99, 235, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(56, 189, 248, 0.6)';
+          ring.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
