@@ -165,40 +165,81 @@
       </div>
     </section>
 
-    <!-- Interactive 4-Page Live Dashboard Showcase -->
+    <!-- Interactive 4-Page Live Dashboard Showcase with 2.2s Auto-Slider -->
     <section class="space-y-6">
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+      <!-- Header with Interactive Slider Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
         <div class="space-y-1">
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
             <i data-lucide="layout" class="w-5 h-5 text-red-400"></i> Interactive 4-Page Dashboard Views
           </h2>
           <p class="text-xs text-slate-400 font-mono">Switch between executive views to inspect layout, visual hierarchies, and key business analytics.</p>
         </div>
-        <span class="text-xs text-slate-500 font-mono hidden sm:inline">Click tabs below to switch ➔</span>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-300 transition-all cursor-pointer">
+            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
+            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+          </button>
+
+          <!-- Prev & Next Clickable Controls -->
+          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-red-500/40 bg-red-600 hover:bg-red-500 text-white shadow-md shadow-red-600/30 transition-all cursor-pointer">
+            <span>Next View</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-red-600 via-rose-500 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
 
       <!-- Dashboard Tabs Switcher -->
       <div class="flex flex-wrap gap-2.5">
-        <button onclick="switchDashboardTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
           <i data-lucide="home" class="w-4 h-4 text-red-400"></i> Page 1: Executive Landing
         </button>
-        <button onclick="switchDashboardTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
           <i data-lucide="bar-chart-3" class="w-4 h-4 text-rose-400"></i> Page 2: Sales Overview (₹59.63 Cr)
         </button>
-        <button onclick="switchDashboardTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
           <i data-lucide="receipt" class="w-4 h-4 text-amber-400"></i> Page 3: Sales Details & Intraday
         </button>
-        <button onclick="switchDashboardTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2">
+        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
           <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i> Page 4: Segment Analysis (Scooter vs Bike)
         </button>
       </div>
 
       <!-- Dashboard Visual Display Card -->
       <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
-        <!-- Image Container -->
-        <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#0a0507]">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#0a0507]">
           <img id="dashboardImg" src="assets/honda/dashboard_1_home.png" alt="Honda Two-Wheelers Dashboard" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
-          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-red-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-red-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-red-400 font-mono flex items-center gap-2 border border-red-500/20">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
             <i data-lucide="eye" class="w-3.5 h-3.5 text-red-400"></i> <span id="dashboardImgLabel">Dashboard Page 1 of 4</span>
           </div>
         </div>
@@ -428,7 +469,7 @@ DIVIDE(
     })();
 
     // ==========================================
-    // Interactive 4-Tab Dashboard Switcher
+    // Interactive 4-Tab 2.2-Second Auto-Slider Engine
     // ==========================================
     const dashboardData = [
       {
@@ -461,7 +502,13 @@ DIVIDE(
       }
     ];
 
-    function switchDashboardTab(index) {
+    let currentTabIndex = 0;
+    let autoPlayActive = true;
+    const SLIDE_DURATION = 2200; // 2.2 seconds
+    let slideTimer = null;
+
+    function renderSlide(index) {
+      currentTabIndex = index;
       document.querySelectorAll('.tab-btn').forEach((btn, i) => {
         if (i === index) {
           btn.classList.add('active');
@@ -472,18 +519,120 @@ DIVIDE(
 
       const d = dashboardData[index];
       const img = document.getElementById('dashboardImg');
-      img.style.opacity = '0';
-      setTimeout(() => {
-        img.src = d.img;
-        img.style.opacity = '1';
-      }, 150);
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = d.img;
+          img.style.opacity = '1';
+        }, 120);
+      }
 
-      document.getElementById('dashboardImgLabel').innerText = d.label;
-      document.getElementById('insightTitle').innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
-      document.getElementById('insightSubtitle').innerText = d.subtitle;
-      document.getElementById('insightDesc').innerText = d.desc;
+      const imgLabel = document.getElementById('dashboardImgLabel');
+      if (imgLabel) imgLabel.innerText = d.label;
+
+      const titleEl = document.getElementById('insightTitle');
+      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
+
+      const subEl = document.getElementById('insightSubtitle');
+      if (subEl) subEl.innerText = d.subtitle;
+
+      const descEl = document.getElementById('insightDesc');
+      if (descEl) descEl.innerText = d.desc;
+
       lucide.createIcons();
     }
+
+    function resetProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        setTimeout(() => {
+          if (autoPlayActive && bar) {
+            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+            bar.style.width = '100%';
+          }
+        }, 30);
+      }
+    }
+
+    function switchDashboardTab(index) {
+      renderSlide(index);
+      if (autoPlayActive) {
+        startAutoPlayTimer();
+      }
+    }
+
+    function userSelectTab(index) {
+      switchDashboardTab(index);
+    }
+
+    function nextDashboardTab() {
+      const next = (currentTabIndex + 1) % dashboardData.length;
+      switchDashboardTab(next);
+    }
+
+    function prevDashboardTab() {
+      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
+      switchDashboardTab(prev);
+    }
+
+    function startAutoPlayTimer() {
+      clearInterval(slideTimer);
+      resetProgressBar();
+      slideTimer = setInterval(() => {
+        nextDashboardTab();
+      }, SLIDE_DURATION);
+    }
+
+    function toggleAutoPlay() {
+      autoPlayActive = !autoPlayActive;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+      const pill = document.getElementById('sliderStatusPill');
+      const bar = document.getElementById('slideProgressBar');
+
+      if (autoPlayActive) {
+        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
+        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        startAutoPlayTimer();
+      } else {
+        clearInterval(slideTimer);
+        if (bar) {
+          bar.style.transition = 'none';
+          bar.style.width = '0%';
+        }
+        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Paused (Click to Resume)';
+        if (pill) pill.innerText = 'Auto-Slider Paused';
+      }
+      lucide.createIcons();
+    }
+
+    // Pause auto-slider when user hovers on dashboard card, resume when leaving
+    const container = document.getElementById('dashboardSlideContainer');
+    if (container) {
+      container.addEventListener('mouseenter', () => {
+        if (autoPlayActive) {
+          clearInterval(slideTimer);
+          const bar = document.getElementById('slideProgressBar');
+          if (bar) bar.style.transition = 'none';
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = 'Hovered (Paused)';
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        if (autoPlayActive) {
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          startAutoPlayTimer();
+        }
+      });
+    }
+
+    // Initialize auto-play on load
+    startAutoPlayTimer();
 
     // ==========================================
     // Interactive Red/Crimson Dotted Cursor Trail
