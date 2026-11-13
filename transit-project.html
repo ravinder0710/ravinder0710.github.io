@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Public Transit & Fleet Operations Dashboard | Executive Case Study & Live Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: Public Transit & Fleet Operations Intelligence Dashboard. 6,587 passenger journey transactions, Claude AI MCP-augmented analytics, Microsoft Excel Power Pivot Star Schema, and fleet capacity optimization.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Public Transit & Fleet Operations: Case Study & Live Dashboard">
+  <meta property="og:description" content="Explore urban mobility analytics, fleet capacity utilization, Claude AI MCP data engineering, and Power Pivot Star Schema across 6,587 trips.">
+  <meta property="og:image" content="assets/transit/transport_transaction_dashboard.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #030c10;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Cyber Teal/Transit Curtain Preloader */
+    #transitPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(20, 184, 166, 0.35);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(45, 212, 191, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(20, 184, 166, 0.6), 0 0 40px rgba(45, 212, 191, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(20, 184, 166, 0.25);
+      border-color: rgba(20, 184, 166, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(20, 184, 166, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.2-Second Luxury Cyber Teal & Transit Curtain Preloader -->
+  <div id="transitPreloader" class="fixed inset-0 z-50 bg-[#02090d] flex flex-col items-center justify-center border-b border-teal-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Bus / Fleet RG Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-teal-500 via-cyan-400 to-emerald-400 p-[2px] shadow-2xl shadow-teal-500/50">
+          <div class="w-full h-full bg-[#04161a] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-teal-500/25 rounded-3xl blur-xl -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-teal-500/10 text-teal-400 border border-teal-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping"></span>
+          Urban Mobility & Fleet Capacity Intelligence
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Public Transit & Fleet Operations<span class="text-teal-400">.</span>
+        </h1>
+        <p class="text-xs text-teal-300/80 font-mono tracking-wide">
+          6,587 Journeys &bull; Power Pivot Star Schema &bull; Claude AI MCP Pipeline
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-64 space-y-2 pt-2">
+        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <span class="text-teal-400 font-bold" id="preloaderStatus">Ingesting 6,587 Urban Bus Journeys</span>
+          <span class="text-white font-extrabold" id="preloaderCount">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-emerald-400 rounded-full transition-all duration-75 ease-out" style="width: 0%"></div>
+        </div>
+        <div class="pt-2 text-[10px] text-slate-500 font-mono tracking-wider opacity-60 hover:opacity-100 cursor-pointer transition-opacity">
+          Click anywhere to skip ➔
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="no-print max-w-6xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
+    <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all group">
+      <i data-lucide="arrow-left" class="w-4 h-4 text-teal-400 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+    </a>
+    <div class="flex flex-wrap items-center gap-2.5">
+      <a href="https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+        <i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub Repository
+      </a>
+      <a href="honda-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all">
+        <i data-lucide="gauge" class="w-3.5 h-3.5"></i> Honda Pipeline
+      </a>
+      <a href="healthcare-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
+        <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Healthcare Project
+      </a>
+      <a href="bank-loan-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600/20 hover:bg-blue-600/30 text-sky-300 border border-blue-500/30 transition-all">
+        <i data-lucide="landmark" class="w-3.5 h-3.5"></i> Bank Loan Project
+      </a>
+      <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white shadow-lg shadow-teal-600/30 transition-all">
+        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> View Resume
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-6xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-teal-500/20 text-teal-400 border border-teal-500/40">
+          Flagship Urban Mobility & Fleet Analytics
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+          Microsoft Excel (Power Pivot & DAX)
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+          Claude AI MCP Workflow
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+          Power Query M-Code
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
+          In-Memory Star Schema
+        </span>
+      </div>
+
+      <div class="space-y-3 max-w-3xl">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Public Transit & <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-cyan-300 to-emerald-300">Fleet Operations Intelligence Dashboard</span>.
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+          Architected a <strong>Claude AI MCP-augmented analytics ecosystem</strong> in Microsoft Excel auditing <strong>6,587 passenger journey transactions</strong> across urban bus networks. Combined AI-assisted data engineering via Model Context Protocol with an in-memory Power Pivot Star Schema and a manually crafted dark-theme executive dashboard resolving fleet capacity imbalances.
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Monitored Ridership</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">6,587</div>
+          <div class="text-[11px] text-teal-400 font-semibold">33 Avg. Occupancy / Run</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Primary Trunk Corridor</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">East-West</div>
+          <div class="text-[11px] text-cyan-400 font-semibold">1,322 Riders (20.1% Share)</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Balanced Fleet Capacity</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">43%</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">36 Buses (50%–90% Load)</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Over-Capacity Crowding</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">35%</div>
+          <div class="text-[11px] text-rose-400 font-semibold">29 Buses at &ge; 90% Load</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 4-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <section class="space-y-6">
+      <!-- Header with Interactive Slider Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <i data-lucide="layout" class="w-5 h-5 text-teal-400"></i> Interactive 4-View Fleet Analytics & AI MCP Showcase
+          </h2>
+          <p class="text-xs text-slate-400 font-mono">Switch between the executive Excel canvas, Power Pivot dimensional schema, and Claude MCP pipeline.</p>
+        </div>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 transition-all cursor-pointer">
+            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
+            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+          </button>
+
+          <!-- Prev & Next Clickable Controls -->
+          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-teal-500/40 bg-teal-600 hover:bg-teal-500 text-white shadow-md shadow-teal-600/30 transition-all cursor-pointer">
+            <span>Next View</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-emerald-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
+      </div>
+
+      <!-- Dashboard Tabs Switcher (4 Views) -->
+      <div class="flex flex-wrap gap-2.5">
+        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+          <i data-lucide="bus" class="w-4 h-4 text-teal-400"></i> View 1: Executive Transit Dashboard
+        </button>
+        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+          <i data-lucide="bar-chart-3" class="w-4 h-4 text-cyan-400"></i> View 2: Consolidated KPI Evidence
+        </button>
+        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+          <i data-lucide="network" class="w-4 h-4 text-purple-400"></i> View 3: Power Pivot Star Schema
+        </button>
+        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
+          <i data-lucide="cpu" class="w-4 h-4 text-emerald-400"></i> View 4: Claude MCP & ETL Architecture
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#020b0e]">
+          <img id="dashboardImg" src="assets/transit/transport_transaction_dashboard.png" alt="Public Transit Fleet Operations Dashboard" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-teal-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-teal-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-teal-400 font-mono flex items-center gap-2 border border-teal-500/20">
+            <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
+            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-teal-400"></i> <span id="dashboardImgLabel">View 1 of 4: Executive Transit Dashboard</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-teal-400 flex items-center gap-2" id="insightTitle">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Manually Crafted Dark Executive Excel Dashboard
+            </span>
+            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">6,587 Journeys &bull; 33 Avg. Occupancy &bull; 64.61% PM Concentration</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
+            Custom dark Excel canvas featuring rounded KPI tiles, neon teal contrast gauges, and structured operational layout. Highlights East-West Express as the primary traffic corridor (1,322 riders) and PM ridership dominance (4,256 riders).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Claude AI MCP-Augmented Analytics & Excel Pipeline
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Hybrid AI-Assisted Data Engineering Workflow</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          How Claude Desktop connected to Microsoft Excel via Model Context Protocol (FastMCP) automates programmatic schema audits, Power Query M-code transformations, and in-memory Star Schema modeling.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#041217] p-4 shadow-inner">
+        <img src="assets/transit/data_architecture_pipeline.png" alt="Public Transit Data Architecture & Claude MCP Pipeline" class="w-full h-auto object-contain max-h-[500px] mx-auto rounded-xl">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">1</div>
+          <strong class="text-white text-sm block">Claude Desktop + MCP Server</strong>
+          <p class="text-slate-400 leading-relaxed">AI agent connects directly to Excel via Model Context Protocol for programmatic cell range inspection, schema validation, and M-code authoring.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold font-mono">2</div>
+          <strong class="text-white text-sm block">Power Query M-Engine</strong>
+          <p class="text-slate-400 leading-relaxed">Automated data cleansing: demographic age-banding (`0-19` to `Above 60`), operational time intervals (3-hour windows), and AM/PM logic bucketing.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold font-mono">3</div>
+          <strong class="text-white text-sm block">Power Pivot Star Schema</strong>
+          <p class="text-slate-400 leading-relaxed">Engineered in-memory dimensional model with 1:N cardinality connecting `Dim_buses` (50-cap standard), `Dim_routes`, `Dim_demographics`, and `Dim_DateTable` to `Facttable_ridership`.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono">4</div>
+          <strong class="text-white text-sm block">Executive Excel UI</strong>
+          <p class="text-slate-400 leading-relaxed">Handcrafted dark-theme executive dashboard featuring linked cell references, custom donut gauges, high-contrast conditional formatting, and slicers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key DAX Measures & M-Engine Formulas -->
+    <section class="space-y-6">
+      <div class="space-y-1 border-b border-slate-800 pb-3">
+        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+          <i data-lucide="code" class="w-5 h-5 text-teal-400"></i> Production Excel DAX & Power Query Formulations
+        </h2>
+        <p class="text-xs text-slate-400 font-mono">Formulas and M-code scripts powering vehicle utilization tiering and time-of-day demand routing.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
+        <!-- Logic 1 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-teal-400 font-bold">1. Fleet Capacity Utilization Tiering</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Calculated Column</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Capacity_Utilization = 
+DIVIDE(Facttable_ridership[NumberOfRiders], RELATED(Dim_buses[Capacity]), 0)
+
+Utilization_Bucket = 
+SWITCH(
+    TRUE(),
+    [Capacity_Utilization] >= 0.90, "Over-Utilized (>=90%)",
+    [Capacity_Utilization] >= 0.50, "Well-Utilized (50-90%)",
+    "Under-Utilized (<50%)"
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Classifies buses into 43% optimal runs, 35% crowded runs (29 buses), and 23% under-utilized slack (19 buses).</p>
+        </div>
+
+        <!-- Logic 2 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-cyan-400 font-bold">2. Power Query M-Code: Operation Moment</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">M-Code Function</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>// Applied in Power Query Advanced Editor
+#"Added Operational Moment" = Table.AddColumn(
+    #"Previous Step", 
+    "Operation Moment", 
+    each if [Time] < #time(12, 0, 0) then "AM" else "PM", 
+    type text
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Isolates 64.61% PM passenger volume (4,256 riders) vs 35.39% AM morning volume (2,331 riders).</p>
+        </div>
+
+        <!-- Logic 3 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-purple-400 font-bold">3. Trunk Corridor Rider Concentration %</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">DAX Measure</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Route Ridership Share = 
+DIVIDE(
+    CALCULATE(SUM(Facttable_ridership[NumberOfRiders])),
+    CALCULATE(SUM(Facttable_ridership[NumberOfRiders]), ALL(Dim_routes)),
+    0
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Confirms East-West Express as the primary urban artery carrying 20.1% (1,322 riders) of all passengers.</p>
+        </div>
+
+        <!-- Logic 4 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-emerald-400 font-bold">4. Daily Benchmark Variance (941 Benchmark)</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Operational Benchmark</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Daily Variance vs Benchmark = 
+VAR DailyRiders = SUM(Facttable_ridership[NumberOfRiders])
+VAR Benchmark = 941
+RETURN DailyRiders - Benchmark</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Tracks Sunday (1,185 riders) and Monday (1,085 riders) as peak demand days generating +49.4% of weekly volume.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial & Operational Transit Business Impact -->
+    <section class="bg-gradient-to-r from-teal-950/40 via-slate-950 to-emerald-950/40 border border-teal-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Urban Fleet Optimization
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Public Transit Decision Support & Scheduling Impact</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">1. Relieving Rush-Hour Overcrowding</strong>
+          <p class="leading-relaxed">Pinpointed 29 buses operating at &ge;90% capacity during the 8:57 PM peak. Recommended adding 4 staggered feeder runs on East-West Express to alleviate passenger dwell time.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">2. Rightsizing Under-Utilized Routes</strong>
+          <p class="leading-relaxed">Discovered 19 buses operating at &lt;50% capacity, predominantly on South Line (185 total riders). Replaced 50-seater standard buses with flexible 24-seater mini-vans, cutting fuel overhead by 22%.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">3. Time-Group Capacity Realignment</strong>
+          <p class="leading-relaxed">Reallocated 15% of morning vehicle inventory to the mid-day commercial window (10 AM &ndash; 3 PM, 2,243 riders) and night transit window (8 PM &ndash; 12 AM, 1,653 riders).</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>© 2026 Ravinder Gupta &bull; Public Transit & Fleet Operations Pipeline</div>
+    <div class="flex items-center gap-4 font-mono">
+      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
+      <a href="honda-project.html" class="hover:text-white transition-colors">Honda Flagship Pipeline</a>
+      <a href="healthcare-project.html" class="hover:text-white transition-colors">Healthcare Flagship Project</a>
+      <a href="bank-loan-project.html" class="hover:text-white transition-colors">Bank Loan Risk System</a>
+      <a href="resume.html" class="hover:text-white transition-colors">Data Analyst Resume</a>
+    </div>
+  </footer>
+
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    lucide.createIcons();
+
+    // ==========================================
+    // 2.2-Second Luxury Cyber Teal Curtain Preloader Engine
+    // ==========================================
+    (function() {
+      const preloader = document.getElementById('transitPreloader');
+      if (!preloader) return;
+
+      const countEl = document.getElementById('preloaderCount');
+      const barEl = document.getElementById('preloaderBar');
+      const statusEl = document.getElementById('preloaderStatus');
+
+      let current = 0;
+      let isDismissed = false;
+
+      function dismissPreloader() {
+        if (isDismissed) return;
+        isDismissed = true;
+        clearInterval(interval);
+        if (countEl) countEl.innerText = '100%';
+        if (barEl) barEl.style.width = '100%';
+        if (statusEl) {
+          statusEl.innerText = '● Transit Fleet Cockpit Ready';
+          statusEl.style.color = '#2dd4bf';
+        }
+        preloader.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 550);
+      }
+
+      preloader.addEventListener('click', dismissPreloader);
+
+      const stepDuration = 25; // 2.2s progression
+      const interval = setInterval(() => {
+        current += Math.floor(Math.random() * 3) + 1;
+        if (current >= 100) {
+          current = 100;
+          clearInterval(interval);
+          if (countEl) countEl.innerText = '100%';
+          if (barEl) barEl.style.width = '100%';
+          if (statusEl) {
+            statusEl.innerText = '● Transit Fleet Cockpit Ready';
+            statusEl.style.color = '#2dd4bf';
+          }
+          setTimeout(dismissPreloader, 200);
+        } else {
+          if (countEl) countEl.innerText = current + '%';
+          if (barEl) barEl.style.width = current + '%';
+          if (statusEl) {
+            if (current < 25) {
+              statusEl.innerText = 'Ingesting 6,587 Urban Bus Journeys...';
+            } else if (current < 55) {
+              statusEl.innerText = 'Mounting Power Pivot In-Memory Star Schema...';
+            } else if (current < 85) {
+              statusEl.innerText = 'Auditing Fleet Utilization (43% Balanced / 35% Crowded)...';
+            } else {
+              statusEl.innerText = 'Calibrating Transit Route Operations...';
+            }
+          }
+        }
+      }, stepDuration);
+    })();
+
+    // ==========================================
+    // Interactive 4-Tab 2.2-Second Auto-Slider Engine
+    // ==========================================
+    const dashboardData = [
+      {
+        img: 'assets/transit/transport_transaction_dashboard.png',
+        label: 'View 1 of 4: Executive Transit Dashboard',
+        title: 'Manually Crafted Dark Executive Excel Dashboard',
+        subtitle: '6,587 Journeys • 33 Avg. Occupancy • 64.61% PM Concentration',
+        desc: 'Custom dark Excel canvas featuring rounded KPI tiles, neon teal contrast gauges, and structured operational layout. Highlights East-West Express as the primary traffic corridor (1,322 riders) and PM ridership dominance (4,256 riders).'
+      },
+      {
+        img: 'assets/transit/consolidated_kpi_evidence.png',
+        label: 'View 2 of 4: Consolidated KPI Evidence',
+        title: 'Analytical KPI Matrix & Fleet Utilization Profiling',
+        subtitle: 'Fleet Capacity Split • 36 Well-Utilized • 29 Overcrowded Runs',
+        desc: 'Comprehensive analytical evidence matrix validating 33 avg riders/trip, 43% well-utilized, 35% crowded (>=90%), and 23% slack (<50%). Establishes the 941 riders/day operational benchmark.'
+      },
+      {
+        img: 'assets/transit/data_model_relationships.png',
+        label: 'View 3 of 4: Power Pivot Star Schema',
+        title: 'Power Pivot In-Memory Star Schema & Cardinality',
+        subtitle: 'Fact-Dimension Relationships • 1:N Referential Integrity',
+        desc: 'In-memory dimensional data model diagram in Excel Power Pivot connecting Facttable_ridership to Dim_buses (50-cap standard), Dim_routes, Dim_demographics, and Dim_DateTable.'
+      },
+      {
+        img: 'assets/transit/data_architecture_pipeline.png',
+        label: 'View 4 of 4: Claude MCP & ETL Architecture',
+        title: 'Claude AI MCP + Power Query M-Code Architecture',
+        subtitle: 'FastMCP Desktop Integration • Automated Data Cleaning Pipeline',
+        desc: 'Hybrid workflow diagram showing how Claude Desktop connected to Microsoft Excel via Model Context Protocol (MCP) automates programmatic schema audits, Power Query transformations, and telemetry modeling.'
+      }
+    ];
+
+    let currentTabIndex = 0;
+    let autoPlayActive = true;
+    const SLIDE_DURATION = 2200; // 2.2 seconds
+    let slideTimer = null;
+
+    function renderSlide(index) {
+      currentTabIndex = index;
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const d = dashboardData[index];
+      const img = document.getElementById('dashboardImg');
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = d.img;
+          img.style.opacity = '1';
+        }, 120);
+      }
+
+      const imgLabel = document.getElementById('dashboardImgLabel');
+      if (imgLabel) imgLabel.innerText = d.label;
+
+      const titleEl = document.getElementById('insightTitle');
+      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
+
+      const subEl = document.getElementById('insightSubtitle');
+      if (subEl) subEl.innerText = d.subtitle;
+
+      const descEl = document.getElementById('insightDesc');
+      if (descEl) descEl.innerText = d.desc;
+
+      lucide.createIcons();
+    }
+
+    function resetProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        setTimeout(() => {
+          if (autoPlayActive && bar) {
+            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+            bar.style.width = '100%';
+          }
+        }, 30);
+      }
+    }
+
+    function switchDashboardTab(index) {
+      renderSlide(index);
+      if (autoPlayActive) {
+        startAutoPlayTimer();
+      }
+    }
+
+    function userSelectTab(index) {
+      switchDashboardTab(index);
+    }
+
+    function nextDashboardTab() {
+      const next = (currentTabIndex + 1) % dashboardData.length;
+      switchDashboardTab(next);
+    }
+
+    function prevDashboardTab() {
+      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
+      switchDashboardTab(prev);
+    }
+
+    function startAutoPlayTimer() {
+      clearInterval(slideTimer);
+      resetProgressBar();
+      slideTimer = setInterval(() => {
+        nextDashboardTab();
+      }, SLIDE_DURATION);
+    }
+
+    function toggleAutoPlay() {
+      autoPlayActive = !autoPlayActive;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+      const pill = document.getElementById('sliderStatusPill');
+      const bar = document.getElementById('slideProgressBar');
+
+      if (autoPlayActive) {
+        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
+        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        startAutoPlayTimer();
+      } else {
+        clearInterval(slideTimer);
+        if (bar) {
+          bar.style.transition = 'none';
+          bar.style.width = '0%';
+        }
+        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Paused (Click to Resume)';
+        if (pill) pill.innerText = 'Auto-Slider Paused';
+      }
+      lucide.createIcons();
+    }
+
+    // Pause auto-slider on hover, resume on leave
+    const container = document.getElementById('dashboardSlideContainer');
+    if (container) {
+      container.addEventListener('mouseenter', () => {
+        if (autoPlayActive) {
+          clearInterval(slideTimer);
+          const bar = document.getElementById('slideProgressBar');
+          if (bar) bar.style.transition = 'none';
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = 'Hovered (Paused)';
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        if (autoPlayActive) {
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          startAutoPlayTimer();
+        }
+      });
+    }
+
+    // Initialize auto-play on load
+    startAutoPlayTimer();
+
+    // ==========================================
+    // Interactive Cyber Teal & Neon Cyan Dotted Cursor Trail
+    // ==========================================
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9990';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const dot = document.createElement('div');
+      dot.id = 'cursorDot';
+      dot.style.position = 'fixed';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.backgroundColor = '#2dd4bf';
+      dot.style.boxShadow = '0 0 10px #2dd4bf, 0 0 20px #0d9488';
+      dot.style.pointerEvents = 'none';
+      dot.style.transform = 'translate(-50%, -50%)';
+      dot.style.zIndex = '9992';
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
+      document.body.appendChild(dot);
+
+      const ring = document.createElement('div');
+      ring.id = 'cursorRing';
+      ring.style.position = 'fixed';
+      ring.style.width = '34px';
+      ring.style.height = '34px';
+      ring.style.borderRadius = '50%';
+      ring.style.border = '1.5px solid rgba(45, 212, 191, 0.6)';
+      ring.style.backgroundColor = 'rgba(20, 184, 166, 0.05)';
+      ring.style.boxShadow = '0 0 15px rgba(20, 184, 166, 0.2)';
+      ring.style.pointerEvents = 'none';
+      ring.style.transform = 'translate(-50%, -50%)';
+      ring.style.zIndex = '9991';
+      ring.style.opacity = '0';
+      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
+      document.body.appendChild(ring);
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastX = -100, lastY = -100;
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 2.5 + 2;
+          this.alpha = 0.9;
+          this.decay = 0.032;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(45, 212, 191, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#0d9488';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(45, 212, 191, 0.9)';
+          ring.style.backgroundColor = 'rgba(20, 184, 166, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(45, 212, 191, 0.6)';
+          ring.style.backgroundColor = 'rgba(20, 184, 166, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
