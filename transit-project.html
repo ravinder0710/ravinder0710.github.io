@@ -174,7 +174,7 @@
       </div>
     </section>
 
-    <!-- Interactive 4-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <!-- Interactive 4-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
     <section class="space-y-6">
       <!-- Header with Interactive Slider Controls -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
@@ -190,7 +190,7 @@
           <!-- Autoplay / Pause Toggle -->
           <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 transition-all cursor-pointer">
             <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
           </button>
 
           <!-- Prev & Next Clickable Controls -->
@@ -204,7 +204,7 @@
         </div>
       </div>
 
-      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
       <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-emerald-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
@@ -244,7 +244,7 @@
           <!-- Top-Left Status Pill -->
           <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-teal-400 font-mono flex items-center gap-2 border border-teal-500/20">
             <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
           </div>
 
           <!-- Bottom-Right Label -->
@@ -499,7 +499,7 @@ RETURN DailyRiders - Benchmark</code></pre>
     })();
 
     // ==========================================
-    // Interactive 4-Tab 2.2-Second Auto-Slider Engine
+    // Interactive 4-Tab 5.0-Second Auto-Slider Engine
     // ==========================================
     const dashboardData = [
       {
@@ -534,7 +534,7 @@ RETURN DailyRiders - Benchmark</code></pre>
 
     let currentTabIndex = 0;
     let autoPlayActive = true;
-    const SLIDE_DURATION = 2200; // 2.2 seconds
+    const SLIDE_DURATION = 5000; // 5.0 Seconds
     let slideTimer = null;
 
     function renderSlide(index) {
@@ -624,8 +624,8 @@ RETURN DailyRiders - Benchmark</code></pre>
 
       if (autoPlayActive) {
         if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
-        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
+        if (pill) pill.innerText = '5.0s Live Auto-Slider';
         startAutoPlayTimer();
       } else {
         clearInterval(slideTimer);
@@ -655,7 +655,7 @@ RETURN DailyRiders - Benchmark</code></pre>
       container.addEventListener('mouseleave', () => {
         if (autoPlayActive) {
           const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          if (pill) pill.innerText = '5.0s Live Auto-Slider';
           startAutoPlayTimer();
         }
       });

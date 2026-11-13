@@ -48,7 +48,7 @@
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
 
-  <!-- 2.2-Second Luxury Cinematic Curtain Preloader -->
+  <!-- 2.8-Second Luxury Cinematic Curtain Preloader -->
   <div id="hondaPreloader" class="fixed inset-0 z-50 bg-[#0d0405] flex flex-col items-center justify-center border-b border-red-500/30">
     <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
       <!-- Glowing Honda Wing Themed Badge -->
@@ -165,7 +165,7 @@
       </div>
     </section>
 
-    <!-- Interactive 4-Page Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <!-- Interactive 4-Page Live Dashboard Showcase with 5.0s Auto-Slider -->
     <section class="space-y-6">
       <!-- Header with Interactive Slider Controls -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
@@ -181,7 +181,7 @@
           <!-- Autoplay / Pause Toggle -->
           <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-300 transition-all cursor-pointer">
             <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
           </button>
 
           <!-- Prev & Next Clickable Controls -->
@@ -195,7 +195,7 @@
         </div>
       </div>
 
-      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
       <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-red-600 via-rose-500 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
@@ -235,7 +235,7 @@
           <!-- Top-Left Status Pill -->
           <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-red-400 font-mono flex items-center gap-2 border border-red-500/20">
             <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
           </div>
 
           <!-- Bottom-Right Label -->
@@ -245,16 +245,21 @@
         </div>
 
         <!-- Dynamic Page Insights Banner -->
-        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs">
+        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-3">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
             <span class="font-bold text-red-400 flex items-center gap-2" id="insightTitle">
               <i data-lucide="sparkles" class="w-4 h-4"></i> Executive Landing Cockpit
             </span>
-            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">Entry Port &bull; Intraday Telemetry</span>
+            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">Entry Port • Intraday Telemetry</span>
           </div>
           <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
             Designed as the command console for Honda regional dealership managers. Features direct page navigation, active pipeline telemetry status, and quick-filter parameters connecting dealers directly to regional performance metrics.
           </p>
+          <div class="flex flex-wrap gap-2 pt-1" id="insightKpiTags">
+            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-red-500/10 text-red-400 border border-red-500/20" id="insightKpi1">Central Console</span>
+            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-rose-500/10 text-rose-400 border border-rose-500/20" id="insightKpi2">Intraday Telemetry</span>
+            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20" id="insightKpi3">Regional Slicing</span>
+          </div>
         </div>
       </div>
     </section>
@@ -438,7 +443,7 @@ DIVIDE(
 
       preloader.addEventListener('click', dismissPreloader);
 
-      const stepDuration = 25; // 2.2s progression
+      const stepDuration = 28; // ~2.8s total progression
       const interval = setInterval(() => {
         current += Math.floor(Math.random() * 3) + 1;
         if (current >= 100) {
@@ -470,7 +475,8 @@ DIVIDE(
     })();
 
     // ==========================================
-    // Interactive 4-Tab 2.2-Second Auto-Slider Engine
+    // Interactive 4-Tab 5.0-Second Auto-Slider Engine
+    // (Explicit User Customization: SLIDE_DURATION = 5000)
     // ==========================================
     const dashboardData = [
       {
@@ -478,35 +484,52 @@ DIVIDE(
         label: 'Dashboard Page 1 of 4: Executive Landing',
         title: 'Executive Landing & System Console',
         subtitle: 'Entry Portal • Intraday Telemetry',
-        desc: 'Designed as the central operational cockpit for Honda regional leadership. Features live pipeline status indicators, instant navigation to sub-modules, and dealership regional slicing controls.'
+        desc: 'Designed as the central operational cockpit for Honda regional leadership. Features live pipeline status indicators, instant navigation to sub-modules, and dealership regional slicing controls.',
+        kpi1: 'Central Console',
+        kpi2: 'Intraday Telemetry',
+        kpi3: 'Regional Slicing'
       },
       {
         img: 'assets/honda/dashboard_2_overview.png',
         label: 'Dashboard Page 2 of 4: Sales Overview',
         title: '₹59.63 Cr Gross Sales Performance Cockpit',
         subtitle: '5,617 Units • DirectQuery Telemetry',
-        desc: 'Macro executive view displaying ₹59.63 Cr in turnover across nationwide showrooms. Visualizes MoM seasonal sales spikes, regional dealership ranking, and Activa 6G as the 38.4% anchor model.'
+        desc: 'Macro executive view displaying ₹59.63 Cr in turnover across nationwide showrooms. Visualizes MoM seasonal sales spikes, regional dealership ranking, and Activa 6G as the 38.4% anchor model.',
+        kpi1: '₹59.63 Cr Turnover',
+        kpi2: '5,617 Units Sold',
+        kpi3: 'Activa 6G (38.4%)'
       },
       {
         img: 'assets/honda/dashboard_3_sales_details.png',
         label: 'Dashboard Page 3 of 4: Sales Details & Intraday',
         title: 'Granular Transaction Ledger & Dealer Commissions',
         subtitle: 'Transaction Level • Invoice Telemetry',
-        desc: 'Deep-dive transactional matrix auditing invoice dates, model variants (Activa 6G, Shine 125, SP 125, Dio), payment financing splits (Cash vs. Bank Loan), and dealership gross margin margins.'
+        desc: 'Deep-dive transactional matrix auditing invoice dates, model variants (Activa 6G, Shine 125, SP 125, Dio), payment financing splits (Cash vs. Bank Loan), and dealership gross margin margins.',
+        kpi1: 'Invoice Audit',
+        kpi2: 'Cash vs Loan Mix',
+        kpi3: 'Dealer Commissions'
       },
       {
         img: 'assets/honda/dashboard_4_segment_analysis.png',
         label: 'Dashboard Page 4 of 4: Segment Analysis',
         title: 'Scooter vs. Motorcycle Portfolio Share',
         subtitle: 'Product Velocity • Demographic Telemetry',
-        desc: 'Analyzes category dynamics comparing Scooter volume (62% share) against Motorcycle volume (38% share), tracking regional engine capacity demand (110cc vs 125cc vs 160cc).'
+        desc: 'Analyzes category dynamics comparing Scooter volume (62% share) against Motorcycle volume (38% share), tracking regional engine capacity demand (110cc vs 125cc vs 160cc).',
+        kpi1: '62% Scooter Share',
+        kpi2: '38% Motorcycle Share',
+        kpi3: '110cc vs 125cc vs 160cc'
       }
     ];
 
     let currentTabIndex = 0;
     let autoPlayActive = true;
-    const SLIDE_DURATION = 2200; // 2.2 seconds
+    
+    // Explicit User Requirement: 5.0 Seconds Slider Animation Duration
+    const SLIDE_DURATION = 5000; // 5.0 seconds
+    const PROGRESS_STEP = 50;    // updates every 50ms
     let slideTimer = null;
+    let progressTimer = null;
+    let progressPercent = 0;
 
     function renderSlide(index) {
       currentTabIndex = index;
@@ -521,9 +544,10 @@ DIVIDE(
       const d = dashboardData[index];
       const img = document.getElementById('dashboardImg');
       if (img) {
-        img.style.opacity = '0';
+        img.style.opacity = '0.2';
         setTimeout(() => {
           img.src = d.img;
+          img.alt = d.title;
           img.style.opacity = '1';
         }, 120);
       }
@@ -540,20 +564,23 @@ DIVIDE(
       const descEl = document.getElementById('insightDesc');
       if (descEl) descEl.innerText = d.desc;
 
+      const kpi1 = document.getElementById('insightKpi1');
+      if (kpi1) kpi1.innerText = d.kpi1;
+      const kpi2 = document.getElementById('insightKpi2');
+      if (kpi2) kpi2.innerText = d.kpi2;
+      const kpi3 = document.getElementById('insightKpi3');
+      if (kpi3) kpi3.innerText = d.kpi3;
+
       lucide.createIcons();
+
+      progressPercent = 0;
+      updateProgressBar();
     }
 
-    function resetProgressBar() {
+    function updateProgressBar() {
       const bar = document.getElementById('slideProgressBar');
       if (bar) {
-        bar.style.transition = 'none';
-        bar.style.width = '0%';
-        setTimeout(() => {
-          if (autoPlayActive && bar) {
-            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
-            bar.style.width = '100%';
-          }
-        }, 30);
+        bar.style.width = progressPercent + '%';
       }
     }
 
@@ -580,7 +607,19 @@ DIVIDE(
 
     function startAutoPlayTimer() {
       clearInterval(slideTimer);
-      resetProgressBar();
+      clearInterval(progressTimer);
+
+      progressPercent = 0;
+      updateProgressBar();
+
+      progressTimer = setInterval(() => {
+        if (autoPlayActive) {
+          progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
+          if (progressPercent > 100) progressPercent = 100;
+          updateProgressBar();
+        }
+      }, PROGRESS_STEP);
+
       slideTimer = setInterval(() => {
         nextDashboardTab();
       }, SLIDE_DURATION);
@@ -591,19 +630,17 @@ DIVIDE(
       const icon = document.getElementById('playPauseIcon');
       const text = document.getElementById('playPauseText');
       const pill = document.getElementById('sliderStatusPill');
-      const bar = document.getElementById('slideProgressBar');
 
       if (autoPlayActive) {
         if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
-        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
+        if (pill) pill.innerText = '5.0s Live Auto-Slider';
         startAutoPlayTimer();
       } else {
         clearInterval(slideTimer);
-        if (bar) {
-          bar.style.transition = 'none';
-          bar.style.width = '0%';
-        }
+        clearInterval(progressTimer);
+        progressPercent = 0;
+        updateProgressBar();
         if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
         if (text) text.innerText = 'Paused (Click to Resume)';
         if (pill) pill.innerText = 'Auto-Slider Paused';
@@ -617,8 +654,7 @@ DIVIDE(
       container.addEventListener('mouseenter', () => {
         if (autoPlayActive) {
           clearInterval(slideTimer);
-          const bar = document.getElementById('slideProgressBar');
-          if (bar) bar.style.transition = 'none';
+          clearInterval(progressTimer);
           const pill = document.getElementById('sliderStatusPill');
           if (pill) pill.innerText = 'Hovered (Paused)';
         }
@@ -626,7 +662,7 @@ DIVIDE(
       container.addEventListener('mouseleave', () => {
         if (autoPlayActive) {
           const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          if (pill) pill.innerText = '5.0s Live Auto-Slider';
           startAutoPlayTimer();
         }
       });
