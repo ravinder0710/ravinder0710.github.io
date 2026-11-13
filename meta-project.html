@@ -192,9 +192,9 @@
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
         <div class="space-y-1">
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <i data-lucide="layout" class="w-5 h-5 text-purple-400"></i> Interactive 4-View Marketing Attribution & Campaign Showcase
+            <i data-lucide="layout" class="w-5 h-5 text-purple-400"></i> Interactive 2-View Marketing Attribution & Campaign Showcase
           </h2>
-          <p class="text-xs text-slate-400 font-mono">Switch between Facebook analytics, Instagram mobile-first telemetry, canvas tooltips, and snowflake architecture.</p>
+          <p class="text-xs text-slate-400 font-mono">Switch between Facebook analytics and Instagram mobile-first telemetry.</p>
         </div>
 
         <!-- Slider Action Controls -->
@@ -221,19 +221,13 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-sky-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (4 Views) -->
+      <!-- Dashboard Tabs Switcher (2 Views) -->
       <div class="flex flex-wrap gap-2.5">
         <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
           <i data-lucide="facebook" class="w-4 h-4 text-sky-400"></i> View 1: Facebook Campaign Performance
         </button>
         <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
           <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i> View 2: Instagram Campaign Performance
-        </button>
-        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="calendar" class="w-4 h-4 text-purple-400"></i> View 3: Daily Calendar Micro-Tooltip
-        </button>
-        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="network" class="w-4 h-4 text-emerald-400"></i> View 4: Snowflake Architecture Pipeline
         </button>
       </div>
 
@@ -261,7 +255,7 @@
 
           <!-- Bottom-Right Label -->
           <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-purple-400"></i> <span id="dashboardImgLabel">View 1 of 4: Facebook Campaign Performance</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-purple-400"></i> <span id="dashboardImgLabel">View 1 of 2: Facebook Campaign Performance</span>
           </div>
         </div>
 
@@ -515,31 +509,17 @@ DIVIDE(
     const dashboardData = [
       {
         img: 'assets/meta-ad/meta_ad_facebook_dashboard.png',
-        label: 'View 1 of 4: Facebook Campaign Performance',
+        label: 'View 1 of 2: Facebook Campaign Performance',
         title: 'Facebook Advertising Performance & Acquisition Telemetry',
         subtitle: '91.3K Impressions • 10.9K Clicks • 11.95% CTR • 538 Purchases',
         desc: 'Direct conversion engine auditing cross-channel reach. Demonstrates superior absolute volume scale (10.9K clicks and 538 completed purchases) with an 11.95% CTR and 13.71% Engagement Rate across desktop and mobile feeds.'
       },
       {
         img: 'assets/meta-ad/meta_ad_instagram_dashboard.png',
-        label: 'View 2 of 4: Instagram Campaign Performance',
+        label: 'View 2 of 2: Instagram Campaign Performance',
         title: 'Instagram Creative Format Velocity & Mobile Engagement',
         subtitle: '40.8K Impressions • 4.8K Clicks • 11.70% CTR • Stories & Reels',
         desc: 'Mobile-first visual advertising telemetry evaluating Stories, Reels, and image hooks. Highlights high aesthetic engagement and younger demographic resonance (Gen-Z & Young Millennials, Ages 16–26).'
-      },
-      {
-        img: 'assets/meta-ad/meta_ad_calendar_tooltip.png',
-        label: 'View 3 of 4: Daily Calendar Micro-Tooltip',
-        title: 'Interactive Daily Calendar Micro-Drilldown Tooltip',
-        subtitle: '10-KPI Flight Performance • Daily Volume Pacing • Conversion Matrix',
-        desc: 'Custom canvas tooltip engineered in Power BI: hovering over any day in the monthly calendar matrix instantly surfaces full 10-KPI funnel performance for that specific calendar date without cluttering the executive layout.'
-      },
-      {
-        img: 'assets/meta-ad/data_architecture_pipeline.png',
-        label: 'View 4 of 4: Snowflake Architecture Pipeline',
-        title: 'Snowflake Dimensional Data Architecture & Attribution Pipeline',
-        subtitle: 'ad_events Fact (400,000 Rows) • Campaigns • Ads • Users • Calendar',
-        desc: 'Optimized multi-table snowflake schema integrating 400,000 interaction logs with creative specifications, campaign flight budgets, demographic profiles, and dynamic Field Parameter measure binders.'
       }
     ];
 
