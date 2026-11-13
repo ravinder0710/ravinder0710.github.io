@@ -490,7 +490,6 @@
             </div>
           </div>
         </article>
-        </article>
 
         <!-- Project 2: Fraud Intelligence -->
         <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="powerbi">
@@ -1328,9 +1327,33 @@
 
 
   <script>
+    // Centralized Video Registry: Paste any YouTube, Loom, Drive, or MP4 URL here anytime!
+    const DEMO_VIDEOS = {
+      'honda': 'honda-walkthrough.html',
+      'healthcare': '',       // e.g. 'https://youtu.be/...'
+      'bank-loan': '',        // e.g. 'https://youtu.be/...'
+      'fraud': '',
+      'personal-finance': '',
+      'adventure': '',
+      'transit': '',
+      'coffee': '',
+      'churn': '',
+      'meta': '',
+      'emperor': '',
+      'hr': ''
+    };
+
     // Interactive Demo Video Toast & Fallback Handler
     function handleDemoVideoClick(event, projectKey, fallbackUrl) {
-      if (fallbackUrl.endsWith('#demo-video')) {
+      // 1. Check if user configured a video URL in DEMO_VIDEOS registry
+      if (DEMO_VIDEOS[projectKey] && DEMO_VIDEOS[projectKey].trim() !== '') {
+        event.preventDefault();
+        window.open(DEMO_VIDEOS[projectKey], '_blank');
+        return;
+      }
+
+      // 2. Fallback: if ends with #demo-video, show friendly toast and open repo
+      if (fallbackUrl && fallbackUrl.endsWith('#demo-video')) {
         event.preventDefault();
         showToast('Demo Video Walkthrough is being recorded for this project. Opening repository Readme...');
         setTimeout(() => {
