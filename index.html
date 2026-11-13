@@ -580,12 +580,12 @@
 
         <!-- Project 4: AdventureWorks DW -->
         <article class="glass-card rounded-3xl overflow-hidden flex flex-col justify-between" data-category="excel">
-          <div class="relative group cursor-pointer" onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/adventure-works-sales-profit-excel_pipeline.png', 'AdventureWorks xVelocity Architecture')">
-            <img src="https://raw.githubusercontent.com/ravinder0710/adventure-works-sales-profit-excel/main/dashboard_time_analysis.png" alt="AdventureWorks Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
-            <div class="absolute inset-0 bg-blue-600/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
-              <i data-lucide="eye" class="w-4 h-4"></i> Click to View Pipeline Architecture
+          <a href="adventure-project.html" target="_blank" class="relative group block cursor-pointer">
+            <img src="assets/adventure/dashboard_time_analysis.png" alt="AdventureWorks Global Retail Dashboard" class="w-full h-56 object-cover object-top border-b border-slate-800/80">
+            <div class="absolute inset-0 bg-emerald-600/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-xs font-bold text-white backdrop-blur-sm">
+              <i data-lucide="layout" class="w-4 h-4"></i> Open AdventureWorks Case Study & Live 3-View Suite ➔
             </div>
-          </div>
+          </a>
           <div class="p-6 space-y-4 flex-1 flex flex-col justify-between">
             <div class="space-y-2">
               <div class="flex flex-wrap items-center gap-1.5">
@@ -593,7 +593,12 @@
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">xVelocity Engine</span>
                 <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">DAX</span>
               </div>
-              <h3 class="text-lg font-bold text-white">Global Retail Sales & Profit (AdventureWorks DW)</h3>
+              <a href="adventure-project.html" target="_blank" class="group/title block">
+                <h3 class="text-lg font-bold text-white group-hover/title:text-emerald-400 transition-colors flex items-center gap-1.5">
+                  Global Retail Sales & Profit (AdventureWorks DW)
+                  <i data-lucide="arrow-up-right" class="w-4 h-4 opacity-0 group-hover/title:opacity-100 transition-opacity"></i>
+                </h3>
+              </a>
               <p class="text-xs text-slate-400 leading-relaxed">
                 Modeled 60,400 orders in-memory inside Excel with zero external BI dependencies, designing 25+ DAX calculated measures and territory drilldowns.
               </p>
@@ -609,7 +614,7 @@
                 <button onclick="openArchModal('https://raw.githubusercontent.com/ravinder0710/ravinder0710/main/pipeline_diagrams/adventure-works-sales-profit-excel_pipeline.png', 'AdventureWorks xVelocity Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
                   <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
                 </button>
-                <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel#readme" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30">
+                <a href="adventure-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30">
                   <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
                 </a>
                 <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video" onclick="handleDemoVideoClick(event, 'adventure-works', 'https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30"><i data-lucide="play" class="w-3.5 h-3.5"></i> Demo Video</a>
