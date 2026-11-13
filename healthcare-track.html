@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ravinder Gupta | Healthcare Provider Analytics & RCM Track</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Healthcare Provider Analytics & RCM Track of Ravinder Gupta. Clinical outcomes, inpatient length of stay, and £3.36M hospital billing reconciliation.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ravinder Gupta | Healthcare Analytics & RCM Track">
+  <meta property="og:description" content="Deep dive into Healthcare Provider Analytics, Star/Snowflake schemas, DAX SUMX room iterators, and RCM billing intelligence.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ravinder0710/healthcare-provider-analytics-powerbi/main/screenshots/healthcare_dashboard_light.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #090d16;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Cinematic Curtain Preloader */
+    #trackPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(16, 185, 129, 0.28);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(52, 211, 153, 0.35);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- Premium Cinematic Curtain Intro Preloader for Healthcare Track -->
+  <div id="trackPreloader" class="fixed inset-0 z-50 bg-[#061011] flex flex-col items-center justify-center border-b border-emerald-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Logo Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-cyan-400 p-[2px] shadow-2xl shadow-emerald-500/40">
+          <div class="w-full h-full bg-[#081717] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-emerald-500/20 rounded-3xl blur-xl -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+          Clinical Systems & RCM Intelligence
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Healthcare Analytics Track<span class="text-emerald-500">.</span>
+        </h1>
+        <p class="text-xs text-emerald-300/80 font-mono tracking-wide">
+          Provider Analytics &bull; Revenue Cycle Management &bull; Star Schema
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-56 space-y-2 pt-2">
+        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <span class="text-emerald-400 font-bold" id="trackPreloaderStatus">Loading Healthcare Systems</span>
+          <span class="text-white font-extrabold" id="trackPreloaderCount">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden p-[1px]">
+          <div id="trackPreloaderBar" class="h-full bg-gradient-to-r from-emerald-600 via-teal-400 to-cyan-500 rounded-full transition-all duration-75 ease-out" style="width: 0%"></div>
+        </div>
+        <div class="pt-2 text-[10px] text-slate-500 font-mono tracking-wider opacity-60 hover:opacity-100 cursor-pointer transition-opacity">
+          Click anywhere to skip ➔
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Action Bar -->
+  <div class="no-print max-w-6xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
+    <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all group">
+      <i data-lucide="arrow-left" class="w-4 h-4 text-emerald-400 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+    </a>
+    <div class="flex flex-wrap items-center gap-2.5">
+      <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
+        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Data Analyst Resume
+      </a>
+      <a href="healthcare-resume.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
+        <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Healthcare Specialist Resume
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Showcase Container -->
+  <main class="max-w-6xl mx-auto space-y-12">
+
+    <!-- Hero Showcase Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+        <i data-lucide="activity" class="w-4 h-4"></i> Specialized Domain Track: Healthcare Systems & RCM
+      </div>
+
+      <div class="space-y-3 max-w-3xl">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Healthcare Provider Analytics & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">Clinical Intelligence</span>.
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+          A dedicated portfolio vertical solving operational and financial challenges across hospitals, clinical trusts, and NHS healthcare networks. Specializing in Star/Snowflake dimensional schemas, revenue cycle management (RCM) billing audit, daily room charge iterators, and patient length-of-stay (LOS) cohort modeling.
+        </p>
+      </div>
+
+      <!-- Core Track KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Encounters Audited</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">5,000</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">UK NHS Inpatients</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Gross Billing</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">£3.36M</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">100% DAX Reconciled</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Payor Settlement</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">£2.23M</div>
+          <div class="text-[11px] text-sky-400 font-semibold">66.4% Insured Share</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Out-of-Pocket</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">£1.13M</div>
+          <div class="text-[11px] text-amber-400 font-semibold">33.6% Patient Liability</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flagship Work Deep Dive ("Jo Hum Kaam Karenge Vo Dikhayenge") -->
+    <section class="space-y-6">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2.5">
+            <i data-lucide="microscope" class="w-5 h-5 text-emerald-400"></i> Core Healthcare Production Projects
+          </h2>
+          <p class="text-xs text-slate-400 font-mono">End-to-end analytical pipelines, schemas, DAX logic, and verified business insights.</p>
+        </div>
+      </div>
+
+      <!-- Project 1 Card: Healthcare Provider Analytics & RCM -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6 shadow-xl hover:border-emerald-500/40 transition-all">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          <div class="space-y-1.5">
+            <div class="flex items-center gap-2 text-xs font-bold text-emerald-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              Flagship Enterprise Project
+            </div>
+            <h3 class="text-2xl font-black text-white">Healthcare Provider Analytics & Revenue Cycle Management (RCM)</h3>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">
+              Power BI Desktop &bull; Star/Snowflake Dimensional Modeling &bull; Advanced DAX Dynamic Iterators &bull; SQL Views & Staging
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2.5">
+            <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+              <i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub Repo
+            </a>
+            <a href="healthcare-resume.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
+              <i data-lucide="file-check" class="w-3.5 h-3.5"></i> View Healthcare Resume
+            </a>
+          </div>
+        </div>
+
+        <!-- Dashboard Image Preview -->
+        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-inner">
+          <img src="https://raw.githubusercontent.com/ravinder0710/healthcare-provider-analytics-powerbi/main/screenshots/healthcare_dashboard_light.png" alt="Healthcare Executive Dashboard Light Theme" class="w-full h-auto object-cover max-h-[500px]">
+        </div>
+
+        <!-- Technical Highlights Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1">
+            <strong class="text-white flex items-center gap-1.5"><i data-lucide="database" class="w-3.5 h-3.5 text-emerald-400"></i> Star/Snowflake Schema</strong>
+            <p class="text-slate-400 leading-relaxed">8 normalized relational tables linking 5,000 patient encounters with active/inactive date relationships for admission and discharge cohorts.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1">
+            <strong class="text-white flex items-center gap-1.5"><i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i> Dynamic DAX Iterators</strong>
+            <p class="text-slate-400 leading-relaxed">Engineered daily bed iterators (`SUMX`) factoring length-of-stay room tariffs, payor coverage deductibles, and MoM billing growth offsets.</p>
+          </div>
+          <div class="p-4 rounded-xl bg-slate-900/70 border border-slate-800 space-y-1">
+            <strong class="text-white flex items-center gap-1.5"><i data-lucide="sliders" class="w-3.5 h-3.5 text-blue-400"></i> Dual-Theme Executive UI</strong>
+            <p class="text-slate-400 leading-relaxed">Implemented Light and Dark themes with dynamic Field Parameters (slicing by city, county, doctor, department) and pop-out bookmark slicers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Supporting Projects for Healthcare Leadership -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-xs font-bold text-sky-400">
+            <i data-lucide="code-2" class="w-4 h-4"></i> Python Clinical Analytics
+          </div>
+          <h4 class="font-bold text-white text-sm">Patient Length of Stay (LOS) & Readmission Dynamics</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Pandas and Seaborn EDA isolating inpatient stay distributions, outlier diagnosis trimming, and age-cohort readmission risk scoring.</p>
+        </div>
+        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-xs font-bold text-blue-400">
+            <i data-lucide="shield-alert" class="w-4 h-4"></i> High-Risk Auditing
+          </div>
+          <h4 class="font-bold text-white text-sm">Bank Loan Risk Segregation & Impairment Benchmark</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">Audited 38.5K records across 37 validated SQL queries, establishing debt recovery benchmarks applicable to hospital self-pay collections.</p>
+        </div>
+        <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center gap-2 text-xs font-bold text-indigo-400">
+            <i data-lucide="layers" class="w-4 h-4"></i> Multi-Entity Modeling
+          </div>
+          <h4 class="font-bold text-white text-sm">Emperor Enterprise Multi-Branch Architecture</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">11 dimension and 12 fact tables modeling complex decentralized operations, proving scale readiness for hospital network integrations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dedicated Healthcare Resume Gateway Card -->
+    <section class="bg-gradient-to-r from-emerald-950/60 via-slate-950 to-teal-950/60 border border-emerald-500/40 rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-2xl">
+      <div class="w-16 h-16 mx-auto rounded-3xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/40 shadow-xl shadow-emerald-500/20">
+        <i data-lucide="file-check-2" class="w-8 h-8"></i>
+      </div>
+      <div class="space-y-2 max-w-2xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Healthcare Specialist Resume Gateway</h2>
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+          Open the dedicated 3rd page containing the specialized Healthcare Data Analyst resume track, formatted specifically for clinical recruiters and hospital administrators.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+        <a href="healthcare-resume.html" class="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl text-sm font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-600/30 transition-all group">
+          <i data-lucide="heart-pulse" class="w-4 h-4 text-emerald-200 group-hover:scale-110 transition-transform"></i> Open Healthcare Specialist Resume &rarr;
+        </a>
+        <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-sky-400 border border-slate-700 transition-all">
+          <i data-lucide="file-text" class="w-4 h-4"></i> View General Data Analyst Resume
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>© 2026 Ravinder Gupta &bull; Healthcare Analytics Track</div>
+    <div class="flex items-center gap-4 font-mono">
+      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
+      <a href="resume.html" class="hover:text-white transition-colors">General Resume</a>
+      <a href="healthcare-resume.html" class="text-emerald-400 hover:underline">Healthcare Resume</a>
+    </div>
+  </footer>
+
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    lucide.createIcons();
+
+    // 1.8s Luxury Curtain Preloader for Healthcare Track
+    (function() {
+      const preloader = document.getElementById('trackPreloader');
+      if (!preloader) return;
+
+      const countEl = document.getElementById('trackPreloaderCount');
+      const barEl = document.getElementById('trackPreloaderBar');
+      const statusEl = document.getElementById('trackPreloaderStatus');
+
+      let current = 0;
+      let isDismissed = false;
+
+      function dismissPreloader() {
+        if (isDismissed) return;
+        isDismissed = true;
+        clearInterval(interval);
+        if (countEl) countEl.innerText = '100%';
+        if (barEl) barEl.style.width = '100%';
+        if (statusEl) {
+          statusEl.innerText = '● Systems Ready';
+          statusEl.style.color = '#34d399';
+        }
+        preloader.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 550);
+      }
+
+      preloader.addEventListener('click', dismissPreloader);
+
+      const stepDuration = 20;
+      const interval = setInterval(() => {
+        current += Math.floor(Math.random() * 3) + 1;
+        if (current >= 100) {
+          current = 100;
+          clearInterval(interval);
+          if (countEl) countEl.innerText = '100%';
+          if (barEl) barEl.style.width = '100%';
+          if (statusEl) {
+            statusEl.innerText = '● Systems Ready';
+            statusEl.style.color = '#34d399';
+          }
+          setTimeout(dismissPreloader, 180);
+        } else {
+          if (countEl) countEl.innerText = current + '%';
+          if (barEl) barEl.style.width = current + '%';
+          if (statusEl) {
+            if (current < 25) {
+              statusEl.innerText = 'Mounting Clinical Telemetry...';
+            } else if (current < 55) {
+              statusEl.innerText = 'Auditing £3.36M Billing Ledger...';
+            } else if (current < 85) {
+              statusEl.innerText = 'Rendering Dual-Theme Dashboards...';
+            } else {
+              statusEl.innerText = 'Finalizing Healthcare Analytics Track...';
+            }
+          }
+        }
+      }, stepDuration);
+    })();
+
+    // Interactive Emerald/Cyan Dotted Cursor Trail
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9990';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const dot = document.createElement('div');
+      dot.id = 'cursorDot';
+      dot.style.position = 'fixed';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.backgroundColor = '#34d399';
+      dot.style.boxShadow = '0 0 10px #34d399, 0 0 20px #059669';
+      dot.style.pointerEvents = 'none';
+      dot.style.transform = 'translate(-50%, -50%)';
+      dot.style.zIndex = '9992';
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
+      document.body.appendChild(dot);
+
+      const ring = document.createElement('div');
+      ring.id = 'cursorRing';
+      ring.style.position = 'fixed';
+      ring.style.width = '34px';
+      ring.style.height = '34px';
+      ring.style.borderRadius = '50%';
+      ring.style.border = '1.5px solid rgba(52, 211, 153, 0.6)';
+      ring.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+      ring.style.boxShadow = '0 0 15px rgba(52, 211, 153, 0.2)';
+      ring.style.pointerEvents = 'none';
+      ring.style.transform = 'translate(-50%, -50%)';
+      ring.style.zIndex = '9991';
+      ring.style.opacity = '0';
+      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
+      document.body.appendChild(ring);
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastX = -100, lastY = -100;
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 2.5 + 2;
+          this.alpha = 0.9;
+          this.decay = 0.032;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(52, 211, 153, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#059669';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(110, 231, 183, 0.9)';
+          ring.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(52, 211, 153, 0.6)';
+          ring.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
