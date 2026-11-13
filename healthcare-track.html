@@ -34,6 +34,12 @@
       color: #ffffff !important;
       text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
     }
+    .hc-tab-btn.active {
+      background-color: rgba(16, 185, 129, 0.25);
+      border-color: rgba(16, 185, 129, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
+    }
     h1:hover, h2:hover, h3:hover, h4:hover {
       text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(52, 211, 153, 0.35);
     }
@@ -178,9 +184,50 @@
           </div>
         </div>
 
-        <!-- Dashboard Image Preview -->
-        <div class="rounded-2xl overflow-hidden border border-slate-800 bg-slate-900 shadow-inner">
-          <img src="https://raw.githubusercontent.com/ravinder0710/healthcare-provider-analytics-powerbi/main/screenshots/healthcare_dashboard_light.png" alt="Healthcare Executive Dashboard Light Theme" class="w-full h-auto object-cover max-h-[500px]">
+        <!-- Interactive 6-Tab Dashboard Showcase -->
+        <div class="space-y-4 pt-2">
+          <!-- Tabs Switcher -->
+          <div class="flex flex-wrap gap-2">
+            <button onclick="switchHCDashboard(0)" id="hcTab0" class="hc-tab-btn active px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> 1. Details (Light)
+            </button>
+            <button onclick="switchHCDashboard(1)" id="hcTab1" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> 2. Details (Dark)
+            </button>
+            <button onclick="switchHCDashboard(2)" id="hcTab2" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i> 3. Trends (Light)
+            </button>
+            <button onclick="switchHCDashboard(3)" id="hcTab3" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="line-chart" class="w-3.5 h-3.5 text-teal-400"></i> 4. Trends (Dark Mode)
+            </button>
+            <button onclick="switchHCDashboard(4)" id="hcTab4" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-sky-400"></i> 5. Provider & Doctors
+            </button>
+            <button onclick="switchHCDashboard(5)" id="hcTab5" class="hc-tab-btn px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5">
+              <i data-lucide="user-check" class="w-3.5 h-3.5 text-purple-400"></i> 6. Doctor Tooltips
+            </button>
+          </div>
+
+          <!-- Active Dashboard Display Frame -->
+          <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#061011] shadow-inner">
+            <img id="hcDashboardImg" src="assets/healthcare/healthcare_details_light.png" alt="Healthcare Executive Dashboard View" class="w-full h-auto object-contain max-h-[580px] transition-all duration-300">
+            <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5">
+              <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="hcDashboardImgLabel">View 1 of 6: Details (Light Mode)</span>
+            </div>
+          </div>
+
+          <!-- Dynamic Page Insights Banner -->
+          <div id="hcInsightBox" class="p-4 rounded-xl bg-slate-900/80 border border-slate-800/80 space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-bold text-emerald-400 flex items-center gap-1.5" id="hcInsightTitle">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Details Executive Cockpit (Light Theme)
+              </span>
+              <span class="text-slate-500 font-mono text-[11px]" id="hcInsightSubtitle">Field Parameters &bull; £3.36M Billing Reconciliation</span>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed" id="hcInsightDesc">
+              Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.
+            </p>
+          </div>
         </div>
 
         <!-- Technical Highlights Grid -->
@@ -266,6 +313,78 @@
     window.scrollTo(0, 0);
 
     lucide.createIcons();
+
+    // ==========================================
+    // Interactive 6-Tab Healthcare Dashboard Switcher
+    // ==========================================
+    const hcDashboardData = [
+      {
+        img: 'assets/healthcare/healthcare_details_light.png',
+        label: 'View 1 of 6: Details (Light Mode)',
+        title: 'Details Executive Cockpit (Light Theme)',
+        subtitle: 'Field Parameters • £3.36M Billing Reconciliation',
+        desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.'
+      },
+      {
+        img: 'assets/healthcare/healthcare_details_dark.png',
+        label: 'View 2 of 6: Details (Dark Mode)',
+        title: 'Details Executive Cockpit (Dark Theme)',
+        subtitle: 'High Contrast Mode • £2.23M Payor Coverage',
+        desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.'
+      },
+      {
+        img: 'assets/healthcare/healthcare_trend_light.jpg',
+        label: 'View 3 of 6: Monthly & Department Trends (Light)',
+        title: 'Monthly Inpatient Billing Trend (Actual vs Prior Month)',
+        subtitle: 'MoM DAX Iterators • Department vs Weekday Billing',
+        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.'
+      },
+      {
+        img: 'assets/healthcare/healthcare_trend_dark.jpg',
+        label: 'View 4 of 6: Monthly Trends (Dark Mode)',
+        title: 'Monthly Trends & Department Velocity (Dark Theme)',
+        subtitle: 'MoM Waterfall • Orthopedics & Pediatrics Telemetry',
+        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.'
+      },
+      {
+        img: 'assets/healthcare/healthcare_provider_details.jpg',
+        label: 'View 5 of 6: Provider Clinical Performance & Doctor Ratings',
+        title: 'Physician Performance, Length of Stay (LOS) & Outpatient Triage',
+        subtitle: '5,000 Visits • Emergency (39%) vs Non-Emergency (61%)',
+        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.'
+      },
+      {
+        img: 'assets/healthcare/healthcare_provider_tooltip.jpg',
+        label: 'View 6 of 6: Physician Drilldown Tooltip Card',
+        title: 'Physician Report Card & Patient Satisfaction Metric',
+        subtitle: 'Doctor Scorecard • 4,973 Attended Encounters',
+        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).'
+      }
+    ];
+
+    function switchHCDashboard(index) {
+      document.querySelectorAll('.hc-tab-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const d = hcDashboardData[index];
+      const img = document.getElementById('hcDashboardImg');
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = d.img;
+        img.style.opacity = '1';
+      }, 150);
+
+      document.getElementById('hcDashboardImgLabel').innerText = d.label;
+      document.getElementById('hcInsightTitle').innerHTML = '<i data-lucide="sparkles" class="w-3.5 h-3.5"></i> ' + d.title;
+      document.getElementById('hcInsightSubtitle').innerText = d.subtitle;
+      document.getElementById('hcInsightDesc').innerText = d.desc;
+      lucide.createIcons();
+    }
 
     // 1.8s Luxury Curtain Preloader for Healthcare Track
     (function() {
