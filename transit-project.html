@@ -186,94 +186,54 @@
       </div>
     </section>
 
-    <!-- Interactive 4-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
+    <!-- Executive Transit Fleet Operations Dashboard Showcase (Single Flagship Dashboard) -->
     <section class="space-y-6">
-      <!-- Header with Interactive Slider Controls -->
+      <!-- Section Header -->
       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
         <div class="space-y-1">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-400 border border-teal-500/20">
+            <i data-lucide="bus" class="w-3.5 h-3.5"></i> Single Flagship Production Dashboard
+          </div>
           <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <i data-lucide="layout" class="w-5 h-5 text-teal-400"></i> Interactive 4-View Fleet Analytics & AI MCP Showcase
+            <i data-lucide="layout" class="w-5 h-5 text-teal-400"></i> Executive Transit Fleet Operations & Ridership Dashboard
           </h2>
-          <p class="text-xs text-slate-400 font-mono">Switch between the executive Excel canvas, Power Pivot dimensional schema, and Claude MCP pipeline.</p>
+          <p class="text-xs text-slate-400 font-mono">Custom dark-themed executive Excel cockpit with dynamic KPI telemetry, corridor ridership distribution, and temporal occupancy gauges.</p>
         </div>
 
-        <!-- Slider Action Controls -->
-        <div class="flex items-center gap-2">
-          <!-- Autoplay / Pause Toggle -->
-          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-teal-500/30 bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 transition-all cursor-pointer">
-            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
-          </button>
-
-          <!-- Prev & Next Clickable Controls -->
-          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-          </button>
-          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-teal-500/40 bg-teal-600 hover:bg-teal-500 text-white shadow-md shadow-teal-600/30 transition-all cursor-pointer">
-            <span>Next View</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
+        <div class="flex items-center gap-2.5">
+          <a href="assets/transit/transport_transaction_dashboard.png" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 border border-teal-500/30 transition-all cursor-pointer">
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Open Full Resolution
+          </a>
         </div>
-      </div>
-
-      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
-      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
-        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-teal-500 via-cyan-400 to-emerald-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
-      </div>
-
-      <!-- Dashboard Tabs Switcher (4 Views) -->
-      <div class="flex flex-wrap gap-2.5">
-        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="bus" class="w-4 h-4 text-teal-400"></i> View 1: Executive Transit Dashboard
-        </button>
-        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="bar-chart-3" class="w-4 h-4 text-cyan-400"></i> View 2: Consolidated KPI Evidence
-        </button>
-        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="network" class="w-4 h-4 text-purple-400"></i> View 3: Power Pivot Star Schema
-        </button>
-        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="cpu" class="w-4 h-4 text-emerald-400"></i> View 4: Claude MCP & ETL Architecture
-        </button>
       </div>
 
       <!-- Dashboard Visual Display Card -->
       <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
-        <!-- Image Container with Left & Right Hover Buttons -->
-        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#020b0e]">
-          <img id="dashboardImg" src="assets/transit/transport_transaction_dashboard.png" alt="Public Transit Fleet Operations Dashboard" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
-
-          <!-- Left floating arrow -->
-          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-teal-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
-            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Right floating arrow -->
-          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-teal-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
-            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-          </button>
+        <div class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#020b0e]">
+          <img src="assets/transit/transport_transaction_dashboard.png" alt="Public Transit Fleet Operations Dashboard" class="w-full h-auto object-contain max-h-[760px] transition-all duration-300">
 
           <!-- Top-Left Status Pill -->
-          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-teal-400 font-mono flex items-center gap-2 border border-teal-500/20">
-            <span class="w-2 h-2 rounded-full bg-teal-500 animate-pulse"></span>
-            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
+          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/85 backdrop-blur-md text-[11px] text-teal-400 font-mono flex items-center gap-2 border border-teal-500/20">
+            <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+            <span>Production Excel Dashboard Canvas</span>
           </div>
 
           <!-- Bottom-Right Label -->
-          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-teal-400"></i> <span id="dashboardImgLabel">View 1 of 4: Executive Transit Dashboard</span>
+          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/85 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
+            <i data-lucide="bar-chart-2" class="w-3.5 h-3.5 text-teal-400"></i>
+            <span>6,587 Journeys &bull; 33 Avg. Occupancy &bull; 64.61% PM</span>
           </div>
         </div>
 
-        <!-- Dynamic Page Insights Banner -->
-        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs">
-            <span class="font-bold text-teal-400 flex items-center gap-2" id="insightTitle">
+        <!-- Dynamic Insights Banner -->
+        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+            <span class="font-bold text-teal-400 flex items-center gap-2">
               <i data-lucide="sparkles" class="w-4 h-4"></i> Manually Crafted Dark Executive Excel Dashboard
             </span>
-            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">6,587 Journeys &bull; 33 Avg. Occupancy &bull; 64.61% PM Concentration</span>
+            <span class="text-slate-500 font-mono text-[11px]">6,587 Journeys &bull; 33 Avg. Occupancy &bull; 64.61% PM Concentration</span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
             Custom dark Excel canvas featuring rounded KPI tiles, neon teal contrast gauges, and structured operational layout. Highlights East-West Express as the primary traffic corridor (1,322 riders) and PM ridership dominance (4,256 riders).
           </p>
         </div>
@@ -509,172 +469,6 @@ RETURN DailyRiders - Benchmark</code></pre>
         }
       }, stepDuration);
     })();
-
-    // ==========================================
-    // Interactive 4-Tab 5.0-Second Auto-Slider Engine
-    // ==========================================
-    const dashboardData = [
-      {
-        img: 'assets/transit/transport_transaction_dashboard.png',
-        label: 'View 1 of 4: Executive Transit Dashboard',
-        title: 'Manually Crafted Dark Executive Excel Dashboard',
-        subtitle: '6,587 Journeys • 33 Avg. Occupancy • 64.61% PM Concentration',
-        desc: 'Custom dark Excel canvas featuring rounded KPI tiles, neon teal contrast gauges, and structured operational layout. Highlights East-West Express as the primary traffic corridor (1,322 riders) and PM ridership dominance (4,256 riders).'
-      },
-      {
-        img: 'assets/transit/consolidated_kpi_evidence.png',
-        label: 'View 2 of 4: Consolidated KPI Evidence',
-        title: 'Analytical KPI Matrix & Fleet Utilization Profiling',
-        subtitle: 'Fleet Capacity Split • 36 Well-Utilized • 29 Overcrowded Runs',
-        desc: 'Comprehensive analytical evidence matrix validating 33 avg riders/trip, 43% well-utilized, 35% crowded (>=90%), and 23% slack (<50%). Establishes the 941 riders/day operational benchmark.'
-      },
-      {
-        img: 'assets/transit/data_model_relationships.png',
-        label: 'View 3 of 4: Power Pivot Star Schema',
-        title: 'Power Pivot In-Memory Star Schema & Cardinality',
-        subtitle: 'Fact-Dimension Relationships • 1:N Referential Integrity',
-        desc: 'In-memory dimensional data model diagram in Excel Power Pivot connecting Facttable_ridership to Dim_buses (50-cap standard), Dim_routes, Dim_demographics, and Dim_DateTable.'
-      },
-      {
-        img: 'assets/transit/data_architecture_pipeline.png',
-        label: 'View 4 of 4: Claude MCP & ETL Architecture',
-        title: 'Claude AI MCP + Power Query M-Code Architecture',
-        subtitle: 'FastMCP Desktop Integration • Automated Data Cleaning Pipeline',
-        desc: 'Hybrid workflow diagram showing how Claude Desktop connected to Microsoft Excel via Model Context Protocol (MCP) automates programmatic schema audits, Power Query transformations, and telemetry modeling.'
-      }
-    ];
-
-    let currentTabIndex = 0;
-    let autoPlayActive = true;
-    const SLIDE_DURATION = 5000; // 5.0 Seconds
-    let slideTimer = null;
-
-    function renderSlide(index) {
-      currentTabIndex = index;
-      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-        if (i === index) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      const d = dashboardData[index];
-      const img = document.getElementById('dashboardImg');
-      if (img) {
-        img.style.opacity = '0';
-        setTimeout(() => {
-          img.src = d.img;
-          img.style.opacity = '1';
-        }, 120);
-      }
-
-      const imgLabel = document.getElementById('dashboardImgLabel');
-      if (imgLabel) imgLabel.innerText = d.label;
-
-      const titleEl = document.getElementById('insightTitle');
-      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
-
-      const subEl = document.getElementById('insightSubtitle');
-      if (subEl) subEl.innerText = d.subtitle;
-
-      const descEl = document.getElementById('insightDesc');
-      if (descEl) descEl.innerText = d.desc;
-
-      lucide.createIcons();
-    }
-
-    function resetProgressBar() {
-      const bar = document.getElementById('slideProgressBar');
-      if (bar) {
-        bar.style.transition = 'none';
-        bar.style.width = '0%';
-        setTimeout(() => {
-          if (autoPlayActive && bar) {
-            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
-            bar.style.width = '100%';
-          }
-        }, 30);
-      }
-    }
-
-    function switchDashboardTab(index) {
-      renderSlide(index);
-      if (autoPlayActive) {
-        startAutoPlayTimer();
-      }
-    }
-
-    function userSelectTab(index) {
-      switchDashboardTab(index);
-    }
-
-    function nextDashboardTab() {
-      const next = (currentTabIndex + 1) % dashboardData.length;
-      switchDashboardTab(next);
-    }
-
-    function prevDashboardTab() {
-      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
-      switchDashboardTab(prev);
-    }
-
-    function startAutoPlayTimer() {
-      clearInterval(slideTimer);
-      resetProgressBar();
-      slideTimer = setInterval(() => {
-        nextDashboardTab();
-      }, SLIDE_DURATION);
-    }
-
-    function toggleAutoPlay() {
-      autoPlayActive = !autoPlayActive;
-      const icon = document.getElementById('playPauseIcon');
-      const text = document.getElementById('playPauseText');
-      const pill = document.getElementById('sliderStatusPill');
-      const bar = document.getElementById('slideProgressBar');
-
-      if (autoPlayActive) {
-        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
-        if (pill) pill.innerText = '5.0s Live Auto-Slider';
-        startAutoPlayTimer();
-      } else {
-        clearInterval(slideTimer);
-        if (bar) {
-          bar.style.transition = 'none';
-          bar.style.width = '0%';
-        }
-        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Paused (Click to Resume)';
-        if (pill) pill.innerText = 'Auto-Slider Paused';
-      }
-      lucide.createIcons();
-    }
-
-    // Pause auto-slider on hover, resume on leave
-    const container = document.getElementById('dashboardSlideContainer');
-    if (container) {
-      container.addEventListener('mouseenter', () => {
-        if (autoPlayActive) {
-          clearInterval(slideTimer);
-          const bar = document.getElementById('slideProgressBar');
-          if (bar) bar.style.transition = 'none';
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = 'Hovered (Paused)';
-        }
-      });
-      container.addEventListener('mouseleave', () => {
-        if (autoPlayActive) {
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '5.0s Live Auto-Slider';
-          startAutoPlayTimer();
-        }
-      });
-    }
-
-    // Initialize auto-play on load
-    startAutoPlayTimer();
 
     // ==========================================
     // Interactive Cyber Teal & Neon Cyan Dotted Cursor Trail
