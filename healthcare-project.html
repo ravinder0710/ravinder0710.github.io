@@ -226,13 +226,25 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (2 Views) -->
+      <!-- Dashboard Tabs Switcher (6 Views: 5 Dashboards + 1 Tooltip) -->
       <div class="flex flex-wrap gap-2">
         <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> View 1: Details (Light Mode)
+          <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> View 1: Details (Light)
         </button>
         <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> View 2: Details (Dark Mode)
+          <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> View 2: Details (Dark)
+        </button>
+        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i> View 3: Trends (Light)
+        </button>
+        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="line-chart" class="w-3.5 h-3.5 text-teal-400"></i> View 4: Trends (Dark)
+        </button>
+        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-sky-400"></i> View 5: Provider & Doctors
+        </button>
+        <button onclick="userSelectTab(5)" id="tabBtn5" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="user-check" class="w-3.5 h-3.5 text-purple-400"></i> View 6: Doctor Tooltip
         </button>
       </div>
 
@@ -260,7 +272,7 @@
 
           <!-- Bottom-Right Label -->
           <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="dashboardImgLabel">View 1 of 2: Details (Light Mode)</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="dashboardImgLabel">View 1 of 6: Details (Light Mode)</span>
           </div>
         </div>
 
@@ -599,7 +611,7 @@ AVERAGEX(
     const dashboardData = [
       {
         img: 'assets/healthcare/healthcare_details_light.png',
-        label: 'View 1 of 2: Details (Light Mode)',
+        label: 'View 1 of 6: Details (Light Mode)',
         title: 'Details Executive Cockpit (Light Theme)',
         subtitle: 'Field Parameters • £3.36M Billing Reconciliation',
         desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.',
@@ -609,13 +621,53 @@ AVERAGEX(
       },
       {
         img: 'assets/healthcare/healthcare_details_dark.png',
-        label: 'View 2 of 2: Details (Dark Mode)',
+        label: 'View 2 of 6: Details (Dark Mode)',
         title: 'Details Executive Cockpit (Dark Theme)',
         subtitle: 'High Contrast Mode • £2.23M Payor Coverage',
         desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.',
         kpi1: '66.4% Insured Ratio',
         kpi2: '£2.23M Institutional Pay',
         kpi3: '£1.13M Patient Liability'
+      },
+      {
+        img: 'assets/healthcare/healthcare_trend_light.jpg',
+        label: 'View 3 of 6: Trends (Light Mode)',
+        title: 'Monthly Inpatient Billing Trend (Actual vs Prior Month)',
+        subtitle: 'MoM DAX Iterators • Department vs Weekday Billing',
+        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.',
+        kpi1: '£1.66M Q1 Peak Volume',
+        kpi2: 'Cardiology Tariff Lead',
+        kpi3: 'Weekday vs Weekend Mix'
+      },
+      {
+        img: 'assets/healthcare/healthcare_trend_dark.jpg',
+        label: 'View 4 of 6: Trends (Dark Mode)',
+        title: 'Monthly Trends & Department Velocity (Dark Theme)',
+        subtitle: 'MoM Waterfall • Orthopedics & Pediatrics Telemetry',
+        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.',
+        kpi1: 'Seasonality Diagnostics',
+        kpi2: 'Pediatrics Capacity',
+        kpi3: 'Orthopedics Velocity'
+      },
+      {
+        img: 'assets/healthcare/healthcare_provider_details.jpg',
+        label: 'View 5 of 6: Provider & Doctors',
+        title: 'Physician Performance, Length of Stay (LOS) & Outpatient Triage',
+        subtitle: '5,000 Visits • Emergency (39%) vs Non-Emergency (61%)',
+        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.',
+        kpi1: '3,768 Outpatient Visits',
+        kpi2: '1,232 Inpatient Admitted',
+        kpi3: '5.05 Dr. Grek Benchmark'
+      },
+      {
+        img: 'assets/healthcare/healthcare_provider_tooltip.jpg',
+        label: 'View 6 of 6: Physician Drilldown Tooltip',
+        title: 'Physician Report Card & Patient Satisfaction Metric',
+        subtitle: 'Doctor Scorecard • 4,973 Attended Encounters',
+        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).',
+        kpi1: '4,973 Attended Cases',
+        kpi2: '4.21 Satisfaction Score',
+        kpi3: 'Drill-Through Telemetry'
       }
     ];
 
