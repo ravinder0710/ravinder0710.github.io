@@ -63,6 +63,21 @@
     ::-webkit-scrollbar-track { background: #090d16; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(56, 189, 248, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(96, 165, 250, 0.6), 0 0 40px rgba(56, 189, 248, 0.35);
+    }
+    a:hover, button:hover {
+      text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen selection:bg-blue-600 selection:text-white">
@@ -769,6 +784,165 @@
         closeArchModal();
       }
     });
+
+    // ==========================================
+    // Interactive Blue Dotted Cursor & Text Highlight Engine
+    // ==========================================
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      // 1. Dotted Particle Canvas
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9990';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      // 2. Inner Glowing Blue Dot
+      const dot = document.createElement('div');
+      dot.id = 'cursorDot';
+      dot.style.position = 'fixed';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.backgroundColor = '#38bdf8';
+      dot.style.boxShadow = '0 0 10px #38bdf8, 0 0 20px #2563eb';
+      dot.style.pointerEvents = 'none';
+      dot.style.transform = 'translate(-50%, -50%)';
+      dot.style.zIndex = '9992';
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
+      document.body.appendChild(dot);
+
+      // 3. Outer Trailing Aura Ring
+      const ring = document.createElement('div');
+      ring.id = 'cursorRing';
+      ring.style.position = 'fixed';
+      ring.style.width = '34px';
+      ring.style.height = '34px';
+      ring.style.borderRadius = '50%';
+      ring.style.border = '1.5px solid rgba(56, 189, 248, 0.6)';
+      ring.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+      ring.style.boxShadow = '0 0 15px rgba(56, 189, 248, 0.2)';
+      ring.style.pointerEvents = 'none';
+      ring.style.transform = 'translate(-50%, -50%)';
+      ring.style.zIndex = '9991';
+      ring.style.opacity = '0';
+      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
+      document.body.appendChild(ring);
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastX = -100, lastY = -100;
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 2.5 + 2; // 2px - 4.5px dotted size
+          this.alpha = 0.9;
+          this.decay = 0.032; // smooth fade
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+          if (this.size > 0.4) this.size -= 0.04;
+        }
+        draw(c) {
+          c.save();
+          c.globalAlpha = Math.max(0, this.alpha);
+          c.fillStyle = '#38bdf8';
+          c.shadowBlur = 8;
+          c.shadowColor = '#2563eb';
+          c.beginPath();
+          c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          c.fill();
+          c.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        // Spawn dotted particles on movement
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 7) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 40) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      // 60FPS animation loop
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          particles[i].update();
+          particles[i].draw(ctx);
+          if (particles[i].alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+
+        // Smooth trailing physics for ring
+        ringX += (mouseX - ringX) * 0.24;
+        ringY += (mouseY - ringY) * 0.24;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+
+        requestAnimationFrame(animate);
+      }
+      requestAnimationFrame(animate);
+
+      // Interactive Text Touch Expansion
+      const interactiveTargets = document.querySelectorAll('p, h1, h2, h3, h4, span, a, button, li, .badge-filter, .glass-card');
+      interactiveTargets.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(56, 189, 248, 0.95)';
+          ring.style.backgroundColor = 'rgba(56, 189, 248, 0.12)';
+          dot.style.transform = 'translate(-50%, -50%) scale(1.35)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(56, 189, 248, 0.6)';
+          ring.style.backgroundColor = 'rgba(37, 99, 235, 0.05)';
+          dot.style.transform = 'translate(-50%, -50%) scale(1)';
+        });
+      });
+    })();
   </script>
 </body>
 </html>
