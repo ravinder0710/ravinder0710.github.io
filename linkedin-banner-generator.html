@@ -18,7 +18,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center p-4 sm:p-6 antialiased selection:bg-cyan-500 selection:text-black">
+<body class="min-h-screen bg-slate-950 text-slate-100 flex flex-col items-center p-3 sm:p-6 antialiased selection:bg-cyan-500 selection:text-black">
 
   <!-- Header -->
   <header class="w-full max-w-6xl flex flex-wrap items-center justify-between gap-4 py-4 border-b border-slate-800/80 mb-6">
@@ -33,7 +33,7 @@
             1584 × 396 HD Exporter
           </span>
         </h1>
-        <p class="text-xs text-slate-400 font-mono">Branded background cover photo optimized for DP safe-zone &amp; recruiter impact</p>
+        <p class="text-xs text-slate-400 font-mono">Customized branding cover banner optimized for DP safe-zone &amp; hiring impact</p>
       </div>
     </div>
 
@@ -64,18 +64,20 @@
           <span class="text-emerald-400 font-bold">Lossless PNG</span>
         </div>
 
-        <!-- Theme & DP Safe Zone Toggle -->
-        <div class="flex items-center gap-3">
+        <!-- Theme Selector (6 Themes) & DP Safe Zone Toggle -->
+        <div class="flex flex-wrap items-center gap-3">
           <label class="flex items-center gap-2 text-slate-300 cursor-pointer select-none">
             <input type="checkbox" id="dpGuideToggle" onchange="toggleDpGuide()" checked class="rounded border-slate-700 text-cyan-500 focus:ring-0">
             <span>Show Profile DP Safe Zone</span>
           </label>
 
           <div class="flex items-center bg-slate-950 border border-slate-800 rounded-xl p-1 gap-1 text-[11px]">
-            <button onclick="setTheme('cyan')" id="theme-cyan" class="px-2.5 py-1 rounded-lg bg-cyan-500 text-black font-extrabold transition">Cyan</button>
-            <button onclick="setTheme('crimson')" id="theme-crimson" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">Crimson</button>
-            <button onclick="setTheme('gold')" id="theme-gold" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">Gold</button>
-            <button onclick="setTheme('obsidian')" id="theme-obsidian" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">Obsidian</button>
+            <button onclick="setTheme('cyan')" id="theme-cyan" class="px-2.5 py-1 rounded-lg bg-cyan-500 text-black font-extrabold transition cursor-pointer">Cyan</button>
+            <button onclick="setTheme('crimson')" id="theme-crimson" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Crimson</button>
+            <button onclick="setTheme('emerald')" id="theme-emerald" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Emerald</button>
+            <button onclick="setTheme('violet')" id="theme-violet" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Violet</button>
+            <button onclick="setTheme('gold')" id="theme-gold" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Gold</button>
+            <button onclick="setTheme('obsidian')" id="theme-obsidian" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition cursor-pointer">Obsidian</button>
           </div>
         </div>
       </div>
@@ -89,39 +91,39 @@
       <div class="w-full mt-4 pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-          <span><strong>Safe-Zone Optimized:</strong> Left circular cutout marks where your LinkedIn Profile Picture (DP) sits. All text and metrics are positioned in the safe zone!</span>
+          <span><strong>Safe-Zone Verified:</strong> Left circular cutout marks where your LinkedIn Profile Photo (DP) sits. Skills, Name, and Monogram are safely placed in the visible viewing zone!</span>
         </div>
         <div class="font-mono text-cyan-400">
-          Ready to upload directly to LinkedIn
+          6 Luxury Color Themes Available
         </div>
       </div>
 
     </div>
 
-    <!-- Banner Design Specs & Upload Guide -->
+    <!-- Skills & Hierarchy Overview -->
     <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-4">
       
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-        <div class="text-cyan-400 font-bold font-mono text-xs uppercase mb-1">01. Visual Architecture</div>
-        <h3 class="text-white font-bold text-sm mb-2">Executive Clean Hierarchy</h3>
+        <div class="text-cyan-400 font-bold font-mono text-xs uppercase mb-1">01. 5 Core Stack Highlights</div>
+        <h3 class="text-white font-bold text-sm mb-2">2-Line Large Badge Stack</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Avoids clutter. Features bold typography, subtle cyber matrix grid, glowing telemetry nodes, and your signature 3D RG Monogram badge on the right.
+          Features: <strong>Advance Excel</strong>, <strong>Power BI</strong>, <strong>MySQL</strong>, <strong>Python with Pandas</strong>, and <strong>Power BI MCP Server</strong> with high-visibility tech icons.
         </p>
       </div>
 
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-        <div class="text-amber-400 font-bold font-mono text-xs uppercase mb-1">02. Recruiter Credibility</div>
-        <h3 class="text-white font-bold text-sm mb-2">Quantified Production Metrics</h3>
+        <div class="text-purple-400 font-bold font-mono text-xs uppercase mb-1">02. Executive Word Replaced</div>
+        <h3 class="text-white font-bold text-sm mb-2">Enterprise Data Intelligence</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Showcases real business scale: 12 production projects, RM 20.7M sales pacing, $435.8M loan risk auditing, and £3.36M clinical billing.
+          Replaced "Executive" with <strong>"Enterprise Data Intelligence &amp; Business Architecture"</strong> — representing production data warehousing and industrial-scale modeling.
         </p>
       </div>
 
       <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-5">
-        <div class="text-emerald-400 font-bold font-mono text-xs uppercase mb-1">03. Direct Hiring Signal</div>
-        <h3 class="text-white font-bold text-sm mb-2">Immediate Joiner Status</h3>
+        <div class="text-emerald-400 font-bold font-mono text-xs uppercase mb-1">03. Clean Monogram &amp; Status</div>
+        <h3 class="text-white font-bold text-sm mb-2">Pristine 3D RG Badge</h3>
         <p class="text-xs text-slate-400 leading-relaxed">
-          Displays your live portfolio URL (<code class="text-cyan-300">ravinder0710.github.io</code>) and an "Immediate Joiner (0 Days Notice)" indicator for recruiters.
+          Removed "Verified BI" text from under the RG badge for a razor-clean minimalist luxury look. Includes live portfolio link and immediate joining badge.
         </p>
       </div>
 
@@ -146,7 +148,8 @@
         badgeGrad1: '#22d3ee',
         badgeGrad2: '#6366f1',
         glow: 'rgba(34, 211, 238, 0.25)',
-        textDrop: 'rgba(34, 211, 238, 0.6)'
+        textDrop: 'rgba(34, 211, 238, 0.6)',
+        btnBg: 'bg-cyan-500'
       },
       crimson: {
         accent: '#ef4444',
@@ -157,7 +160,32 @@
         badgeGrad1: '#ef4444',
         badgeGrad2: '#f59e0b',
         glow: 'rgba(239, 68, 68, 0.3)',
-        textDrop: 'rgba(239, 68, 68, 0.6)'
+        textDrop: 'rgba(239, 68, 68, 0.6)',
+        btnBg: 'bg-red-500'
+      },
+      emerald: {
+        accent: '#10b981',
+        accent2: '#34d399',
+        accentDark: '#059669',
+        gradientStart: '#022c22',
+        gradientEnd: '#02140e',
+        badgeGrad1: '#34d399',
+        badgeGrad2: '#06b6d4',
+        glow: 'rgba(16, 185, 129, 0.3)',
+        textDrop: 'rgba(16, 185, 129, 0.65)',
+        btnBg: 'bg-emerald-500'
+      },
+      violet: {
+        accent: '#a855f7',
+        accent2: '#c084fc',
+        accentDark: '#7e22ce',
+        gradientStart: '#1e1035',
+        gradientEnd: '#090312',
+        badgeGrad1: '#c084fc',
+        badgeGrad2: '#ec4899',
+        glow: 'rgba(168, 85, 247, 0.35)',
+        textDrop: 'rgba(168, 85, 247, 0.65)',
+        btnBg: 'bg-purple-500'
       },
       gold: {
         accent: '#f59e0b',
@@ -168,7 +196,8 @@
         badgeGrad1: '#fbbf24',
         badgeGrad2: '#ea580c',
         glow: 'rgba(245, 158, 11, 0.3)',
-        textDrop: 'rgba(245, 158, 11, 0.6)'
+        textDrop: 'rgba(245, 158, 11, 0.6)',
+        btnBg: 'bg-amber-500'
       },
       obsidian: {
         accent: '#94a3b8',
@@ -179,18 +208,21 @@
         badgeGrad1: '#94a3b8',
         badgeGrad2: '#3b82f6',
         glow: 'rgba(148, 163, 184, 0.25)',
-        textDrop: 'rgba(148, 163, 184, 0.6)'
+        textDrop: 'rgba(148, 163, 184, 0.6)',
+        btnBg: 'bg-slate-400'
       }
     };
 
     function setTheme(name) {
       currentTheme = name;
-      ['cyan', 'crimson', 'gold', 'obsidian'].forEach(t => {
+      ['cyan', 'crimson', 'emerald', 'violet', 'gold', 'obsidian'].forEach(t => {
         const btn = document.getElementById('theme-' + t);
-        if (t === name) {
-          btn.className = 'px-2.5 py-1 rounded-lg bg-cyan-500 text-black font-extrabold transition';
-        } else {
-          btn.className = 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition';
+        if (btn) {
+          if (t === name) {
+            btn.className = 'px-2.5 py-1 rounded-lg ' + themes[t].btnBg + ' text-black font-extrabold transition cursor-pointer';
+          } else {
+            btn.className = 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition cursor-pointer';
+          }
         }
       });
       renderBanner();
@@ -237,7 +269,7 @@
 
       // 3. Ambient Glowing Spotlight Orbs
       // Orb 1: Near Center/Right
-      const orb1 = ctx.createRadialGradient(1000, 180, 20, 1000, 180, 360);
+      const orb1 = ctx.createRadialGradient(980, 180, 20, 980, 180, 380);
       orb1.addColorStop(0, th.glow);
       orb1.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = orb1;
@@ -256,149 +288,156 @@
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.moveTo(380, 60);
-      ctx.lineTo(800, 60);
-      ctx.lineTo(840, 100);
-      ctx.lineTo(1300, 100);
+      ctx.lineTo(760, 60);
+      ctx.lineTo(800, 95);
+      ctx.lineTo(1280, 95);
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.moveTo(420, 340);
-      ctx.lineTo(1050, 340);
-      ctx.lineTo(1090, 300);
-      ctx.lineTo(1380, 300);
+      ctx.moveTo(420, 345);
+      ctx.lineTo(1050, 345);
+      ctx.lineTo(1085, 315);
+      ctx.lineTo(1380, 315);
       ctx.stroke();
       ctx.restore();
 
       // ==========================================
       // TEXT & CONTENT SECTION (CENTER / RIGHT SAFE ZONE)
       // ==========================================
-      const contentX = 390; // Safely to the right of DP
+      const contentX = 385; // Safely to the right of DP
 
-      // A. Eyebrow Tagline
+      // A. Eyebrow Tagline (Replaced "EXECUTIVE" with "ENTERPRISE")
       ctx.fillStyle = th.accent;
       ctx.font = '800 13px "JetBrains Mono"';
       ctx.textAlign = 'left';
-      ctx.fillText('// EXECUTIVE DATA INTELLIGENCE & BUSINESS ARCHITECTURE', contentX, 72);
+      ctx.fillText('// ENTERPRISE DATA INTELLIGENCE & BUSINESS ARCHITECTURE', contentX, 64);
 
       // B. Main Full Name
       ctx.fillStyle = '#ffffff';
       ctx.font = '900 52px "Plus Jakarta Sans"';
       ctx.shadowColor = th.textDrop;
       ctx.shadowBlur = 18;
-      ctx.fillText('RAVINDER GUPTA', contentX, 130);
+      ctx.fillText('RAVINDER GUPTA', contentX, 122);
 
       // Dot Accent
       ctx.fillStyle = th.accent;
-      ctx.fillText('.', contentX + ctx.measureText('RAVINDER GUPTA').width - 8, 130);
+      ctx.fillText('.', contentX + ctx.measureText('RAVINDER GUPTA').width - 8, 122);
       ctx.shadowBlur = 0; // reset
 
       // C. Primary Role & Specialization
       ctx.fillStyle = th.accent2;
-      ctx.font = '800 22px "JetBrains Mono"';
-      ctx.fillText('Data Analyst & Business Intelligence Specialist', contentX, 168);
+      ctx.font = '800 21px "JetBrains Mono"';
+      ctx.fillText('Data Analyst & Business Intelligence Specialist', contentX, 158);
 
       // D. Architectural Subtitle
       ctx.fillStyle = '#94a3b8';
-      ctx.font = '600 15px "Plus Jakarta Sans"';
-      ctx.fillText('Power BI DirectQuery • Star Schema Data Warehousing • Python FastMCP & Serverless Pipelines', contentX, 200);
+      ctx.font = '600 14px "Plus Jakarta Sans"';
+      ctx.fillText('Star Schema Data Warehousing • DirectQuery Cockpits • Serverless Analytics Pipelines', contentX, 188);
 
-      // E. Production Metrics Bar (Glassmorphism Pill)
-      const barY = 224;
-      const barW = 790;
-      const barH = 50;
+      // ==========================================
+      // 5 CORE SKILLS IN 2 LINES (BIGGER FONT & ICONS)
+      // Requested by user:
+      // "advance excel, power bi, mysql, python with panda, power bi mcp server"
+      // ==========================================
 
-      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-      roundRect(ctx, contentX, barY, barW, barH, 14, true, false);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-      ctx.lineWidth = 1;
-      roundRect(ctx, contentX, barY, barW, barH, 14, false, true);
+      // Line 1: Advance Excel, Power BI, MySQL
+      const line1Y = 214;
+      const chipHeight = 44;
 
-      // Metrics Items inside Bar
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '800 13px "JetBrains Mono"';
-      ctx.textAlign = 'left';
-
-      ctx.fillText('📊 12 Production Architectures', contentX + 22, barY + 31);
-      ctx.fillStyle = '#475569';
-      ctx.fillText('|', contentX + 260, barY + 31);
-
-      ctx.fillStyle = '#f59e0b';
-      ctx.fillText('RM 20.7M F&B', contentX + 280, barY + 31);
-      ctx.fillStyle = '#475569';
-      ctx.fillText('|', contentX + 395, barY + 31);
-
-      ctx.fillStyle = '#38bdf8';
-      ctx.fillText('$435.8M Loan Risk', contentX + 415, barY + 31);
-      ctx.fillStyle = '#475569';
-      ctx.fillText('|', contentX + 575, barY + 31);
-
-      ctx.fillStyle = '#10b981';
-      ctx.fillText('£3.36M NHS Clinical', contentX + 595, barY + 31);
-
-      // F. Tech Stack Chips Row
-      const chipY = 294;
-      const chips = [
-        { text: 'Power BI DAX', color: '#f59e0b' },
-        { text: 'Relational SQL', color: '#38bdf8' },
-        { text: 'Python FastMCP', color: '#f43f5e' },
-        { text: 'n8n Cloud ETL', color: '#10b981' }
+      const line1Chips = [
+        { icon: '📊', name: 'Advance Excel', color: '#10b981', w: 185 },
+        { icon: '⚡', name: 'Power BI', color: '#f59e0b', w: 145 },
+        { icon: '🐬', name: 'MySQL', color: '#38bdf8', w: 135 }
       ];
 
-      let cx = contentX;
-      chips.forEach(c => {
-        const cw = 150;
+      let lx1 = contentX;
+      line1Chips.forEach(c => {
+        // Chip Box
         ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
-        roundRect(ctx, cx, chipY, cw, 36, 10, true, false);
-        ctx.strokeStyle = 'rgba(51, 65, 85, 0.9)';
-        ctx.lineWidth = 1;
-        roundRect(ctx, cx, chipY, cw, 36, 10, false, true);
+        roundRect(ctx, lx1, line1Y, c.w, chipHeight, 12, true, false);
+        ctx.strokeStyle = c.color;
+        ctx.lineWidth = 1.5;
+        roundRect(ctx, lx1, line1Y, c.w, chipHeight, 12, false, true);
 
-        ctx.fillStyle = c.color;
-        ctx.font = '800 11px "JetBrains Mono"';
-        ctx.textAlign = 'center';
-        ctx.fillText(c.text, cx + cw / 2, chipY + 22);
+        // Content
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '800 15px "Plus Jakarta Sans"';
+        ctx.textAlign = 'left';
+        ctx.fillText(c.icon + ' ' + c.name, lx1 + 16, line1Y + 28);
 
-        cx += cw + 14;
+        lx1 += c.w + 14;
       });
 
-      // Status Pill: Immediate Joiner
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.15)';
-      roundRect(ctx, cx, chipY, 190, 36, 10, true, false);
+      // Line 2: Python with Pandas, Power BI MCP Server + Immediate Joiner
+      const line2Y = 268;
+
+      const line2Chips = [
+        { icon: '🐍', name: 'Python with Pandas', color: '#60a5fa', w: 220 },
+        { icon: '🤖', name: 'Power BI MCP Server', color: '#f43f5e', w: 235 }
+      ];
+
+      let lx2 = contentX;
+      line2Chips.forEach(c => {
+        // Chip Box
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+        roundRect(ctx, lx2, line2Y, c.w, chipHeight, 12, true, false);
+        ctx.strokeStyle = c.color;
+        ctx.lineWidth = 1.5;
+        roundRect(ctx, lx2, line2Y, c.w, chipHeight, 12, false, true);
+
+        // Content
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '800 15px "Plus Jakarta Sans"';
+        ctx.textAlign = 'left';
+        ctx.fillText(c.icon + ' ' + c.name, lx2 + 16, line2Y + 28);
+
+        lx2 += c.w + 14;
+      });
+
+      // Immediate Joiner Pill (Next to Line 2)
+      const joinerW = 210;
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.16)';
+      roundRect(ctx, lx2, line2Y, joinerW, chipHeight, 12, true, false);
       ctx.strokeStyle = '#10b981';
-      ctx.lineWidth = 1;
-      roundRect(ctx, cx, chipY, 190, 36, 10, false, true);
+      ctx.lineWidth = 1.5;
+      roundRect(ctx, lx2, line2Y, joinerW, chipHeight, 12, false, true);
 
       ctx.fillStyle = '#34d399';
-      ctx.font = '800 11px "JetBrains Mono"';
-      ctx.fillText('● 0 Days Notice (Joiner)', cx + 95, chipY + 22);
+      ctx.font = '800 13px "JetBrains Mono"';
+      ctx.textAlign = 'center';
+      ctx.fillText('● 0 Days Notice (Joiner)', lx2 + joinerW / 2, line2Y + 27);
 
-      // G. Live Portfolio URL (Bottom Left of content)
+      // ==========================================
+      // G. LIVE PORTFOLIO & GITHUB URLS (BOTTOM BAR)
+      // ==========================================
+      const bottomY = 352;
       ctx.fillStyle = '#94a3b8';
-      ctx.font = '700 12px "JetBrains Mono"';
+      ctx.font = '700 13px "JetBrains Mono"';
       ctx.textAlign = 'left';
-      ctx.fillText('🌐 Live Portfolio:', contentX, 360);
+      ctx.fillText('🌐 Live Portfolio:', contentX, bottomY);
 
       ctx.fillStyle = th.accent;
-      ctx.font = '800 13px "JetBrains Mono"';
-      ctx.fillText('https://ravinder0710.github.io', contentX + 130, 360);
+      ctx.font = '800 14px "JetBrains Mono"';
+      ctx.fillText('https://ravinder0710.github.io', contentX + 140, bottomY);
 
       ctx.fillStyle = '#64748b';
-      ctx.fillText('• GitHub: github.com/ravinder0710', contentX + 390, 360);
+      ctx.fillText('•  GitHub: github.com/ravinder0710', contentX + 410, bottomY);
 
       // ==========================================
       // RIGHT SIDE: 3D RG MONOGRAM BRAND BADGE
+      // ("VERIFIED BI" REMOVED AS REQUESTED)
       // ==========================================
-      const badgeCenterX = 1380;
+      const badgeCenterX = 1385;
       const badgeCenterY = 198;
-      const badgeSize = 140;
+      const badgeSize = 145;
 
       // Glow Halo
-      const halo = ctx.createRadialGradient(badgeCenterX, badgeCenterY, 20, badgeCenterX, badgeCenterY, 110);
+      const halo = ctx.createRadialGradient(badgeCenterX, badgeCenterY, 20, badgeCenterX, badgeCenterY, 115);
       halo.addColorStop(0, th.glow);
       halo.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = halo;
       ctx.beginPath();
-      ctx.arc(badgeCenterX, badgeCenterY, 110, 0, Math.PI * 2);
+      ctx.arc(badgeCenterX, badgeCenterY, 115, 0, Math.PI * 2);
       ctx.fill();
 
       // Dashed Guide Ring
@@ -407,16 +446,16 @@
       ctx.lineWidth = 1.5;
       ctx.setLineDash([8, 6]);
       ctx.beginPath();
-      ctx.arc(badgeCenterX, badgeCenterY, 95, 0, Math.PI * 2);
+      ctx.arc(badgeCenterX, badgeCenterY, 100, 0, Math.PI * 2);
       ctx.stroke();
       ctx.restore();
 
-      // Badge Container
+      // Badge Container Box
       const bx = badgeCenterX - badgeSize / 2;
       const by = badgeCenterY - badgeSize / 2;
 
       ctx.shadowColor = th.accent;
-      ctx.shadowBlur = 30;
+      ctx.shadowBlur = 32;
       ctx.fillStyle = '#070f1e';
       roundRect(ctx, bx, by, badgeSize, badgeSize, 28, true, false);
 
@@ -433,19 +472,27 @@
       ctx.fillStyle = '#060a14';
       roundRect(ctx, bx + 4, by + 4, badgeSize - 8, badgeSize - 8, 24, true, false);
 
-      // Monogram Initials RG
+      // Holographic grid dots inside badge
+      ctx.save();
+      ctx.fillStyle = th.accent;
+      ctx.globalAlpha = 0.15;
+      for (let gx = bx + 16; gx < bx + badgeSize - 16; gx += 10) {
+        for (let gy = by + 16; gy < by + badgeSize - 16; gy += 10) {
+          ctx.beginPath();
+          ctx.arc(gx, gy, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.restore();
+
+      // Monogram Initials RG (Bold & Centered, Clean without "Verified BI")
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 64px "Plus Jakarta Sans"';
+      ctx.font = '900 68px "Plus Jakarta Sans"';
       ctx.textAlign = 'center';
       ctx.shadowColor = th.accent;
-      ctx.shadowBlur = 16;
-      ctx.fillText('RG', badgeCenterX, badgeCenterY + 22);
+      ctx.shadowBlur = 18;
+      ctx.fillText('RG', badgeCenterX, badgeCenterY + 24);
       ctx.shadowBlur = 0;
-
-      // Sub-badge label
-      ctx.fillStyle = th.accent;
-      ctx.font = '800 10px "JetBrains Mono"';
-      ctx.fillText('VERIFIED BI', badgeCenterX, badgeCenterY + 48);
 
       // ==========================================
       // DP SAFE ZONE OVERLAY (OPTIONAL TOGGLE)
@@ -453,7 +500,7 @@
       if (showDpGuide) {
         ctx.save();
 
-        // LinkedIn Circular DP placement (approx x: 195, y: 345 on desktop)
+        // LinkedIn Circular DP placement (approx x: 195, y: 340 on desktop)
         const dpX = 195;
         const dpY = 340;
         const dpRadius = 135;
