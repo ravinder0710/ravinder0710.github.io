@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Shop Sales & Market Expansion Intelligence | Executive Case Study & Live Dashboard</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: Coffee Shop Sales & Market Expansion Intelligence. 149,116 retail transactions, $698K revenue telemetry, PostgreSQL/MySQL 10-query framework, and strategic market expansion modeling across 14 cities.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Coffee Shop Sales & Market Expansion: Case Study & Live Dashboard">
+  <meta property="og:description" content="Explore retail footfall intelligence, custom canvas tooltips, and SQL-backed city expansion feasibility (Pune, Delhi, Jaipur) across 149K+ transactions.">
+  <meta property="og:image" content="assets/coffee/coffee_shop_sales_dashboard.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #0b0705;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Roasted Amber/Coffee Curtain Preloader */
+    #coffeePreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(245, 158, 11, 0.35);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(251, 191, 36, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(245, 158, 11, 0.6), 0 0 40px rgba(251, 191, 36, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(245, 158, 11, 0.25);
+      border-color: rgba(245, 158, 11, 0.6);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(245, 158, 11, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.2-Second Luxury Roasted Amber Curtain Preloader -->
+  <div id="coffeePreloader" class="fixed inset-0 z-50 bg-[#070403] flex flex-col items-center justify-center border-b border-amber-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Espresso / RG Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-600 via-orange-500 to-yellow-400 p-[2px] shadow-2xl shadow-amber-500/50">
+          <div class="w-full h-full bg-[#180b06] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-amber-500/25 rounded-3xl blur-xl -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-1.5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>
+          Retail BI & Strategic Expansion Analytics
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          Coffee Shop Sales & Expansion<span class="text-amber-400">.</span>
+        </h1>
+        <p class="text-xs text-amber-300/80 font-mono tracking-wide">
+          149,116 Transactions &bull; PostgreSQL & MySQL &bull; 14 Metro Markets
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-64 space-y-2 pt-2">
+        <div class="flex items-center justify-between text-[11px] font-mono text-slate-400">
+          <span class="text-amber-400 font-bold" id="preloaderStatus">Ingesting 149,116 Retail Transactions</span>
+          <span class="text-white font-extrabold" id="preloaderCount">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-amber-600 via-orange-500 to-yellow-400 rounded-full transition-all duration-75 ease-out" style="width: 0%"></div>
+        </div>
+        <div class="pt-2 text-[10px] text-slate-500 font-mono tracking-wider opacity-60 hover:opacity-100 cursor-pointer transition-opacity">
+          Click anywhere to skip ➔
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="no-print max-w-6xl mx-auto mb-8 flex flex-wrap items-center justify-between gap-3 bg-slate-900/90 border border-slate-800 p-4 rounded-2xl backdrop-blur-md shadow-xl">
+    <a href="index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-white transition-all group">
+      <i data-lucide="arrow-left" class="w-4 h-4 text-amber-400 group-hover:-translate-x-1 transition-transform"></i> Back to Portfolio
+    </a>
+    <div class="flex flex-wrap items-center gap-2.5">
+      <a href="https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
+        <i data-lucide="github" class="w-3.5 h-3.5"></i> GitHub Repository
+      </a>
+      <a href="honda-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 border border-red-500/30 transition-all">
+        <i data-lucide="gauge" class="w-3.5 h-3.5"></i> Honda Pipeline
+      </a>
+      <a href="healthcare-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
+        <i data-lucide="heart-pulse" class="w-3.5 h-3.5"></i> Healthcare Project
+      </a>
+      <a href="bank-loan-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600/20 hover:bg-blue-600/30 text-sky-300 border border-blue-500/30 transition-all">
+        <i data-lucide="landmark" class="w-3.5 h-3.5"></i> Bank Loan Project
+      </a>
+      <a href="transit-project.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 border border-teal-500/30 transition-all">
+        <i data-lucide="bus" class="w-3.5 h-3.5"></i> Public Transit
+      </a>
+      <a href="resume.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white shadow-lg shadow-amber-600/30 transition-all">
+        <i data-lucide="file-text" class="w-3.5 h-3.5"></i> View Resume
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-6xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-amber-500/20 text-amber-400 border border-amber-500/40">
+          Flagship Retail BI & Market Expansion
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-500/10 text-orange-300 border border-orange-500/20">
+          Power BI Enterprise Cockpit
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
+          PostgreSQL & MySQL (10 Production Queries)
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
+          Custom Canvas Tooltips & Heatmaps
+        </span>
+        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
+          Strategic Demographics Feasibility
+        </span>
+      </div>
+
+      <div class="space-y-3 max-w-3xl">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Coffee Shop Sales & <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-300 to-yellow-200">Market Expansion Intelligence</span>.
+        </h1>
+        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
+          Architected a dual-tier retail business intelligence solution unifying <strong>strategic demographic expansion modeling across 14 Indian metropolitan markets</strong> with an <strong>executive Power BI sales and footfall cockpit tracking 149,116 point-of-sale transactions ($698K revenue)</strong> across NYC flagship store locations (Astoria, Hell's Kitchen, Lower Manhattan).
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">May 2023 Revenue</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">$156.7K</div>
+          <div class="text-[11px] text-emerald-400 font-semibold">+31.8% MoM Surge ($5,056/day)</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Transactions Audited</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">149,116</div>
+          <div class="text-[11px] text-amber-400 font-semibold">33,527 Orders &bull; 48.2K Units (May)</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Strategic Expansion Feasibility</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">Top 3</div>
+          <div class="text-[11px] text-cyan-400 font-semibold">Pune, Delhi & Jaipur Prioritized</div>
+        </div>
+        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
+          <div class="text-[11px] font-mono text-slate-400 uppercase">Commuter Traffic Split</div>
+          <div class="text-2xl sm:text-3xl font-black text-white">74.4%</div>
+          <div class="text-[11px] text-orange-400 font-semibold">Weekday Share &bull; 7-10 AM Rush</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 6-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <section class="space-y-6">
+      <!-- Header with Interactive Slider Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+        <div class="space-y-1">
+          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+            <i data-lucide="layout" class="w-5 h-5 text-amber-400"></i> Interactive 6-View Retail BI & Expansion Showcase
+          </h2>
+          <p class="text-xs text-slate-400 font-mono">Switch between the executive Power BI cockpit, drilldown canvas tooltips, and market expansion strategy slides.</p>
+        </div>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 transition-all cursor-pointer">
+            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
+            <span id="playPauseText">Auto-Slide: 2.2s Active</span>
+          </button>
+
+          <!-- Prev & Next Clickable Controls -->
+          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
+          </button>
+          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-amber-500/40 bg-amber-600 hover:bg-amber-500 text-white shadow-md shadow-amber-600/30 transition-all cursor-pointer">
+            <span>Next View</span>
+            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-amber-600 via-orange-500 to-yellow-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
+      </div>
+
+      <!-- Dashboard Tabs Switcher (6 Views) -->
+      <div class="flex flex-wrap gap-2">
+        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-400"></i> View 1: Executive Sales Cockpit
+        </button>
+        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-400"></i> View 2: Calendar Tooltip Drilldown
+        </button>
+        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="clock" class="w-3.5 h-3.5 text-yellow-400"></i> View 3: Day & Hour Heatmap Matrix
+        </button>
+        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> View 4: Expansion Recommendations
+        </button>
+        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="target" class="w-3.5 h-3.5 text-sky-400"></i> View 5: Expansion Objectives
+        </button>
+        <button onclick="userSelectTab(5)" id="tabBtn5" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-400"></i> View 6: Retail Brand Showcase
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#0d0705]">
+          <img id="dashboardImg" src="assets/coffee/coffee_shop_sales_dashboard.png" alt="Coffee Shop Sales Executive Dashboard" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-amber-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-amber-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-amber-400 font-mono flex items-center gap-2 border border-amber-500/20">
+            <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+            <span id="sliderStatusPill">2.2s Live Auto-Slider</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-400"></i> <span id="dashboardImgLabel">View 1 of 6: Executive Sales Cockpit</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-amber-400 flex items-center gap-2" id="insightTitle">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Executive Coffee Sales Performance Suite
+            </span>
+            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">$156.7K May Sales &bull; +31.8% MoM Surge &bull; 149,116 Transactions</span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
+            High-impact retail cockpit monitoring NYC flagship operations (Hell's Kitchen $52.6K, Astoria $52.4K, Lower Manhattan $51.7K). Features MoM growth variance, store footfall distributions, and hero product velocity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section -->
+    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
+      <div class="space-y-2 border-b border-slate-800 pb-4">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Retail Data Architecture & Market Feasibility Flow
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Dual-Tier Retail Analytics & Demographic Pipeline</h2>
+        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
+          How 149,116 retail POS transactions and 14 metropolitan demographic datasets are structured across PostgreSQL/MySQL, transformed with CTEs and window ranking, and presented in Power BI.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#0f0907] p-4 shadow-inner">
+        <img src="assets/coffee/data_architecture_pipeline.png" alt="Coffee Shop Data Architecture Pipeline Diagram" class="w-full h-auto object-contain max-h-[500px] mx-auto rounded-xl">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-mono">1</div>
+          <strong class="text-white text-sm block">Retail POS & Demographic Ingestion</strong>
+          <p class="text-slate-400 leading-relaxed">149,116 transactional POS sales rows across 3 retail branches, merged with demographic census data (population, rent index) across 14 candidate cities.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold font-mono">2</div>
+          <strong class="text-white text-sm block">PostgreSQL / MySQL Analytical Engine</strong>
+          <p class="text-slate-400 leading-relaxed">10-query SQL framework employing `DENSE_RANK()`, `LAG() OVER()`, and dynamic rent-to-customer efficiency ratios to prioritize retail store openings.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold font-mono">3</div>
+          <strong class="text-white text-sm block">Star Schema Retail Data Model</strong>
+          <p class="text-slate-400 leading-relaxed">Clean 1-to-many dimensional relationships connecting `dim_products` (Coffee, Tea, Bakery), `dim_customers`, `dim_city`, and `dim_calendar` to `fact_sales`.</p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono">4</div>
+          <strong class="text-white text-sm block">Power BI Tooltips & Heatmaps</strong>
+          <p class="text-slate-400 leading-relaxed">Micro-drilldown canvas tooltips providing instant daily calendar pacing and peak hour footfall allocation (7:00 AM &ndash; 10:00 AM rush hour).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key SQL & DAX Measures & Formulations -->
+    <section class="space-y-6">
+      <div class="space-y-1 border-b border-slate-800 pb-3">
+        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
+          <i data-lucide="code" class="w-5 h-5 text-amber-400"></i> Production SQL Queries & Retail DAX Formulations
+        </h2>
+        <p class="text-xs text-slate-400 font-mono">Mathematical formulations and queries powering retail footfall analytics and urban market expansion feasibility.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
+        <!-- SQL 1 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-amber-400 font-bold">1. Market Sizing: 25% Adoption Rule</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">PostgreSQL</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>SELECT 
+    city_name,
+    population,
+    ROUND((population * 0.25 / 1000000.0)::NUMERIC, 2) AS coffee_consumers_millions,
+    city_rank
+FROM city
+ORDER BY coffee_consumers_millions DESC;</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Identifies Delhi (7.7M) and Mumbai (5.2M) as the largest aggregate consumer pools in the candidate set.</p>
+        </div>
+
+        <!-- SQL 2 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-orange-400 font-bold">2. Top Selling Products by City (`DENSE_RANK`)</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Window Function</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>WITH ranked_sales AS (
+    SELECT 
+        ci.city_name, p.product_name,
+        COUNT(s.sale_id) AS transactions,
+        DENSE_RANK() OVER (PARTITION BY ci.city_name ORDER BY COUNT(s.sale_id) DESC) AS rnk
+    FROM sales s
+    JOIN products p ON p.product_id = s.product_id
+    JOIN customers c ON c.customer_id = s.customer_id
+    JOIN city ci ON ci.city_id = c.city_id
+    GROUP BY ci.city_name, p.product_name
+)
+SELECT city_name, product_name, transactions FROM ranked_sales WHERE rnk <= 3;</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Isolates regional taste preferences to customize opening retail inventory for each launch city.</p>
+        </div>
+
+        <!-- DAX 3 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-yellow-400 font-bold">3. MoM Gross Sales Growth % Variance</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Time Intelligence</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Sales MoM Growth % = 
+VAR CurrentSales = [Total Sales]
+VAR PriorMonthSales = CALCULATE([Total Sales], DATEADD(dim_calendar[Date], -1, MONTH))
+RETURN
+DIVIDE(CurrentSales - PriorMonthSales, PriorMonthSales, 0)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Reconciles May 2023 performance surge: +31.8% revenue ($156.7K) and +32.3% transaction volume.</p>
+        </div>
+
+        <!-- DAX 4 -->
+        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
+          <div class="flex items-center justify-between text-slate-400">
+            <span class="text-emerald-400 font-bold">4. Commuter Footfall Rush Hour Share (7&ndash;10 AM)</span>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Operational DAX</span>
+          </div>
+          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Morning Rush Share = 
+DIVIDE(
+    CALCULATE([Total Sales], dim_calendar[Hour] IN {7, 8, 9, 10}),
+    [Total Sales],
+    0
+)</code></pre>
+          <p class="text-[11px] text-slate-400 font-sans">Validates that 45%+ of daily store turnover occurs within the 3-hour morning office worker window.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commercial & Strategic Retail Business Impact -->
+    <section class="bg-gradient-to-r from-amber-950/40 via-slate-950 to-orange-950/40 border border-amber-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Strategic Market Decisions
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-white">Commercial Takeaways & Store Launch Prioritization</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">1. Priority Store Rollout: Pune & Jaipur</strong>
+          <p class="leading-relaxed">Prioritized Pune and Jaipur over high-cost metros like Mumbai due to superior rent efficiency (₹156 to ₹330 rent per active buyer), ensuring faster payback periods.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">2. Rush Hour Labor & Prep Staging</strong>
+          <p class="leading-relaxed">Discovered that 74.4% of sales occur on weekdays with an intense 8-9 AM peak ($19K+ in Hour 9). Shifted 60% of barista shift hours to morning prep to reduce queue drop-offs.</p>
+        </div>
+        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
+          <strong class="text-white text-sm block">3. High-Margin Beverage Cross-Selling</strong>
+          <p class="leading-relaxed">Tea experienced the highest MoM growth (+33.5%), while Barista Espresso remained the hero product ($20.4K). Recommended combo bundles with high-attach bakery items.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div>© 2026 Ravinder Gupta &bull; Coffee Shop Sales & Market Expansion Pipeline</div>
+    <div class="flex items-center gap-4 font-mono">
+      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
+      <a href="honda-project.html" class="hover:text-white transition-colors">Honda Flagship Pipeline</a>
+      <a href="healthcare-project.html" class="hover:text-white transition-colors">Healthcare Flagship Project</a>
+      <a href="bank-loan-project.html" class="hover:text-white transition-colors">Bank Loan Risk System</a>
+      <a href="transit-project.html" class="hover:text-white transition-colors">Public Transit Fleet</a>
+      <a href="resume.html" class="hover:text-white transition-colors">Data Analyst Resume</a>
+    </div>
+  </footer>
+
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    lucide.createIcons();
+
+    // ==========================================
+    // 2.2-Second Luxury Roasted Amber Curtain Preloader Engine
+    // ==========================================
+    (function() {
+      const preloader = document.getElementById('coffeePreloader');
+      if (!preloader) return;
+
+      const countEl = document.getElementById('preloaderCount');
+      const barEl = document.getElementById('preloaderBar');
+      const statusEl = document.getElementById('preloaderStatus');
+
+      let current = 0;
+      let isDismissed = false;
+
+      function dismissPreloader() {
+        if (isDismissed) return;
+        isDismissed = true;
+        clearInterval(interval);
+        if (countEl) countEl.innerText = '100%';
+        if (barEl) barEl.style.width = '100%';
+        if (statusEl) {
+          statusEl.innerText = '● Retail Analytics Cockpit Ready';
+          statusEl.style.color = '#fbbf24';
+        }
+        preloader.style.transform = 'translateY(-100%)';
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 550);
+      }
+
+      preloader.addEventListener('click', dismissPreloader);
+
+      const stepDuration = 25; // 2.2s progression
+      const interval = setInterval(() => {
+        current += Math.floor(Math.random() * 3) + 1;
+        if (current >= 100) {
+          current = 100;
+          clearInterval(interval);
+          if (countEl) countEl.innerText = '100%';
+          if (barEl) barEl.style.width = '100%';
+          if (statusEl) {
+            statusEl.innerText = '● Retail Analytics Cockpit Ready';
+            statusEl.style.color = '#fbbf24';
+          }
+          setTimeout(dismissPreloader, 200);
+        } else {
+          if (countEl) countEl.innerText = current + '%';
+          if (barEl) barEl.style.width = current + '%';
+          if (statusEl) {
+            if (current < 25) {
+              statusEl.innerText = 'Ingesting 149,116 Retail Transactions...';
+            } else if (current < 55) {
+              statusEl.innerText = 'Analyzing 14 Indian Metro Feasibility...';
+            } else if (current < 85) {
+              statusEl.innerText = 'Mounting Power BI Heatmaps & Tooltips...';
+            } else {
+              statusEl.innerText = 'Calibrating Commuter Footfall Matrix...';
+            }
+          }
+        }
+      }, stepDuration);
+    })();
+
+    // ==========================================
+    // Interactive 6-Tab 2.2-Second Auto-Slider Engine
+    // ==========================================
+    const dashboardData = [
+      {
+        img: 'assets/coffee/coffee_shop_sales_dashboard.png',
+        label: 'View 1 of 6: Executive Sales Cockpit',
+        title: 'Executive Coffee Sales Performance Suite',
+        subtitle: '$156.7K May Sales • +31.8% MoM Surge • 149,116 Transactions',
+        desc: 'High-impact retail cockpit monitoring NYC flagship operations (Hell\'s Kitchen $52.6K, Astoria $52.4K, Lower Manhattan $51.7K). Features MoM growth variance, store footfall distributions, and hero product velocity.'
+      },
+      {
+        img: 'assets/coffee/coffee_shop_tooltip_calendar.png',
+        label: 'View 2 of 6: Calendar Tooltip Drilldown',
+        title: 'Interactive Daily Calendar Micro-Drilldown Tooltip',
+        subtitle: 'Pacing Telemetry • Daily Order Volumes • MoM Daily Comparison',
+        desc: 'Custom canvas tooltip engineered in Power BI: hovering over any calendar day reveals daily order volume, unit velocity, and MoM trend vs. previous month, validating daily sales consistency ($5,056/day average).'
+      },
+      {
+        img: 'assets/coffee/coffee_shop_tooltip_day_hour.png',
+        label: 'View 3 of 6: Day & Hour Heatmap Matrix',
+        title: 'Peak Day & Hour Footfall Heatmap Matrix',
+        subtitle: '7:00 AM – 10:00 AM Morning Rush • 74.4% Weekday Concentration',
+        desc: 'Micro-drilldown matrix revealing exact hourly revenue contribution. Highlights 8:00 AM – 9:00 AM as the single highest volume window ($19K+ in Hour 9 alone), proving that office commuters drive over 45% of store sales.'
+      },
+      {
+        img: 'assets/coffee/expansion_recommendations.png',
+        label: 'View 4 of 6: Expansion Recommendations',
+        title: 'Strategic Market Expansion: Top 3 Cities Prioritization',
+        subtitle: 'Pune, Delhi & Jaipur • Rent-to-Customer Efficiency Index',
+        desc: 'Rigorous SQL multi-criteria model evaluating population scale, estimated coffee consumers (25% rule), distinct online customers, and commercial rent efficiency, recommending Pune, Delhi, and Jaipur for new store launches.'
+      },
+      {
+        img: 'assets/coffee/expansion_objectives.png',
+        label: 'View 5 of 6: Expansion Objectives',
+        title: 'Monday Coffee Strategic Expansion Objectives & Framework',
+        subtitle: 'Data-Driven Geographic Growth • Unit Economics Benchmarks',
+        desc: 'Strategic presentation outlining criteria for derisking capital allocation: identifying high-density consumer pockets while maintaining monthly rent burdens beneath the ₹500/customer threshold.'
+      },
+      {
+        img: 'assets/coffee/monday_coffee_banner.png',
+        label: 'View 6 of 6: Retail Brand Showcase',
+        title: 'Monday Coffee Retail Brand & Product Architecture',
+        subtitle: 'Specialty Coffee Roasts • High-Attach Teas & Bakery SKUs',
+        desc: 'Visual retail brand identity representing specialty beans, hot/cold beverage hierarchies, and customer loyalty retention strategies across urban commuter hubs.'
+      }
+    ];
+
+    let currentTabIndex = 0;
+    let autoPlayActive = true;
+    const SLIDE_DURATION = 2200; // 2.2 seconds
+    let slideTimer = null;
+
+    function renderSlide(index) {
+      currentTabIndex = index;
+      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
+        if (i === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const d = dashboardData[index];
+      const img = document.getElementById('dashboardImg');
+      if (img) {
+        img.style.opacity = '0';
+        setTimeout(() => {
+          img.src = d.img;
+          img.style.opacity = '1';
+        }, 120);
+      }
+
+      const imgLabel = document.getElementById('dashboardImgLabel');
+      if (imgLabel) imgLabel.innerText = d.label;
+
+      const titleEl = document.getElementById('insightTitle');
+      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
+
+      const subEl = document.getElementById('insightSubtitle');
+      if (subEl) subEl.innerText = d.subtitle;
+
+      const descEl = document.getElementById('insightDesc');
+      if (descEl) descEl.innerText = d.desc;
+
+      lucide.createIcons();
+    }
+
+    function resetProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.transition = 'none';
+        bar.style.width = '0%';
+        setTimeout(() => {
+          if (autoPlayActive && bar) {
+            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
+            bar.style.width = '100%';
+          }
+        }, 30);
+      }
+    }
+
+    function switchDashboardTab(index) {
+      renderSlide(index);
+      if (autoPlayActive) {
+        startAutoPlayTimer();
+      }
+    }
+
+    function userSelectTab(index) {
+      switchDashboardTab(index);
+    }
+
+    function nextDashboardTab() {
+      const next = (currentTabIndex + 1) % dashboardData.length;
+      switchDashboardTab(next);
+    }
+
+    function prevDashboardTab() {
+      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
+      switchDashboardTab(prev);
+    }
+
+    function startAutoPlayTimer() {
+      clearInterval(slideTimer);
+      resetProgressBar();
+      slideTimer = setInterval(() => {
+        nextDashboardTab();
+      }, SLIDE_DURATION);
+    }
+
+    function toggleAutoPlay() {
+      autoPlayActive = !autoPlayActive;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+      const pill = document.getElementById('sliderStatusPill');
+      const bar = document.getElementById('slideProgressBar');
+
+      if (autoPlayActive) {
+        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Auto-Slide: 2.2s Active';
+        if (pill) pill.innerText = '2.2s Live Auto-Slider';
+        startAutoPlayTimer();
+      } else {
+        clearInterval(slideTimer);
+        if (bar) {
+          bar.style.transition = 'none';
+          bar.style.width = '0%';
+        }
+        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
+        if (text) text.innerText = 'Paused (Click to Resume)';
+        if (pill) pill.innerText = 'Auto-Slider Paused';
+      }
+      lucide.createIcons();
+    }
+
+    // Pause auto-slider on hover, resume on leave
+    const container = document.getElementById('dashboardSlideContainer');
+    if (container) {
+      container.addEventListener('mouseenter', () => {
+        if (autoPlayActive) {
+          clearInterval(slideTimer);
+          const bar = document.getElementById('slideProgressBar');
+          if (bar) bar.style.transition = 'none';
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = 'Hovered (Paused)';
+        }
+      });
+      container.addEventListener('mouseleave', () => {
+        if (autoPlayActive) {
+          const pill = document.getElementById('sliderStatusPill');
+          if (pill) pill.innerText = '2.2s Live Auto-Slider';
+          startAutoPlayTimer();
+        }
+      });
+    }
+
+    // Initialize auto-play on load
+    startAutoPlayTimer();
+
+    // ==========================================
+    // Interactive Warm Amber Dotted Cursor Trail
+    // ==========================================
+    (function() {
+      if (window.matchMedia('(hover: none)').matches) return;
+
+      const canvas = document.createElement('canvas');
+      canvas.id = 'cursorCanvas';
+      canvas.style.position = 'fixed';
+      canvas.style.top = '0';
+      canvas.style.left = '0';
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.pointerEvents = 'none';
+      canvas.style.zIndex = '9990';
+      document.body.appendChild(canvas);
+
+      const ctx = canvas.getContext('2d');
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const dot = document.createElement('div');
+      dot.id = 'cursorDot';
+      dot.style.position = 'fixed';
+      dot.style.width = '8px';
+      dot.style.height = '8px';
+      dot.style.borderRadius = '50%';
+      dot.style.backgroundColor = '#fbbf24';
+      dot.style.boxShadow = '0 0 10px #fbbf24, 0 0 20px #d97706';
+      dot.style.pointerEvents = 'none';
+      dot.style.transform = 'translate(-50%, -50%)';
+      dot.style.zIndex = '9992';
+      dot.style.opacity = '0';
+      dot.style.transition = 'opacity 0.2s ease, transform 0.15s ease-out';
+      document.body.appendChild(dot);
+
+      const ring = document.createElement('div');
+      ring.id = 'cursorRing';
+      ring.style.position = 'fixed';
+      ring.style.width = '34px';
+      ring.style.height = '34px';
+      ring.style.borderRadius = '50%';
+      ring.style.border = '1.5px solid rgba(251, 191, 36, 0.6)';
+      ring.style.backgroundColor = 'rgba(245, 158, 11, 0.05)';
+      ring.style.boxShadow = '0 0 15px rgba(245, 158, 11, 0.2)';
+      ring.style.pointerEvents = 'none';
+      ring.style.transform = 'translate(-50%, -50%)';
+      ring.style.zIndex = '9991';
+      ring.style.opacity = '0';
+      ring.style.transition = 'opacity 0.25s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease';
+      document.body.appendChild(ring);
+
+      let mouseX = -100, mouseY = -100;
+      let ringX = -100, ringY = -100;
+      let lastX = -100, lastY = -100;
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.size = Math.random() * 2.5 + 2;
+          this.alpha = 0.9;
+          this.decay = 0.032;
+          this.vx = (Math.random() - 0.5) * 0.6;
+          this.vy = (Math.random() - 0.5) * 0.6;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(251, 191, 36, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#d97706';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(251, 191, 36, 0.9)';
+          ring.style.backgroundColor = 'rgba(245, 158, 11, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(251, 191, 36, 0.6)';
+          ring.style.backgroundColor = 'rgba(245, 158, 11, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
