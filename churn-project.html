@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Churn Behavioral Analytics & Retention Engine | Executive Case Study & Statistical Diagnostics</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <meta name="description" content="Production Case Study: Customer Churn Behavioral Analytics & Retention Engine. 10,000 accounts, $73.3K monthly revenue-at-risk, tenure cohort diagnostic modeling, and support friction decoupling.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Customer Churn Behavioral Analytics & Retention Engine">
+  <meta property="og:description" content="Explore end-to-end subscription analytics, 5 diagnostic statistical views, and $73,267 monthly revenue protection modeling across 10,000 accounts.">
+  <meta property="og:image" content="assets/churn/customer_distribution_by_churn_risk.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #060b11;
+      color: #f1f5f9;
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Luxury Churn Emerald/Cyan/Crimson Curtain Preloader */
+    #churnPreloader {
+      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      box-shadow: 0 25px 60px rgba(16, 185, 129, 0.35);
+    }
+
+    /* Interactive Text Subtle Highlight on Cursor Touch */
+    p, h1, h2, h3, h4, li {
+      transition: color 0.25s ease, text-shadow 0.25s ease;
+    }
+    p:hover, li:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
+    }
+    h1:hover, h2:hover, h3:hover, h4:hover {
+      text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(6, 182, 212, 0.35);
+    }
+
+    .tab-btn.active {
+      background-color: rgba(16, 185, 129, 0.22);
+      border-color: rgba(16, 185, 129, 0.65);
+      color: #ffffff;
+      box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
+    }
+  </style>
+</head>
+<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- 2.2-Second Luxury Churn Emerald & Cyan Curtain Preloader -->
+  <div id="churnPreloader" class="fixed inset-0 z-50 bg-[#03070b] flex flex-col items-center justify-center border-b border-emerald-500/30">
+    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
+      <!-- Glowing Retention Shield / RG Themed Badge -->
+      <div class="relative">
+        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-400 to-cyan-400 p-[2px] shadow-2xl shadow-emerald-500/50">
+          <div class="w-full h-full bg-[#071319] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+        <div class="absolute -inset-2 bg-emerald-500/20 blur-xl rounded-full -z-10 animate-pulse"></div>
+      </div>
+
+      <!-- Typography -->
+      <div class="space-y-2">
+        <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+          Customer Churn Analytics & Retention Engine
+        </h2>
+        <p class="text-xs sm:text-sm text-emerald-400/90 font-mono tracking-wide">
+          10,000 Accounts · $73.3K MRR at Risk · Diagnostic Cohorts
+        </p>
+      </div>
+
+      <!-- Progress Bar & Counter -->
+      <div class="w-64 space-y-2">
+        <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-emerald-500/20">
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full w-0 transition-all duration-[2200ms] ease-out"></div>
+        </div>
+        <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
+          <span>Initializing Statistical Engine</span>
+          <span id="preloaderCount" class="text-emerald-300 font-bold">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Interactive Canvas Particle Background -->
+  <canvas id="trailCanvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
+  <div id="cursorRing" class="fixed pointer-events-none z-50 rounded-full border border-emerald-400/60 bg-emerald-500/5 transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2 hidden md:block" style="width: 34px; height: 34px;"></div>
+  <div id="cursorDot" class="fixed pointer-events-none z-50 w-2 h-2 rounded-full bg-emerald-400 transition-transform duration-0 ease-out -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-emerald-400/80 hidden md:block"></div>
+
+  <!-- Top Action Navigation Bar -->
+  <header class="max-w-7xl mx-auto mb-8">
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
+      <div class="flex items-center gap-3">
+        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-emerald-400 transition-colors group">
+          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
+          Back to Portfolio
+        </a>
+        <span class="text-slate-700">|</span>
+        <span class="text-xs font-mono text-emerald-400 font-semibold flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Python Diagnostic Framework
+        </span>
+      </div>
+
+      <div class="flex items-center gap-2.5">
+        <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-emerald-500/40">
+          <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+        </a>
+        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
+          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline Diagram
+        </a>
+        <a href="mailto:iamravindergupta17@gmail.com" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
+          <i data-lucide="mail" class="w-3.5 h-3.5"></i> Contact Ravinder
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Case Study Content -->
+  <main class="max-w-7xl mx-auto space-y-12">
+
+    <!-- Hero Section -->
+    <section class="space-y-6">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Python 3.10+</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Pandas & NumPy</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-teal-500/10 text-teal-400 border border-teal-500/20">Seaborn & Matplotlib</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">Statistical Diagnostics</span>
+        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">10,000 Accounts Cohort</span>
+      </div>
+
+      <div class="space-y-4">
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          Customer Churn Behavioral Analytics & Retention Engine
+        </h1>
+        <p class="text-base sm:text-lg text-slate-400 max-w-4xl leading-relaxed">
+          End-to-end diagnostic subscription modeling across <strong class="text-white">10,000 customer accounts</strong>, multi-table feature engineering, and <strong class="text-emerald-400">$73,267.54 monthly recurring revenue (MRR) protection framework</strong>. Conducted rigorous exploratory data analysis (EDA) across subscriber demographics, subscription tiers, and 4,647 customer support tickets to pinpoint true cancellation catalysts versus false correlation traps.
+        </p>
+      </div>
+
+      <!-- Core Project Impact KPIs -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Revenue at Risk</div>
+          <div class="text-2xl sm:text-3xl font-black text-rose-400">$73,267.54</div>
+          <p class="text-xs text-slate-400">Monthly recurring cash flow exposed; 63.2% concentrated in Premium users.</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Overall Churn Rate</div>
+          <div class="text-2xl sm:text-3xl font-black text-emerald-400">27.27%</div>
+          <p class="text-xs text-slate-400">2,727 cancellations across 10,000 multi-tier subscription accounts.</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Baseline Retention</div>
+          <div class="text-2xl sm:text-3xl font-black text-cyan-400">72.73%</div>
+          <p class="text-xs text-slate-400">7,273 active paying subscribers generating predictable lifetime value.</p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
+          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Support Decoupling</div>
+          <div class="text-2xl sm:text-3xl font-black text-white font-mono">0.00 Corr</div>
+          <p class="text-xs text-slate-400">Proves customer service escalations do NOT cause cancellations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive 5-Tab Live Dashboard Showcase with 2.2s Auto-Slider -->
+    <section class="space-y-6">
+      <!-- Header with Interactive Slider Controls -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
+            <i data-lucide="layers" class="w-6 h-6 text-emerald-400"></i>
+            Diagnostic Visualization Suite & Statistical Views
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-400">
+            Interactive 2.2-second rotation cycling through 5 core statistical perspectives, tenure distributions, and diagnostic matrices.
+          </p>
+        </div>
+
+        <!-- Slider Action Controls -->
+        <div class="flex items-center gap-2 self-start sm:self-auto">
+          <!-- Autoplay / Pause Toggle -->
+          <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
+            <i id="playPauseIcon" data-lucide="pause" class="w-3.5 h-3.5"></i>
+            <span id="playPauseText">Pause 2.2s Auto-Slider</span>
+          </button>
+          <!-- Prev & Next Clickable Controls -->
+          <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
+            <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 5</span>
+            <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2.2s Auto-Slide Progress Bar Indicator -->
+      <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800/80">
+        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full transition-all ease-linear" style="width: 0%;"></div>
+      </div>
+
+      <!-- Dashboard Tabs Switcher (5 Views) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2" id="tabContainer">
+        <button onclick="switchTab(0)" class="tab-btn active px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 1</div>
+          <div class="text-white font-bold truncate">Risk Tier Distribution</div>
+        </button>
+
+        <button onclick="switchTab(1)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 2</div>
+          <div class="text-white font-bold truncate">Tenure Group Vulnerability</div>
+        </button>
+
+        <button onclick="switchTab(2)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 3</div>
+          <div class="text-white font-bold truncate">Plan Type & Revenue Risk</div>
+        </button>
+
+        <button onclick="switchTab(3)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 4</div>
+          <div class="text-white font-bold truncate">Support Escalation Audit</div>
+        </button>
+
+        <button onclick="switchTab(4)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 5</div>
+          <div class="text-white font-bold truncate">Diagnostic Correlation Matrix</div>
+        </button>
+      </div>
+
+      <!-- Dashboard Visual Display Card -->
+      <div class="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl space-y-4">
+        <!-- Image Container with Left & Right Hover Buttons -->
+        <div class="relative group/view rounded-2xl overflow-hidden border border-slate-800/90 bg-[#071319]/90 min-h-[420px] sm:min-h-[580px] flex items-center justify-center">
+          <img id="dashboardImg" src="assets/churn/customer_distribution_by_churn_risk.png" alt="Customer Churn Statistical Analysis" class="w-full h-auto max-h-[720px] object-contain transition-opacity duration-300">
+
+          <!-- Left floating arrow -->
+          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-emerald-600 hover:scale-105 shadow-2xl">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Right floating arrow -->
+          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-emerald-600 hover:scale-105 shadow-2xl">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+          </button>
+
+          <!-- Top-Left Status Pill -->
+          <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/80 flex items-center gap-2 text-xs font-mono text-emerald-300">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="viewStatusBadge">View 1: Risk Tier Distribution</span>
+          </div>
+
+          <!-- Bottom-Right Label -->
+          <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-400">
+            Click tabs below to switch ➔
+          </div>
+        </div>
+
+        <!-- Dynamic Page Insights Banner -->
+        <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold">
+            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
+            <span id="insightTitle">Statistical Insight: Perfect Outcome Alignment</span>
+          </div>
+          <p id="insightDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            Low Risk accounts represent 42.3% (4,232 users), Medium Risk 30.4% (3,041 users), and High Risk 27.3% (2,727 users). The high-risk cohort (Score 70+) perfectly aligns with the historical 2,727 cancellations, validating the diagnostic score calibration.
+          </p>
+          <div class="flex flex-wrap items-center gap-4 text-xs font-mono pt-1 text-slate-400">
+            <div><span class="text-emerald-400 font-bold">Cohorts:</span> <span id="insightKpi1">Low 42.3% · Med 30.4% · High 27.3%</span></div>
+            <div><span class="text-cyan-400 font-bold">Focus:</span> <span id="insightKpi2">2,727 High-Risk Accounts</span></div>
+            <div><span class="text-teal-400 font-bold">Validation:</span> <span id="insightKpi3">100% Outcome Matching</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pipeline Architecture Deep Dive Section -->
+    <section id="pipeline" class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
+          <i data-lucide="git-merge" class="w-4 h-4"></i>
+          System Architecture & Data Engineering
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Python Diagnostic Pipeline & Feature Engineering Architecture
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Multi-table relational data pipeline orchestrating 10,000 subscriber records, 10,000 subscription plans, and 4,647 customer support interaction logs into a clean master analytics dataset.
+        </p>
+      </div>
+
+      <!-- Architecture Diagram Image -->
+      <div class="rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/90 p-4 shadow-2xl backdrop-blur-md">
+        <img src="assets/churn/data_architecture_pipeline.png" alt="Python Diagnostic Data Architecture & Relational Pipeline" class="w-full h-auto rounded-2xl border border-slate-800/80">
+      </div>
+
+      <!-- Architecture 4-Step Technical Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-bold text-emerald-400 text-sm">1</div>
+          <h3 class="font-bold text-white text-sm">Multi-Table Ingestion</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Ingests 3 relational entities: <code class="text-emerald-300">db_customer</code> (10K demographics), <code class="text-emerald-300">db_subscription</code> (10K billing & status), and <code class="text-emerald-300">db_support</code> (4,647 complaint logs).
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center font-bold text-cyan-400 text-sm">2</div>
+          <h3 class="font-bold text-white text-sm">Categorical Scrubbing</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Harmonizes mixed gender entries into clean Male/Female binaries, rectifies string typos (<code class="text-cyan-300">"Refferal"</code> ➔ <code class="text-cyan-300">"Referral"</code>), and imputes missing country values.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center font-bold text-teal-400 text-sm">3</div>
+          <h3 class="font-bold text-white text-sm">Row-Safe Left Joins</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Aggregates 1:N customer support tickets into single-row customer summaries (complaint count, escalations, mean CSAT) before joining, preventing dataset row explosion.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-8 h-8 rounded-lg bg-rose-500/10 border border-rose-500/20 flex items-center justify-center font-bold text-rose-400 text-sm">4</div>
+          <h3 class="font-bold text-white text-sm">Diagnostic Modeling</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Constructs 26 analytical features: tenure day counters, cohort buckets, and $73,267.54 monthly recurring revenue risk models grouped by plan tier.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Python & Statistical Formulations -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
+          <i data-lucide="code" class="w-4 h-4"></i>
+          Production Python & Feature Engineering Code
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Vectorized Logic & Support Aggregations
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Core Python implementations utilized to transform unstructured multi-table data into clean cohort signals, avoiding common survivor bias and cartesian explosions.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Python 1 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Vectorized Churn Flagging & Tenure Cohorts</span>
+            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">NumPy & Pandas</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-emerald-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code># Vectorized binary cancellation flag
+df_sub['churn_flag'] = np.where(
+    df_sub['cancellation_date'].notnull(), 1, 0
+)
+
+# Robust tenure duration logic
+effective_end = df_sub['cancellation_date'].fillna(
+    pd.to_datetime('today')
+)
+df_sub['tenure_days'] = (
+    effective_end - df_sub['subscription_start_date']
+).dt.days
+
+# Cohort binning
+bins = [-1, 180, 365, 730, 99999]
+labels = ['0-6 Mo', '6-12 Mo', '1-2 Yr', '2+ Yr']
+df_sub['tenure_group'] = pd.cut(
+    df_sub['tenure_days'], bins=bins, labels=labels
+)</code></pre>
+          <p class="text-xs text-slate-400">
+            Vectorized conditioning accurately marks churn dates while imputing active subscriber tenure without runtime row-iteration overhead.
+          </p>
+        </div>
+
+        <!-- Python 2 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Support Aggregation (Preventing Row Explosion)</span>
+            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">Pandas GroupBy</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-cyan-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code># Group multiple tickets into 1 row per customer
+df_support_agg = df_support_clean.groupby('customerid').agg(
+    total_complaints=('customerid', 'count'),
+    total_escalations=('escalations', lambda x: (x == 'Yes').sum()),
+    avg_csat_score=('csat_score', 'mean'),
+    last_complaint_date=('complaint_date', 'max')
+).reset_index()
+
+# Safe left-join to master dataset
+df_master = df_sub.merge(
+    df_support_agg, on='customerid', how='left'
+)
+df_master['total_complaints'] = df_master['total_complaints'].fillna(0)</code></pre>
+          <p class="text-xs text-slate-400">
+            Guarantees exactly 10,000 master customer rows by flattening multi-ticket customer support histories prior to left-joining.
+          </p>
+        </div>
+
+        <!-- Python 3 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Financial Exposure & Tier Exposure Concentration</span>
+            <span class="text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">Revenue at Risk</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-rose-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code># Total Monthly Recurring Revenue at Risk
+mrr_at_risk = df_master[
+    df_master['churn_flag'] == 1
+]['monthly_charges'].sum()
+# Output: $73,267.54
+
+# Tier concentration breakdown
+tier_exposure = df_master[df_master['churn_flag'] == 1].groupby(
+    'plan_type'
+)['monthly_charges'].agg(['count', 'sum']).rename(
+    columns={'count': 'churned_users', 'sum': 'mrr_lost'}
+)
+tier_exposure['mrr_share_pct'] = (
+    tier_exposure['mrr_lost'] / mrr_at_risk * 100
+)</code></pre>
+          <p class="text-xs text-slate-400">
+            Uncovers that while Premium churn rate matches Basic (~27%), Premium subscribers account for 63.2% ($46.3K/mo) of total revenue lost.
+          </p>
+        </div>
+
+        <!-- Python 4 -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-white">Diagnostic Correlation Heatmap Modeling</span>
+            <span class="text-[10px] font-mono text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">Seaborn Viz</span>
+          </div>
+          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-teal-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code># Full Pearson correlation matrix
+features = [
+    'monthly_charges', 'tenure_days', 'total_complaints',
+    'total_escalations', 'avg_csat_score', 'churn_flag'
+]
+corr_matrix = df_master[features].corr()
+
+# Seaborn styled heatmap with mask
+plt.figure(figsize=(10, 6))
+sns.heatmap(
+    corr_matrix, annot=True, cmap='coolwarm',
+    fmt='.2f', linewidths=0.5, vmin=-1, vmax=1
+)
+plt.title('Correlation Heatmap of Key Metrics', fontsize=14)</code></pre>
+          <p class="text-xs text-slate-400">
+            Validates independence of support complaints (0.00 correlation to churn) and exposes multi-collinearity boundaries across user engagement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategic Retention & Commercial Recommendations -->
+    <section class="space-y-6 pt-4">
+      <div class="space-y-2">
+        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
+          <i data-lucide="shield-alert" class="w-4 h-4"></i>
+          Strategic Retention Playbook
+        </div>
+        <h2 class="text-3xl font-black text-white">
+          Data-Driven Retention Architecture & LTV Protection
+        </h2>
+        <p class="text-sm text-slate-400 max-w-3xl">
+          Actionable business interventions designed to mitigate high-value subscription churn and re-architect customer onboarding schedules.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-bold">
+            <i data-lucide="crown" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">VIP Premium Protection</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Deploy white-glove onboarding and dedicated account managers to Premium users. Safeguarding top-tier accounts protects 63.2% of the $73.3K monthly exposure.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold">
+            <i data-lucide="clock" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">Tenure Tipping Point (Mo 1–12)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Automate milestone engagement surveys at Day 30, 90, and 180. Intervening before month 12 captures the cohort before historical cancellation boundaries activate.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 font-bold">
+            <i data-lucide="headphones" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">Decouple Support from Churn KPIs</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Since complaints show 0.00 correlation with churn, refrain from blaming support teams for churn. Re-focus retention teams on product pricing and feature adoption.
+          </p>
+        </div>
+
+        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">
+            <i data-lucide="calendar" class="w-5 h-5"></i>
+          </div>
+          <h3 class="font-bold text-white text-sm">Cohort Survival Standardization</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Shift reporting from dynamic run-date tenure to fixed monthly acquisition cohorts. This eliminates survivor bias where older cohorts appear falsely loyal.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="pt-8 border-t border-slate-800/80 text-center space-y-4">
+      <div class="flex items-center justify-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-bold text-xs text-emerald-400">
+          RG
+        </div>
+        <span class="text-sm font-bold text-white">Ravinder Gupta · Data Analyst & BI Specialist</span>
+      </div>
+      <p class="text-xs text-slate-500">
+        Gurugram (Delhi-NCR), India · Production Analytics & Diagnostic Intelligence · 2026
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Interactive 2.2-Second Slider Script & Dynamic Insights Logic -->
+  <script>
+    // Lucide Icons Initialization
+    lucide.createIcons();
+
+    // 2.2-Second Curtain Preloader Animation
+    window.addEventListener('DOMContentLoaded', () => {
+      const bar = document.getElementById('preloaderBar');
+      const count = document.getElementById('preloaderCount');
+      const preloader = document.getElementById('churnPreloader');
+      
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 4;
+        if (progress > 100) progress = 100;
+        count.innerText = progress + '%';
+        bar.style.width = progress + '%';
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            preloader.style.transform = 'translateY(-100%)';
+            setTimeout(() => preloader.style.display = 'none', 750);
+          }, 300);
+        }
+      }, 75); // ~2.2s total duration
+    });
+
+    // 5-View Showcase Data Model
+    const views = [
+      {
+        id: 0,
+        title: "View 1: Risk Tier Distribution",
+        img: "assets/churn/customer_distribution_by_churn_risk.png",
+        insightTitle: "Statistical Insight: Perfect Outcome Alignment",
+        insightDesc: "Low Risk accounts represent 42.3% (4,232 users), Medium Risk 30.4% (3,041 users), and High Risk 27.3% (2,727 users). The high-risk cohort (Score 70+) perfectly aligns with the historical 2,727 cancellations, validating the diagnostic score calibration.",
+        kpi1: "Low 42.3% · Med 30.4% · High 27.3%",
+        kpi2: "2,727 High-Risk Accounts",
+        kpi3: "100% Outcome Matching"
+      },
+      {
+        id: 1,
+        title: "View 2: Tenure Group Vulnerability",
+        img: "assets/churn/churn_rate_by_tenure_group.png",
+        insightTitle: "Cohort Finding: Month 1–12 Cancellation Tipping Point",
+        insightDesc: "Historical cancellation records exhibit high attrition in early tenure cohorts (0-6 months and 6-12 months), while accounts passing the 12-month threshold demonstrate strong multi-year stability. Interventions within the first 90 days yield the highest retention ROI.",
+        kpi1: "Months 1-12 Critical Window",
+        kpi2: "Tenure-Based Hazard Rate",
+        kpi3: "Early Onboarding Protection"
+      },
+      {
+        id: 2,
+        title: "View 3: Plan Type & Revenue Risk",
+        img: "assets/churn/churn_rate_by_plan_type.png",
+        insightTitle: "Revenue Insight: 63.2% Exposure in Premium Tiers",
+        insightDesc: "Churn rate is uniform across subscription tiers (Premium 27.57%, Basic 27.43%, Standard 26.95%). However, because Premium ARPU is 5.6x higher ($56.61 vs $10.04), 818 lost Premium subscribers drive $46.3K (63.2%) of the total $73,267.54 monthly revenue at risk.",
+        kpi1: "Premium 27.57% · Basic 27.43%",
+        kpi2: "$73,267.54 Monthly MRR at Risk",
+        kpi3: "63.2% Exposure in Premium"
+      },
+      {
+        id: 3,
+        title: "View 4: Support Escalation Audit",
+        img: "assets/churn/churn_rate_escalation_vs_no_escalation.png",
+        insightTitle: "Diagnostic Finding: Customer Support Decoupling",
+        insightDesc: "Subscribers with critical support escalations churned at 27.39%, compared to 27.25% for unescalated accounts (a statistically negligible 0.14% difference). Customer support friction is NOT the driver of cancellations; churn stems from product utility and pricing.",
+        kpi1: "Escalated 27.39% vs None 27.25%",
+        kpi2: "0.14% Negligible Delta",
+        kpi3: "0.00 Correlation to Churn"
+      },
+      {
+        id: 4,
+        title: "View 5: Diagnostic Correlation Matrix",
+        img: "assets/churn/correlation_heatmap_key_metrics.png",
+        insightTitle: "Diagnostic Matrix: Factor Independence & Multicollinearity",
+        insightDesc: "The full Seaborn Pearson correlation matrix verifies 0.00 correlation between support tickets/CSAT scores and churn flags. It confirms that support operations perform reliably and prevents leadership from misattributing retention losses to service teams.",
+        kpi1: "26 Engineered Dimensions",
+        kpi2: "CSAT vs Churn: 0.00",
+        kpi3: "Support Tickets vs Churn: 0.00"
+      }
+    ];
+
+    let currentSlide = 0;
+    let autoPlayTimer = null;
+    let isPlaying = true;
+    let progressTimer = null;
+    let progressPercent = 0;
+    const SLIDE_DURATION = 2200; // 2.2 Seconds
+    const PROGRESS_STEP = 50;
+
+    function renderSlide(index) {
+      currentSlide = index;
+      const v = views[index];
+
+      // Update image with smooth fade
+      const imgEl = document.getElementById('dashboardImg');
+      imgEl.style.opacity = '0.3';
+      setTimeout(() => {
+        imgEl.src = v.img;
+        imgEl.alt = v.title;
+        imgEl.style.opacity = '1';
+      }, 150);
+
+      // Update badges & text
+      document.getElementById('viewStatusBadge').innerText = v.title;
+      document.getElementById('slideIndicator').innerText = (index + 1) + " / " + views.length;
+      document.getElementById('insightTitle').innerText = v.insightTitle;
+      document.getElementById('insightDesc').innerText = v.insightDesc;
+      document.getElementById('insightKpi1').innerText = v.kpi1;
+      document.getElementById('insightKpi2').innerText = v.kpi2;
+      document.getElementById('insightKpi3').innerText = v.kpi3;
+
+      // Update Tab Buttons
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach((btn, idx) => {
+        if (idx === index) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      // Reset Progress Bar
+      progressPercent = 0;
+      updateProgressBar();
+    }
+
+    function updateProgressBar() {
+      const bar = document.getElementById('slideProgressBar');
+      if (bar) {
+        bar.style.width = progressPercent + '%';
+      }
+    }
+
+    function startAutoSlider() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (progressTimer) clearInterval(progressTimer);
+
+      progressPercent = 0;
+      progressTimer = setInterval(() => {
+        progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
+        if (progressPercent > 100) progressPercent = 100;
+        updateProgressBar();
+      }, PROGRESS_STEP);
+
+      autoPlayTimer = setInterval(() => {
+        nextSlide();
+      }, SLIDE_DURATION);
+    }
+
+    function stopAutoSlider() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (progressTimer) clearInterval(progressTimer);
+      progressPercent = 0;
+      updateProgressBar();
+    }
+
+    function toggleAutoPlay() {
+      isPlaying = !isPlaying;
+      const icon = document.getElementById('playPauseIcon');
+      const text = document.getElementById('playPauseText');
+
+      if (isPlaying) {
+        icon.setAttribute('data-lucide', 'pause');
+        text.innerText = 'Pause 2.2s Auto-Slider';
+        startAutoSlider();
+      } else {
+        icon.setAttribute('data-lucide', 'play');
+        text.innerText = 'Resume 2.2s Auto-Slider';
+        stopAutoSlider();
+      }
+      lucide.createIcons();
+    }
+
+    function switchTab(index) {
+      renderSlide(index);
+      if (isPlaying) {
+        startAutoSlider();
+      }
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % views.length;
+      renderSlide(nextIndex);
+    }
+
+    function prevSlide() {
+      const prevIndex = (currentSlide - 1 + views.length) % views.length;
+      renderSlide(prevIndex);
+    }
+
+    // Initialize slider on load
+    window.addEventListener('load', () => {
+      renderSlide(0);
+      startAutoSlider();
+    });
+
+    // 60 FPS Cursor Particle Trail Effect in Emerald & Cyan Neon Glow
+    (function initCursorTrail() {
+      const canvas = document.getElementById('trailCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const ring = document.getElementById('cursorRing');
+      const dot = document.getElementById('cursorDot');
+
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      let mouseX = width / 2;
+      let mouseY = height / 2;
+      let ringX = mouseX;
+      let ringY = mouseY;
+      let lastX = mouseX;
+      let lastY = mouseY;
+
+      const particles = [];
+
+      class DottedParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.radius = Math.random() * 2.5 + 1.2;
+          this.alpha = 1;
+          this.vx = (Math.random() - 0.5) * 1.4;
+          this.vy = (Math.random() - 0.5) * 1.4;
+          this.decay = Math.random() * 0.03 + 0.02;
+        }
+        update() {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.alpha -= this.decay;
+        }
+        draw(context) {
+          context.save();
+          context.beginPath();
+          context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+          context.fillStyle = 'rgba(52, 211, 153, ' + Math.max(this.alpha, 0) + ')';
+          context.shadowBlur = 8;
+          context.shadowColor = '#10b981';
+          context.fill();
+          context.restore();
+        }
+      }
+
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.opacity = '1';
+        ring.style.opacity = '1';
+        dot.style.left = mouseX + 'px';
+        dot.style.top = mouseY + 'px';
+
+        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+        if (dist > 8) {
+          particles.push(new DottedParticle(mouseX, mouseY));
+          if (particles.length > 50) particles.shift();
+          lastX = mouseX;
+          lastY = mouseY;
+        }
+      });
+
+      document.addEventListener('mouseleave', () => {
+        dot.style.opacity = '0';
+        ring.style.opacity = '0';
+      });
+
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          ring.style.width = '48px';
+          ring.style.height = '48px';
+          ring.style.borderColor = 'rgba(52, 211, 153, 0.9)';
+          ring.style.backgroundColor = 'rgba(16, 185, 129, 0.15)';
+        });
+        el.addEventListener('mouseleave', () => {
+          ring.style.width = '34px';
+          ring.style.height = '34px';
+          ring.style.borderColor = 'rgba(52, 211, 153, 0.6)';
+          ring.style.backgroundColor = 'rgba(16, 185, 129, 0.05)';
+        });
+      });
+
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.update();
+          p.draw(ctx);
+          if (p.alpha <= 0) {
+            particles.splice(i, 1);
+          }
+        }
+        ringX += (mouseX - ringX) * 0.18;
+        ringY += (mouseY - ringY) * 0.18;
+        ring.style.left = ringX + 'px';
+        ring.style.top = ringY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+</body>
+</html>
