@@ -221,25 +221,13 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-amber-600 via-orange-500 to-yellow-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (6 Views) -->
+      <!-- Dashboard Tabs Switcher (2 Views) -->
       <div class="flex flex-wrap gap-2">
         <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
           <i data-lucide="coffee" class="w-3.5 h-3.5 text-amber-400"></i> View 1: Executive Sales Cockpit
         </button>
         <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="calendar" class="w-3.5 h-3.5 text-orange-400"></i> View 2: Calendar Tooltip Drilldown
-        </button>
-        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="clock" class="w-3.5 h-3.5 text-yellow-400"></i> View 3: Day & Hour Heatmap Matrix
-        </button>
-        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> View 4: Expansion Recommendations
-        </button>
-        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="target" class="w-3.5 h-3.5 text-sky-400"></i> View 5: Expansion Objectives
-        </button>
-        <button onclick="userSelectTab(5)" id="tabBtn5" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5 text-purple-400"></i> View 6: Retail Brand Showcase
+          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-emerald-400"></i> View 2: Expansion Recommendations
         </button>
       </div>
 
@@ -267,7 +255,7 @@
 
           <!-- Bottom-Right Label -->
           <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-400"></i> <span id="dashboardImgLabel">View 1 of 6: Executive Sales Cockpit</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-400"></i> <span id="dashboardImgLabel">View 1 of 2: Executive Sales Cockpit</span>
           </div>
         </div>
 
@@ -526,45 +514,17 @@ DIVIDE(
     const dashboardData = [
       {
         img: 'assets/coffee/coffee_shop_sales_dashboard.png',
-        label: 'View 1 of 6: Executive Sales Cockpit',
+        label: 'View 1 of 2: Executive Sales Cockpit',
         title: 'Executive Coffee Sales Performance Suite',
         subtitle: '$156.7K May Sales • +31.8% MoM Surge • 149,116 Transactions',
         desc: 'High-impact retail cockpit monitoring NYC flagship operations (Hell\'s Kitchen $52.6K, Astoria $52.4K, Lower Manhattan $51.7K). Features MoM growth variance, store footfall distributions, and hero product velocity.'
       },
       {
-        img: 'assets/coffee/coffee_shop_tooltip_calendar.png',
-        label: 'View 2 of 6: Calendar Tooltip Drilldown',
-        title: 'Interactive Daily Calendar Micro-Drilldown Tooltip',
-        subtitle: 'Pacing Telemetry • Daily Order Volumes • MoM Daily Comparison',
-        desc: 'Custom canvas tooltip engineered in Power BI: hovering over any calendar day reveals daily order volume, unit velocity, and MoM trend vs. previous month, validating daily sales consistency ($5,056/day average).'
-      },
-      {
-        img: 'assets/coffee/coffee_shop_tooltip_day_hour.png',
-        label: 'View 3 of 6: Day & Hour Heatmap Matrix',
-        title: 'Peak Day & Hour Footfall Heatmap Matrix',
-        subtitle: '7:00 AM – 10:00 AM Morning Rush • 74.4% Weekday Concentration',
-        desc: 'Micro-drilldown matrix revealing exact hourly revenue contribution. Highlights 8:00 AM – 9:00 AM as the single highest volume window ($19K+ in Hour 9 alone), proving that office commuters drive over 45% of store sales.'
-      },
-      {
         img: 'assets/coffee/expansion_recommendations.png',
-        label: 'View 4 of 6: Expansion Recommendations',
+        label: 'View 2 of 2: Expansion Recommendations',
         title: 'Strategic Market Expansion: Top 3 Cities Prioritization',
         subtitle: 'Pune, Delhi & Jaipur • Rent-to-Customer Efficiency Index',
         desc: 'Rigorous SQL multi-criteria model evaluating population scale, estimated coffee consumers (25% rule), distinct online customers, and commercial rent efficiency, recommending Pune, Delhi, and Jaipur for new store launches.'
-      },
-      {
-        img: 'assets/coffee/expansion_objectives.png',
-        label: 'View 5 of 6: Expansion Objectives',
-        title: 'Monday Coffee Strategic Expansion Objectives & Framework',
-        subtitle: 'Data-Driven Geographic Growth • Unit Economics Benchmarks',
-        desc: 'Strategic presentation outlining criteria for derisking capital allocation: identifying high-density consumer pockets while maintaining monthly rent burdens beneath the ₹500/customer threshold.'
-      },
-      {
-        img: 'assets/coffee/monday_coffee_banner.png',
-        label: 'View 6 of 6: Retail Brand Showcase',
-        title: 'Monday Coffee Retail Brand & Product Architecture',
-        subtitle: 'Specialty Coffee Roasts • High-Attach Teas & Bakery SKUs',
-        desc: 'Visual retail brand identity representing specialty beans, hot/cold beverage hierarchies, and customer loyalty retention strategies across urban commuter hubs.'
       }
     ];
 

@@ -201,7 +201,7 @@
             <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
-            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 6</span>
+            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 2</span>
             <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
               <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </button>
@@ -214,36 +214,16 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-pink-600 via-rose-500 to-indigo-500 rounded-full transition-all ease-linear" style="width: 0%;"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (6 Views) -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2" id="tabContainer">
-        <button onclick="switchTab(0)" class="tab-btn active px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 1</div>
-          <div class="text-white font-bold truncate">Attrition Overview</div>
+      <!-- Dashboard Tabs Switcher (2 Views) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="tabContainer">
+        <button onclick="switchTab(0)" class="tab-btn active px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 1</div>
+          <div class="text-white font-bold truncate">Attrition Overview (Executive Summary)</div>
         </button>
 
-        <button onclick="switchTab(1)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 2</div>
-          <div class="text-white font-bold truncate">Job Role Diagnostics</div>
-        </button>
-
-        <button onclick="switchTab(2)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 3</div>
-          <div class="text-white font-bold truncate">Age & Gender Cohorts</div>
-        </button>
-
-        <button onclick="switchTab(3)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 4</div>
-          <div class="text-white font-bold truncate">Workforce Health</div>
-        </button>
-
-        <button onclick="switchTab(4)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 5</div>
-          <div class="text-white font-bold truncate">HR Action Lists</div>
-        </button>
-
-        <button onclick="switchTab(5)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 6</div>
-          <div class="text-white font-bold truncate">Workforce Detail Matrix</div>
+        <button onclick="switchTab(1)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 2</div>
+          <div class="text-white font-bold truncate">Job Role Diagnostics & Demographics</div>
         </button>
       </div>
 
@@ -608,63 +588,25 @@ DIVIDE([Active Employees], [Total Employees], 0)
     const views = [
       {
         id: 0,
+        page: "Page 1",
         title: "Page 1: Attrition Overview (Executive Summary)",
         img: "assets/hr/hr_dashboard_page_1.png",
-        insightTitle: "Attrition Diagnostic: Departmental & Career Tenure Vulnerability",
-        insightDesc: "Out of 2,925 total personnel, 492 departures establish an enterprise baseline attrition rate of 16.82%. R&D represents the primary vulnerability zone accounting for 57.3% (282 exits), followed by Sales at 37.8% (186 exits), with acute concentration in early career tenure (0–10 years).",
-        kpi1: "2,925 Total Staff (2,433 Active)",
-        kpi2: "R&D Lead: 282 Exits (57.3%)",
-        kpi3: "0–10 Years Tenure Cliff"
+        insightTitle: "Macro Attrition Baseline: 16.1% Turnover Across 1,470 Employees",
+        insightDesc: "The organization experienced 237 voluntary exits against an active workforce of 1,233. The average employee age is 37 years with an average tenure of 7.0 years, confirming that turnover is heavily concentrated in early career stages.",
+        kpi1: "16.1% Overall Attrition",
+        kpi2: "237 Voluntary Exits",
+        kpi3: "1,233 Retained Employees"
       },
       {
         id: 1,
+        page: "Page 2",
         title: "Page 2: Job Role Diagnostics",
         img: "assets/hr/hr_dashboard_page_2.png",
-        insightTitle: "Role Headwinds: Laboratory Technicians & Sales Executives",
-        insightDesc: "Granular job role analysis reveals acute departure volumes concentrated in technical and client-facing roles: Laboratory Technicians (126 exits), Sales Executives (114 exits), and Research Scientists (94 exits) represent 67.9% of all corporate attrition.",
-        kpi1: "Lab Techs: 126 Exits",
-        kpi2: "Sales Execs: 114 Exits",
-        kpi3: "Research Scientists: 94 Exits"
-      },
-      {
-        id: 2,
-        title: "Page 3: Age & Gender Cohorts",
-        img: "assets/hr/hr_dashboard_page_3.png",
-        insightTitle: "Demographic Trends: 26–35 Cohort & Gender Distribution",
-        insightDesc: "Male employees recorded 312 exits (17.79% rate) while female employees recorded 180 exits (15.37% rate). The 26–35 age group accounts for 44.7% of total departures, highlighting critical mid-career transition risks.",
-        kpi1: "Male: 312 Exits (17.8%)",
-        kpi2: "Female: 180 Exits (15.4%)",
-        kpi3: "26–35 Age Band: 44.7% Exits"
-      },
-      {
-        id: 3,
-        title: "Page 4: Workforce Health",
-        img: "assets/hr/hr_dashboard_page_4.png",
-        insightTitle: "Workforce Composition: Active Staff & Review Proportions",
-        insightDesc: "Active workforce monitor tracking 2,433 active personnel across gender splits (1,754 Male / 1,171 Female). Establishes institutional baseline ratios for promotion candidates (4.92%) and retrenchment candidates (8.00%).",
-        kpi1: "2,433 Active Personnel (83.2%)",
-        kpi2: "4.92% Due for Promotion Review",
-        kpi3: "8.00% Due for Retrenchment"
-      },
-      {
-        id: 4,
-        title: "Page 5: HR Action Lists",
-        img: "assets/hr/hr_dashboard_page_5.png",
-        insightTitle: "Operational Action: Rule-Based Screening Rosters",
-        insightDesc: "Provides transparent candidate rosters for executive decision-makers: 144 personnel flagged for Promotion Review (stagnant 10–15 years since advancement) and 234 personnel flagged for Retrenchment Review (≥18 years company service).",
-        kpi1: "144 Promotion Candidates",
-        kpi2: "234 Retrenchment Candidates",
-        kpi3: "Transparent Policy Rules"
-      },
-      {
-        id: 5,
-        title: "Page 6: Workforce Detail Matrix",
-        img: "assets/hr/hr_dashboard_page_6.png",
-        insightTitle: "Multi-Dimensional Deep Dive: Overtime & Job Satisfaction",
-        insightDesc: "Cross-tabulates candidate review pools against overtime frequency and job satisfaction quadrants. Personnel working frequent overtime coupled with low job satisfaction exhibit 3.2× higher likelihood of departure.",
-        kpi1: "Overtime Correlated Attrition",
-        kpi2: "Job Satisfaction Quadrants",
-        kpi3: "Cross-Functional Slicing"
+        insightTitle: "Department Vulnerability: Sales Representatives (39.8%) Critical Exposure",
+        insightDesc: "Sales Representatives exhibit alarming 39.8% attrition, followed by Laboratory Technicians (23.9%) and Human Resources (23.1%). In contrast, R&D Directors (2.5%) and Managers (4.9%) maintain elite retention stability.",
+        kpi1: "Sales Reps: 39.8% Turnover",
+        kpi2: "Lab Techs: 23.9% Attrition",
+        kpi3: "R&D Directors: 2.5% Stability"
       }
     ];
 

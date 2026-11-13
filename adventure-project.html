@@ -186,7 +186,7 @@
             Executive Excel Power Pivot Showcase
           </h2>
           <p class="text-xs sm:text-sm text-slate-400">
-            Automated 2.2-second rotation cycling through Time Analysis, Details & Merchandising View, and In-Memory Star Schema Architecture.
+            Automated 5.0-second rotation cycling through Time Analysis and Details & Merchandising View.
           </p>
         </div>
 
@@ -195,14 +195,14 @@
           <!-- Autoplay / Pause Toggle -->
           <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
             <i id="playPauseIcon" data-lucide="pause" class="w-3.5 h-3.5"></i>
-            <span id="playPauseText">Pause 2.2s Auto-Slider</span>
+            <span id="playPauseText">Pause 5.0s Auto-Slider</span>
           </button>
           <!-- Prev & Next Clickable Controls -->
           <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
             <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
-            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 3</span>
+            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 2</span>
             <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
               <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </button>
@@ -215,8 +215,8 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%;"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (3 Views) -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="tabContainer">
+      <!-- Dashboard Tabs Switcher (2 Views) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="tabContainer">
         <button onclick="switchTab(0)" class="tab-btn active px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
           <div class="text-slate-400 text-[10px] uppercase font-mono">View 1</div>
           <div class="text-white font-bold truncate">Time Analysis & Volatility</div>
@@ -225,11 +225,6 @@
         <button onclick="switchTab(1)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
           <div class="text-slate-400 text-[10px] uppercase font-mono">View 2</div>
           <div class="text-white font-bold truncate">Details & Merchandising View</div>
-        </button>
-
-        <button onclick="switchTab(2)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">View 3</div>
-          <div class="text-white font-bold truncate">xVelocity Star Schema Architecture</div>
         </button>
       </div>
 
@@ -619,16 +614,6 @@ RETURN
         kpi1: "Top-5 Bikes: $31.27M Profit (24.8%)",
         kpi2: "Expensive (> $150): 95.43% of Profit",
         kpi3: "US & Australia: 62.74% Global Share"
-      },
-      {
-        id: 2,
-        title: "View 3: xVelocity Star Schema Architecture",
-        img: "assets/adventure/data_architecture_pipeline.png",
-        insightTitle: "Engineering Insight: Power Pivot xVelocity In-Memory Model",
-        insightDesc: "Robust Star Schema connecting 60,400 sales transactions (FactInternetSales) to 5 dimension tables (DimProduct, DimCustomer, DimDate, DimSalesTerritory, DimGeography) inside Excel's xVelocity memory cache. Eliminates spreadsheet bloat with zero worksheet VLOOKUP formulas.",
-        kpi1: "In-Memory xVelocity Columnar Compression",
-        kpi2: "Star Schema 1:N Power Pivot Relationships",
-        kpi3: "25+ Formulated DAX Calculated Measures"
       }
     ];
 
@@ -714,7 +699,7 @@ RETURN
 
       if (isPlaying) {
         icon.setAttribute('data-lucide', 'pause');
-        text.innerText = 'Pause 2.2s Auto-Slider';
+        text.innerText = 'Pause 5.0s Auto-Slider';
         startAutoSlider();
       } else {
         icon.setAttribute('data-lucide', 'play');

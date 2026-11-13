@@ -225,28 +225,13 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-blue-600 via-sky-400 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (7 Views) -->
+      <!-- Dashboard Tabs Switcher (2 Views) -->
       <div class="flex flex-wrap gap-2">
         <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-400"></i> View 1: Summary (C-Suite)
+          <i data-lucide="shield-check" class="w-3.5 h-3.5 text-sky-400"></i> View 1: Summary (C-Suite Lending)
         </button>
         <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-400"></i> View 2: Overview (Dimensions)
-        </button>
-        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="table" class="w-3.5 h-3.5 text-emerald-400"></i> View 3: Details Grid
-        </button>
-        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="map-pin" class="w-3.5 h-3.5 text-purple-400"></i> View 4: Python Regional Map
-        </button>
-        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="trending-up" class="w-3.5 h-3.5 text-cyan-400"></i> View 5: Python Monthly Trend
-        </button>
-        <button onclick="userSelectTab(5)" id="tabBtn5" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="donut" class="w-3.5 h-3.5 text-rose-400"></i> View 6: Python Term Donut
-        </button>
-        <button onclick="userSelectTab(6)" id="tabBtn6" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="home" class="w-3.5 h-3.5 text-teal-400"></i> View 7: Homeownership Treemap
+          <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-400"></i> View 2: Overview (Dimensional Slicing)
         </button>
       </div>
 
@@ -274,7 +259,7 @@
 
           <!-- Bottom-Right Label -->
           <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-blue-400"></i> <span id="dashboardImgLabel">View 1 of 7: Summary (C-Suite Lending)</span>
+            <i data-lucide="eye" class="w-3.5 h-3.5 text-blue-400"></i> <span id="dashboardImgLabel">View 1 of 2: Summary (C-Suite Lending)</span>
           </div>
         </div>
 
@@ -602,7 +587,7 @@ AVERAGEX(
     const dashboardData = [
       {
         img: 'assets/bank-loan/dashboard_summary_view.png',
-        label: 'View 1 of 7: Summary (C-Suite Lending)',
+        label: 'View 1 of 2: Summary (C-Suite Lending)',
         title: 'C-Suite Lending KPIs & Good/Bad Risk Splits',
         subtitle: '$435.76M Disbursed • 86.18% Good vs 13.82% Bad Loan Split',
         desc: 'Macro lending health console auditing 38,576 applications. Visualizes $435.76M in funded capital against $473.07M cash received, isolating +$65.56M in good loan profits against the -$28.25M charged-off impairment write-off.',
@@ -612,63 +597,13 @@ AVERAGEX(
       },
       {
         img: 'assets/bank-loan/dashboard_overview_view.png',
-        label: 'View 2 of 7: Overview (Dimensional Slicing)',
+        label: 'View 2 of 2: Overview (Dimensional Slicing)',
         title: 'Dimensional Portfolio Risk Slicing & Geospatial Telemetry',
         subtitle: 'State Concentration • 36 vs 60 Month Term • Purpose Breakdown',
         desc: 'Executive slice-and-dice analyzing monthly disbursement trends, regional concentration across CA, NY, and TX, and loan purpose splits where Debt Consolidation drives 70%+ of borrowing volume.',
         kpi1: 'CA/NY/TX Top States',
         kpi2: 'Debt Consolidation #1',
         kpi3: 'Grade A-G Filter Context'
-      },
-      {
-        img: 'assets/bank-loan/dashboard_details_grid.png',
-        label: 'View 3 of 7: Granular Details Grid',
-        title: 'Granular Transaction Ledger & Borrower Credit Grades',
-        subtitle: 'Facility Level Audit • FICO Grade A through G • DTI Matrix',
-        desc: 'Deep-dive operational matrix auditing individual loan IDs, employment tenures, verification flags, annual incomes, interest rates, and loan statuses for underwriting compliance.',
-        kpi1: '38,576 Facilities',
-        kpi2: 'DTI Solvency Matrix',
-        kpi3: '12.05% Portfolio APR'
-      },
-      {
-        img: 'assets/bank-loan/python_state_funding.png',
-        label: 'View 4 of 7: Python Regional Exposure',
-        title: 'State-wise Capital Allocation & Regional Concentration',
-        subtitle: 'Python Matplotlib/Seaborn • Geographic Lending Limits',
-        desc: 'Exploratory statistical modeling mapping state-level lending saturation. Highlights California, New York, Florida, and Texas as prime geographic capital centers for risk-hedging strategies.',
-        kpi1: 'Regional Saturation',
-        kpi2: 'State Limits Audited',
-        kpi3: 'Matplotlib Heatmap'
-      },
-      {
-        img: 'assets/bank-loan/python_monthly_trend.png',
-        label: 'View 5 of 7: Python Monthly Funded Trend',
-        title: 'Monthly Funded Amount Trajectory & Year-End Surge',
-        subtitle: 'Seaborn Spline with Shaded Area • December $53.98M Peak',
-        desc: 'Time-series trajectory visualizing capital expansion throughout FY2021, culminating in December peak originations (+13.04% MoM) requiring active year-end liquidity management.',
-        kpi1: '$53.98M Dec Peak',
-        kpi2: '+13.04% MoM Growth',
-        kpi3: 'Year-End Surge'
-      },
-      {
-        img: 'assets/bank-loan/python_term_donut.png',
-        label: 'View 6 of 7: Python Term Donut',
-        title: 'Portfolio Term Duration Share (36 vs 60 Months)',
-        subtitle: '73.2% Short-Term • 26.8% Long-Term Donut Distribution',
-        desc: 'Evaluates duration risk confirming 36-month short-term loans account for 73.2% (28,237 loans) of originations, offering higher cash turnover and significantly lower delinquency rates.',
-        kpi1: '73.2% 36-Month Term',
-        kpi2: '28,237 Short Facilities',
-        kpi3: 'Higher Cash Velocity'
-      },
-      {
-        img: 'assets/bank-loan/python_homeownership_treemap.png',
-        label: 'View 7 of 7: Homeownership Treemap',
-        title: 'Homeownership Risk Distribution & Collateral Standing',
-        subtitle: 'Rent vs Mortgage vs Own • Exposure Categorization',
-        desc: 'Statistical treemap charting borrower collateral standing across Mortgaged (48.4%), Rented (43.1%), and Owned (8.5%) residences, correlating tenure stability with charge-off frequencies.',
-        kpi1: '48.4% Mortgaged',
-        kpi2: '43.1% Renter Cohort',
-        kpi3: '8.5% Owned Residences'
       }
     ];
 

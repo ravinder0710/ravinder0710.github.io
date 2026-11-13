@@ -202,7 +202,7 @@
             <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
               <i data-lucide="chevron-left" class="w-4 h-4"></i>
             </button>
-            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 6</span>
+            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 2</span>
             <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
               <i data-lucide="chevron-right" class="w-4 h-4"></i>
             </button>
@@ -215,36 +215,16 @@
         <div id="slideProgressBar" class="h-full bg-gradient-to-r from-rose-600 via-pink-500 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%;"></div>
       </div>
 
-      <!-- Dashboard Tabs Switcher (6 Selected Views) -->
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2" id="tabContainer">
-        <button onclick="switchTab(0)" class="tab-btn active px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 1</div>
-          <div class="text-white font-bold truncate">Executive Overview</div>
+      <!-- Dashboard Tabs Switcher (2 Views) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="tabContainer">
+        <button onclick="switchTab(0)" class="tab-btn active px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 1</div>
+          <div class="text-white font-bold truncate">Executive Overview Cockpit</div>
         </button>
 
-        <button onclick="switchTab(1)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 2</div>
+        <button onclick="switchTab(1)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
+          <div class="text-slate-400 text-[10px] uppercase font-mono">View 2</div>
           <div class="text-white font-bold truncate">RM20M Target Pacing</div>
-        </button>
-
-        <button onclick="switchTab(2)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 3</div>
-          <div class="text-white font-bold truncate">5-Branch Scorecard</div>
-        </button>
-
-        <button onclick="switchTab(3)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 12</div>
-          <div class="text-white font-bold truncate">VIP Rooms & Events</div>
-        </button>
-
-        <button onclick="switchTab(4)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 13</div>
-          <div class="text-white font-bold truncate">Loyalty & Wallet Liquidity</div>
-        </button>
-
-        <button onclick="switchTab(5)" class="tab-btn px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">Page 18</div>
-          <div class="text-white font-bold truncate">Omnichannel Attribution</div>
         </button>
       </div>
 
@@ -628,63 +608,25 @@ RETURN
     const views = [
       {
         id: 0,
+        page: "Page 1",
         title: "Page 1: Executive Overview Cockpit",
         img: "assets/emperor/page_01_overview.png",
-        insightTitle: "Commercial Finding: RM20.69M Sales Outperformance",
-        insightDesc: "Emperor Cuisine surpassed its corporate annual target of RM20.00M by +RM691.10K (103.5% achievement), powered by solid dinner check averages of RM450.53, strong VVIP room bookings, and 60.2% member sales contribution.",
-        kpi1: "RM20.69M (103.5% Target)",
-        kpi2: "RM450.53 / Check Average",
-        kpi3: "12,698 Bookings (72% Conversion)"
+        insightTitle: "Financial Insight: RM17.81M Actual vs RM20M Stretch Target",
+        insightDesc: "Emperor achieved RM17.81M net revenue across 141,617 dining transactions, closing at 89.06% of the ambitious RM20M milestone with a controllable variance gap of RM2.19M. Average order value (AOV) settled at RM125.77 per dining check.",
+        kpi1: "RM17.81M Actual Revenue",
+        kpi2: "89.06% Target Attainment",
+        kpi3: "RM125.77 Average Order Value"
       },
       {
         id: 1,
+        page: "Page 2",
         title: "Page 2: RM20M Target Pacing",
         img: "assets/emperor/page_02_rm20m_target.png",
-        insightTitle: "Target Tracking: Monthly Pacing & Quota Surplus",
-        insightDesc: "Full-year cumulative sales tracking confirms consistent month-on-month quota achievement, with peak surpluses generated during festival seasons and corporate banquet booking months across Q2 and Q4.",
-        kpi1: "RM20.00M Corporate Quota",
-        kpi2: "+RM691K Cumulative Surplus",
-        kpi3: "5 Locations On-Track Pacing"
-      },
-      {
-        id: 2,
-        title: "Page 3: 5-Branch Scorecard",
-        img: "assets/emperor/page_03_branch_performance.png",
-        insightTitle: "Regional Benchmarks: KL Flagship & Klang Dominance",
-        insightDesc: "KL Flagship generated RM5.82M with premier basket sizes (RM512.40), followed by Klang (RM4.31M) and Subang (RM3.94M). Cheras underperformed (-RM180K gap) with a 3.82 rating, triggering an operational remediation plan.",
-        kpi1: "KL Lead: RM5.82M (RM512 Check)",
-        kpi2: "Klang Rank #2: RM4.31M",
-        kpi3: "Cheras Remediation Focus"
-      },
-      {
-        id: 3,
-        title: "Page 12: VIP Rooms & Events",
-        img: "assets/emperor/page_12_vip_rooms_events.png",
-        insightTitle: "High-Ticket Hospitality: RM6.23M Private Suite Revenue",
-        insightDesc: "VIP and VVIP private dining rooms generated RM6.23M, while banquet events and corporate bookings added RM4.45M. Collectively, high-ticket private dining accounts for over 51% of gross operational margins.",
-        kpi1: "RM3.11M VIP + RM3.12M VVIP",
-        kpi2: "RM4.45M Banquet Operations",
-        kpi3: "51% Gross Margin Contribution"
-      },
-      {
-        id: 4,
-        title: "Page 13: Loyalty & Wallet Liquidity",
-        img: "assets/emperor/page_13_membership.png",
-        insightTitle: "Customer Retention: 8,000 Members Drive 60.2% of Sales",
-        insightDesc: "8,000 loyalty members generate RM12.45M in sales. The digital prepaid wallet logged RM1.45M in top-ups and RM1.31M in redemptions, with voucher campaigns recording an active 47.2% redemption rate.",
-        kpi1: "8,000 Active Members",
-        kpi2: "RM12.45M Member Sales (60.2%)",
-        kpi3: "RM1.45M Wallet Top-Ups"
-      },
-      {
-        id: 5,
-        title: "Page 18: Omnichannel Attribution",
-        img: "assets/emperor/page_18_omnichannel_attribution_1.png",
-        insightTitle: "Digital Performance: 63M Views & 71.8% Booking Rate",
-        insightDesc: "Consolidates 10 digital marketing platforms (TikTok, Instagram, WhatsApp, Search) generating 63M impressions. WhatsApp and direct website channels delivered the highest booking conversion rates (71.8% attributed).",
-        kpi1: "63M Total Views (3M Followers)",
-        kpi2: "12,223 Direct Enquiries",
-        kpi3: "71.8% Attributed Bookings"
+        insightTitle: "Target Velocity: RM2.19M Revenue Gap Attribution",
+        insightDesc: "Deep-dive pacing analytics isolating the RM2.19M target shortfall across branches and seasonal quarters. Highlights Q4 holiday booking acceleration as the critical window required to overcome the early-year deficit.",
+        kpi1: "-RM2.19M Variance Gap",
+        kpi2: "141,617 Total Covers Audited",
+        kpi3: "4.86% MoM Velocity Surge"
       }
     ];
 
