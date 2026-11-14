@@ -163,9 +163,12 @@
       box-shadow: 0 12px 30px -10px var(--brand-glow) !important;
     }
 
-    /* Static RG Badge */
+    /* Static Brand Monogram Ring (Zero Rotation) */
+    .badge-brand-static {
+      background: conic-gradient(from 135deg, #22d3ee, #2563eb, #10b981, #f59e0b, #ef4444, #a855f7, #f97316, #84cc16, #22d3ee);
+    }
     .badge-conic-ring {
-      background: linear-gradient(135deg, var(--brand-primary), var(--brand-accent));
+      background: conic-gradient(from 135deg, #22d3ee, #2563eb, #10b981, #f59e0b, #ef4444, #a855f7, #f97316, #84cc16, #22d3ee);
     }
   </style>
 
@@ -223,10 +226,17 @@
   <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#090d16]/80 border-b border-slate-800/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <!-- Clean Static RG Monogram Badge -->
+        <!-- Brand Monogram Badge (Static, No Rotation) -->
         <button onclick="toggleBrandDrawer()" id="navRgBadgeBtn" class="group relative flex items-center gap-2.5 text-left focus:outline-none cursor-pointer" title="Ravinder Gupta Portfolio">
-          <div id="navRgBadgeIcon" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-md shadow-blue-500/20 transition-transform group-hover:scale-105">
-            RG
+          <div class="relative">
+            <!-- Sleek Static Brand Gradient Border (No Spin) -->
+            <div id="navRgBadgeOuter" class="w-9 h-9 rounded-xl p-[1.5px] badge-brand-static transition-transform duration-300 group-hover:scale-105 shadow-md shadow-blue-500/20">
+              <div id="navRgBadgeInner" class="w-full h-full bg-[#090d16] rounded-[10px] flex items-center justify-center font-black text-xs text-white tracking-wider">
+                RG
+              </div>
+            </div>
+            <!-- Gentle Ambient Glow -->
+            <div id="navRgBadgeGlow" class="absolute -inset-1 rounded-2xl opacity-40 blur-sm -z-10 group-hover:opacity-75 transition-opacity" style="background: var(--brand-glow);"></div>
           </div>
           <span class="font-bold text-lg tracking-tight text-white group-hover:text-slate-100 transition-colors">
             Ravinder Gupta<span id="navNameDot" style="color: var(--brand-accent);">.</span>
@@ -1783,8 +1793,8 @@
       const navDot = document.getElementById('navNameDot');
       if (navDot) navDot.style.color = th.accent;
 
-      const navBadge = document.getElementById('navRgBadgeIcon');
-      if (navBadge) navBadge.style.background = th.gradient;
+      const navGlow = document.getElementById('navRgBadgeGlow');
+      if (navGlow) navGlow.style.background = th.glow;
 
       const badgeLabel = document.getElementById('activeThemeBadge');
       if (badgeLabel) {
