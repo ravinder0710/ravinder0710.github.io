@@ -94,7 +94,7 @@
       <div class="w-full mt-4 pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
         <div class="flex items-center gap-2">
           <span class="w-2.5 h-2.5 rounded-full bg-cyan-400"></span>
-          <span><strong>Safe-Zone &amp; Spacing Verified:</strong> RG Brand Monogram shifted to far right (x=1445) with 350px+ breathing room. All 9 tools render official corporate vector logos.</span>
+          <span><strong>Safe-Zone &amp; Spacing Verified:</strong> RG Brand Monogram balanced in right section (x=1340) with harmonious golden-ratio margins. All 9 tools render official corporate vector logos.</span>
         </div>
         <div class="font-mono text-cyan-400">
           9 Standard Real Logos Active
@@ -323,8 +323,12 @@
       ctx.fillStyle = radGlow1;
       ctx.fillRect(0, 0, W, H);
 
-      // Right Side Glow near shifted Monogram
-      const radGlow2 = ctx.createRadialGradient(1445, 198, 20, 1445, 198, 300);
+      // Right Side Glow near centered Monogram
+      const badgeCenterX = 1340;
+      const badgeCenterY = 198;
+      const badgeSize = 142;
+
+      const radGlow2 = ctx.createRadialGradient(badgeCenterX, badgeCenterY, 20, badgeCenterX, badgeCenterY, 300);
       radGlow2.addColorStop(0, th.glow);
       radGlow2.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = radGlow2;
@@ -492,11 +496,9 @@
 
       // ==========================================
       // RIGHT SIDE: 3D RG MONOGRAM BRAND BADGE
-      // (SHIFTED TO RIGHT AT X=1445 FOR EXPANSIVE BREATHING ROOM)
+      // (BALANCED POSITION AT X=1340)
       // ==========================================
-      const badgeCenterX = 1445;
-      const badgeCenterY = 198;
-      const badgeSize = 142;
+      // badgeCenterX, badgeCenterY, badgeSize already defined above
 
       // Glow Halo
       const badgeGlow = ctx.createRadialGradient(badgeCenterX, badgeCenterY, 30, badgeCenterX, badgeCenterY, 130);
