@@ -104,6 +104,68 @@
       text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
     }
   </style>
+
+  <style id="dynamicBrandThemeStyles">
+    :root {
+      --brand-primary: #2563eb;
+      --brand-primary-hover: #1d4ed8;
+      --brand-secondary: #3b82f6;
+      --brand-accent: #60a5fa;
+      --brand-glow: rgba(37, 99, 235, 0.4);
+      --brand-glow-soft: rgba(37, 99, 235, 0.14);
+      --brand-gradient: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #38bdf8 100%);
+      --cursor-color: #60a5fa;
+    }
+
+    /* Dynamic Global Text & Gradient Overrides */
+    .gradient-text {
+      background: var(--brand-gradient) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+    }
+
+    .theme-active-dot {
+      background-color: var(--brand-accent) !important;
+      box-shadow: 0 0 10px var(--brand-glow) !important;
+    }
+
+    /* Buttons adopting active theme */
+    .btn-brand-primary, 
+    a[href="#projects"],
+    a[href="mailto:iamravindergupta17@gmail.com"] {
+      background-color: var(--brand-primary) !important;
+      box-shadow: 0 10px 25px -5px var(--brand-glow) !important;
+    }
+    .btn-brand-primary:hover,
+    a[href="#projects"]:hover,
+    a[href="mailto:iamravindergupta17@gmail.com"]:hover {
+      background-color: var(--brand-primary-hover) !important;
+    }
+
+    /* Active Filter Badges */
+    .badge-filter.active {
+      background: var(--brand-primary) !important;
+      border-color: var(--brand-accent) !important;
+      box-shadow: 0 0 16px var(--brand-glow) !important;
+    }
+
+    /* Glass Cards Glow on Hover */
+    .glass-card:hover {
+      border-color: var(--brand-accent) !important;
+      box-shadow: 0 12px 30px -10px var(--brand-glow) !important;
+    }
+
+    /* Animated RG Badge in Navbar */
+    @keyframes conicSpin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .badge-conic-ring {
+      background: conic-gradient(from 0deg, #22d3ee, #2563eb, #10b981, #f59e0b, #ef4444, #a855f7, #f97316, #84cc16, #22d3ee);
+      animation: conicSpin 7s linear infinite;
+    }
+  </style>
+
 </head>
 <body class="antialiased min-h-screen selection:bg-blue-600 selection:text-white">
 
@@ -157,18 +219,44 @@
   <!-- Navigation -->
   <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#090d16]/80 border-b border-slate-800/80">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-blue-500/25">
-          RG
-        </div>
-        <span class="font-bold text-lg tracking-tight text-white">Ravinder Gupta<span class="text-blue-500">.</span></span>
-      </a>
+      <div class="flex items-center gap-3">
+        <!-- Interactive Animated RG Brand Badge Trigger -->
+        <button onclick="toggleBrandDrawer()" id="navRgBadgeBtn" class="group relative flex items-center gap-2.5 text-left focus:outline-none cursor-pointer" title="Click to open Brand Studio &amp; 9 Themes">
+          <!-- Animated Conic Luminous Badge -->
+          <div class="relative">
+            <div class="w-9 h-9 rounded-xl p-[1.5px] badge-conic-ring transition-transform duration-300 group-hover:scale-110 shadow-lg">
+              <div id="navRgBadgeInner" class="w-full h-full bg-[#090d16] rounded-[10px] flex items-center justify-center font-black text-sm text-white tracking-wider">
+                RG
+              </div>
+            </div>
+            <!-- Pulsing Halo -->
+            <div id="navRgBadgeGlow" class="absolute -inset-1 rounded-2xl opacity-60 blur-sm -z-10 group-hover:opacity-100 transition-opacity" style="background: var(--brand-glow);"></div>
+            <!-- Live Neon Dot -->
+            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping pointer-events-none"></span>
+            <span class="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 pointer-events-none border border-black"></span>
+          </div>
+          <!-- Clean Name & Studio Tooltip -->
+          <div class="flex flex-col">
+            <span class="font-bold text-lg tracking-tight text-white group-hover:text-slate-100 transition-colors">
+              Ravinder Gupta<span id="navNameDot" style="color: var(--brand-accent);">.</span>
+            </span>
+            <span class="text-[9px] font-mono tracking-widest text-slate-400 uppercase -mt-1 flex items-center gap-1 group-hover:text-cyan-400 transition-colors">
+              <span>Brand Studio</span> <span class="text-[8px] text-cyan-400">✦</span>
+            </span>
+          </div>
+        </button>
+      </div>
 
       <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
         <a href="#about" class="hover:text-blue-400 transition-colors">About</a>
         <a href="#skills" class="hover:text-blue-400 transition-colors">Technical Skills</a>
         <a href="#projects" class="hover:text-blue-400 transition-colors">Projects Suite</a>
         <a href="#contact" class="hover:text-blue-400 transition-colors">Contact</a>
+              <button onclick="toggleBrandDrawer()" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-semibold bg-slate-900/90 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-slate-700 transition-all cursor-pointer shadow-sm" title="Open 9 Brand Themes & Identity Studio">
+          <span class="w-2 h-2 rounded-full theme-active-dot"></span>
+          <span>9 Themes</span>
+          <span class="text-[9px] font-mono text-slate-400 bg-slate-950 px-1.5 py-0.5 rounded border border-slate-800">T</span>
+        </button>
       </nav>
 
       <div class="flex items-center gap-2.5">
@@ -1244,9 +1332,9 @@
         draw(c) {
           c.save();
           c.globalAlpha = Math.max(0, this.alpha);
-          c.fillStyle = '#38bdf8';
+          c.fillStyle = window.ACTIVE_CURSOR_COLOR || '#38bdf8';
           c.shadowBlur = 8;
-          c.shadowColor = '#2563eb';
+          c.shadowColor = window.ACTIVE_CURSOR_GLOW || '#2563eb';
           c.beginPath();
           c.arc(this.x, this.y, this.size, 0, Math.PI * 2);
           c.fill();
@@ -1387,5 +1475,504 @@
       }, 3500);
     }
   </script>
+
+  <!-- ========================================== -->
+  <!-- SLIDE-OVER DRAWER / SLIDER: BRAND STUDIO & 9 THEMES -->
+  <!-- ========================================== -->
+  <div id="brandDrawerBackdrop" onclick="closeBrandDrawer()" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 ease-out"></div>
+  <aside id="brandDrawer" class="fixed top-0 right-0 z-50 h-full w-full sm:w-[490px] md:w-[530px] bg-[#070b14]/95 border-l border-slate-800 shadow-2xl backdrop-blur-2xl transform translate-x-full transition-transform duration-300 ease-out flex flex-col overflow-hidden text-slate-100">
+    <!-- Header -->
+    <div class="p-5 border-b border-slate-800/80 flex items-center justify-between bg-slate-950/70">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl p-[2px] badge-conic-ring shadow-lg shadow-cyan-500/25">
+          <div class="w-full h-full bg-[#090d16] rounded-[10px] flex items-center justify-center font-black text-white text-base tracking-wider">
+            RG
+          </div>
+        </div>
+        <div>
+          <h2 class="text-sm font-black text-white flex items-center gap-2">
+            Ravinder Gupta
+            <span class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              Brand Studio
+            </span>
+          </h2>
+          <p class="text-[11px] text-slate-400 font-mono">9 Dynamic Themes • Interactive Cursor • Banner Studio</p>
+        </div>
+      </div>
+      <button onclick="closeBrandDrawer()" class="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition cursor-pointer" title="Close Studio (Esc)">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Drawer Body (Scrollable) -->
+    <div class="flex-1 overflow-y-auto p-5 space-y-6">
+      <!-- 9 Dynamic Theme Palette -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold tracking-wider uppercase text-slate-200 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+            1. Select Global Theme (9 Colors)
+          </span>
+          <span id="activeThemeBadge" class="text-[11px] font-mono font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">Royal Blue Active</span>
+        </div>
+        <p class="text-[11.5px] text-slate-400 leading-relaxed">
+          Hover any color to test live cursor physics &amp; glow. Click to activate that brand color across the <strong>entire portfolio</strong> (buttons, glows, gradient titles, project cards).
+        </p>
+
+        <!-- 9 Swatches Grid -->
+        <div class="grid grid-cols-3 gap-2.5" id="themeSwatchesGrid"></div>
+      </div>
+
+      <!-- Live LinkedIn Banner & Branding Showcase -->
+      <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-mono font-bold tracking-wider uppercase text-slate-200 flex items-center gap-1.5">
+            <i data-lucide="image" class="w-3.5 h-3.5 text-cyan-400"></i>
+            2. Official LinkedIn Banner
+          </span>
+          <a href="linkedin-banner-generator.html" target="_blank" class="text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+            <span>Full Generator Studio</span> ↗
+          </a>
+        </div>
+
+        <!-- Banner Live Preview -->
+        <div class="w-full rounded-xl overflow-hidden border border-slate-800 bg-black aspect-[1584/396] relative shadow-lg group">
+          <canvas id="drawerBannerCanvas" width="1584" height="396" class="w-full h-full object-contain"></canvas>
+          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-[2px]">
+            <a href="linkedin-banner-generator.html" target="_blank" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-black shadow-lg hover:bg-slate-200 transition">
+              Open Full HD Studio ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1 text-xs">
+          <span class="text-[11px] text-slate-400 font-mono">1584 × 396 • 9 Core Tools Active</span>
+          <a href="linkedin-banner-generator.html" target="_blank" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black transition cursor-pointer flex items-center gap-1.5 active:scale-95 shadow-lg shadow-cyan-500/20">
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span>Export Banner</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links to Branding Assets -->
+      <div class="p-4 rounded-2xl bg-slate-950/80 border border-slate-800/80 space-y-2.5">
+        <span class="text-xs font-mono font-bold tracking-wider uppercase text-slate-200 flex items-center gap-1.5">
+          <i data-lucide="compass" class="w-3.5 h-3.5 text-indigo-400"></i>
+          3. Portals &amp; Specialized Tracks
+        </span>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <a href="linkedin-banner-generator.html" target="_blank" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/40 text-slate-300 hover:text-white transition flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+            <span>LinkedIn Banner Studio</span>
+          </a>
+          <a href="healthcare-track.html" target="_blank" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-emerald-500/40 text-slate-300 hover:text-white transition flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>Healthcare Track</span>
+          </a>
+          <a href="resume.html" target="_blank" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-blue-500/40 text-slate-300 hover:text-white transition flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+            <span>Executive Resume</span>
+          </a>
+          <a href="honda-walkthrough.html" target="_blank" class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-amber-500/40 text-slate-300 hover:text-white transition flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <span>Honda Telematics</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+  <script>
+    // ==========================================
+    // 9 BRAND THEMES REGISTRY
+    // ==========================================
+    const BRAND_THEMES = {
+      blue: {
+        id: 'blue',
+        name: 'Royal Blue',
+        subtitle: 'Signature Executive',
+        dotCol: '#3b82f6',
+        primary: '#2563eb',
+        primaryHover: '#1d4ed8',
+        secondary: '#3b82f6',
+        accent: '#60a5fa',
+        glow: 'rgba(37, 99, 235, 0.45)',
+        glowSoft: 'rgba(37, 99, 235, 0.14)',
+        gradient: 'linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%)',
+        cursor: '#60a5fa'
+      },
+      cyan: {
+        id: 'cyan',
+        name: 'Electric Cyan',
+        subtitle: 'Cyber Intelligence',
+        dotCol: '#06b6d4',
+        primary: '#0891b2',
+        primaryHover: '#0e7490',
+        secondary: '#06b6d4',
+        accent: '#22d3ee',
+        glow: 'rgba(6, 182, 212, 0.45)',
+        glowSoft: 'rgba(6, 182, 212, 0.14)',
+        gradient: 'linear-gradient(135deg, #22d3ee 0%, #06b6d4 50%, #3b82f6 100%)',
+        cursor: '#22d3ee'
+      },
+      emerald: {
+        id: 'emerald',
+        name: 'Emerald Mint',
+        subtitle: 'Healthcare Clinical',
+        dotCol: '#10b981',
+        primary: '#059669',
+        primaryHover: '#047857',
+        secondary: '#10b981',
+        accent: '#34d399',
+        glow: 'rgba(16, 185, 129, 0.45)',
+        glowSoft: 'rgba(16, 185, 129, 0.14)',
+        gradient: 'linear-gradient(135deg, #34d399 0%, #10b981 50%, #06b6d4 100%)',
+        cursor: '#34d399'
+      },
+      crimson: {
+        id: 'crimson',
+        name: 'Crimson Red',
+        subtitle: 'High Velocity & Risk',
+        dotCol: '#ef4444',
+        primary: '#dc2626',
+        primaryHover: '#b91c1c',
+        secondary: '#ef4444',
+        accent: '#f87171',
+        glow: 'rgba(239, 68, 68, 0.45)',
+        glowSoft: 'rgba(239, 68, 68, 0.14)',
+        gradient: 'linear-gradient(135deg, #f87171 0%, #ef4444 50%, #f59e0b 100%)',
+        cursor: '#f87171'
+      },
+      violet: {
+        id: 'violet',
+        name: 'Cyber Violet',
+        subtitle: 'Neural Analytics & AI',
+        dotCol: '#8b5cf6',
+        primary: '#7c3aed',
+        primaryHover: '#6d28d9',
+        secondary: '#8b5cf6',
+        accent: '#c084fc',
+        glow: 'rgba(139, 92, 246, 0.45)',
+        glowSoft: 'rgba(139, 92, 246, 0.14)',
+        gradient: 'linear-gradient(135deg, #c084fc 0%, #8b5cf6 50%, #ec4899 100%)',
+        cursor: '#c084fc'
+      },
+      gold: {
+        id: 'gold',
+        name: 'Solar Gold',
+        subtitle: 'Fintech Luxury',
+        dotCol: '#f59e0b',
+        primary: '#d97706',
+        primaryHover: '#b45309',
+        secondary: '#f59e0b',
+        accent: '#fbbf24',
+        glow: 'rgba(245, 158, 11, 0.45)',
+        glowSoft: 'rgba(245, 158, 11, 0.14)',
+        gradient: 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #ea580c 100%)',
+        cursor: '#fbbf24'
+      },
+      sunset: {
+        id: 'sunset',
+        name: 'Sunset Orange',
+        subtitle: 'Dynamic Telematics',
+        dotCol: '#f97316',
+        primary: '#ea580c',
+        primaryHover: '#c2410c',
+        secondary: '#f97316',
+        accent: '#fb923c',
+        glow: 'rgba(249, 115, 22, 0.45)',
+        glowSoft: 'rgba(249, 115, 22, 0.14)',
+        gradient: 'linear-gradient(135deg, #fb923c 0%, #f97316 50%, #e11d48 100%)',
+        cursor: '#fb923c'
+      },
+      lime: {
+        id: 'lime',
+        name: 'Neon Lime',
+        subtitle: 'Matrix Warehousing',
+        dotCol: '#84cc16',
+        primary: '#65a30d',
+        primaryHover: '#4d7c0f',
+        secondary: '#84cc16',
+        accent: '#a3e635',
+        glow: 'rgba(132, 204, 22, 0.45)',
+        glowSoft: 'rgba(132, 204, 22, 0.14)',
+        gradient: 'linear-gradient(135deg, #a3e635 0%, #84cc16 50%, #10b981 100%)',
+        cursor: '#a3e635'
+      },
+      obsidian: {
+        id: 'obsidian',
+        name: 'Obsidian Slate',
+        subtitle: 'Stealth Titanium',
+        dotCol: '#94a3b8',
+        primary: '#475569',
+        primaryHover: '#334155',
+        secondary: '#64748b',
+        accent: '#f1f5f9',
+        glow: 'rgba(148, 163, 184, 0.35)',
+        glowSoft: 'rgba(148, 163, 184, 0.1)',
+        gradient: 'linear-gradient(135deg, #f8fafc 0%, #94a3b8 50%, #475569 100%)',
+        cursor: '#f1f5f9'
+      }
+    };
+
+    let activeThemeKey = localStorage.getItem('rg_brand_theme') || 'cyan';
+
+    // Global cursor color variable accessed by cursor renderer
+    window.ACTIVE_CURSOR_COLOR = BRAND_THEMES[activeThemeKey]?.cursor || '#22d3ee';
+    window.ACTIVE_CURSOR_GLOW = BRAND_THEMES[activeThemeKey]?.glow || 'rgba(34, 211, 238, 0.45)';
+
+    // Render 9 Theme Swatches in Drawer
+    function renderThemeSwatches() {
+      const container = document.getElementById('themeSwatchesGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      Object.values(BRAND_THEMES).forEach(th => {
+        const isActive = th.id === activeThemeKey;
+        const btn = document.createElement('button');
+        btn.className = 'p-3 rounded-xl bg-slate-900/90 border transition-all text-left flex flex-col gap-1.5 cursor-pointer relative group ' + 
+          (isActive ? 'border-white/80 shadow-lg ring-1 ring-white/60 bg-slate-800' : 'border-slate-800 hover:border-slate-700 hover:bg-slate-800/60');
+        btn.dataset.theme = th.id;
+        btn.onclick = () => applyGlobalTheme(th.id);
+
+        // Hover effect on cursor
+        btn.onmouseenter = () => {
+          window.ACTIVE_CURSOR_COLOR = th.cursor;
+          window.ACTIVE_CURSOR_GLOW = th.glow;
+          const dot = document.getElementById('cursorDot');
+          const ring = document.getElementById('cursorRing');
+          if (dot) {
+            dot.style.backgroundColor = th.cursor;
+            dot.style.boxShadow = '0 0 14px ' + th.cursor + ', 0 0 25px ' + th.glow;
+          }
+          if (ring) {
+            ring.style.borderColor = th.cursor;
+            ring.style.boxShadow = '0 0 20px ' + th.glow;
+          }
+        };
+
+        btn.onmouseleave = () => {
+          const current = BRAND_THEMES[activeThemeKey];
+          window.ACTIVE_CURSOR_COLOR = current.cursor;
+          window.ACTIVE_CURSOR_GLOW = current.glow;
+          const dot = document.getElementById('cursorDot');
+          const ring = document.getElementById('cursorRing');
+          if (dot) {
+            dot.style.backgroundColor = current.cursor;
+            dot.style.boxShadow = '0 0 10px ' + current.cursor;
+          }
+          if (ring) {
+            ring.style.borderColor = current.cursor;
+            ring.style.boxShadow = '0 0 15px ' + current.glow;
+          }
+        };
+
+        btn.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="w-3.5 h-3.5 rounded-full border border-black/40 shadow-sm" style="background-color: ${th.dotCol};"></span>
+            ${isActive ? '<span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>' : ''}
+          </div>
+          <span class="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">${th.name}</span>
+          <span class="text-[9.5px] font-mono text-slate-400 leading-tight">${th.subtitle}</span>
+        `;
+        container.appendChild(btn);
+      });
+    }
+
+    // Apply Theme Globally Across Entire Portfolio
+    function applyGlobalTheme(themeKey, save = true) {
+      const th = BRAND_THEMES[themeKey] || BRAND_THEMES.cyan;
+      activeThemeKey = th.id;
+
+      const root = document.documentElement;
+      root.style.setProperty('--brand-primary', th.primary);
+      root.style.setProperty('--brand-primary-hover', th.primaryHover);
+      root.style.setProperty('--brand-secondary', th.secondary);
+      root.style.setProperty('--brand-accent', th.accent);
+      root.style.setProperty('--brand-glow', th.glow);
+      root.style.setProperty('--brand-glow-soft', th.glowSoft);
+      root.style.setProperty('--brand-gradient', th.gradient);
+      root.style.setProperty('--cursor-color', th.cursor);
+
+      // Update Cursor globals
+      window.ACTIVE_CURSOR_COLOR = th.cursor;
+      window.ACTIVE_CURSOR_GLOW = th.glow;
+      const dot = document.getElementById('cursorDot');
+      const ring = document.getElementById('cursorRing');
+      if (dot) {
+        dot.style.backgroundColor = th.cursor;
+        dot.style.boxShadow = '0 0 12px ' + th.cursor + ', 0 0 20px ' + th.glow;
+      }
+      if (ring) {
+        ring.style.borderColor = th.cursor;
+        ring.style.boxShadow = '0 0 18px ' + th.glow;
+      }
+
+      // Update navbar dot & badge
+      const navDot = document.getElementById('navNameDot');
+      if (navDot) navDot.style.color = th.accent;
+
+      const badgeLabel = document.getElementById('activeThemeBadge');
+      if (badgeLabel) {
+        badgeLabel.textContent = th.name + ' Active';
+        badgeLabel.style.borderColor = th.accent;
+        badgeLabel.style.color = th.accent;
+      }
+
+      // Save preference
+      if (save) {
+        localStorage.setItem('rg_brand_theme', th.id);
+        if (typeof showToast === 'function') {
+          showToast(th.name + ' theme activated across portfolio!');
+        }
+      }
+
+      renderThemeSwatches();
+      drawDrawerBannerPreview();
+    }
+
+    // Open / Close Drawer
+    function toggleBrandDrawer() {
+      const drawer = document.getElementById('brandDrawer');
+      const backdrop = document.getElementById('brandDrawerBackdrop');
+      if (!drawer) return;
+      const isOpen = !drawer.classList.contains('translate-x-full');
+      if (isOpen) {
+        closeBrandDrawer();
+      } else {
+        openBrandDrawer();
+      }
+    }
+
+    function openBrandDrawer() {
+      const drawer = document.getElementById('brandDrawer');
+      const backdrop = document.getElementById('brandDrawerBackdrop');
+      if (!drawer) return;
+      drawer.classList.remove('translate-x-full');
+      if (backdrop) {
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100');
+      }
+      document.body.style.overflow = 'hidden'; // prevent background scroll
+      renderThemeSwatches();
+      drawDrawerBannerPreview();
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function closeBrandDrawer() {
+      const drawer = document.getElementById('brandDrawer');
+      const backdrop = document.getElementById('brandDrawerBackdrop');
+      if (!drawer) return;
+      drawer.classList.add('translate-x-full');
+      if (backdrop) {
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+      }
+      document.body.style.overflow = '';
+    }
+
+    // Press 'T' to open Theme Drawer, Escape to close
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeBrandDrawer();
+      if ((e.key === 't' || e.key === 'T') && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        toggleBrandDrawer();
+      }
+    });
+
+    // Draw Quick Banner Preview on Drawer Canvas
+    function drawDrawerBannerPreview() {
+      const c = document.getElementById('drawerBannerCanvas');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+      const W = c.width;
+      const H = c.height;
+      const th = BRAND_THEMES[activeThemeKey] || BRAND_THEMES.cyan;
+
+      ctx.clearRect(0, 0, W, H);
+      // Background
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0, '#060a12');
+      bgGrad.addColorStop(0.4, '#020617');
+      bgGrad.addColorStop(1, '#050810');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 44) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = 0; y < H; y += 44) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      // Content
+      const cx = 385;
+      ctx.fillStyle = th.accent;
+      ctx.font = '800 13px "JetBrains Mono"';
+      ctx.fillText('// ENTERPRISE DATA INTELLIGENCE & BUSINESS ARCHITECTURE', cx, 60);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 50px "Plus Jakarta Sans"';
+      ctx.fillText('RAVINDER GUPTA', cx, 115);
+      ctx.fillStyle = th.accent;
+      ctx.fillText('.', cx + ctx.measureText('RAVINDER GUPTA').width - 8, 115);
+
+      ctx.fillStyle = th.accent;
+      ctx.font = '800 20px "JetBrains Mono"';
+      ctx.fillText('Data Analyst & Business Intelligence Specialist', cx, 150);
+
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '700 14px "Plus Jakarta Sans"';
+      ctx.fillText('Star Schema Warehousing • DirectQuery Cockpits • Serverless Analytics Pipelines', cx, 178);
+
+      // Mini Chips indication
+      ctx.fillStyle = '#060b17';
+      ctx.strokeStyle = th.accent;
+      ctx.lineWidth = 1.5;
+      const tools = ['Advance Excel', 'Power BI', 'SQL', 'Python', 'Tableau', 'Pandas', 'NumPy', 'PySpark', 'Snowflake'];
+      let px = cx;
+      tools.slice(0, 5).forEach(t => {
+        const tw = ctx.measureText(t).width + 30;
+        ctx.strokeRect(px, 206, tw, 36);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '700 12px "Plus Jakarta Sans"';
+        ctx.fillText(t, px + 10, 228);
+        px += tw + 10;
+      });
+
+      // RG Badge with live glow
+      const bx = 1340, by = 198;
+      const glow = ctx.createRadialGradient(bx, by, 20, bx, by, 160);
+      glow.addColorStop(0, th.glow);
+      glow.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath(); ctx.arc(bx, by, 160, 0, Math.PI * 2); ctx.fill();
+
+      ctx.save();
+      ctx.strokeStyle = th.accent;
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 5]);
+      ctx.beginPath(); ctx.arc(bx, by, 94, 0, Math.PI * 2); ctx.stroke();
+      ctx.restore();
+
+      ctx.fillStyle = '#060a12';
+      ctx.strokeStyle = th.accent;
+      ctx.lineWidth = 2.5;
+      ctx.strokeRect(bx - 70, by - 70, 140, 140);
+      ctx.fillRect(bx - 70, by - 70, 140, 140);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 58px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('RG', bx, by);
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      applyGlobalTheme(activeThemeKey, false);
+      renderThemeSwatches();
+    });
+  </script>
+
 </body>
 </html>
