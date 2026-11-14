@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ravinder Gupta — LinkedIn Profile Banner Studio (Razor Sharp 1584 × 396)</title>
+  <title>Ravinder Gupta — LinkedIn Profile Banner Studio (1584 × 396)</title>
   <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
@@ -31,11 +31,11 @@
       <div>
         <h1 class="text-lg font-black tracking-wide text-white flex items-center gap-2">
           LinkedIn Profile Banner Studio
-          <span class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-            Razor-Sharp Edition • Zero Blur
+          <span class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+            Live Brand Lighting Edition • 1584 × 396
           </span>
         </h1>
-        <p class="text-xs text-slate-400 font-mono">100% crisp typography, pure deep contrast &amp; official vector brand logos</p>
+        <p class="text-xs text-slate-400 font-mono">Razor-sharp typography on left, live glowing brand mark on right</p>
       </div>
     </div>
 
@@ -64,14 +64,14 @@
       <!-- Toolbar -->
       <div class="w-full flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-800 text-xs font-mono">
         <div class="flex items-center gap-2">
-          <span class="text-slate-400">Clarity:</span>
-          <span class="text-emerald-400 font-bold">Zero Fog / Razor-Sharp Contrast</span>
+          <span class="text-slate-400">Typography:</span>
+          <span class="text-emerald-400 font-bold">Sharp &amp; Clean</span>
+          <span class="text-slate-600">&bull;</span>
+          <span class="text-slate-400">Brand Badge:</span>
+          <span class="text-cyan-400 font-bold">Live Neon Lighting (x=1340)</span>
           <span class="text-slate-600">&bull;</span>
           <span class="text-slate-400">Tools:</span>
-          <span class="text-cyan-400 font-bold">9 Official Vectors</span>
-          <span class="text-slate-600">&bull;</span>
-          <span class="text-slate-400">Position:</span>
-          <span class="text-amber-400 font-bold">x=1340 Balanced</span>
+          <span class="text-amber-400 font-bold">9 Official Vectors</span>
         </div>
 
         <!-- Theme Selector (6 Themes) & DP Safe Zone Toggle -->
@@ -97,14 +97,14 @@
         <canvas id="bannerCanvas" width="1584" height="396" class="w-full h-full object-contain"></canvas>
       </div>
 
-      <!-- Quick Explanation on Razor-Sharp Fixes -->
+      <!-- Quick Explanation on Live Lighting & Sharp Text -->
       <div class="w-full mt-4 pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-2">
         <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-          <span><strong>Clarity Engine Active:</strong> Light haze removed from behind text, glow blur eliminated, font contrast boosted to 100% pure white &amp; crisp vector edges!</span>
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+          <span><strong>Brand Live Lighting Active:</strong> RG Monogram badge features radiant halo glow, neon drop shadow &amp; orbital pulses. Text &amp; tools remain 100% razor-sharp.</span>
         </div>
-        <div class="font-mono text-emerald-400">
-          ✓ Ultra-Sharp Crisp Rendering
+        <div class="font-mono text-cyan-400">
+          ● Live Brand Identity
         </div>
       </div>
 
@@ -202,6 +202,8 @@
         gradientEnd: '#02040a',
         badgeGrad1: '#22d3ee',
         badgeGrad2: '#6366f1',
+        glow: 'rgba(34, 211, 238, 0.35)',
+        textDrop: 'rgba(34, 211, 238, 0.7)',
         btnBg: 'bg-cyan-500'
       },
       crimson: {
@@ -212,6 +214,8 @@
         gradientEnd: '#040101',
         badgeGrad1: '#ef4444',
         badgeGrad2: '#f59e0b',
+        glow: 'rgba(239, 68, 68, 0.4)',
+        textDrop: 'rgba(239, 68, 68, 0.7)',
         btnBg: 'bg-red-500'
       },
       emerald: {
@@ -222,6 +226,8 @@
         gradientEnd: '#010805',
         badgeGrad1: '#34d399',
         badgeGrad2: '#06b6d4',
+        glow: 'rgba(16, 185, 129, 0.4)',
+        textDrop: 'rgba(16, 185, 129, 0.7)',
         btnBg: 'bg-emerald-500'
       },
       violet: {
@@ -232,6 +238,8 @@
         gradientEnd: '#040108',
         badgeGrad1: '#c084fc',
         badgeGrad2: '#ec4899',
+        glow: 'rgba(168, 85, 247, 0.4)',
+        textDrop: 'rgba(168, 85, 247, 0.7)',
         btnBg: 'bg-purple-500'
       },
       gold: {
@@ -242,6 +250,8 @@
         gradientEnd: '#050301',
         badgeGrad1: '#fbbf24',
         badgeGrad2: '#f97316',
+        glow: 'rgba(245, 158, 11, 0.4)',
+        textDrop: 'rgba(245, 158, 11, 0.7)',
         btnBg: 'bg-amber-500'
       },
       obsidian: {
@@ -252,6 +262,8 @@
         gradientEnd: '#020617',
         badgeGrad1: '#cbd5e1',
         badgeGrad2: '#64748b',
+        glow: 'rgba(226, 232, 240, 0.25)',
+        textDrop: 'rgba(226, 232, 240, 0.5)',
         btnBg: 'bg-slate-300'
       }
     };
@@ -296,7 +308,7 @@
       if (stroke) ctx.stroke();
     }
 
-    // MAIN RAZOR-SHARP DRAW FUNCTION (Supports 1x Preview & 2x Ultra-HD Retina Export)
+    // MAIN DRAW FUNCTION (Supports 1x Preview & 2x Ultra-HD Retina Export)
     function drawOnContext(tCtx, scale = 1, renderDp = true) {
       const W = 1584 * scale;
       const H = 396 * scale;
@@ -305,11 +317,10 @@
       tCtx.save();
       tCtx.scale(scale, scale);
 
-      // Disable any default canvas blurring, enable clean crisp lines
       tCtx.imageSmoothingEnabled = true;
       tCtx.imageSmoothingQuality = 'high';
 
-      // 1. DEEP CRISP BACKGROUND GRADIENT (Zero fog behind text)
+      // 1. DEEP CRISP BACKGROUND GRADIENT (Deep obsidian on left/center so text is razor-sharp)
       const bgGrad = tCtx.createLinearGradient(0, 0, 1584, 396);
       bgGrad.addColorStop(0, th.gradientStart);
       bgGrad.addColorStop(0.45, '#020617');
@@ -328,7 +339,7 @@
         tCtx.beginPath(); tCtx.moveTo(0, y); tCtx.lineTo(1584, y); tCtx.stroke();
       }
 
-      // 3. SUBTLE CLEAN CORNER ACCENTS (Zero blur)
+      // 3. SUBTLE CLEAN CORNER ACCENTS
       tCtx.strokeStyle = th.accent;
       tCtx.lineWidth = 2;
       tCtx.beginPath(); tCtx.moveTo(18, 40); tCtx.lineTo(18, 18); tCtx.lineTo(40, 18); tCtx.stroke();
@@ -337,11 +348,11 @@
       tCtx.beginPath(); tCtx.moveTo(1584 - 40, 396 - 18); tCtx.lineTo(1584 - 18, 396 - 18); tCtx.lineTo(1584 - 18, 396 - 40); tCtx.stroke();
 
       // ==========================================
-      // TEXT & CONTENT SECTION (RAZOR SHARP TYPOGRAPHY)
+      // TEXT & CONTENT SECTION (RAZOR SHARP TYPOGRAPHY - NO BLUR)
       // ==========================================
       const contentX = 385; // Safely to the right of DP cutout
 
-      // A. Eyebrow Tagline (Crisp mono font, zero shadow blur)
+      // A. Eyebrow Tagline
       tCtx.shadowColor = 'transparent';
       tCtx.shadowBlur = 0;
       tCtx.fillStyle = th.accent;
@@ -349,8 +360,8 @@
       tCtx.textAlign = 'left';
       tCtx.fillText('// ENTERPRISE DATA INTELLIGENCE & BUSINESS ARCHITECTURE', contentX, 60);
 
-      // B. Main Full Name: 100% PURE WHITE, ZERO BLUR HALO, RAZOR-SHARP EDGES
-      tCtx.shadowColor = 'rgba(0, 0, 0, 0.9)'; // Subtle dark drop shadow only to separate from background
+      // B. Main Full Name: Pure crisp white with 1px subtle dark separation
+      tCtx.shadowColor = 'rgba(0, 0, 0, 0.9)';
       tCtx.shadowBlur = 3;
       tCtx.shadowOffsetX = 0;
       tCtx.shadowOffsetY = 2;
@@ -359,22 +370,22 @@
       tCtx.font = '900 50px "Plus Jakarta Sans"';
       tCtx.fillText('RAVINDER GUPTA', contentX, 115);
 
-      // Dot Accent (Crisp theme color)
+      // Dot Accent
       tCtx.fillStyle = th.accent;
       tCtx.fillText('.', contentX + tCtx.measureText('RAVINDER GUPTA').width - 8, 115);
 
-      // Reset shadows for crystal sharpness on all following text
+      // Reset shadows for razor sharpness
       tCtx.shadowColor = 'transparent';
       tCtx.shadowBlur = 0;
       tCtx.shadowOffsetX = 0;
       tCtx.shadowOffsetY = 0;
 
-      // C. Primary Role & Specialization: High-Contrast Crisp Electric Cyan/Blue
+      // C. Primary Role & Specialization: High-Contrast Electric Accent
       tCtx.fillStyle = th.accent2;
       tCtx.font = '800 20px "JetBrains Mono"';
       tCtx.fillText('Data Analyst & Business Intelligence Specialist', contentX, 150);
 
-      // D. Architectural Subtitle: Bright High-Contrast Slate (e2e8f0, not dull muted gray)
+      // D. Architectural Subtitle: Bright crisp slate
       tCtx.fillStyle = '#e2e8f0';
       tCtx.font = '700 14px "Plus Jakarta Sans"';
       tCtx.fillText('Star Schema Warehousing • DirectQuery Cockpits • Serverless Analytics Pipelines', contentX, 178);
@@ -397,20 +408,17 @@
 
       let lx1 = contentX;
       line1Chips.forEach(c => {
-        // Chip Solid Background (High contrast, deep slate-950)
         tCtx.fillStyle = '#060b17';
         roundRect(tCtx, lx1, line1Y, c.w, chipHeight, 10, true, false);
         tCtx.strokeStyle = c.color;
         tCtx.lineWidth = 1.6;
         roundRect(tCtx, lx1, line1Y, c.w, chipHeight, 10, false, true);
 
-        // Draw Official Standard Vector Logo
         const img = logoImages[c.logo];
         if (img && img.complete) {
           tCtx.drawImage(img, lx1 + 10, line1Y + (chipHeight - logoSize) / 2, logoSize, logoSize);
         }
 
-        // Chip Text: Pure crisp white
         tCtx.fillStyle = '#ffffff';
         tCtx.font = '700 13.5px "Plus Jakarta Sans"';
         tCtx.textAlign = 'left';
@@ -432,14 +440,12 @@
       let lx2 = contentX;
       line2Chips.forEach(c => {
         if (c.isJoiner) {
-          // Status Pill: 0 Days Notice (Joiner) - Solid crisp emerald border
           tCtx.fillStyle = '#031a14';
           roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, true, false);
           tCtx.strokeStyle = '#10b981';
           tCtx.lineWidth = 1.8;
           roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, false, true);
 
-          // Neon Active Indicator Dot
           tCtx.fillStyle = '#34d399';
           tCtx.beginPath();
           tCtx.arc(lx2 + 16, line2Y + 21, 4.5, 0, Math.PI * 2);
@@ -450,20 +456,17 @@
           tCtx.textAlign = 'left';
           tCtx.fillText('0 Days Notice (Joiner)', lx2 + 28, line2Y + 26);
         } else {
-          // Chip Background
           tCtx.fillStyle = '#060b17';
           roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, true, false);
           tCtx.strokeStyle = c.color;
           tCtx.lineWidth = 1.6;
           roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, false, true);
 
-          // Draw Official Standard Vector Logo
           const img = logoImages[c.logo];
           if (img && img.complete) {
             tCtx.drawImage(img, lx2 + 10, line2Y + (chipHeight - logoSize) / 2, logoSize, logoSize);
           }
 
-          // Chip Text: Pure crisp white
           tCtx.fillStyle = '#ffffff';
           tCtx.font = '700 13.5px "Plus Jakarta Sans"';
           tCtx.textAlign = 'left';
@@ -473,7 +476,7 @@
         lx2 += c.w + 10;
       });
 
-      // E. Live Portfolio & GitHub Verification Footer (Sharp clean typography)
+      // E. Live Portfolio & GitHub Verification Footer
       const bottomY = 332;
       tCtx.fillStyle = '#cbd5e1';
       tCtx.font = '700 13px "JetBrains Mono"';
@@ -488,38 +491,59 @@
       tCtx.fillText('•  GitHub: github.com/ravinder0710', contentX + 410, bottomY);
 
       // ==========================================
-      // RIGHT SIDE: 3D RG MONOGRAM BRAND BADGE (BALANCED AT X=1340)
+      // RIGHT SIDE: 3D RG MONOGRAM BRAND BADGE (WITH LIVE GLOW LIGHTING EFFECT)
       // ==========================================
       const badgeCenterX = 1340;
       const badgeCenterY = 198;
       const badgeSize = 142;
 
-      // Outer Dashed Orbit Ring (Crisp, zero blur)
+      // 1. Ambient Radiant Glow Aura (Only behind the RG badge!)
+      const radGlow2 = tCtx.createRadialGradient(badgeCenterX, badgeCenterY, 20, badgeCenterX, badgeCenterY, 280);
+      radGlow2.addColorStop(0, th.glow);
+      radGlow2.addColorStop(1, 'rgba(0,0,0,0)');
+      tCtx.fillStyle = radGlow2;
+      tCtx.fillRect(badgeCenterX - 280, 0, 560, 396);
+
+      // 2. Focused Core Halo Glow
+      const badgeGlow = tCtx.createRadialGradient(badgeCenterX, badgeCenterY, 30, badgeCenterX, badgeCenterY, 130);
+      badgeGlow.addColorStop(0, th.glow);
+      badgeGlow.addColorStop(1, 'rgba(0,0,0,0)');
+      tCtx.fillStyle = badgeGlow;
+      tCtx.beginPath();
+      tCtx.arc(badgeCenterX, badgeCenterY, 130, 0, Math.PI * 2);
+      tCtx.fill();
+
+      // 3. Glowing Outer Dashed Orbit Ring
       tCtx.save();
       tCtx.strokeStyle = th.accent;
       tCtx.lineWidth = 1.8;
+      tCtx.shadowColor = th.accent;
+      tCtx.shadowBlur = 10;
       tCtx.setLineDash([7, 6]);
       tCtx.beginPath();
       tCtx.arc(badgeCenterX, badgeCenterY, 94, 0, Math.PI * 2);
       tCtx.stroke();
       tCtx.restore();
 
-      // Outer Solid Ring
-      tCtx.strokeStyle = 'rgba(255, 255, 255, 0.16)';
+      // 4. Outer Solid Ring
+      tCtx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
       tCtx.lineWidth = 1.5;
       tCtx.beginPath();
       tCtx.arc(badgeCenterX, badgeCenterY, 108, 0, Math.PI * 2);
       tCtx.stroke();
 
-      // Rounded 3D Monogram Tile
+      // 5. Rounded 3D Monogram Tile with rich neon drop shadow glow
       const tileX = badgeCenterX - badgeSize / 2;
       const tileY = badgeCenterY - badgeSize / 2;
 
-      // Crisp tile background
+      tCtx.save();
+      tCtx.shadowColor = th.accent;
+      tCtx.shadowBlur = 24;
       tCtx.fillStyle = '#060a12';
       roundRect(tCtx, tileX, tileY, badgeSize, badgeSize, 28, true, false);
+      tCtx.restore();
 
-      // Inner Tile Gradient Border
+      // 6. Inner Tile Gradient Border with vivid neon shine
       const tileBorderGrad = tCtx.createLinearGradient(tileX, tileY, tileX + badgeSize, tileY + badgeSize);
       tileBorderGrad.addColorStop(0, th.badgeGrad1);
       tileBorderGrad.addColorStop(1, th.badgeGrad2);
@@ -527,25 +551,24 @@
       tCtx.lineWidth = 2.6;
       roundRect(tCtx, tileX, tileY, badgeSize, badgeSize, 28, false, true);
 
-      // Inner Ambient Fill
+      // 7. Inner Ambient Depth Fill
       const innerTileGrad = tCtx.createRadialGradient(badgeCenterX, badgeCenterY, 10, badgeCenterX, badgeCenterY, badgeSize / 1.4);
       innerTileGrad.addColorStop(0, '#111827');
       innerTileGrad.addColorStop(1, '#030712');
       tCtx.fillStyle = innerTileGrad;
       roundRect(tCtx, tileX + 3, tileY + 3, badgeSize - 6, badgeSize - 6, 25, true, false);
 
-      // Razor-Sharp RG Monogram (Centered, 100% white, zero blur)
-      tCtx.shadowColor = 'rgba(0, 0, 0, 0.85)';
-      tCtx.shadowBlur = 4;
-      tCtx.shadowOffsetY = 2;
+      // 8. Glowing Live RG Monogram Lettering
+      tCtx.save();
+      tCtx.shadowColor = th.textDrop || th.accent;
+      tCtx.shadowBlur = 16;
       tCtx.fillStyle = '#ffffff';
       tCtx.font = '900 60px "Plus Jakarta Sans"';
       tCtx.textAlign = 'center';
       tCtx.textBaseline = 'middle';
       tCtx.fillText('RG', badgeCenterX, badgeCenterY);
-      tCtx.shadowColor = 'transparent';
-      tCtx.shadowBlur = 0;
-      tCtx.textBaseline = 'alphabetic'; // Reset baseline
+      tCtx.restore();
+      tCtx.textBaseline = 'alphabetic';
 
       // ==========================================
       // LEFT PROFILE PHOTO (DP) CUTOUT & RECRUITER SAFE-ZONE
@@ -555,20 +578,17 @@
         const dpY = 198;
         const dpRadius = 132;
 
-        // Dimmed overlay for DP zone
         tCtx.save();
         tCtx.beginPath();
         tCtx.arc(dpX, dpY, dpRadius, 0, Math.PI * 2);
         tCtx.fillStyle = 'rgba(0, 0, 0, 0.65)';
         tCtx.fill();
 
-        // Dashed Neon Outline
         tCtx.strokeStyle = th.accent;
         tCtx.lineWidth = 2.5;
         tCtx.setLineDash([8, 6]);
         tCtx.stroke();
 
-        // Informational Text inside DP circle
         tCtx.fillStyle = '#ffffff';
         tCtx.font = '800 12px "JetBrains Mono"';
         tCtx.textAlign = 'center';
@@ -594,7 +614,6 @@
       exportCanvas.height = 396 * scale;
       const expCtx = exportCanvas.getContext('2d');
 
-      // Draw cleanly WITHOUT the DP cutout circle
       drawOnContext(expCtx, scale, false);
 
       const link = document.createElement('a');
