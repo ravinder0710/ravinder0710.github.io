@@ -427,51 +427,32 @@
         lx1 += c.w + 10;
       });
 
-      // LINE 2 (4 Tools + Immediate Joiner = 5 Chips): Pandas, NumPy, PySpark, Snowflake + 0 Days Notice
+      // LINE 2 (4 Tools): Pandas, NumPy, PySpark, Snowflake
       const line2Y = 256;
       const line2Chips = [
-        { label: 'Pandas', logo: 'pandas', color: '#ec4899', textCol: '#ffffff', w: 116 },
-        { label: 'NumPy', logo: 'numpy', color: '#0ea5e9', textCol: '#ffffff', w: 112 },
-        { label: 'PySpark', logo: 'pyspark', color: '#f97316', textCol: '#ffffff', w: 124 },
-        { label: 'Snowflake', logo: 'snowflake', color: '#06b6d4', textCol: '#ffffff', w: 136 },
-        { isJoiner: true, w: 202 }
+        { label: 'Pandas', logo: 'pandas', color: '#ec4899', textCol: '#ffffff', w: 120 },
+        { label: 'NumPy', logo: 'numpy', color: '#0ea5e9', textCol: '#ffffff', w: 116 },
+        { label: 'PySpark', logo: 'pyspark', color: '#f97316', textCol: '#ffffff', w: 128 },
+        { label: 'Snowflake', logo: 'snowflake', color: '#06b6d4', textCol: '#ffffff', w: 140 }
       ];
 
       let lx2 = contentX;
       line2Chips.forEach(c => {
-        if (c.isJoiner) {
-          tCtx.fillStyle = '#031a14';
-          roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, true, false);
-          tCtx.strokeStyle = '#10b981';
-          tCtx.lineWidth = 1.8;
-          roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, false, true);
+        tCtx.fillStyle = '#060b17';
+        roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, true, false);
+        tCtx.strokeStyle = c.color;
+        tCtx.lineWidth = 1.6;
+        roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, false, true);
 
-          tCtx.fillStyle = '#34d399';
-          tCtx.beginPath();
-          tCtx.arc(lx2 + 16, line2Y + 21, 4.5, 0, Math.PI * 2);
-          tCtx.fill();
-
-          tCtx.fillStyle = '#34d399';
-          tCtx.font = '800 13px "JetBrains Mono"';
-          tCtx.textAlign = 'left';
-          tCtx.fillText('0 Days Notice (Joiner)', lx2 + 28, line2Y + 26);
-        } else {
-          tCtx.fillStyle = '#060b17';
-          roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, true, false);
-          tCtx.strokeStyle = c.color;
-          tCtx.lineWidth = 1.6;
-          roundRect(tCtx, lx2, line2Y, c.w, chipHeight, 10, false, true);
-
-          const img = logoImages[c.logo];
-          if (img && img.complete) {
-            tCtx.drawImage(img, lx2 + 10, line2Y + (chipHeight - logoSize) / 2, logoSize, logoSize);
-          }
-
-          tCtx.fillStyle = '#ffffff';
-          tCtx.font = '700 13.5px "Plus Jakarta Sans"';
-          tCtx.textAlign = 'left';
-          tCtx.fillText(c.label, lx2 + 42, line2Y + 26);
+        const img = logoImages[c.logo];
+        if (img && img.complete) {
+          tCtx.drawImage(img, lx2 + 10, line2Y + (chipHeight - logoSize) / 2, logoSize, logoSize);
         }
+
+        tCtx.fillStyle = '#ffffff';
+        tCtx.font = '700 13.5px "Plus Jakarta Sans"';
+        tCtx.textAlign = 'left';
+        tCtx.fillText(c.label, lx2 + 42, line2Y + 26);
 
         lx2 += c.w + 10;
       });
