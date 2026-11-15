@@ -76,6 +76,17 @@
       transform: scale(1) translateY(0);
     }
 
+    /* Cinematic Dynamic Motion on Active Screenshots (Ken Burns Studio Effect) */
+    @keyframes kenburns {
+      0% { transform: scale(1) translate(0, 0); }
+      50% { transform: scale(1.05) translate(-1.5%, -1%); }
+      100% { transform: scale(1.02) translate(1%, 0.5%); }
+    }
+    .scene.active img {
+      animation: kenburns 14s cubic-bezier(0.25, 1, 0.5, 1) infinite alternate;
+      will-change: transform;
+    }
+
     /* Laser Progress Line */
     .progress-bar-fill {
       transition: width 0.15s linear;
@@ -467,9 +478,9 @@
 
         <div class="flex items-center gap-2">
           <!-- Ambient Synth Audio Toggle -->
-          <button id="audioToggleBtn" onclick="toggleAudio()" class="px-2.5 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white transition cursor-pointer flex items-center gap-1.5 border border-slate-800" title="Toggle Ambient Synth Track">
-            <i id="audioIcon" data-lucide="volume-2" class="w-4 h-4 text-sky-400"></i>
-            <span class="text-[10px] hidden sm:inline" id="audioText">Music On</span>
+          <button id="audioToggleBtn" onclick="toggleAudio()" class="px-2.5 py-1.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-400 hover:text-white transition cursor-pointer flex items-center gap-1.5 border border-slate-800" title="Toggle Ambient Synth Track">
+            <i id="audioIcon" data-lucide="volume-x" class="w-4 h-4"></i>
+            <span class="text-[10px] hidden sm:inline" id="audioText">Music Muted</span>
           </button>
 
           <!-- Fullscreen Button -->
@@ -552,11 +563,9 @@
       document.getElementById('currentTime').innerText = mins + ':' + (secs < 10 ? '0' : '') + secs;
     }
 
-    // ==========================================
-    // Ambient Futuristic Synth Audio Generator (Web Audio API)
-    // ==========================================
+    // Ambient Synth Audio (Muted by default to avoid browser audio distortion)
     let audioCtx = null;
-    let isAudioEnabled = true;
+    let isAudioEnabled = false;
     let synthInterval = null;
     let masterGain = null;
 
