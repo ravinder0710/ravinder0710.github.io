@@ -13,25 +13,62 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Ultra-Sleek Narrow Scrollbar */
-    html {
+    /* Ultra-Sleek Narrow Scrollbar (Global, Inner Containers & Code Blocks) */
+    *, html, body {
       scrollbar-width: thin;
-      scrollbar-color: #1e293b transparent;
+      scrollbar-color: #334155 transparent;
     }
-    ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+    ::-webkit-scrollbar,
+    *::-webkit-scrollbar {
+      width: 5px !important;
+      height: 5px !important;
     }
-    ::-webkit-scrollbar-track {
-      background: transparent;
+    ::-webkit-scrollbar-track,
+    *::-webkit-scrollbar-track {
+      background: transparent !important;
     }
-    ::-webkit-scrollbar-thumb {
-      background: #1e293b;
-      border-radius: 9999px;
+    ::-webkit-scrollbar-thumb,
+    *::-webkit-scrollbar-thumb {
+      background: #1e293b !important;
+      border-radius: 9999px !important;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #334155;
+    ::-webkit-scrollbar-thumb:hover,
+    *::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8 !important;
     }
+    ::-webkit-scrollbar-corner,
+    *::-webkit-scrollbar-corner {
+      background: transparent !important;
+    }
+    ::-webkit-scrollbar-button,
+    *::-webkit-scrollbar-button {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+    }
+
+    /* Dedicated Codeblock & Pre Horizontal Scrollbar Styling */
+    pre, pre code {
+      scrollbar-width: thin;
+      scrollbar-color: #334155 rgba(15, 23, 42, 0.7);
+    }
+    pre::-webkit-scrollbar {
+      height: 4px !important;
+      width: 4px !important;
+    }
+    pre::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.7) !important;
+      border-radius: 9999px !important;
+    }
+    pre::-webkit-scrollbar-thumb {
+      background: #334155 !important;
+      border-radius: 9999px !important;
+    }
+    pre::-webkit-scrollbar-thumb:hover {
+      background: #38bdf8 !important;
+    }
+
+
 
     body {
       background-color: #07050d;
