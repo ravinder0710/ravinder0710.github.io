@@ -16,17 +16,28 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    @media print {
-      /* Mobile Optimization: Completely disable custom cursor on mobile / touch */
-    @media (max-width: 1024px), (pointer: coarse), (hover: none) {
-      #cursorCanvas, #cursorDot, #cursorRing {
-        display: none !important;
-        visibility: hidden !important;
-        opacity: 0 !important;
-        pointer-events: none !important;
-      }
+    /* Ultra-Sleek Narrow Scrollbar */
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #1e293b transparent;
     }
-    body { background: #ffffff !important; color: #000000 !important; }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    @media print {
+      body { background: #ffffff !important; color: #000000 !important; }
       .no-print { display: none !important; }
       .print-container { box-shadow: none !important; border: none !important; max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
       a { text-decoration: none !important; color: #000000 !important; }

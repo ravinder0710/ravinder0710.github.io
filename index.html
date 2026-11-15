@@ -95,10 +95,25 @@
       border-color: #3b82f6;
       box-shadow: 0 0 16px rgba(37, 99, 235, 0.45);
     }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #090d16; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    /* Ultra-Sleek Narrow Scrollbar */
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #1e293b transparent;
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
 
     /* Luxury Cinematic Curtain Preloader */
     #introPreloader {
