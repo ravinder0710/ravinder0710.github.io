@@ -79,7 +79,7 @@
 
     /* Luxury Emerald & Gold Curtain Preloader */
     #financePreloader {
-      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      transition: transform 0.45s cubic-bezier(0.85, 0, 0.15, 1);
       box-shadow: 0 25px 60px rgba(16, 185, 129, 0.35);
     }
 
@@ -750,7 +750,7 @@ DIVIDE(
 
       preloader.addEventListener('click', dismissPreloader);
 
-      const stepDuration = 28; // ~2.8s progression
+      const stepDuration = 20; // Snappy 1.5s total // ~2.8s progression
       const interval = setInterval(() => {
         current += Math.floor(Math.random() * 3) + 1;
         if (current >= 100) {
@@ -762,7 +762,7 @@ DIVIDE(
             statusEl.innerText = '● Wealth Analytics Cockpit Ready';
             statusEl.style.color = '#34d399';
           }
-          setTimeout(dismissPreloader, 200);
+          setTimeout(dismissPreloader, 100);
         } else {
           if (countEl) countEl.innerText = current + '%';
           if (barEl) barEl.style.width = current + '%';

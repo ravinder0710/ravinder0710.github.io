@@ -79,7 +79,7 @@
 
     /* Luxury Royal Blue/Fintech Curtain Preloader */
     #bankLoanPreloader {
-      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      transition: transform 0.45s cubic-bezier(0.85, 0, 0.15, 1);
       box-shadow: 0 25px 60px rgba(37, 99, 235, 0.35);
     }
 
@@ -649,7 +649,7 @@ AVERAGEX(
 
       preloader.addEventListener('click', dismissPreloader);
 
-      const stepDuration = 28; // ~2.8s total progression
+      const stepDuration = 20; // Snappy 1.5s total // ~2.8s total progression
       const interval = setInterval(() => {
         current += Math.floor(Math.random() * 3) + 1;
         if (current >= 100) {
@@ -661,7 +661,7 @@ AVERAGEX(
             statusEl.innerText = '● Banking Risk Cockpit Ready';
             statusEl.style.color = '#38bdf8';
           }
-          setTimeout(dismissPreloader, 200);
+          setTimeout(dismissPreloader, 100);
         } else {
           if (countEl) countEl.innerText = current + '%';
           if (barEl) barEl.style.width = current + '%';

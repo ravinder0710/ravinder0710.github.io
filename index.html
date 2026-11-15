@@ -152,7 +152,7 @@
 
     /* Luxury Cinematic Curtain Preloader */
     #introPreloader {
-      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      transition: transform 0.45s cubic-bezier(0.85, 0, 0.15, 1);
       box-shadow: 0 25px 60px rgba(56, 189, 248, 0.28);
     }
 
@@ -169,6 +169,18 @@
     }
     a:hover, button:hover {
       text-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+    }
+
+    /* Hero Domain Pill Boxes with Cyan Hover Glow (2nd Screenshot Style) */
+    .domain-pill {
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease, box-shadow 0.22s ease, color 0.22s ease, background-color 0.22s ease !important;
+    }
+    .domain-pill:hover {
+      border-color: rgba(56, 189, 248, 0.85) !important;
+      transform: translateY(-2px) !important;
+      box-shadow: 0 0 16px -2px rgba(56, 189, 248, 0.5) !important;
+      color: #ffffff !important;
+      background-color: rgba(15, 23, 42, 0.95) !important;
     }
   </style>
 
@@ -358,14 +370,14 @@
         </div>
 
         <!-- Industry Verticals Ticker -->
-        <div class="flex flex-wrap items-center gap-2 pt-2 text-[11px] font-semibold text-slate-400">
-          <span class="text-xs text-slate-500 uppercase font-mono tracking-wider">Domains:</span>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Healthcare</span>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Automotive</span>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Banking &amp; Finance</span>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Retail</span>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Human Resources</span>
-          <span class="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">Fraud Analysis</span>
+        <div class="flex flex-wrap items-center gap-2 pt-2 text-xs font-semibold text-slate-400">
+          <span class="text-xs text-slate-500 uppercase font-mono tracking-wider mr-1">Domains:</span>
+          <button onclick="handleProjectSearch('Healthcare')" class="domain-pill px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer">Healthcare</button>
+          <button onclick="handleProjectSearch('Honda')" class="domain-pill px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer">Automotive</button>
+          <button onclick="handleProjectSearch('Loan')" class="domain-pill px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer">Banking &amp; Finance</button>
+          <button onclick="handleProjectSearch('Retail')" class="domain-pill px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer">Retail</button>
+          <button onclick="handleProjectSearch('HR')" class="domain-pill px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer">Human Resources</button>
+          <button onclick="handleProjectSearch('Fraud')" class="domain-pill px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer">Fraud Analysis</button>
         </div>
 
         <!-- Quick Proof Metrics -->
@@ -1267,8 +1279,8 @@
       // Allow recruiter to click/tap anywhere to skip immediately
       preloader.addEventListener('click', dismissPreloader);
 
-      // Exact 2.2-second progression: 1.5s counter + 0.2s pause + 0.5s slide
-      const stepDuration = 25; // 60 ticks * 25ms = 1500ms
+      // Snappy 1.5-second total experience: 1.0s counter + 0.1s pause + 0.4s slide
+      const stepDuration = 20; // ~50 ticks * 20ms = ~1000ms
       const interval = setInterval(() => {
         current += Math.floor(Math.random() * 3) + 1; // 1-3% increment
         if (current >= 100) {
@@ -1281,8 +1293,8 @@
             statusEl.style.color = '#4ade80';
           }
 
-          // 200ms royal pause at 100%, then slide up!
-          setTimeout(dismissPreloader, 200);
+          // Snappy 100ms pause at 100%, then slide up!
+          setTimeout(dismissPreloader, 100);
         } else {
           if (countEl) countEl.innerText = current + '%';
           if (barEl) barEl.style.width = current + '%';

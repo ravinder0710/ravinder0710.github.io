@@ -79,7 +79,7 @@
 
     /* Luxury Cyber Crimson & Gold Curtain Preloader */
     #fraudPreloader {
-      transition: transform 0.75s cubic-bezier(0.85, 0, 0.15, 1);
+      transition: transform 0.45s cubic-bezier(0.85, 0, 0.15, 1);
       box-shadow: 0 25px 60px rgba(239, 68, 68, 0.35);
     }
 
@@ -147,7 +147,7 @@
       <!-- Progress Bar & Counter -->
       <div class="w-64 space-y-2">
         <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-red-500/20">
-          <div id="preloaderBar" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 rounded-full w-0 transition-all duration-[2200ms] ease-out"></div>
+          <div id="preloaderBar" class="h-full bg-gradient-to-r from-red-600 via-amber-500 to-yellow-400 rounded-full w-0 transition-all duration-100 ease-out"></div>
         </div>
         <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
           <span>Initializing Surveillance Cockpit</span>
@@ -719,12 +719,9 @@ RETURN
 
         if (progress >= 100) {
           clearInterval(interval);
-          setTimeout(() => {
-            preloader.style.transform = 'translateY(-100%)';
-            setTimeout(() => preloader.style.display = 'none', 750);
-          }, 300);
+          setTimeout(() => { preloader.style.transform = 'translateY(-100%)'; setTimeout(() => preloader.style.display = 'none', 450); }, 120);
         }
-      }, 75); // ~2.2s total duration
+      }, 42); // Snappy 1.5s total duration
     });
 
     // 2-View Showcase Data Model (Executive Cockpit & P1/P2/P3 Governance)
