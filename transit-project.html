@@ -44,6 +44,20 @@
       color: #ffffff;
       box-shadow: 0 8px 24px -6px rgba(20, 184, 166, 0.4);
     }
+
+    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
+    div[class*="p-4 rounded-2xl"],
+    div[class*="p-5 rounded-2xl"],
+    div[class*="p-6 rounded-2xl"] {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    div[class*="p-4 rounded-2xl"]:hover,
+    div[class*="p-5 rounded-2xl"]:hover,
+    div[class*="p-6 rounded-2xl"]:hover {
+      border-color: rgba(56, 189, 248, 0.6) !important;
+      transform: translateY(-3px) !important;
+      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
@@ -387,6 +401,15 @@ RETURN DailyRiders - Benchmark</code></pre>
           <strong class="text-white text-sm block">3. Time-Group Capacity Realignment</strong>
           <p class="leading-relaxed">Reallocated 15% of morning vehicle inventory to the mid-day commercial window (10 AM &ndash; 3 PM, 2,243 riders) and night transit window (8 PM &ndash; 12 AM, 1,653 riders).</p>
         </div>
+      </div>
+
+      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
+        <a href="https://github.com/ravinder0710" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white shadow-xl shadow-teal-600/30 transition-all">
+          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo
+        </a>
+        <a href="finance-project.html" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">
+          Next Project &rarr;
+        </a>
       </div>
     </section>
 

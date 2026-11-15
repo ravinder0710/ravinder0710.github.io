@@ -44,6 +44,26 @@
       color: #ffffff;
       box-shadow: 0 8px 24px -6px rgba(168, 85, 247, 0.4);
     }
+
+    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
+    div[class*="p-4 rounded-2xl"],
+    div[class*="p-5 rounded-2xl"],
+    div[class*="p-6 rounded-2xl"],
+    div[class*="rounded-2xl p-5"],
+    div[class*="rounded-2xl p-4"],
+    div[class*="rounded-2xl p-6"] {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    div[class*="p-4 rounded-2xl"]:hover,
+    div[class*="p-5 rounded-2xl"]:hover,
+    div[class*="p-6 rounded-2xl"]:hover,
+    div[class*="rounded-2xl p-5"]:hover,
+    div[class*="rounded-2xl p-4"]:hover,
+    div[class*="rounded-2xl p-6"]:hover {
+      border-color: rgba(56, 189, 248, 0.6) !important;
+      transform: translateY(-3px) !important;
+      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
@@ -418,6 +438,15 @@ DIVIDE(
           <strong class="text-white text-sm block">3. Dayparting Commuter & Evening Windows</strong>
           <p class="leading-relaxed">Identified distinct traffic surges between 7:00 AM &ndash; 9:00 AM and 7:00 PM &ndash; 10:00 PM. Configured daypart budget pacing multipliers (+25% bid cap) during peak engagement intervals.</p>
         </div>
+      </div>
+
+      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
+        <a href="https://github.com/ravinder0710" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-xl shadow-purple-600/30 transition-all">
+          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo
+        </a>
+        <a href="honda-project.html" target="_blank" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">
+          Next Project &rarr;
+        </a>
       </div>
     </section>
 

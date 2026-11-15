@@ -44,6 +44,20 @@
       color: #ffffff;
       box-shadow: 0 8px 24px -6px rgba(239, 68, 68, 0.4);
     }
+
+    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
+    div[class*="p-4 rounded-2xl"],
+    div[class*="p-5 rounded-2xl"],
+    div[class*="p-6 rounded-2xl"] {
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    }
+    div[class*="p-4 rounded-2xl"]:hover,
+    div[class*="p-5 rounded-2xl"]:hover,
+    div[class*="p-6 rounded-2xl"]:hover {
+      border-color: rgba(56, 189, 248, 0.6) !important;
+      transform: translateY(-3px) !important;
+      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    }
   </style>
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
@@ -406,7 +420,7 @@ DIVIDE(
           <a href="honda-walkthrough.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
             <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Interactive Walkthrough
           </a>
-          <a href="index.html#projects" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+          <a href="emperor-project.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">
             Next Project &rarr;
           </a>
         </div>
