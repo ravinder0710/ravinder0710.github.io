@@ -57,23 +57,26 @@
       pointer-events: none;
     }
 
-    /* Smooth Scene Cross-Fades */
+    /* Smooth Scene Cross-Fades with Zero Bleed-Through */
     .scene {
       position: absolute;
       inset: 0;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: scale(0.98) translateY(12px);
+      background: radial-gradient(circle at 50% 30%, #0d172e 0%, #060b17 65%, #02050b 100%);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      transform: scale(0.98);
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 44px 64px;
+      padding: 36px 56px;
     }
     .scene.active {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
-      transform: scale(1) translateY(0);
+      transform: scale(1);
     }
 
     /* Cinematic Dynamic Motion on Active Screenshots (Ken Burns Studio Effect) */
@@ -289,7 +292,7 @@
         </div>
         <div class="col-span-7 relative">
           <div class="video-card rounded-2xl overflow-hidden border border-rose-500/30 shadow-2xl p-2 bg-slate-950">
-            <img src="assets/bank-loan/dashboard_details_grid.png" alt="Fraud Risk Grid" class="w-full h-auto rounded-xl object-cover">
+            <img src="assets/fraud/dashboard_overview_page.png" alt="Fraud Risk Intelligence Dashboard" class="w-full h-auto rounded-xl object-cover">
           </div>
         </div>
       </div>
@@ -466,14 +469,14 @@
 
         <!-- Chapter Jumper Buttons -->
         <div class="hidden lg:flex items-center gap-1.5 text-[11px]">
-          <button onclick="jumpToScene(1)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">1. Intro</button>
-          <button onclick="jumpToScene(2)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">2. Healthcare</button>
-          <button onclick="jumpToScene(3)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">3. Banking</button>
-          <button onclick="jumpToScene(4)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">4. Fraud AI</button>
-          <button onclick="jumpToScene(5)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">5. Auto EV</button>
-          <button onclick="jumpToScene(6)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">6. Retail DW</button>
-          <button onclick="jumpToScene(7)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">7. Skills</button>
-          <button onclick="jumpToScene(8)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">8. Next Team?</button>
+          <button id="chBtn1" onclick="jumpToScene(1)" class="px-2.5 py-1 rounded-lg bg-blue-600 text-white font-bold border border-blue-400 transition">1. Intro</button>
+          <button id="chBtn2" onclick="jumpToScene(2)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">2. Healthcare</button>
+          <button id="chBtn3" onclick="jumpToScene(3)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">3. Banking</button>
+          <button id="chBtn4" onclick="jumpToScene(4)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">4. Fraud AI</button>
+          <button id="chBtn5" onclick="jumpToScene(5)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">5. Auto EV</button>
+          <button id="chBtn6" onclick="jumpToScene(6)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">6. Retail DW</button>
+          <button id="chBtn7" onclick="jumpToScene(7)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">7. Skills</button>
+          <button id="chBtn8" onclick="jumpToScene(8)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">8. Next Team?</button>
         </div>
 
         <div class="flex items-center gap-2">
@@ -537,14 +540,26 @@
       // Find current scene
       let activeScene = SCENES.find(s => currentTime >= s.start && currentTime < s.end) || SCENES[SCENES.length - 1];
 
-      // Update scene active classes
+      // Update scene active classes with zero ghosting
       for (let i = 1; i <= 8; i++) {
         const el = document.getElementById('scene' + i);
         if (el) {
           if (i === activeScene.id) {
             el.classList.add('active');
+            el.style.visibility = 'visible';
           } else {
             el.classList.remove('active');
+            el.style.visibility = 'hidden';
+          }
+        }
+
+        // Highlight chapter button
+        const btn = document.getElementById('chBtn' + i);
+        if (btn) {
+          if (i === activeScene.id) {
+            btn.className = 'px-2.5 py-1 rounded-lg bg-blue-600 text-white font-bold border border-blue-400 transition';
+          } else {
+            btn.className = 'px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-400 border border-slate-800 transition';
           }
         }
       }
