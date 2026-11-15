@@ -664,7 +664,13 @@ DIVIDE(
     // Interactive Meta Purple & Electric Blue Dotted Cursor Trail
     // ==========================================
     (function() {
-      if (window.matchMedia('(hover: none)').matches) return;
+      // Completely disable custom cursor on touch & mobile screens
+      const isTouchOrMobile = ('ontouchstart' in window) || 
+                              (navigator.maxTouchPoints > 0) || 
+                              window.matchMedia('(pointer: coarse)').matches || 
+                              window.matchMedia('(hover: none)').matches || 
+                              window.innerWidth < 1024;
+      if (isTouchOrMobile) return;
 
       const canvas = document.createElement('canvas');
       canvas.id = 'cursorCanvas';

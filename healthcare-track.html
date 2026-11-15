@@ -13,6 +13,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
+    /* Mobile Optimization: Completely disable custom cursor on mobile / touch */
+    @media (max-width: 1024px), (pointer: coarse), (hover: none) {
+      #cursorCanvas, #cursorDot, #cursorRing {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    }
     body {
       background-color: #070c14;
       color: #f1f5f9;
@@ -959,6 +968,13 @@ DIVIDE(CurrentBilling - PriorBilling, PriorBilling, 0)</code></pre>
   <!-- ========================================== -->
   <script>
     (function initHealthcareCursor() {
+      // Completely disable custom cursor on touch & mobile screens
+      const isTouchOrMobile = ('ontouchstart' in window) || 
+                              (navigator.maxTouchPoints > 0) || 
+                              window.matchMedia('(pointer: coarse)').matches || 
+                              window.matchMedia('(hover: none)').matches || 
+                              window.innerWidth < 1024;
+      if (isTouchOrMobile) return;
       // 1. Particle Canvas Overlay
       const canvas = document.createElement('canvas');
       canvas.id = 'cursorCanvas';
