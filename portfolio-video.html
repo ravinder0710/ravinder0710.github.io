@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ravinder Gupta — 2-Minute Executive Portfolio Showcase Video</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg: #070b14;
+      --card-bg: rgba(13, 20, 36, 0.88);
+      --border: rgba(56, 189, 248, 0.2);
+      --cyan: #38bdf8;
+      --blue: #2563eb;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --purple: #a855f7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #03060d;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* 16:9 Video Canvas Frame */
+    #videoContainer {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(circle at 50% 30%, #0d172e 0%, #060b17 65%, #02050b 100%);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 50px -10px rgba(37, 99, 235, 0.25);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    /* Ambient Animated Grid Lines */
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* Smooth Scene Cross-Fades */
+    .scene {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: scale(0.98) translateY(12px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 44px 64px;
+    }
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Laser Progress Line */
+    .progress-bar-fill {
+      transition: width 0.15s linear;
+    }
+
+    /* Monogram Luminous Ring */
+    .badge-ring {
+      background: conic-gradient(from 135deg, #22d3ee, #2563eb, #10b981, #f59e0b, #ef4444, #a855f7, #f97316, #22d3ee);
+    }
+
+    /* High-contrast Glassmorphic Cards */
+    .video-card {
+      background: rgba(11, 18, 33, 0.82);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.6);
+    }
+  </style>
+</head>
+<body class="p-3 sm:p-6 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Top Global Header -->
+  <header class="w-full max-w-7xl flex flex-wrap items-center justify-between gap-4 mb-4 text-xs font-mono">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition">
+        <i data-lucide="arrow-left" class="w-3.5 h-3.5 text-blue-400"></i> Back to Main Portfolio
+      </a>
+      <span class="text-slate-500 hidden sm:inline">&bull;</span>
+      <span class="text-slate-400 hidden sm:inline">Executive Data Intelligence Video Suite</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 text-sky-400 border border-blue-500/20 font-bold">
+        <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+        120 Seconds • 8 Enterprise Chapters
+      </span>
+      <button id="recordBtn" onclick="toggleRecord()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 text-white font-bold text-xs shadow-lg shadow-red-600/30 transition flex items-center gap-2 cursor-pointer active:scale-95">
+        <i data-lucide="video" class="w-4 h-4"></i>
+        <span id="recordBtnText">Record &amp; Download MP4</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 16:9 Video Stage -->
+  <div id="videoContainer" class="relative group select-none">
+    
+    <div class="grid-bg"></div>
+
+    <!-- Live Watermark (Top Right) -->
+    <div class="absolute top-6 right-8 z-30 flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-slate-950/70 border border-slate-800 text-[11px] font-mono backdrop-blur-md">
+      <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+      <span class="text-slate-300 font-bold">ravinder0710.github.io</span>
+    </div>
+
+    <!-- Chapter Indicator Pill (Top Left) -->
+    <div class="absolute top-6 left-8 z-30 flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-950/70 border border-slate-800 text-xs font-mono backdrop-blur-md">
+      <span class="text-sky-400 font-extrabold" id="sceneBadgeNum">CHAPTER 1 OF 8</span>
+      <span class="text-slate-600">&bull;</span>
+      <span class="text-slate-300" id="sceneBadgeTitle">Executive Brand Intro</span>
+    </div>
+
+    <!-- ========================================================
+         SCENE 1: EXECUTIVE BRAND INTRO & HERO HOOK (0:00 - 0:15)
+         ======================================================== -->
+    <div id="scene1" class="scene active">
+      <div class="max-w-4xl space-y-6">
+        <div class="flex items-center gap-4">
+          <div class="relative w-16 h-16 rounded-2xl p-[2px] badge-ring shadow-xl shadow-blue-500/30">
+            <div class="w-full h-full bg-[#090d16] rounded-[14px] flex items-center justify-center font-black text-2xl text-white tracking-wider">
+              RG
+            </div>
+          </div>
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-[10px] font-mono uppercase bg-blue-500/10 text-sky-400 border border-blue-500/30 font-bold tracking-widest">
+              Data Analyst &bull; Business Intelligence Specialist
+            </div>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight mt-1">
+              Ravinder Gupta<span class="text-blue-500">.</span>
+            </h1>
+          </div>
+        </div>
+
+        <p class="text-xl sm:text-2xl text-slate-200 font-semibold leading-relaxed max-w-3xl">
+          Translating Complex Enterprise Data into <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-400">Executive Intelligence</span>.
+        </p>
+
+        <p class="text-sm text-slate-400 leading-normal max-w-2xl">
+          Specializing in Star/Snowflake Dimensional Modeling, DAX Time-Intelligence Frameworks, Advanced Relational SQL, and AI-Augmented Analytics (FastMCP + Claude).
+        </p>
+
+        <!-- Proof Metrics Ticker -->
+        <div class="grid grid-cols-4 gap-4 pt-3 max-w-3xl">
+          <div class="video-card p-4 rounded-2xl border-l-4 border-l-blue-500">
+            <div class="text-2xl font-black text-white font-mono">12 Repos</div>
+            <div class="text-[11px] text-slate-400 font-medium">Production BI Projects</div>
+          </div>
+          <div class="video-card p-4 rounded-2xl border-l-4 border-l-sky-400">
+            <div class="text-2xl font-black text-sky-400 font-mono">550K+</div>
+            <div class="text-[11px] text-slate-400 font-medium">Modeled Records</div>
+          </div>
+          <div class="video-card p-4 rounded-2xl border-l-4 border-l-indigo-400">
+            <div class="text-2xl font-black text-indigo-400 font-mono">100%</div>
+            <div class="text-[11px] text-slate-400 font-medium">Open Source on Git</div>
+          </div>
+          <div class="video-card p-4 rounded-2xl border-l-4 border-l-emerald-400">
+            <div class="text-2xl font-black text-emerald-400 font-mono">Immediate</div>
+            <div class="text-[11px] text-slate-400 font-medium">0 Days Notice Joiner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 2: HEALTHCARE PROVIDER & RCM RECONCILIATION (0:15 - 0:32)
+         ======================================================== -->
+    <div id="scene2" class="scene">
+      <div class="grid grid-cols-12 gap-8 items-center h-full">
+        <div class="col-span-5 space-y-4">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-teal-500/10 text-teal-400 border border-teal-500/30 uppercase tracking-wider">
+            Flagship Production Project 01
+          </span>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight leading-snug">
+            Healthcare Provider Analytics &amp; Revenue Cycle (RCM)
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Reconciled <strong>&pound;3.36M in hospital gross billing</strong> across 5,000 inpatient encounters. Engineered DAX SUMX daily room charge iterators, patient length-of-stay (LOS) cohort modeling, and doctor KPI benchmarking.
+          </p>
+          <div class="flex flex-wrap gap-2 text-[10px] font-mono text-slate-300">
+            <span class="px-2 py-1 rounded-md bg-slate-900 border border-slate-800">5,000 NHS Inpatients</span>
+            <span class="px-2 py-1 rounded-md bg-slate-900 border border-slate-800">&pound;2.23M Insured Share (66.4%)</span>
+            <span class="px-2 py-1 rounded-md bg-slate-900 border border-slate-800">&pound;1.13M Out-of-Pocket</span>
+          </div>
+        </div>
+        <div class="col-span-7 relative">
+          <div class="video-card rounded-2xl overflow-hidden border border-teal-500/30 shadow-2xl p-2 bg-slate-950">
+            <img src="assets/healthcare/healthcare_trend_dark.jpg" alt="Healthcare Analytics Dashboard" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 3: BANKING & CREDIT RISK ANALYTICS (0:32 - 0:48)
+         ======================================================== -->
+    <div id="scene3" class="scene">
+      <div class="grid grid-cols-12 gap-8 items-center h-full">
+        <div class="col-span-7 relative">
+          <div class="video-card rounded-2xl overflow-hidden border border-amber-500/30 shadow-2xl p-2 bg-slate-950">
+            <img src="assets/bank-loan/dashboard_overview_view.png" alt="Banking Risk Dashboard" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+        <div class="col-span-5 space-y-4">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 uppercase tracking-wider">
+            Flagship Production Project 02
+          </span>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight leading-snug">
+            Bank Loan Portfolio &amp; Credit Risk Telemetry
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Authored <strong>35+ MySQL queries</strong> across 38K+ loan applications ($436M funded) to track MoM portfolio health, segment good loans (86%) from high-risk tranches, and uncover $28M in charged-off unrecovered debt.
+          </p>
+          <div class="space-y-2 text-xs font-mono">
+            <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-slate-800">
+              <span class="text-slate-400">Total Funded Portfolio:</span>
+              <span class="text-emerald-400 font-bold">$436M (86% Good Loans)</span>
+            </div>
+            <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/80 border border-slate-800">
+              <span class="text-slate-400">Charged-Off Recovery:</span>
+              <span class="text-amber-400 font-bold">57% Reconciled Ratio</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 4: FINANCIAL FRAUD & AI MODELING (0:48 - 1:04)
+         ======================================================== -->
+    <div id="scene4" class="scene">
+      <div class="grid grid-cols-12 gap-8 items-center h-full">
+        <div class="col-span-5 space-y-4">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-rose-500/10 text-rose-400 border border-rose-500/30 uppercase tracking-wider">
+            Flagship Production Project 03 &bull; AI MCP
+          </span>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight leading-snug">
+            Financial Fraud Behavioral Risk &amp; Anomaly AI
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Modeled 37.9K transactional logs into an enterprise forensic model using a custom <strong>FastMCP server + Claude AI</strong>. Audited foreign-IP logins producing a 25% fraud rate (10.2x uplift) for prioritized law-enforcement dispatch.
+          </p>
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-rose-500/20 text-xs font-mono space-y-1">
+            <div class="text-rose-400 font-bold">&bull; 10.2x Foreign IP Risk Uplift</div>
+            <div class="text-slate-300">&bull; &ge;3 Failed Logins = 16% Fraud Probability</div>
+            <div class="text-slate-400">&bull; Model Context Protocol (FastMCP) DAX Generation</div>
+          </div>
+        </div>
+        <div class="col-span-7 relative">
+          <div class="video-card rounded-2xl overflow-hidden border border-rose-500/30 shadow-2xl p-2 bg-slate-950">
+            <img src="assets/bank-loan/dashboard_details_grid.png" alt="Fraud Risk Grid" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 5: AUTOMOTIVE TELEMATICS & IOT FLEET (1:04 - 1:20)
+         ======================================================== -->
+    <div id="scene5" class="scene">
+      <div class="grid grid-cols-12 gap-8 items-center h-full">
+        <div class="col-span-7 relative">
+          <div class="video-card rounded-2xl overflow-hidden border border-blue-500/30 shadow-2xl p-2 bg-slate-950">
+            <img src="assets/honda/dashboard_2_overview.png" alt="Automotive Telematics Dashboard" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+        <div class="col-span-5 space-y-4">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-blue-500/10 text-sky-400 border border-blue-500/30 uppercase tracking-wider">
+            Flagship Production Project 04
+          </span>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight leading-snug">
+            Automotive Telematics &amp; Electric Vehicle IoT
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Multi-branch vehicle performance telemetry modeling across 1,200 electric transit vehicles. Engineered real-time battery degradation cycles, charging station dwell time distributions, and preventive maintenance triggers.
+          </p>
+          <div class="grid grid-cols-2 gap-2 text-xs font-mono">
+            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">VEHICLE FLEET</span>
+              <span class="text-white font-bold text-sm">1,200 Units</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800">
+              <span class="text-slate-400 block text-[10px]">MAINTENANCE RATIO</span>
+              <span class="text-sky-400 font-bold text-sm">99.4% Uptime</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 6: RETAIL DATA WAREHOUSE & REVENUE RECOVERY (1:20 - 1:36)
+         ======================================================== -->
+    <div id="scene6" class="scene">
+      <div class="grid grid-cols-12 gap-8 items-center h-full">
+        <div class="col-span-5 space-y-4">
+          <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold bg-purple-500/10 text-purple-400 border border-purple-500/30 uppercase tracking-wider">
+            Flagship Production Project 05 &bull; Enterprise DW
+          </span>
+          <h2 class="text-3xl font-extrabold text-white tracking-tight leading-snug">
+            Global Retail Warehouse &amp; Inventory Optimization
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Engineered an Excel Power Pivot &amp; Power BI Star Schema across <strong>60,000+ orders ($307M revenue)</strong>. Audited 606 SKUs and uncovered that 74% produced zero sales, reallocating procurement capital toward high-margin tiers.
+          </p>
+          <div class="space-y-1 text-xs font-mono">
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex justify-between">
+              <span class="text-slate-400">Total Analyzed Flow:</span>
+              <span class="text-purple-300 font-bold">$307M (41% Margin)</span>
+            </div>
+            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex justify-between">
+              <span class="text-slate-400">Zero-Sales Inventory Isolated:</span>
+              <span class="text-rose-400 font-bold">448 Inactive SKUs</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-7 relative">
+          <div class="video-card rounded-2xl overflow-hidden border border-purple-500/30 shadow-2xl p-2 bg-slate-950">
+            <img src="assets/emperor/page_01_overview.png" alt="Retail & Restaurant Warehouse" class="w-full h-auto rounded-xl object-cover">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 7: TECHNICAL SKILLS & ARCHITECTURE STACK (1:36 - 1:50)
+         ======================================================== -->
+    <div id="scene7" class="scene">
+      <div class="max-w-4xl space-y-6">
+        <div>
+          <span class="px-3 py-1 rounded-full text-[10px] font-mono uppercase bg-blue-500/10 text-sky-400 border border-blue-500/20 font-bold">
+            Technical Stack &amp; Architectural Mastery
+          </span>
+          <h2 class="text-4xl font-extrabold text-white tracking-tight mt-2">
+            Engineered for Precision, Speed &amp; Integrity
+          </h2>
+          <p class="text-sm text-slate-300 mt-1 max-w-2xl">
+            Hands-on production proficiency across query languages, dimensional data warehouses, and modern AI engineering.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-4 pt-2">
+          <!-- Stack 1 -->
+          <div class="video-card p-4 rounded-2xl space-y-2 border-t-2 border-t-blue-500">
+            <div class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="database" class="w-4 h-4 text-blue-400"></i> Relational SQL &amp; Modeling
+            </div>
+            <p class="text-xs text-slate-400">MySQL, PostgreSQL, Neon DB, SQL Server. CTEs, Window Functions, Complex Joins, Star &amp; Snowflake Dimensional Schemas.</p>
+          </div>
+          <!-- Stack 2 -->
+          <div class="video-card p-4 rounded-2xl space-y-2 border-t-2 border-t-amber-500">
+            <div class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="bar-chart-3" class="w-4 h-4 text-amber-400"></i> BI &amp; Visualization
+            </div>
+            <p class="text-xs text-slate-400">Power BI (DAX, Power Query, Field Parameters, Dynamic Tooltips), Microsoft Excel (Power Pivot, VBA), Tableau Desktop.</p>
+          </div>
+          <!-- Stack 3 -->
+          <div class="video-card p-4 rounded-2xl space-y-2 border-t-2 border-t-emerald-500">
+            <div class="text-sm font-bold text-white flex items-center gap-2">
+              <i data-lucide="cpu" class="w-4 h-4 text-emerald-400"></i> Python &amp; AI MCP Workflows
+            </div>
+            <p class="text-xs text-slate-400">Python (Pandas, NumPy, Matplotlib, Seaborn), Model Context Protocol (FastMCP + Claude), Automated Forensic EDA.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SCENE 8: CREDENTIALS, AVAILABILITY & OUTRO (1:50 - 2:00)
+         ======================================================== -->
+    <div id="scene8" class="scene">
+      <div class="max-w-3xl space-y-6 text-center mx-auto flex flex-col items-center">
+        <div class="w-20 h-20 rounded-2xl p-[2px] badge-ring shadow-2xl shadow-blue-500/40">
+          <div class="w-full h-full bg-[#090d16] rounded-2xl flex items-center justify-center font-black text-3xl text-white tracking-wider">
+            RG
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-4xl sm:text-5xl font-black text-white tracking-tight">
+            Ready to Deliver Value on Day One.
+          </h2>
+          <p class="text-base sm:text-lg text-slate-300">
+            Open to <strong>Data Analyst, BI Analyst &amp; Analytics Specialist</strong> Roles.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-3 pt-2">
+          <div class="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            0 Days Notice &bull; Immediate Joiner
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 font-mono text-xs flex items-center gap-2">
+            📍 Gurugram / Delhi-NCR &bull; Open to Relocation &bull; Remote
+          </div>
+        </div>
+
+        <!-- Links Box -->
+        <div class="p-4 rounded-2xl video-card border border-blue-500/30 max-w-md w-full space-y-1 font-mono text-xs">
+          <div class="text-white font-bold text-sm">https://ravinder0710.github.io</div>
+          <div class="text-sky-400">iamravindergupta17@gmail.com &bull; github.com/ravinder0710</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Controls Bar Overlay -->
+    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black via-black/80 to-transparent p-4 sm:p-6 z-30 flex flex-col gap-2.5">
+      
+      <!-- Interactive Progress Scrubber -->
+      <div class="relative w-full h-2 bg-slate-800/80 rounded-full overflow-hidden cursor-pointer group/bar" onclick="seekClick(event)">
+        <div id="videoProgressBar" class="h-full bg-gradient-to-r from-blue-600 via-sky-400 to-indigo-500 progress-bar-fill rounded-full" style="width: 0%"></div>
+      </div>
+
+      <!-- Controls Row -->
+      <div class="flex items-center justify-between text-xs font-mono">
+        <!-- Play / Pause & Time -->
+        <div class="flex items-center gap-4">
+          <button onclick="togglePlay()" class="w-9 h-9 rounded-xl bg-blue-600 hover:bg-blue-500 text-white flex items-center justify-center transition shadow-md shadow-blue-600/30 cursor-pointer">
+            <i id="playIcon" data-lucide="play" class="w-4 h-4 ml-0.5"></i>
+          </button>
+          <div class="text-slate-300 tabular-nums">
+            <span id="currentTime" class="text-white font-bold">0:00</span> / <span class="text-slate-500">2:00</span>
+          </div>
+        </div>
+
+        <!-- Chapter Jumper Buttons -->
+        <div class="hidden lg:flex items-center gap-1.5 text-[11px]">
+          <button onclick="jumpToScene(1)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">1. Intro</button>
+          <button onclick="jumpToScene(2)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">2. Healthcare</button>
+          <button onclick="jumpToScene(3)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">3. Banking</button>
+          <button onclick="jumpToScene(4)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">4. Fraud AI</button>
+          <button onclick="jumpToScene(5)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">5. Auto EV</button>
+          <button onclick="jumpToScene(6)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">6. Retail DW</button>
+          <button onclick="jumpToScene(7)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">7. Skills</button>
+          <button onclick="jumpToScene(8)" class="px-2.5 py-1 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800 transition">8. Outro</button>
+        </div>
+
+        <!-- Fullscreen Button -->
+        <button onclick="toggleFullscreen()" class="p-2 rounded-xl bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white transition cursor-pointer" title="Fullscreen (F)">
+          <i data-lucide="maximize" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Helpful Instruction Card -->
+  <div class="w-full max-w-7xl mt-6 p-5 rounded-2xl bg-slate-900/70 border border-slate-800/80 text-xs text-slate-300 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-sky-400 flex items-center justify-center font-bold">
+        HD
+      </div>
+      <div>
+        <div class="font-bold text-white">Automated Browser Recording Ready</div>
+        <div class="text-[11px] text-slate-400">Click <strong>"Record &amp; Download MP4"</strong> above: it will record the entire 2-minute showcase in 1080p and auto-download the video file to your computer!</div>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="text-slate-500">Keyboard Shortcuts:</span>
+      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">Space</kbd> Play/Pause
+      <kbd class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-200">F</kbd> Fullscreen
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const TOTAL_DURATION = 120; // 120 Seconds (2 Minutes)
+    let isPlaying = false;
+    let currentTime = 0;
+    let timer = null;
+
+    // 8 Scene Timestamps in Seconds
+    const SCENES = [
+      { id: 1, start: 0,   end: 15, badge: 'CHAPTER 1 OF 8', title: 'Executive Brand Intro' },
+      { id: 2, start: 15,  end: 32, badge: 'CHAPTER 2 OF 8', title: 'Healthcare Provider & RCM' },
+      { id: 3, start: 32,  end: 48, badge: 'CHAPTER 3 OF 8', title: 'Banking Portfolio & Risk' },
+      { id: 4, start: 48,  end: 64, badge: 'CHAPTER 4 OF 8', title: 'Financial Fraud Anomaly AI' },
+      { id: 5, start: 64,  end: 80, badge: 'CHAPTER 5 OF 8', title: 'Automotive EV Telematics' },
+      { id: 6, start: 80,  end: 96, badge: 'CHAPTER 6 OF 8', title: 'Retail DW & Optimization' },
+      { id: 7, start: 96,  end: 110, badge: 'CHAPTER 7 OF 8', title: 'Tech Stack & Architecture' },
+      { id: 8, start: 110, end: 120, badge: 'CHAPTER 8 OF 8', title: 'Credentials & Outro' }
+    ];
+
+    function updateSceneDisplay() {
+      // Find current scene
+      let activeScene = SCENES.find(s => currentTime >= s.start && currentTime < s.end) || SCENES[SCENES.length - 1];
+
+      // Update scene active classes
+      for (let i = 1; i <= 8; i++) {
+        const el = document.getElementById('scene' + i);
+        if (el) {
+          if (i === activeScene.id) {
+            el.classList.add('active');
+          } else {
+            el.classList.remove('active');
+          }
+        }
+      }
+
+      // Update badges
+      document.getElementById('sceneBadgeNum').innerText = activeScene.badge;
+      document.getElementById('sceneBadgeTitle').innerText = activeScene.title;
+
+      // Update progress bar
+      const pct = (currentTime / TOTAL_DURATION) * 100;
+      document.getElementById('videoProgressBar').style.width = pct + '%';
+
+      // Update time text
+      const mins = Math.floor(currentTime / 60);
+      const secs = Math.floor(currentTime % 60);
+      document.getElementById('currentTime').innerText = mins + ':' + (secs < 10 ? '0' : '') + secs;
+    }
+
+    function togglePlay() {
+      if (isPlaying) {
+        pause();
+      } else {
+        play();
+      }
+    }
+
+    function play() {
+      if (currentTime >= TOTAL_DURATION) currentTime = 0;
+      isPlaying = true;
+      document.getElementById('playIcon').setAttribute('data-lucide', 'pause');
+      lucide.createIcons();
+      clearInterval(timer);
+      timer = setInterval(() => {
+        currentTime += 0.25;
+        if (currentTime >= TOTAL_DURATION) {
+          currentTime = TOTAL_DURATION;
+          pause();
+        }
+        updateSceneDisplay();
+      }, 250);
+    }
+
+    function pause() {
+      isPlaying = false;
+      clearInterval(timer);
+      document.getElementById('playIcon').setAttribute('data-lucide', 'play');
+      lucide.createIcons();
+    }
+
+    function seekClick(e) {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const frac = Math.max(0, Math.min(1, clickX / rect.width));
+      currentTime = frac * TOTAL_DURATION;
+      updateSceneDisplay();
+    }
+
+    function jumpToScene(sceneId) {
+      const s = SCENES.find(x => x.id === sceneId);
+      if (s) {
+        currentTime = s.start;
+        updateSceneDisplay();
+      }
+    }
+
+    function toggleFullscreen() {
+      const el = document.getElementById('videoContainer');
+      if (!document.fullscreenElement) {
+        el.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen().catch(err => console.log(err));
+      }
+    }
+
+    // Keyboard Shortcuts
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        togglePlay();
+      } else if (e.code === 'KeyF') {
+        toggleFullscreen();
+      } else if (e.code === 'ArrowRight') {
+        currentTime = Math.min(TOTAL_DURATION, currentTime + 5);
+        updateSceneDisplay();
+      } else if (e.code === 'ArrowLeft') {
+        currentTime = Math.max(0, currentTime - 5);
+        updateSceneDisplay();
+      }
+    });
+
+    // ==========================================
+    // Screen Capture & Direct Video Downloader
+    // ==========================================
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    async function toggleRecord() {
+      const btn = document.getElementById('recordBtn');
+      const btnText = document.getElementById('recordBtnText');
+
+      if (mediaRecorder && mediaRecorder.state === 'recording') {
+        mediaRecorder.stop();
+        btnText.innerText = 'Record & Download MP4';
+        btn.classList.remove('animate-pulse');
+        return;
+      }
+
+      try {
+        // Prompt user to select this tab for full 1080p recording
+        const stream = await navigator.mediaDevices.getDisplayMedia({
+          video: { frameRate: 60, width: 1920, height: 1080 },
+          audio: false
+        });
+
+        recordedChunks = [];
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm; codecs=vp9' });
+
+        mediaRecorder.ondataavailable = function(e) {
+          if (e.data.size > 0) recordedChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = function() {
+          const blob = new Blob(recordedChunks, { type: 'video/webm' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.style.display = 'none';
+          a.href = url;
+          a.download = 'Ravinder_Gupta_Data_Analyst_Portfolio_Showcase.webm';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+          }, 100);
+
+          btnText.innerText = 'Record & Download MP4';
+          btn.classList.remove('animate-pulse');
+          pause();
+        };
+
+        mediaRecorder.start();
+        btnText.innerText = 'Recording... Click to Stop';
+        btn.classList.add('animate-pulse');
+
+        // Restart video from 0 and play automatically
+        currentTime = 0;
+        play();
+
+      } catch (err) {
+        console.error("Recording error: ", err);
+        alert("To record the video, choose 'Entire Screen' or 'This Chrome Tab' in the prompt.");
+      }
+    }
+
+    // Auto-start showcase on page load
+    setTimeout(() => {
+      play();
+    }, 600);
+  </script>
+</body>
+</html>
