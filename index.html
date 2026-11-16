@@ -530,22 +530,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-red-400 font-bold">KPIs:</span> ₹59.63 Cr Revenue · 5,617 Units · Activa 6G #1 (38% Vol) · 100% Free-Tier Cloud
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/honda-sales-analytics-powerbi-n8n" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/honda-sales-analytics-powerbi-n8n" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/honda-sales-analytics-powerbi-n8n_pipeline.png', 'Honda Two-Wheelers Enterprise Pipeline Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/honda-sales-analytics-powerbi-n8n_pipeline.png', 'Honda Two-Wheelers Enterprise Pipeline Architecture')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="honda-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white border border-red-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Honda_Sales_Analytics_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Honda_Sales_Analytics_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="honda-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white border-red-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="honda-walkthrough.html" target="_blank" rel="noopener" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="honda-walkthrough.html" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -579,22 +590,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> RM20.69M Sales · 5 Branches · 103.5% Target Achieved · RM799K Action Plan
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/emperor-restaurant-analytics-powerbi_pipeline.png', 'Emperor Restaurant Star Schema Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/emperor-restaurant-analytics-powerbi_pipeline.png', 'Emperor Restaurant Star Schema Architecture')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="emperor-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 hover:text-white border border-rose-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Emperor_Restaurant_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Emperor_Restaurant_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="emperor-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 hover:text-white border-rose-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'emperor', 'https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'emperor', 'https://github.com/ravinder0710/emperor-restaurant-analytics-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -630,22 +652,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-teal-400 font-bold">KPIs:</span> £3.36M Billing · £2.23M Insured · £1.13M Out-of-Pocket · 7.2/10 Rating · 5,000 Visits
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/healthcare-provider-analytics-powerbi_pipeline.png', 'Healthcare Provider Data Architecture & RCM Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/healthcare-provider-analytics-powerbi_pipeline.png', 'Healthcare Provider Data Architecture & RCM Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="healthcare-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 hover:text-white border border-cyan-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Healthcare_Provider_Analytics_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Healthcare_Provider_Analytics_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="healthcare-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 hover:text-white border-cyan-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'healthcare', 'https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'healthcare', 'https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -679,22 +712,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 60.4K Orders · $307.1M Revenue · $126.3M Profit · 41.1% Operating Margin
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/adventure-works-sales-profit-excel_pipeline.png', 'AdventureWorks xVelocity Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/adventure-works-sales-profit-excel_pipeline.png', 'AdventureWorks xVelocity Architecture')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="adventure-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="adventure-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border-emerald-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video" onclick="handleDemoVideoClick(event, 'adventure', 'https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video" onclick="handleDemoVideoClick(event, 'adventure', 'https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -729,22 +773,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 38.6K Loans · $435.8M Disbursed · 86.2% Good Loan Surplus · 56.9% Recovery Rate
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/bank-loan-analysis-sql-powerbi-python_pipeline.png', 'Bank Loan Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/bank-loan-analysis-sql-powerbi-python_pipeline.png', 'Bank Loan Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="bank-loan-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 hover:text-white border border-amber-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Bank_Loan_Risk_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Bank_Loan_Risk_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="bank-loan-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 hover:text-white border-amber-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python#demo-video" onclick="handleDemoVideoClick(event, 'bank-loan', 'https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python#demo-video" onclick="handleDemoVideoClick(event, 'bank-loan', 'https://github.com/ravinder0710/bank-loan-analysis-sql-powerbi-python#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -779,22 +834,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 10K Subscribers · 27.27% Churn · 72.73% Retention · $73.3K Monthly MRR at Risk
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/customer-churn-analysis-python_pipeline.png', 'Customer Churn EDA Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/customer-churn-analysis-python_pipeline.png', 'Customer Churn EDA Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="churn-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-orange-600/20 hover:bg-orange-600/30 text-orange-300 hover:text-white border border-orange-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Customer_Churn_Analysis_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Customer_Churn_Analysis_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="churn-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-orange-600/20 hover:bg-orange-600/30 text-orange-300 hover:text-white border-orange-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/customer-churn-analysis-python#demo-video" onclick="handleDemoVideoClick(event, 'churn', 'https://github.com/ravinder0710/customer-churn-analysis-python#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/customer-churn-analysis-python#demo-video" onclick="handleDemoVideoClick(event, 'churn', 'https://github.com/ravinder0710/customer-churn-analysis-python#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -829,22 +895,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 37.9K Logs · 924 Fraud Cases · ₦19M Compromised · 10.2x Foreign IP Risk Uplift
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/fraud-intelligence-dashboard-powerbi_pipeline.png', 'Financial Fraud Behavioral Risk Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/fraud-intelligence-dashboard-powerbi_pipeline.png', 'Financial Fraud Behavioral Risk Architecture')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="fraud-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white border border-red-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Fraud_Intelligence_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Fraud_Intelligence_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="fraud-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white border-red-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP#demo-video" onclick="handleDemoVideoClick(event, 'fraud', 'https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP#demo-video" onclick="handleDemoVideoClick(event, 'fraud', 'https://github.com/ravinder0710/fraud-intelligence-dashboard-powerbi-claude-MCP#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -878,22 +955,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-teal-400 font-bold">KPIs:</span> 6,587 Riders · 33 Avg/Trip · 43% Balanced · 35% Crowded (29 Buses) · 64.6% PM
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/public-transit-fleet-operations-excel_pipeline.png', 'Transit Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/public-transit-fleet-operations-excel_pipeline.png', 'Transit Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="transit-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 hover:text-white border border-teal-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Public_Transit_Fleet_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Public_Transit_Fleet_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="transit-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 hover:text-white border-teal-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP#demo-video" onclick="handleDemoVideoClick(event, 'transit', 'https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP#demo-video" onclick="handleDemoVideoClick(event, 'transit', 'https://github.com/ravinder0710/public-transit-fleet-operations-excel-claude-MCP#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -927,22 +1015,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 2,216 Entries · $1.82M Flow · $538K Surplus · 29.57% Savings Velocity
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/personal-financial-analytics-powerbi_pipeline.png', 'Personal Finance Star Schema')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/personal-financial-analytics-powerbi_pipeline.png', 'Personal Finance Star Schema')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="finance-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Personal_Finance_Wealth_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Personal_Finance_Wealth_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="finance-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border-emerald-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'finance', 'https://github.com/ravinder0710/personal-financial-analytics-powerbi#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'finance', 'https://github.com/ravinder0710/personal-financial-analytics-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -976,22 +1075,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 2,925 Headcount · 16.82% Attrition · 144 Promotion Ready · 234 Retrenchment Review
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/hr-workforce-intelligence-powerbi_pipeline.png', 'HR Workforce Decision Engine Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/hr-workforce-intelligence-powerbi_pipeline.png', 'HR Workforce Decision Engine Pipeline')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="hr-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border border-indigo-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/HR_Workforce_Intelligence_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/HR_Workforce_Intelligence_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="hr-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 hover:text-white border-indigo-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'hr', 'https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'hr', 'https://github.com/ravinder0710/hr-workforce-intelligence-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -1020,22 +1130,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 149.1K POS Trans · 14 Metros · Top 3: Pune, Delhi, Jaipur · 42% Rush Share
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/coffee-shop-sales-sql-powerbi_pipeline.png', 'Coffee Shop Market Expansion Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/coffee-shop-sales-sql-powerbi_pipeline.png', 'Coffee Shop Market Expansion Architecture')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="coffee-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 hover:text-white border border-amber-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Coffee_Shop_Sales_Expansion_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Coffee_Shop_Sales_Expansion_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="coffee-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-amber-600/20 hover:bg-amber-600/30 text-amber-300 hover:text-white border-amber-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'coffee', 'https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'coffee', 'https://github.com/ravinder0710/coffee-shop-sales-sql-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -1069,22 +1190,33 @@
               <div class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-[11px] font-mono text-slate-300">
                 <span class="text-blue-400 font-bold">KPIs:</span> 400K Events · $2.54M Spend · 11.79% CTR · 5.69% Stories CVR (vs 3.42% Feeds)
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
-                  <i data-lucide="github" class="w-3.5 h-3.5"></i> Repository
+              <div class="space-y-2 pt-1">
+                <!-- Row 1: 3 Columns (Repository, Pipeline, Project Report) -->
+                <div class="grid grid-cols-3 gap-2">
+                  <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white transition-all border border-slate-700">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-3.5 h-3.5 fill-current flex-shrink-0"><path d="M392 88C392 78.3 386.2 69.5 377.2 65.8C368.2 62.1 357.9 64.2 351 71L295 127C285.6 136.4 285.6 151.6 295 160.9L351 216.9C357.9 223.8 368.2 225.8 377.2 222.1C386.2 218.4 392 209.7 392 200L392 176L416 176C433.7 176 448 190.3 448 208L448 422.7C419.7 435 400 463.2 400 496C400 540.2 435.8 576 480 576C524.2 576 560 540.2 560 496C560 463.2 540.3 435 512 422.7L512 208C512 155 469 112 416 112L392 112L392 88zM136 144C136 130.7 146.7 120 160 120C173.3 120 184 130.7 184 144C184 157.3 173.3 168 160 168C146.7 168 136 157.3 136 144zM192 217.3C220.3 205 240 176.8 240 144C240 99.8 204.2 64 160 64C115.8 64 80 99.8 80 144C80 176.8 99.7 205 128 217.3L128 422.6C99.7 434.9 80 463.1 80 495.9C80 540.1 115.8 575.9 160 575.9C204.2 575.9 240 540.1 240 495.9C240 463.1 220.3 434.9 192 422.6L192 217.3zM136 496C136 482.7 146.7 472 160 472C173.3 472 184 482.7 184 496C184 509.3 173.3 520 160 520C146.7 520 136 509.3 136 496zM480 472C493.3 472 504 482.7 504 496C504 509.3 493.3 520 480 520C466.7 520 456 509.3 456 496C456 482.7 466.7 472 480 472z"/></svg>
+                  <span>Repository</span>
                 </a>
-                <button onclick="openArchModal('pipeline_diagrams/meta-ad-campaign-performance-powerbi_pipeline.png', 'Meta Ads Snowflake Architecture')" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
-                  <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> Pipeline
+                  <button onclick="openArchModal('pipeline_diagrams/meta-ad-campaign-performance-powerbi_pipeline.png', 'Meta Ads Snowflake Architecture')" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 transition-all border border-blue-500/30">
+                  <img src="assets/icons/data-pipeline.png" class="w-4 h-3.5 object-contain flex-shrink-0" alt="Pipeline" />
+                  <span>Pipeline</span>
                 </button>
-                <a href="meta-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 hover:text-white border border-purple-500/30">
-                  <i data-lucide="layout" class="w-3.5 h-3.5"></i> Case Study & Dashboard
+                  <a href="assets/reports/Meta_Ad_Campaign_Performance_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-2 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
+                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+                  <span class="truncate">Project Report</span>
                 </a>
-                <a href="assets/reports/Meta_Ad_Campaign_Performance_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white transition-all border border-emerald-500/30">
-                  <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report
+                </div>
+                <!-- Row 2: 2 Columns (Case Study & Interactive Dashboard, Demo Video) -->
+                <div class="grid grid-cols-2 gap-2">
+                  <a href="meta-project.html" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 hover:text-white border-purple-500/30 transition-all border shadow-sm">
+                  <i data-lucide="layout" class="w-3.5 h-3.5 flex-shrink-0"></i>
+                  <span class="truncate">Case Study &amp; Interactive Dashboard</span>
                 </a>
-                <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'meta-ad', 'https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi#demo-video')" target="_blank" class="col-span-2 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
-                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video
+                  <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi#demo-video" onclick="handleDemoVideoClick(event, 'meta-ad', 'https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi#demo-video')" target="_blank" class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-semibold bg-red-600/20 hover:bg-red-600/30 text-red-300 hover:text-white transition-all border border-red-500/30">
+                  <i data-lucide="play" class="w-3.5 h-3.5 text-red-400 flex-shrink-0"></i>
+                  <span>Demo Video</span>
                 </a>
+                </div>
               </div>
             </div>
           </article>
@@ -1106,10 +1238,12 @@
             <i data-lucide="mail" class="w-4 h-4"></i> iamravindergupta17@gmail.com
           </a>
           <a href="https://github.com/ravinder0710" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
-            <i data-lucide="github" class="w-4 h-4"></i> GitHub Profile
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-current"><path d="M280.5 426.5C214.5 418.5 168 371 168 309.5C168 284.5 177 257.5 192 239.5C185.5 223 186.5 188 194 173.5C214 171 241 181.5 257 196C276 190 296 187 320.5 187C345 187 365 190 383 195.5C398.5 181.5 426 171 446 173.5C453 187 454 222 447.5 239C463.5 258 472 283.5 472 309.5C472 371 425.5 417.5 358.5 426C375.5 437 387 461 387 488.5L387 540.5C387 555.5 399.5 564 414.5 558C505 523.5 576 433 576 321C576 179.5 461 64 319.5 64C178 64 64 179.5 64 321C64 432 134.5 524 229.5 558.5C243 563.5 256 554.5 256 541L256 501C249 504 240 506 232 506C199 506 179.5 488 165.5 454.5C160 441 154 433 142.5 431.5C136.5 431 134.5 428.5 134.5 425.5C134.5 419.5 144.5 415 154.5 415C169 415 181.5 424 194.5 442.5C204.5 457 215 463.5 227.5 463.5C240 463.5 248 459 259.5 447.5C268 439 274.5 431.5 280.5 426.5z"/></svg>
+            <span>GitHub Profile</span>
           </a>
           <a href="https://www.linkedin.com/in/ravinder-gupta-da" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-xs bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all">
-            <i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4 fill-current"><path d="M160 96C124.7 96 96 124.7 96 160L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 160C544 124.7 515.3 96 480 96L160 96zM165 266.2L231.5 266.2L231.5 480L165 480L165 266.2zM236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160C219.5 160 236.7 177.2 236.7 198.5zM413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480L413.9 480z"/></svg>
+            <span>LinkedIn</span>
           </a>
         </div>
       </div>
