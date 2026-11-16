@@ -3,66 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ravinder Gupta — 3 to 5s Luxury Brand Intro Animation</title>
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <title>Ravinder Gupta — Brand Motion Identity & Design Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
   <style>
-    /* Ultra-Sleek Narrow Scrollbar (Global, Inner Containers & Code Blocks) */
-    *, html, body {
-      scrollbar-width: thin;
-      scrollbar-color: #334155 transparent;
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    ::-webkit-scrollbar,
-    *::-webkit-scrollbar {
-      width: 5px !important;
-      height: 5px !important;
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
     }
-    ::-webkit-scrollbar-track,
-    *::-webkit-scrollbar-track {
-      background: transparent !important;
-    }
-    ::-webkit-scrollbar-thumb,
-    *::-webkit-scrollbar-thumb {
-      background: #1e293b !important;
-      border-radius: 9999px !important;
-    }
-    ::-webkit-scrollbar-thumb:hover,
-    *::-webkit-scrollbar-thumb:hover {
-      background: #38bdf8 !important;
-    }
-    ::-webkit-scrollbar-corner,
-    *::-webkit-scrollbar-corner {
-      background: transparent !important;
-    }
-    ::-webkit-scrollbar-button,
-    *::-webkit-scrollbar-button {
-      display: none !important;
-      width: 0 !important;
-      height: 0 !important;
-    }
-
-    /* Dedicated Codeblock & Pre Horizontal Scrollbar Styling */
-    pre, pre code {
-      scrollbar-width: thin;
-      scrollbar-color: #334155 rgba(15, 23, 42, 0.7);
-    }
-    pre::-webkit-scrollbar {
-      height: 4px !important;
-      width: 4px !important;
-    }
-    pre::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.7) !important;
-      border-radius: 9999px !important;
-    }
-    pre::-webkit-scrollbar-thumb {
-      background: #334155 !important;
-      border-radius: 9999px !important;
-    }
-    pre::-webkit-scrollbar-thumb:hover {
-      background: #38bdf8 !important;
-    }
-
-
-
     @keyframes pulseGlow {
       0%, 100% { opacity: 0.4; transform: scale(0.98); }
       50% { opacity: 0.9; transform: scale(1.04); }
@@ -90,192 +44,499 @@
     .ring-spin {
       animation: rotateRing 14s linear infinite;
     }
+
+    /* Custom Sleek Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #020617;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
   </style>
 </head>
-<body class="bg-transparent text-[var(--foreground)] antialiased p-3 sm:p-5 font-sans">
-  <div class="max-w-3xl mx-auto bg-slate-950 text-white border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden select-none">
-    
-    <!-- Top Control Bar -->
-    <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4 mb-6">
-      <div class="flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
-        <span class="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase">Brand Motion Identity</span>
-        <span class="text-slate-500 text-xs font-mono">&bull; 4.2s Dynamic Sequence</span>
-      </div>
+<body class="bg-[#030712] text-slate-100 antialiased min-h-screen py-8 px-4 sm:px-6">
 
-      <div class="flex items-center gap-2">
-        <!-- Replay Button -->
-        <button onclick="playBrandAnimation()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 transition-all flex items-center gap-1.5 cursor-pointer shadow-lg shadow-cyan-500/10 active:scale-95">
-          <span>▶ Replay Intro</span>
-        </button>
-        <!-- Theme Selectors -->
-        <div class="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-1 gap-1 text-[11px] font-mono">
-          <button onclick="setBrandTheme('cyan')" id="themeBtn-cyan" class="px-2.5 py-1 rounded-lg bg-cyan-500 text-black font-extrabold transition-all cursor-pointer">Cyan</button>
-          <button onclick="setBrandTheme('crimson')" id="themeBtn-crimson" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Crimson</button>
-          <button onclick="setBrandTheme('emerald')" id="themeBtn-emerald" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Emerald</button>
-          <button onclick="setBrandTheme('gold')" id="themeBtn-gold" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer">Gold</button>
+  <!-- Main Container -->
+  <div class="max-w-4xl mx-auto space-y-8">
+    
+    <!-- Top Global Header -->
+    <header class="flex flex-wrap items-center justify-between gap-4 p-5 rounded-3xl bg-slate-950/80 border border-slate-800/90 shadow-2xl backdrop-blur-xl">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl p-[2px] bg-gradient-to-tr from-cyan-400 via-sky-300 to-indigo-500 shadow-lg shadow-cyan-500/25 flex-shrink-0">
+          <div class="w-full h-full bg-[#090d16] rounded-[14px] flex items-center justify-center font-black text-white text-base tracking-wider">
+            RG
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-base font-black text-white tracking-wide">Ravinder Gupta</h1>
+            <span class="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+              Brand Studio
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 font-mono">9 Dynamic Themes • Motion Identity • LinkedIn Banner Studio</p>
         </div>
       </div>
-    </div>
 
-    <!-- Main Motion Canvas Stage -->
-    <div id="animationStage" class="relative w-full h-80 sm:h-96 rounded-2xl bg-[#030712] border border-slate-800/90 overflow-hidden flex flex-col items-center justify-center">
+      <div class="flex items-center gap-2.5">
+        <a href="index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 hover:border-slate-700 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Portfolio</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 1. BRAND MOTION IDENTITY (Animation Stage) -->
+    <section class="bg-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden select-none space-y-6">
       
-      <!-- Particle Background Canvas -->
-      <canvas id="motionCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+      <!-- Top Control Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" id="statusPulse"></span>
+          <span class="text-xs font-mono font-bold tracking-widest text-cyan-400 uppercase" id="section1Label">1. Brand Motion Identity</span>
+          <span class="text-slate-500 text-xs font-mono">&bull; 4.2s Sequence</span>
+        </div>
 
-      <!-- Ambient Glowing Orbs -->
-      <div id="glowOrb1" class="absolute w-72 h-72 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none transition-all duration-700"></div>
-      <div id="glowOrb2" class="absolute w-60 h-60 rounded-full bg-violet-600/15 blur-3xl pointer-events-none transition-all duration-700"></div>
+        <div class="flex items-center gap-2.5">
+          <!-- Active Color Tag -->
+          <span id="headerThemeBadge" class="text-xs font-mono font-bold px-3 py-1 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+            Electric Cyan Active
+          </span>
+          <!-- Replay Button -->
+          <button onclick="playBrandAnimation()" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 transition-all flex items-center gap-1.5 cursor-pointer shadow-lg shadow-cyan-500/10 active:scale-95" id="replayBtn">
+            <span>▶ Replay Intro</span>
+          </button>
+        </div>
+      </div>
 
-      <!-- Cybernetic Circular Ring Guides -->
-      <div id="cyberRings" class="absolute w-64 h-64 sm:w-72 sm:h-72 rounded-full border border-dashed border-cyan-500/20 ring-spin pointer-events-none transition-opacity duration-500"></div>
-      <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full border border-cyan-500/10 pointer-events-none"></div>
-
-      <!-- Stage Content Stack -->
-      <div class="relative z-10 flex flex-col items-center text-center space-y-4 px-4 max-w-lg">
+      <!-- Main Motion Canvas Stage -->
+      <div id="animationStage" class="relative w-full h-80 sm:h-96 rounded-2xl bg-[#030712] border border-slate-800/90 overflow-hidden flex flex-col items-center justify-center">
         
-        <!-- Central RG Monogram 3D Badge -->
-        <div id="badgeContainer" class="relative group cursor-pointer transition-all duration-500 animate-badge-float">
-          <!-- Animated Laser Shine Sweep -->
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl p-[2.5px] bg-gradient-to-tr from-cyan-400 via-sky-300 to-indigo-500 shadow-2xl shadow-cyan-500/40 overflow-hidden" id="badgeBorder">
-            <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-laser pointer-events-none"></div>
-            <!-- Inner Facet -->
-            <div class="w-full h-full bg-[#070e1b] rounded-[22px] flex items-center justify-center relative overflow-hidden backdrop-blur-xl border border-white/10" id="badgeInner">
-              <!-- Holographic Grid Lines inside Badge -->
-              <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:8px_8px]"></div>
-              <!-- Monogram Initials -->
-              <span id="badgeText" class="text-3xl sm:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-300 drop-shadow-[0_2px_12px_rgba(56,189,248,0.8)]">
-                RG
-              </span>
+        <!-- Particle Background Canvas -->
+        <canvas id="motionCanvas" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+
+        <!-- Ambient Glowing Orbs -->
+        <div id="glowOrb1" class="absolute w-72 h-72 rounded-full bg-cyan-500/15 blur-3xl pointer-events-none transition-all duration-700"></div>
+        <div id="glowOrb2" class="absolute w-60 h-60 rounded-full bg-blue-600/15 blur-3xl pointer-events-none transition-all duration-700"></div>
+
+        <!-- Cybernetic Circular Ring Guides -->
+        <div id="cyberRings" class="absolute w-64 h-64 sm:w-72 sm:h-72 rounded-full border border-dashed border-cyan-500/20 ring-spin pointer-events-none transition-opacity duration-500"></div>
+        <div class="absolute w-80 h-80 sm:w-96 sm:h-96 rounded-full border border-cyan-500/10 pointer-events-none"></div>
+
+        <!-- Stage Content Stack -->
+        <div class="relative z-10 flex flex-col items-center text-center space-y-4 px-4 max-w-lg">
+          
+          <!-- Central RG Monogram 3D Badge -->
+          <div id="badgeContainer" class="relative group cursor-pointer transition-all duration-500 animate-badge-float">
+            <!-- Animated Laser Shine Sweep -->
+            <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl p-[2.5px] bg-gradient-to-tr from-cyan-400 via-sky-300 to-indigo-500 shadow-2xl shadow-cyan-500/40 overflow-hidden" id="badgeBorder">
+              <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent animate-laser pointer-events-none"></div>
+              <!-- Inner Facet -->
+              <div class="w-full h-full bg-[#070e1b] rounded-[22px] flex items-center justify-center relative overflow-hidden backdrop-blur-xl border border-white/10" id="badgeInner">
+                <!-- Holographic Grid Lines inside Badge -->
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:8px_8px]"></div>
+                <!-- Monogram Initials -->
+                <span id="badgeText" class="text-3xl sm:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-b from-white via-slate-100 to-cyan-300 drop-shadow-[0_2px_12px_rgba(56,189,248,0.8)]">
+                  RG
+                </span>
+              </div>
+            </div>
+            <!-- Pulse Halo Behind Badge -->
+            <div id="badgeGlow" class="absolute -inset-4 bg-cyan-500/30 rounded-full blur-xl -z-10 animate-pulse pointer-events-none"></div>
+          </div>
+
+          <!-- Name & Title Reveal -->
+          <div class="space-y-1.5 transition-all duration-500" id="textBlock">
+            <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" id="badgeTagline">
+              Executive Data Intelligence
+            </div>
+            <h2 id="brandName" class="text-2xl sm:text-3xl font-black text-white tracking-wider uppercase drop-shadow-md">
+              Ravinder Gupta<span class="text-cyan-400" id="dotAccent">.</span>
+            </h2>
+            <p id="brandRole" class="text-xs sm:text-sm text-slate-300 font-mono tracking-wide max-w-md">
+              Star Schema &bull; DirectQuery Cockpits &bull; Serverless Pipelines
+            </p>
+          </div>
+
+          <!-- Telemetry Badges Sequence -->
+          <div id="telemetryRow" class="flex flex-wrap items-center justify-center gap-1.5 pt-1 transition-all duration-500">
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
+              Power BI DAX
+            </span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
+              Relational SQL
+            </span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
+              Python FastMCP
+            </span>
+            <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
+              n8n Cloud ETL
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Live Timeline Progress Bar (0 to 100% over 4.2s) -->
+        <div class="absolute bottom-0 left-0 right-0 h-1 bg-slate-900">
+          <div id="animationTimelineBar" class="h-full bg-cyan-400 transition-all ease-linear" style="width: 0%"></div>
+        </div>
+
+        <!-- Time Counter in Corner -->
+        <div class="absolute bottom-2.5 right-3 text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-cyan-400" id="statusDot"></span>
+          <span id="timerText">0.0s / 4.2s</span>
+        </div>
+      </div>
+
+      <!-- Feature Info Footer -->
+      <div class="pt-2 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3 border-t border-slate-800/80">
+        <div>
+          <strong class="text-white">Motion Utility:</strong> High-impact 60 FPS animation for hero video backdrops, video case studies, and presentation openers.
+        </div>
+        <div class="font-mono text-cyan-400 flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> GPU Accelerated Canvas &amp; 3D Transforms
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- 2. SELECT GLOBAL THEME (9 COLORS) -->
+    <section class="bg-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <h2 class="text-xs font-mono font-bold tracking-wider uppercase text-slate-200">
+            2. Select Global Theme (9 Colors)
+          </h2>
+        </div>
+        <span id="themeGridActiveBadge" class="text-[11px] font-mono font-bold px-2.5 py-1 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+          Electric Cyan Active
+        </span>
+      </div>
+
+      <p class="text-xs text-slate-400 leading-relaxed max-w-2xl">
+        Click any swatch below to switch the <strong>Brand Motion Identity</strong> animation, ambient orbs, and the live <strong>LinkedIn Banner</strong> preview into that signature color scheme in real time:
+      </p>
+
+      <!-- 9 Swatches Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-2" id="themeCardsGrid">
+        <!-- Will be dynamically injected and interactive via JS -->
+      </div>
+    </section>
+
+
+    <!-- 3. OFFICIAL LINKEDIN BANNER -->
+    <section class="bg-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <i data-lucide="image" class="w-4 h-4 text-cyan-400"></i>
+          <h2 class="text-xs font-mono font-bold tracking-wider uppercase text-slate-200">
+            3. Official LinkedIn Banner (1584 × 396)
+          </h2>
+        </div>
+        <a href="linkedin-banner-generator.html" target="_blank" class="text-xs font-mono font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1 transition">
+          <span>Full Generator Studio</span> ↗
+        </a>
+      </div>
+
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Ultra-high-definition executive LinkedIn banner synchronized with your selected theme, telemetry chips, and 3D monogram branding:
+      </p>
+
+      <!-- Banner Live Canvas Preview -->
+      <div class="w-full rounded-2xl overflow-hidden border border-slate-800 bg-black aspect-[1584/396] relative shadow-2xl group">
+        <canvas id="drawerBannerCanvas" width="1584" height="396" class="w-full h-full object-contain"></canvas>
+        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
+          <a href="linkedin-banner-generator.html" target="_blank" class="px-4 py-2 rounded-xl text-xs font-bold bg-white text-black shadow-xl hover:bg-slate-200 transition">
+            Open Full HD Studio ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Banner Controls Footer -->
+      <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+        <span class="text-xs text-slate-400 font-mono">1584 × 396 Standard Size &bull; 9 Core Tools Active</span>
+        <button onclick="downloadBannerImage()" class="px-4 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-black transition cursor-pointer flex items-center gap-2 active:scale-95 shadow-lg shadow-cyan-500/20">
+          <i data-lucide="download" class="w-3.5 h-3.5"></i>
+          <span>Export Banner (PNG)</span>
+        </button>
+      </div>
+    </section>
+
+
+    <!-- 4. PORTALS & SPECIALIZED TRACKS -->
+    <section class="bg-slate-950/90 border border-slate-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-4">
+      <div class="flex items-center gap-2">
+        <i data-lucide="compass" class="w-4 h-4 text-indigo-400"></i>
+        <h2 class="text-xs font-mono font-bold tracking-wider uppercase text-slate-200">
+          4. Portals &amp; Specialized Tracks
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
+        <!-- 1. LinkedIn Banner Studio -->
+        <a href="linkedin-banner-generator.html" target="_blank" class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm hover:shadow-cyan-500/10">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400"></span>
+            <div>
+              <div class="text-xs font-bold text-white group-hover:text-cyan-300 transition-colors">LinkedIn Banner Studio</div>
+              <div class="text-[11px] text-slate-400 font-mono">1584×396 Generator • Live Preview</div>
             </div>
           </div>
-          <!-- Pulse Halo Behind Badge -->
-          <div id="badgeGlow" class="absolute -inset-4 bg-cyan-500/30 rounded-full blur-xl -z-10 animate-pulse pointer-events-none"></div>
-        </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+        </a>
 
-        <!-- Name & Title Reveal -->
-        <div class="space-y-1.5 transition-all duration-500" id="textBlock">
-          <div class="inline-flex items-center gap-2 px-3 py-0.5 rounded-full text-xs font-mono font-bold tracking-widest uppercase bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" id="badgeTagline">
-            Executive Data Intelligence
+        <!-- 2. Healthcare Track -->
+        <a href="healthcare-track.html" target="_blank" class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-emerald-500/40 text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm hover:shadow-emerald-500/10">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400"></span>
+            <div>
+              <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">Healthcare Track</div>
+              <div class="text-[11px] text-slate-400 font-mono">Clinical RCM • 5,000 Patient Records</div>
+            </div>
           </div>
-          <h1 id="brandName" class="text-2xl sm:text-3xl font-black text-white tracking-wider uppercase drop-shadow-md">
-            Ravinder Gupta<span class="text-cyan-400" id="dotAccent">.</span>
-          </h1>
-          <p id="brandRole" class="text-xs sm:text-sm text-slate-300 font-mono tracking-wide max-w-md">
-            Star Schema &bull; DirectQuery Cockpits &bull; Serverless Pipelines
-          </p>
-        </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-emerald-400 transition-colors"></i>
+        </a>
 
-        <!-- Telemetry Badges Sequence -->
-        <div id="telemetryRow" class="flex flex-wrap items-center justify-center gap-1.5 pt-1 transition-all duration-500">
-          <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
-            Power BI DAX
-          </span>
-          <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
-            Relational SQL
-          </span>
-          <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
-            Python FastMCP
-          </span>
-          <span class="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-slate-900/90 text-slate-300 border border-slate-800">
-            n8n Cloud ETL
-          </span>
-        </div>
+        <!-- 3. Executive Resume -->
+        <a href="resume.html" target="_blank" class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/40 text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm hover:shadow-blue-500/10">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-sm shadow-blue-400"></span>
+            <div>
+              <div class="text-xs font-bold text-white group-hover:text-blue-300 transition-colors">Executive Resume</div>
+              <div class="text-[11px] text-slate-400 font-mono">Data Analyst &amp; BI Specialist Profile</div>
+            </div>
+          </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-blue-400 transition-colors"></i>
+        </a>
 
+        <!-- 4. Honda Telematics -->
+        <a href="honda-walkthrough.html" target="_blank" class="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-amber-500/40 text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm hover:shadow-amber-500/10">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400"></span>
+            <div>
+              <div class="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">Honda Telematics</div>
+              <div class="text-[11px] text-slate-400 font-mono">Interactive Motion Walkthrough</div>
+            </div>
+          </div>
+          <i data-lucide="external-link" class="w-4 h-4 text-slate-500 group-hover:text-amber-400 transition-colors"></i>
+        </a>
       </div>
+    </section>
 
-      <!-- Live Timeline Progress Bar (0 to 100% over 4.2s) -->
-      <div class="absolute bottom-0 left-0 right-0 h-1 bg-slate-900">
-        <div id="animationTimelineBar" class="h-full bg-cyan-400 transition-all ease-linear" style="width: 0%"></div>
-      </div>
-
-      <!-- Time Counter in Corner -->
-      <div class="absolute bottom-2.5 right-3 text-[11px] font-mono text-slate-500 flex items-center gap-1.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400" id="statusDot"></span>
-        <span id="timerText">0.0s / 4.2s</span>
-      </div>
-    </div>
-
-    <!-- Explanation / Usability Guide -->
-    <div class="mt-4 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
-      <div>
-        <strong class="text-white">Where to use:</strong> Portfolio preloader, hero video backdrop, LinkedIn video intro, or interactive project header.
-      </div>
-      <div class="font-mono text-cyan-400">
-        Smooth 60 FPS Canvas + CSS 3D Transforms
-      </div>
-    </div>
+    <!-- Footer -->
+    <footer class="text-center text-xs text-slate-500 font-mono py-4">
+      &copy; 2026 Ravinder Gupta &bull; Enterprise Data Intelligence &amp; Brand Motion System
+    </footer>
 
   </div>
 
+
+  <!-- JAVASCRIPT LOGIC (9 Colors + Canvas Animation + Banner Preview) -->
   <script>
-    // Theme Presets
-    const themes = {
-      cyan: {
+    // 9 Brand Color Theme Presets
+    const BRAND_THEMES = {
+      'royal-blue': {
+        name: 'Royal Blue',
+        subtitle: 'Signature Executive',
+        dot: '#2563eb',
+        accent: '#3b82f6',
+        gradient: 'from-blue-600 via-indigo-500 to-cyan-400',
+        badgeShadow: 'shadow-blue-500/50',
+        glow: 'rgba(59, 130, 246, 0.45)',
+        textDrop: 'rgba(59, 130, 246, 0.8)',
+        btnBg: 'bg-blue-600 text-white',
+        borderGlow: 'border-blue-500/50 shadow-blue-500/20',
+        timelineBg: '#2563eb'
+      },
+      'electric-cyan': {
+        name: 'Electric Cyan',
+        subtitle: 'Cyber Intelligence',
+        dot: '#06b6d4',
         accent: '#22d3ee',
         gradient: 'from-cyan-400 via-sky-300 to-indigo-500',
         badgeShadow: 'shadow-cyan-500/40',
-        glow: 'rgba(34, 211, 238, 0.35)',
+        glow: 'rgba(34, 211, 238, 0.4)',
         textDrop: 'rgba(56, 189, 248, 0.8)',
-        btnBg: 'bg-cyan-500',
+        btnBg: 'bg-cyan-500 text-black',
+        borderGlow: 'border-cyan-500/50 shadow-cyan-500/20',
         timelineBg: '#22d3ee'
       },
-      crimson: {
-        accent: '#f87171',
-        gradient: 'from-red-600 via-rose-500 to-amber-400',
-        badgeShadow: 'shadow-red-500/50',
-        glow: 'rgba(239, 68, 68, 0.4)',
-        textDrop: 'rgba(239, 68, 68, 0.8)',
-        btnBg: 'bg-red-500',
-        timelineBg: '#ef4444'
-      },
-      emerald: {
+      'emerald-mint': {
+        name: 'Emerald Mint',
+        subtitle: 'Healthcare Clinical',
+        dot: '#10b981',
         accent: '#34d399',
         gradient: 'from-emerald-400 via-teal-400 to-cyan-500',
         badgeShadow: 'shadow-emerald-500/40',
-        glow: 'rgba(52, 211, 153, 0.35)',
+        glow: 'rgba(52, 211, 153, 0.4)',
         textDrop: 'rgba(52, 211, 153, 0.8)',
-        btnBg: 'bg-emerald-500',
+        btnBg: 'bg-emerald-500 text-black',
+        borderGlow: 'border-emerald-500/50 shadow-emerald-500/20',
         timelineBg: '#10b981'
       },
-      gold: {
+      'crimson-red': {
+        name: 'Crimson Red',
+        subtitle: 'High Velocity & Risk',
+        dot: '#ef4444',
+        accent: '#f87171',
+        gradient: 'from-red-600 via-rose-500 to-amber-400',
+        badgeShadow: 'shadow-red-500/50',
+        glow: 'rgba(239, 68, 68, 0.45)',
+        textDrop: 'rgba(239, 68, 68, 0.8)',
+        btnBg: 'bg-red-500 text-white',
+        borderGlow: 'border-red-500/50 shadow-red-500/20',
+        timelineBg: '#ef4444'
+      },
+      'cyber-violet': {
+        name: 'Cyber Violet',
+        subtitle: 'Neural Analytics & AI',
+        dot: '#a855f7',
+        accent: '#c084fc',
+        gradient: 'from-purple-600 via-violet-500 to-fuchsia-400',
+        badgeShadow: 'shadow-purple-500/40',
+        glow: 'rgba(168, 85, 247, 0.45)',
+        textDrop: 'rgba(192, 132, 252, 0.8)',
+        btnBg: 'bg-purple-600 text-white',
+        borderGlow: 'border-purple-500/50 shadow-purple-500/20',
+        timelineBg: '#a855f7'
+      },
+      'solar-gold': {
+        name: 'Solar Gold',
+        subtitle: 'Fintech Luxury',
+        dot: '#f59e0b',
         accent: '#fbbf24',
-        gradient: 'from-amber-400 via-yellow-300 to-orange-500',
+        gradient: 'from-amber-400 via-yellow-400 to-orange-500',
         badgeShadow: 'shadow-amber-500/40',
-        glow: 'rgba(251, 191, 36, 0.4)',
+        glow: 'rgba(251, 191, 36, 0.45)',
         textDrop: 'rgba(251, 191, 36, 0.8)',
-        btnBg: 'bg-amber-500',
+        btnBg: 'bg-amber-500 text-black',
+        borderGlow: 'border-amber-500/50 shadow-amber-500/20',
         timelineBg: '#f59e0b'
+      },
+      'sunset-orange': {
+        name: 'Sunset Orange',
+        subtitle: 'Dynamic Telematics',
+        dot: '#f97316',
+        accent: '#fb923c',
+        gradient: 'from-orange-500 via-amber-500 to-red-500',
+        badgeShadow: 'shadow-orange-500/40',
+        glow: 'rgba(249, 115, 22, 0.45)',
+        textDrop: 'rgba(251, 146, 60, 0.8)',
+        btnBg: 'bg-orange-500 text-black',
+        borderGlow: 'border-orange-500/50 shadow-orange-500/20',
+        timelineBg: '#f97316'
+      },
+      'neon-lime': {
+        name: 'Neon Lime',
+        subtitle: 'Matrix Warehousing',
+        dot: '#84cc16',
+        accent: '#a3e635',
+        gradient: 'from-lime-400 via-green-400 to-emerald-500',
+        badgeShadow: 'shadow-lime-500/40',
+        glow: 'rgba(132, 204, 22, 0.45)',
+        textDrop: 'rgba(163, 230, 53, 0.8)',
+        btnBg: 'bg-lime-500 text-black',
+        borderGlow: 'border-lime-500/50 shadow-lime-500/20',
+        timelineBg: '#84cc16'
+      },
+      'obsidian-slate': {
+        name: 'Obsidian Slate',
+        subtitle: 'Stealth Titanium',
+        dot: '#94a3b8',
+        accent: '#cbd5e1',
+        gradient: 'from-slate-400 via-slate-500 to-zinc-400',
+        badgeShadow: 'shadow-slate-500/40',
+        glow: 'rgba(148, 163, 184, 0.35)',
+        textDrop: 'rgba(203, 213, 225, 0.8)',
+        btnBg: 'bg-slate-400 text-black',
+        borderGlow: 'border-slate-500/50 shadow-slate-500/20',
+        timelineBg: '#94a3b8'
       }
     };
 
-    let activeTheme = 'cyan';
+    let activeThemeKey = 'electric-cyan';
 
-    function setBrandTheme(name) {
-      activeTheme = name;
-      ['cyan', 'crimson', 'emerald', 'gold'].forEach(t => {
-        const btn = document.getElementById('themeBtn-' + t);
-        if (t === name) {
-          btn.className = 'px-2.5 py-1 rounded-lg ' + themes[t].btnBg + ' text-black font-extrabold transition-all cursor-pointer';
-        } else {
-          btn.className = 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all cursor-pointer';
-        }
+    // Render 9 Swatches Grid
+    function renderThemeCards() {
+      const container = document.getElementById('themeCardsGrid');
+      if (!container) return;
+      container.innerHTML = '';
+
+      Object.keys(BRAND_THEMES).forEach(k => {
+        const th = BRAND_THEMES[k];
+        const isActive = (k === activeThemeKey);
+        
+        const card = document.createElement('div');
+        card.className = `p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center gap-3 relative ${
+          isActive 
+            ? `bg-slate-900 border-white/40 ring-1 ring-white/20 shadow-xl ${th.borderGlow}`
+            : 'bg-slate-900/60 border-slate-800/80 hover:bg-slate-900 hover:border-slate-700'
+        }`;
+        card.onclick = () => selectTheme(k);
+
+        card.innerHTML = `
+          <div class="w-4 h-4 rounded-full flex-shrink-0 shadow-md" style="background-color: ${th.dot};"></div>
+          <div class="flex-1 min-w-0">
+            <div class="text-xs font-bold text-white flex items-center justify-between">
+              <span>${th.name}</span>
+              ${isActive ? '<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white">Active</span>' : ''}
+            </div>
+            <div class="text-[10px] text-slate-400 font-mono truncate">${th.subtitle}</div>
+          </div>
+        `;
+        container.appendChild(card);
       });
+    }
 
-      const th = themes[name];
+    // Select Theme and update all 4 sections
+    function selectTheme(key) {
+      if (!BRAND_THEMES[key]) return;
+      activeThemeKey = key;
+      const th = BRAND_THEMES[key];
+
+      // 1. Update badges
+      document.getElementById('headerThemeBadge').innerText = `${th.name} Active`;
+      document.getElementById('headerThemeBadge').style.borderColor = th.accent + '60';
+      document.getElementById('headerThemeBadge').style.backgroundColor = th.accent + '20';
+      document.getElementById('headerThemeBadge').style.color = th.accent;
+
+      document.getElementById('themeGridActiveBadge').innerText = `${th.name} Active`;
+      document.getElementById('themeGridActiveBadge').style.borderColor = th.accent + '60';
+      document.getElementById('themeGridActiveBadge').style.backgroundColor = th.accent + '20';
+      document.getElementById('themeGridActiveBadge').style.color = th.accent;
+
+      // 2. Update Animation Stage Elements
       const badgeBorder = document.getElementById('badgeBorder');
       badgeBorder.className = `relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl p-[2.5px] bg-gradient-to-tr ${th.gradient} ${th.badgeShadow} overflow-hidden`;
 
       document.getElementById('badgeGlow').style.backgroundColor = th.glow;
       document.getElementById('dotAccent').style.color = th.accent;
-      document.getElementById('dotAccent').innerText = '.';
       document.getElementById('badgeTagline').style.color = th.accent;
       document.getElementById('badgeTagline').style.borderColor = th.accent + '40';
       document.getElementById('badgeTagline').style.backgroundColor = th.accent + '15';
       document.getElementById('statusDot').style.backgroundColor = th.accent;
       document.getElementById('animationTimelineBar').style.backgroundColor = th.timelineBg;
 
+      document.getElementById('glowOrb1').style.backgroundColor = th.glow;
+      document.getElementById('cyberRings').style.borderColor = th.accent + '30';
+
+      // 3. Re-render swatches grid
+      renderThemeCards();
+
+      // 4. Update LinkedIn Banner
+      drawDrawerBannerPreview();
+
+      // 5. Trigger animation replay
       playBrandAnimation();
     }
 
@@ -292,7 +553,7 @@
     });
 
     const particles = [];
-    const NUM_PARTICLES = 40;
+    const NUM_PARTICLES = 45;
 
     class Particle {
       constructor() {
@@ -315,7 +576,7 @@
       draw(c) {
         c.beginPath();
         c.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        c.fillStyle = themes[activeTheme].accent;
+        c.fillStyle = BRAND_THEMES[activeThemeKey].accent;
         c.globalAlpha = this.alpha;
         c.fill();
         c.globalAlpha = 1.0;
@@ -335,12 +596,12 @@
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.hypot(dx, dy);
-          if (dist < 90) {
+          if (dist < 95) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = themes[activeTheme].accent;
-            ctx.globalAlpha = (1 - dist / 90) * 0.25;
+            ctx.strokeStyle = BRAND_THEMES[activeThemeKey].accent;
+            ctx.globalAlpha = (1 - dist / 95) * 0.25;
             ctx.stroke();
             ctx.globalAlpha = 1.0;
           }
@@ -358,8 +619,7 @@
 
     // 4.2-Second Keyframe Sequencer
     let animationTimer = null;
-    let animProgress = 0;
-    const TOTAL_DURATION = 4200; // 4.2s
+    const TOTAL_DURATION = 4200;
 
     function playBrandAnimation() {
       clearInterval(animationTimer);
@@ -424,11 +684,119 @@
       }, 50);
     }
 
-    // Auto-play on first load
+    // Draw Live LinkedIn Banner Preview (1584 × 396)
+    function drawDrawerBannerPreview() {
+      const c = document.getElementById('drawerBannerCanvas');
+      if (!c) return;
+      const ctx = c.getContext('2d');
+      const W = c.width;
+      const H = c.height;
+      const th = BRAND_THEMES[activeThemeKey] || BRAND_THEMES['electric-cyan'];
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Background Gradient
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0, '#060a12');
+      bgGrad.addColorStop(0.4, '#020617');
+      bgGrad.addColorStop(1, '#050810');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Cyber Grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < W; x += 44) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+      for (let y = 0; y < H; y += 44) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+
+      // Content coordinates
+      const cx = 385;
+
+      // Category Tag
+      ctx.fillStyle = th.accent;
+      ctx.font = '800 13px "JetBrains Mono"';
+      ctx.fillText('// ENTERPRISE DATA INTELLIGENCE & BUSINESS ARCHITECTURE', cx, 60);
+
+      // Name Title
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 50px "Plus Jakarta Sans"';
+      ctx.fillText('RAVINDER GUPTA', cx, 115);
+      ctx.fillStyle = th.accent;
+      ctx.fillText('.', cx + ctx.measureText('RAVINDER GUPTA').width - 8, 115);
+
+      // Role Title
+      ctx.fillStyle = th.accent;
+      ctx.font = '800 20px "JetBrains Mono"';
+      ctx.fillText('Data Analyst & Business Intelligence Specialist', cx, 150);
+
+      // Description
+      ctx.fillStyle = '#e2e8f0';
+      ctx.font = '700 14px "Plus Jakarta Sans"';
+      ctx.fillText('Star Schema Warehousing • DirectQuery Cockpits • Serverless Analytics Pipelines', cx, 178);
+
+      // Mini Chips indication
+      ctx.fillStyle = '#060b17';
+      ctx.strokeStyle = th.accent;
+      ctx.lineWidth = 1.5;
+      const tools = ['Advance Excel', 'Power BI', 'SQL', 'Python', 'Tableau', 'Pandas', 'NumPy', 'PySpark', 'Snowflake'];
+      let px = cx;
+      tools.slice(0, 5).forEach(t => {
+        const tw = ctx.measureText(t).width + 30;
+        ctx.strokeRect(px, 206, tw, 36);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '700 12px "Plus Jakarta Sans"';
+        ctx.fillText(t, px + 10, 228);
+        px += tw + 10;
+      });
+
+      // RG Monogram Badge with Glow
+      const bx = 1340, by = 198;
+      const glow = ctx.createRadialGradient(bx, by, 20, bx, by, 160);
+      glow.addColorStop(0, th.glow);
+      glow.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = glow;
+      ctx.fillRect(bx - 160, by - 160, 320, 320);
+
+      // Outer Badge Ring
+      ctx.strokeStyle = th.accent;
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(bx, by, 65, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // Inner Badge Fill
+      ctx.fillStyle = '#090d16';
+      ctx.beginPath();
+      ctx.arc(bx, by, 62, 0, Math.PI * 2);
+      ctx.fill();
+
+      // RG Monogram Text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 48px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('RG', bx, by);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+    }
+
+    // Download Banner Image (PNG)
+    function downloadBannerImage() {
+      const c = document.getElementById('drawerBannerCanvas');
+      if (!c) return;
+      const link = document.createElement('a');
+      link.download = `Ravinder_Gupta_LinkedIn_Banner_${activeThemeKey}.png`;
+      link.href = c.toDataURL('image/png');
+      link.click();
+    }
+
+    // Initialize on page load
     window.addEventListener('DOMContentLoaded', () => {
+      renderThemeCards();
+      drawDrawerBannerPreview();
       setTimeout(playBrandAnimation, 150);
+      if (window.lucide) window.lucide.createIcons();
     });
-    setTimeout(playBrandAnimation, 200);
   </script>
 </body>
 </html>
