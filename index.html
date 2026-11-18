@@ -9849,8 +9849,8 @@ const jet = { svg: $("jetFig"), blocks: [], crc: null, dieTop: 0, dieThroat: 0,
    both count: max(out)/2 + 0.6 must clear throat − stroke/2. Wide clears by
    1.7 at the widest block, tight by 1.6. Change one number here and the other
    two move with it. */
-const JET_OUT_WIDE = [25, 32, 20, 28, 23, 18, 30, 24];
-const JET_OUT_TIGHT = [14, 18, 11, 16, 13, 10, 17, 14];
+const JET_OUT_WIDE = [20, 24, 16, 22, 18, 18, 24, 18, 22, 18];
+const JET_OUT_TIGHT = [11, 14, 9, 13, 10, 10, 14, 10, 12, 11];
 /* the elevation is what the svg's label describes while it is shown; the
    resting drawing's own label is the one in the markup */
 const JET_FLAT_LABEL = "The same machine drawn flat, in elevation. Eight byte blocks arrive along one rail and fan down into four virtual-thread lanes side by side, each carrying a deflate die drawn as two walls that step inward, and every block leaves its die at a width of its own. A second rail gathers the four lanes and returns each block to the place it came from, so the eight land in stream order and not in lane order, and the member is a whole object only once the last one is in. It is drawn as one gzip member: a header lettered 1f 8b 08, the eight stitched blocks abutting so that each join is drawn once, and a trailer, marked in clay, whose check covers the whole input rather than any one block. Which lane takes which block, and how far each block narrows, are drawn and not measured; the lettered bytes come from the gzip format itself, not from this run.";
@@ -9885,7 +9885,7 @@ function buildJetFlat(tight, host) {
      WIDTH only), so both boxes grew downward and neither grew across. */
   const g = tight
     ? { raw: 32, out: JET_OUT_TIGHT, bh: 18,
-        laneX: [81, 125, 169, 213], mouth: 19, throat: 12,
+        laneX: [65, 101, 137, 173, 209], mouth: 16, throat: 10,
         railY: 60, railX0: -40, railX1: 226, dieY: [108, 118, 140, 150],
         stitchY: 186, memX: 8, memY: 206, head: 65, trail: 44,
         tail: "RM799K", lead: 0, deflateY: 144,
@@ -9893,7 +9893,7 @@ function buildJetFlat(tight, host) {
         foot: [[302, "lanes and block sizes here"],
                [316, "are drawn, not measured"]] }
     : { raw: 56, out: JET_OUT_WIDE, bh: 22,
-        laneX: [176, 262, 348, 434], mouth: 32, throat: 19,
+        laneX: [136, 206, 276, 346, 416], mouth: 28, throat: 17,
         railY: 58, railX0: -56, railX1: 446, dieY: [106, 118, 142, 154],
         stitchY: 190, memX: 108, memY: 210, head: 84, trail: 124,
         tail: "RM799K recovered", lead: 134, deflateY: 146,
@@ -9918,7 +9918,7 @@ function buildJetFlat(tight, host) {
     /* centred ABOVE the rail, where no block ever travels — beside the lane it
        sat inside the raw block's own footprint at every width */
     const t = el("text", { x: lx, y: g.railY - 18, "text-anchor": "middle", class: "jlab" }, lw);
-    t.textContent = `vt-${i}`; jlabs.push([t, i]);
+    const fbnames = ["KL", "Klang", "Subang", "Puchong", "Cheras"]; t.textContent = fbnames[i]; jlabs.push([t, i]);
   });
   /* the deflate register: the word at the left, and the four throats sharing
      one y. Wide runs a leader from the word to the first die because its
@@ -10055,23 +10055,23 @@ const jetP = (x, y, d = 0) => [x + d * JET_OB.x, y - d * JET_OB.y];
    below it], read off the drop's own top: the name hangs ON its feed, and
    the feed breaks for it. */
 const JET_SOLID_WIDE = {
-  vb: "0 0 560 400", raw: 56, out: JET_OUT_WIDE, bh: 22,
+  vb: "0 0 560 400", raw: 44, out: JET_OUT_WIDE, bh: 22,
   heads: [[8, 22, "45K POS bill stream", 0], [456, 22, "5-branch revenue consolidation", 1]],
   railY: 58, railX0: -56, streamEnd: 456,
-  mouth: 32, throat: 19, die: [0, 12, 36, 48], mx: 130, mstep: 12, mTop: 280, zPitch: 72, mz: 26,
+  mouth: 30, throat: 18, die: [0, 12, 36, 48], mx: 110, mstep: 10, mTop: 280, zPitch: 58, mz: 26,
   manY: 241, drop: [14, 30], labY: 26,
   stitchY: 308, cap: 6, memX: 108, memY: 330, head: 84, trail: 124, tail: "RM799K recovered", memZ: 22,
   deflateY: 272, lead: [72, 160], ground: 352, groundX: [8, 552],
-  foot: [[8, 386, "branch target pacing and daily sales allocation are consolidated across Malaysia"]],
+  foot: [[8, 386, "branch target pacing and daily sales allocation are consolidated across 5 Malaysia locations"]],
   nib: 2.6, flatDy: 38,
 };
 const JET_SOLID_TIGHT = {
-  vb: "0 0 240 330", raw: 27, out: JET_OUT_TIGHT, bh: 18,
-  heads: [[8, 14, "the stream", 0], [8, 30, "one virtual thread per block", 0]],
+  vb: "0 0 240 330", raw: 21, out: JET_OUT_TIGHT, bh: 18,
+  heads: [[8, 14, "45K POS stream", 0], [8, 30, "5-branch consolidation", 0]],
   railY: 60, railX0: -40, streamEnd: 224,
-  mouth: 19, throat: 12, die: [0, 10, 32, 42], mx: 16, mstep: 5, mTop: 210, zPitch: 50, mz: 15,
+  mouth: 17, throat: 11, die: [0, 10, 32, 42], mx: 10, mstep: 4, mTop: 210, zPitch: 40, mz: 15,
   manY: 182, drop: [9.5, 22.5], labY: 20,
-  stitchY: 240, cap: 6, memX: 8, memY: 260, head: 65, trail: 44, tail: "crc32", memZ: 11,
+  stitchY: 240, cap: 6, memX: 8, memY: 260, head: 65, trail: 44, tail: "RM799K", memZ: 11,
   deflateY: 128, lead: null, ground: 278, groundX: [8, 232],
   foot: [[8, 306, "branch sales pacing"], [8, 320, "consolidated across 5 outlets"]],
   nib: 1.9, flatDy: 0,
@@ -10192,8 +10192,9 @@ function buildJetSolid(g, host) {
   const seg = (a, b) => `M ${r2(a[0])} ${r2(a[1])} L ${r2(b[0])} ${r2(b[1])}`;
   const box = (x0, y0, x1, y1) => `M ${x0} ${y0} H ${x1} V ${y1} H ${x0} Z`;
 
+  const N_BRANCH = 5;
   const { raw, bh } = g;
-  const sy0 = g.railY, sy1 = g.railY + bh, sx1 = g.streamEnd, sx0 = sx1 - raw * 8;
+  const sy0 = g.railY, sy1 = g.railY + bh, sx1 = g.streamEnd, sx0 = sx1 - raw * 10;
   const [, d1, d2, d3] = g.die;
   const top = g.mTop, sh = top + d1, th = top + d2, bot = top + d3;
   const sx = (k) => g.mx + g.mstep * k;            /* the station's own x, one short step per lane */
@@ -10204,49 +10205,38 @@ function buildJetSolid(g, host) {
   const slots = [];
   { let c = dataX; for (const w of g.out) { slots.push([c, c + w]); c += w; } }
 
-  /* ── the construction: the floor the bank stands on, the line its four
-     stations stand on with a tick at each, and the sheet's ground line.
-     Pencil, and it stays: a drawing sheet keeps its construction. ── */
-  /* the floor runs a little in front of the near machine and behind the far
-     one and no further, so its front edge stands clear of the gathering rail */
-  const fy = bot, zMin = zOf(0) - 0.15 * g.zPitch, zMax = zOf(3) + g.mz + 0.15 * g.zPitch;
-  const fx0 = sx(0) - g.mouth - 10, fx1 = sx(3) + g.mouth + 10;
+  /* ── the construction: the floor the bank stands on, the line its five
+     branch stations stand on with a tick at each, and the sheet's ground line. ── */
+  const fy = bot, zMin = zOf(0) - 0.15 * g.zPitch, zMax = zOf(N_BRANCH - 1) + g.mz + 0.15 * g.zPitch;
+  const fx0 = sx(0) - g.mouth - 10, fx1 = sx(N_BRANCH - 1) + g.mouth + 10;
   const station = (k) => jetP(sx(k), fy, zMid(k));
-  const along = (z) => sx(0) + ((z - zMid(0)) * g.mstep) / g.zPitch; /* the station line's x at depth z */
+  const along = (z) => sx(0) + ((z - zMid(0)) * g.mstep) / g.zPitch;
   mk("path", { class: "jpenh", d: [
     seg(jetP(fx0, fy, zMin), jetP(fx1, fy, zMin)), seg(jetP(fx1, fy, zMin), jetP(fx1, fy, zMax)),
     seg(jetP(fx1, fy, zMax), jetP(fx0, fy, zMax)), seg(jetP(fx0, fy, zMax), jetP(fx0, fy, zMin)),
     seg(jetP(along(zMin), fy, zMin), jetP(along(zMax), fy, zMax)),
-    ...[0, 1, 2, 3].map((k) => seg([station(k)[0] - 7, station(k)[1]], [station(k)[0] + 7, station(k)[1]])),
+    ...Array.from({length: N_BRANCH}, (_, k) => seg([station(k)[0] - 7, station(k)[1]], [station(k)[0] + 7, station(k)[1]])),
     seg([g.groundX[0], g.ground], [g.groundX[1], g.ground]),
   ].join(" ") }, con);
 
-  /* ── the stream: its rail in from off the plate, the bar, and the seven
-     cuts the splitter makes in it ── */
+  /* ── the stream: its rail in from off the plate, the bar, and the 9
+     cuts dividing into 10 blocks (2 per branch) ── */
   const rail = part(ink, [[g.railX0, sy0], [sx1, sy0]], "lane", { pencil: "jpenh" });
   const bar = part(ink, [[sx0, sy0], [sx0, sy1], [sx1, sy1], [sx1, sy0]], "mk");
   const cuts = [];
-  for (let i = 1; i < 8; i++) cuts.push(part(ink, [[sx0 + raw * i, sy0], [sx0 + raw * i, sy1]], "mk"));
+  for (let i = 1; i < 10; i++) cuts.push(part(ink, [[sx0 + raw * i, sy0], [sx0 + raw * i, sy1]], "mk"));
 
-  /* ── the feed: ONE pipe off the stream, falling to the back machine and
-     running forward along the bank, every drop's top on it (x and z are
-     both linear in the lane, so the four lie on one line) ── */
-  const f3 = jetP(sx(3), g.manY, zMid(3)), f0 = jetP(sx(0), g.manY, zMid(0));
-  const feed = part(ink, [[f3[0], sy1], f3, f0], "lane", { pencil: "jpenh" });
+  /* ── the feed: ONE pipe off the stream, falling to the back machine (Cheras) and
+     running forward along the 5 branches ── */
+  const fLast = jetP(sx(N_BRANCH - 1), g.manY, zMid(N_BRANCH - 1)), f0 = jetP(sx(0), g.manY, zMid(0));
+  const feed = part(ink, [[fLast[0], sy1], fLast, f0], "lane", { pencil: "jpenh" });
 
-  /* ── the gather, in the DOM before the bank because painter's order is
-     depth order: it runs behind every machine it passes ── */
-  const gather = part(ink, [outlet(3), outlet(0), [sx(0), g.stitchY]], "lane", { pencil: "jpenh" });
+  /* ── the gather pipe collecting outputs from all 5 branches ── */
+  const gather = part(ink, [outlet(N_BRANCH - 1), outlet(0), [sx(0), g.stitchY]], "lane", { pencil: "jpenh" });
 
-  /* ── the four machines: the authored die, two walls that step inward,
-     given its thickness and closed by a rim at the mouth and at the throat.
-     Without the rims the eye pairs each wall with its neighbour in the next
-     lane instead of with its own, and the bank reads as eight loose walls.
-     The walls are filled with the plate's own paper so a near machine covers
-     the one behind it, which is the only depth cue a parallel projection has
-     that a reader cannot argue with. Back to front. ── */
+  /* ── the five branch machines: KL, Klang, Subang, Puchong, Cheras ── */
   const lanes = [];
-  for (let k = 3; k >= 0; k--) {
+  for (let k = N_BRANCH - 1; k >= 0; k--) {
     const x = sx(k), z = zOf(k), z2 = z + g.mz, zc = zMid(k);
     const lg = mk("g", { class: "jmach" }, ink);
     const t0 = jetP(x, g.manY, zc), t1 = jetP(x, top, zc);
@@ -10289,15 +10279,15 @@ function buildJetSolid(g, host) {
     const o = outlet(k), cxm = r2((slots[i][0] + slots[i][1]) / 2);
     return `M ${r2(o[0])} ${r2(o[1])} V ${g.stitchY} H ${cxm} V ${my0}`;
   };
-  const leads = slots.map((_, i) => mk("path", { d: leadD(i % 4, i), class: "jlead", display: "none" }, write));
+  const leads = slots.map((_, i) => mk("path", { d: leadD(i % 5, i), class: "jlead", display: "none" }, write));
 
   /* ── the lane trace, one group per machine, shown only while its control
      is hot: its two blocks in the stream, the deal into its own feed, the
      leads out to its two places in the file, and those two cells. It works
      at every p, pencil or ink, because none of it is the hand's. ── */
-  jet.cells = [0, 1, 2, 3].map((k) => {
+  jet.cells = Array.from({length: 5}, (_, k) => {
     const hg = mk("g", { class: "jhot" }, trace);
-    for (let i = k; i < 8; i += 4) {
+    for (let i = k; i < slots.length; i += 5) {
       mk("path", { d: box(sx0 + raw * i, sy0, sx0 + raw * (i + 1), sy1), class: "jhotk" }, hg);
       mk("path", { d: seg([sx0 + raw * i + raw / 2, sy1], lanes[k].t0), class: "jlead" }, hg);
       mk("path", { d: leadD(k, i), class: "jlead" }, hg);
@@ -10318,9 +10308,10 @@ function buildJetSolid(g, host) {
 
   /* ── the controls: each machine's name, hung on its own feed where the
      pipe breaks for it, in lane order so the keyboard meets vt-0 first ── */
-  const jlabs = [0, 1, 2, 3].map((k) => {
+  const bnames = ["KL", "Klang", "Subang", "Puchong", "Cheras"];
+  const jlabs = Array.from({length: 5}, (_, k) => {
     const t = mk("text", { x: r2(lanes[k].t0[0]), y: r2(lanes[k].t0[1] + g.labY), "text-anchor": "middle", class: "jlab" }, names);
-    const bnames = ["KL", "Klang", "Subang", "Puchong"]; t.textContent = bnames[k];
+    t.textContent = bnames[k];
     return [t, k];
   });
   traceOn(s, jlabs, jet.cells, "lane", (lbl) => `show which blocks lane ${lbl.textContent} carried`);
@@ -10329,7 +10320,7 @@ function buildJetSolid(g, host) {
      targets overlap and the tab order can stay vt-0 to vt-3 */
   for (const [t, k] of jlabs) {
     const L = lanes[k], x0 = jetP(L.x - g.mouth, top, L.z)[0];
-    const x1 = k < 3 ? Math.min(x0 + 2 * g.mouth + 0.8 * g.mz, jetP(sx(k + 1) - g.mouth, top, zOf(k + 1))[0] - 1)
+    const x1 = k < 4 ? Math.min(x0 + 2 * g.mouth + 0.8 * g.mz, jetP(sx(k + 1) - g.mouth, top, zOf(k + 1))[0] - 1)
       : x0 + 2 * g.mouth + 0.8 * g.mz;
     const y0 = jetP(L.x, top, L.z2)[1], y1 = jetP(L.x, bot, L.z)[1];
     if (t.parentNode.classList.contains("tracebtn"))
