@@ -183,14 +183,18 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper">
-          <div class="plate-inner">
-            <img src="assets/hr/data_architecture_pipeline.png" alt="HR Analytics Data Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
-          </div>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+          <a href="assets/hr/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
+            <img src="assets/hr/data_architecture_pipeline.png" alt="HR Workforce Intelligence &amp; Decision Support Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+          </a>
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+            <span>fig. 01 &middot; the hr workforce &amp; decision support pipeline architecture &middot; </span>
+            <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+          </p>
         </div>
-        <figcaption>
-          <span class="fc-main">fig. 01 &middot; the people analytics pipeline.</span>
-          <span class="fc-note">raw employee records &rarr; power query m normalization &rarr; dax measure modeling &rarr; 6-page workforce intelligence cockpit.</span>
+        <figcaption style="margin-top:1.2rem;">
+          <span class="fc-main">fig. 01 &middot; the HR workforce intelligence &amp; decision support data pipeline.</span>
+          <span class="fc-note">raw HR records (2,925 headcount) &rarr; Power Query M-engine ETL (age &amp; distance buckets) &rarr; Master Workforce Model (2,925 rows &times; 35 dimensions) &rarr; DAX business rule engine powering Attrition Intelligence (492 attrition, 16.82%) &amp; Decision Support (severance, promotion &amp; retrenchment reviews).</span>
         </figcaption>
       </figure>
     </section>
