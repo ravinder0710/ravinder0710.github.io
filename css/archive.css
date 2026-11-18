@@ -728,3 +728,44 @@ button{font:inherit; color:inherit; background:none; border:0; cursor:pointer}
   letter-spacing:.04em; word-spacing:normal; color:var(--clay); flex:none}
 .econtents .clabel{font-family:var(--body); font-size:var(--fs-note);
   letter-spacing:0; word-spacing:.12em; line-height:1.35}
+
+/* ═══════════════════════════════════════════════════════════════
+   BESPOKE EDITORIAL SCROLLBAR — Luxury Paper & Terracotta Theme
+   ═══════════════════════════════════════════════════════════════ */
+/* Standard modern Firefox / W3C */
+html, * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--clay-g, #c4532e) var(--paper, #fbf3e7);
+}
+
+/* Chromium, Edge, WebKit, Safari */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper, #fbf3e7);
+  border-left: 1px solid var(--hair, rgba(38,35,28,.12));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--clay-g, #c4532e);
+  border-radius: 9999px;
+  border: 2px solid var(--paper, #fbf3e7);
+  background-clip: padding-box;
+  transition: background-color .2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--clay, #a03f20);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #872e12;
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--paper, #fbf3e7);
+}
+
