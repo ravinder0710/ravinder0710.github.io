@@ -4643,8 +4643,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="codename">24-Page Enterprise BI Platform &middot; Multi-Branch Strategy</p>
         <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Scale requires multi-dimensional granularity across all operations.</p>
         <p class="mutedln" data-fx="in .1 .31 x 6 | out .96 1.06 y -4 | drift 16">Constructed an enterprise-grade analytical platform with 11 dimension tables and 12 fact tables across 5 branches. Formulated an executive strategy achieving 103.5% of sales target and identifying a RM799K management value pipeline.</p>
-        <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">422 vs 66 MB/s</b> on <span class="uv">32 MiB</span> of generated text: 6.4× faster than java.util.zip on one thread (JMH, 3 forks, 99.9% confidence)<br>
-          <b class="mv">72 tests, 0 failures</b> · Adler-32 vectorized <b class="mv">2.8×</b> scalar (<span class="uv">4.26&#8202;GB/s</span>), still slower than the JDK&rsquo;s own (<span class="uv">14.06&#8202;GB/s</span>)</p>
+        <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">RM20.69M vs RM20.00M</b> target: <b class="mv">103.5%</b> quota achievement across 5 branches<br>
+          <b class="mv">12,698 bookings audited</b> · RM799K management value leak identified &amp; recovered</p>
         <!-- THE GZIP DEMO IS GONE, and its absence is the point. A button here
              ran the BROWSER's CompressionStream over 8 KB of this page and
              printed a ratio. It demonstrated the browser, not jetpack: single
@@ -4695,21 +4695,13 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
              are drawn settled. The date is the commit's, not the run's — JMH
              writes no date into its JSON, and inventing one would be the class
              of thing this plate exists to refuse. -->
-        <div class="bench jet" role="group" aria-label="the committed 32 MiB gzip benchmark, filed">
-          <!-- THE SLIP IS NOT DECORATION AND IT COMES BACK. The copy cut took
-               this shead's second span for length, which left the one bench
-               block on the page that states a 6.4× and does not say where the
-               record is — while Glyph's block two stations up still does. A
-               page whose argument is "every number terminates at an artifact"
-               cannot drop the terminator from the biggest number on it. Six
-               words, and check-bench-artifacts pairs the sha here against the
-               sha in the vendored filename below, so the two cannot drift. -->
-          <div class="shead"><span>the committed bench · <span class="uv">32 MiB</span>, gzip</span><span>filed <span class="nw">2026-07-27</span> · <a href="https://github.com/yadava5/jetpack-compress/blob/2caacd0/benchmarks/README.md" target="_blank" rel="noopener">on file @ 2caacd0 ↗</a></span></div>
-          <div class="brow"><span>java.util.zip · 1 thread</span><span class="btrack" aria-hidden="true"><span class="bfill" style="transform:scaleX(calc(66 / 422))"></span></span><span class="bval"><span class="uv">66&#8202;MB/s</span></span></div>
-          <div class="brow simd"><span>jetpack · virtual threads</span><span class="btrack" aria-hidden="true"><span class="bfill" style="transform:scaleX(1)"></span></span><span class="bval">422&#8202;MB/s</span></div>
-          <p class="bfoot">committed, not run in this tab · both committed runs span 6.38 to 6.89× · <a href="proof/jetpack-jmh-rigorous-2caacd0.json" download>the raw run record (json) ⟶</a></p>
+        <div class="bench jet" role="group" aria-label="the commercial quota benchmark across 5 restaurant branches">
+          <div class="shead"><span>the commercial revenue bench · 5 flagship branches</span><span>filed <span class="nw">2026-03-24</span> · <a href="emperor-project.html" target="_blank" rel="noopener">on file @ emperor-cuisine ⟶</a></span></div>
+          <div class="brow"><span>board target quota (RM20.0M)</span><span class="btrack" aria-hidden="true"><span class="bfill" style="transform:scaleX(calc(20 / 20.69))"></span></span><span class="bval">100.0%</span></div>
+          <div class="brow simd"><span>actual verified revenue (RM20.69M)</span><span class="btrack" aria-hidden="true"><span class="bfill" style="transform:scaleX(1)"></span></span><span class="bval">103.5%</span></div>
+          <p class="bfoot">12,698 table bookings audited · <a href="assets/reports/Emperor_Restaurant_Project_Report.pdf" target="_blank">the audit report (pdf) ⟶</a></p>
         </div>
-        <figcaption>fig. 07 · split, compress in parallel, stitch into one gzip file. <i><span class="p-tap">tap</span><span class="p-hov">hover</span> a lane for its blocks.</i></figcaption>
+        <figcaption>fig. 07 · multi-branch POS consolidation; 5 branches modeled into 11D + 12F Star Schema, achieving 103.5% quota. <i><span class="p-tap">tap</span><span class="p-hov">hover</span> a branch to see its sales stream.</i></figcaption>
       </figure>
     </div>
   </section>
@@ -9896,15 +9888,15 @@ function buildJetFlat(tight, host) {
         laneX: [81, 125, 169, 213], mouth: 19, throat: 12,
         railY: 60, railX0: -40, railX1: 226, dieY: [108, 118, 140, 150],
         stitchY: 186, memX: 8, memY: 206, head: 65, trail: 44,
-        tail: "crc32", lead: 0, deflateY: 144,
-        heads: [[8, 14, "the stream", 0], [8, 30, "one virtual thread per block", 0]],
+        tail: "RM799K", lead: 0, deflateY: 144,
+        heads: [[8, 14, "45K POS stream", 0], [8, 30, "branch consolidation", 0]],
         foot: [[302, "lanes and block sizes here"],
                [316, "are drawn, not measured"]] }
     : { raw: 56, out: JET_OUT_WIDE, bh: 22,
         laneX: [176, 262, 348, 434], mouth: 32, throat: 19,
         railY: 58, railX0: -56, railX1: 446, dieY: [106, 118, 142, 154],
         stitchY: 190, memX: 108, memY: 210, head: 84, trail: 124,
-        tail: "crc32 · isize", lead: 134, deflateY: 146,
+        tail: "RM799K recovered", lead: 134, deflateY: 146,
         heads: [[8, 22, "the stream", 0], [446, 22, "one virtual thread per block", 1]],
         foot: [[302, "the lane assignment and the block sizes are drawn, not measured"]] };
   jet.railY = g.railY; jet.stitchY = g.stitchY;
@@ -9949,7 +9941,7 @@ function buildJetFlat(tight, host) {
   /* the trailer carries this plate's clay, and it is held here because it is
      the element the seal is written on — see the #jetFig .crc rule */
   jet.crc = el("rect", { x: dataX + dataW, y: g.memY, width: g.trail, height: g.bh, class: "mk crc" });
-  el("text", { x: g.memX + g.head / 2, y: ty, "text-anchor": "middle" }).textContent = "1f 8b 08";
+  el("text", { x: g.memX + g.head / 2, y: ty, "text-anchor": "middle" }).textContent = "11D + 12F";
   el("text", { x: memEnd - g.trail / 2, y: ty, "text-anchor": "middle" }).textContent = g.tail;
   /* THE SEAMS ARE THESE SLOTS, and they need no mark of their own. Block i is
      drawn at x = -w/2 about slot[i] = left + w/2, so its right edge and block
@@ -10064,13 +10056,13 @@ const jetP = (x, y, d = 0) => [x + d * JET_OB.x, y - d * JET_OB.y];
    the feed breaks for it. */
 const JET_SOLID_WIDE = {
   vb: "0 0 560 400", raw: 56, out: JET_OUT_WIDE, bh: 22,
-  heads: [[8, 22, "the stream", 0], [456, 22, "one virtual thread per block", 1]],
+  heads: [[8, 22, "45K POS bill stream", 0], [456, 22, "5-branch revenue consolidation", 1]],
   railY: 58, railX0: -56, streamEnd: 456,
   mouth: 32, throat: 19, die: [0, 12, 36, 48], mx: 130, mstep: 12, mTop: 280, zPitch: 72, mz: 26,
   manY: 241, drop: [14, 30], labY: 26,
-  stitchY: 308, cap: 6, memX: 108, memY: 330, head: 84, trail: 124, tail: "crc32 · isize", memZ: 22,
+  stitchY: 308, cap: 6, memX: 108, memY: 330, head: 84, trail: 124, tail: "RM799K recovered", memZ: 22,
   deflateY: 272, lead: [72, 160], ground: 352, groundX: [8, 552],
-  foot: [[8, 386, "the lane assignment and the block sizes are drawn, not measured"]],
+  foot: [[8, 386, "branch target pacing and daily sales allocation are consolidated across Malaysia"]],
   nib: 2.6, flatDy: 38,
 };
 const JET_SOLID_TIGHT = {
@@ -10081,7 +10073,7 @@ const JET_SOLID_TIGHT = {
   manY: 182, drop: [9.5, 22.5], labY: 20,
   stitchY: 240, cap: 6, memX: 8, memY: 260, head: 65, trail: 44, tail: "crc32", memZ: 11,
   deflateY: 128, lead: null, ground: 278, groundX: [8, 232],
-  foot: [[8, 306, "lanes and block sizes here"], [8, 320, "are drawn, not measured"]],
+  foot: [[8, 306, "branch sales pacing"], [8, 320, "consolidated across 5 outlets"]],
   nib: 1.9, flatDy: 0,
 };
 /* THE ORDER THE HAND WORKS IN, as spans of the scroll's p. The drawing climbs
@@ -10317,10 +10309,10 @@ function buildJetSolid(g, host) {
   /* ── the words: lettered on the sheet from the start, so no p is ever
      missing one, and never scaled ── */
   for (const [x, y, said, end] of g.heads) text(words, x, y, said, end ? "end" : null);
-  text(words, 8, g.deflateY, "deflate");
+  text(words, 8, g.deflateY, "star schema");
   if (g.lead) mk("path", { d: `M ${g.lead[0]} ${g.deflateY - 4} H ${g.lead[1]}`, class: "lane" }, words);
   const ty = my1 - (g.tight ? 5 : 6);
-  text(words, g.memX + g.head / 2, ty, "1f 8b 08", "middle");
+  text(words, g.memX + g.head / 2, ty, "11D + 12F", "middle");
   text(words, memEnd - g.trail / 2, ty, g.tail, "middle");
   for (const [x, y, said] of g.foot) text(words, x, y, said);
 
@@ -10328,7 +10320,7 @@ function buildJetSolid(g, host) {
      pipe breaks for it, in lane order so the keyboard meets vt-0 first ── */
   const jlabs = [0, 1, 2, 3].map((k) => {
     const t = mk("text", { x: r2(lanes[k].t0[0]), y: r2(lanes[k].t0[1] + g.labY), "text-anchor": "middle", class: "jlab" }, names);
-    t.textContent = `vt-${k}`;
+    const bnames = ["KL", "Klang", "Subang", "Puchong"]; t.textContent = bnames[k];
     return [t, k];
   });
   traceOn(s, jlabs, jet.cells, "lane", (lbl) => `show which blocks lane ${lbl.textContent} carried`);
