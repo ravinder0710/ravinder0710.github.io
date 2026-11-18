@@ -183,14 +183,18 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper">
-          <div class="plate-inner">
-            <img src="assets/churn/data_architecture_pipeline.png" alt="Customer Churn Python EDA Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
-          </div>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+          <a href="assets/churn/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
+            <img src="assets/churn/data_architecture_pipeline.png" alt="Customer Churn &amp; Retention Analytics Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+          </a>
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+            <span>fig. 01 &middot; the subscriber retention pipeline architecture &middot; </span>
+            <a href="assets/churn/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+          </p>
         </div>
-        <figcaption>
-          <span class="fc-main">fig. 01 &middot; the python churn analytics pipeline.</span>
-          <span class="fc-note">subscriber raw cohorts &rarr; pandas data cleaning &rarr; seaborn correlation heatmaps &rarr; retention trigger matrices.</span>
+        <figcaption style="margin-top:1.2rem;">
+          <span class="fc-main">fig. 01 &middot; the customer churn analysis &amp; retention data pipeline.</span>
+          <span class="fc-note">relational joins across db_support (4,647 logs), db_customer (10,000 accounts), and db_subscription (10,000 accounts) &rarr; Python EDA &amp; feature engineering &rarr; tenure &lt; 12 months tipping point isolation (27.27% churn rate).</span>
         </figcaption>
       </figure>
     </section>
