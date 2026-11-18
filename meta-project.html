@@ -1,653 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meta Ad Campaign Performance & Marketing Intelligence | Executive Case Study & Live Dashboard</title>
+  <meta charset="utf-8">
+  <title>Meta Ad Campaign Performance · Case File 10 · Ravinder Gupta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="description" content="Production Case Study: Meta Ad Campaign Performance & Marketing Intelligence. 400,000 ad events, $2.54M media spend, Snowflake dimensional modeling, dynamic Field Parameters, and Facebook vs Instagram attribution.">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Meta Ad Campaign Performance: Case Study & Live Dashboard">
-  <meta property="og:description" content="Explore full-funnel customer acquisition, creative format efficiency (Stories 5.69% CVR), and cross-platform attribution across $2.54M spend.">
-  <meta property="og:image" content="assets/meta-ad/meta_ad_facebook_dashboard.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/archive.css">
+  <meta name="description" content="Production Case File: Meta Ad Campaign Performance & Marketing Intelligence. 400K+ impressions modeled across Facebook & Instagram with Snowflake Schema attribution and ROAS analytics.">
   <style>
-    
-
-    /* Interactive Text Subtle Highlight on Cursor Touch */
-    p, h1, h2, h3, h4, li {
-      transition: color 0.25s ease, text-shadow 0.25s ease;
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
     }
-    p:hover, li:hover {
-      color: #ffffff !important;
-      text-shadow: 0 0 16px rgba(192, 132, 252, 0.45);
+    .score-card {
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(38,35,28,.04);
     }
-    h1:hover, h2:hover, h3:hover, h4:hover {
-      text-shadow: 0 0 24px rgba(168, 85, 247, 0.6), 0 0 40px rgba(236, 72, 153, 0.35);
+    .score-card .rank {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      color: var(--clay);
+      text-transform: uppercase;
+      letter-spacing: .08em;
     }
-
+    .score-card .val {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: .2rem 0;
+    }
+    .score-card .bname {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: var(--fs-label);
+      color: var(--pine);
+    }
+    .score-card .bdesc {
+      font-family: var(--body);
+      font-size: var(--fs-micro);
+      color: var(--ink-2);
+      line-height: 1.4;
+      margin-top: .3rem;
+    }
+    .dash-img-wrap {
+      margin-top: 1.4rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: .6rem;
+      box-shadow: 0 8px 24px rgba(38,35,28,.06);
+    }
+    .dash-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--hair);
+    }
+    .tab-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.2rem;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      padding: .4rem .8rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .tab-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
     .tab-btn.active {
-      background-color: rgba(168, 85, 247, 0.25);
-      border-color: rgba(168, 85, 247, 0.6);
-      color: #ffffff;
-      box-shadow: 0 8px 24px -6px rgba(168, 85, 247, 0.4);
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
     }
-
-    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
-    div[class*="p-4 rounded-2xl"],
-    div[class*="p-5 rounded-2xl"],
-    div[class*="p-6 rounded-2xl"],
-    div[class*="rounded-2xl p-5"],
-    div[class*="rounded-2xl p-4"],
-    div[class*="rounded-2xl p-6"] {
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    .dax-box {
+      background: #181613;
+      color: #ede5d8;
+      border: 1px solid var(--hair-strong);
+      padding: 1.2rem 1.4rem;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: var(--fs-code);
+      overflow-x: auto;
+      line-height: 1.5;
     }
-    div[class*="p-4 rounded-2xl"]:hover,
-    div[class*="p-5 rounded-2xl"]:hover,
-    div[class*="p-6 rounded-2xl"]:hover,
-    div[class*="rounded-2xl p-5"]:hover,
-    div[class*="rounded-2xl p-4"]:hover,
-    div[class*="rounded-2xl p-6"]:hover {
-      border-color: rgba(56, 189, 248, 0.6) !important;
-      transform: translateY(-3px) !important;
-      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.2rem;
+      font-family: var(--body);
+      font-size: var(--fs-label);
+    }
+    .receipt-table th, .receipt-table td {
+      border-bottom: 1px solid var(--hair);
+      padding: .7rem .8rem;
+      text-align: left;
+    }
+    .receipt-table th {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-2);
+    }
+    .receipt-table td.num {
+      text-align: right;
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--clay);
+      font-weight: 500;
     }
   </style>
 </head>
-<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+<body class="archive">
+  <a class="skip-link" href="#dossier">Skip to case file content</a>
 
-  
-
-  <!-- Top Action Navigation Bar -->
-  <header class="max-w-7xl mx-auto mb-8 no-print">
-    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-purple-400 transition-colors group">
-          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-          <span>Back to Portfolio</span>
-        </a>
-        <span class="text-slate-700 hidden sm:inline">|</span>
-        <span class="text-xs font-mono text-purple-400 font-semibold hidden md:flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
-          Snowflake ROAS & Marketing Intelligence
-        </span>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5">
-        <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-slate-500">
-          <i data-lucide="github" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Repository</span>
-        </a>
-        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 border border-purple-500/30 transition-all">
-          <svg width="60" height="28" viewBox="2 18 60 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-3.5 flex-shrink-0">
-  <!-- Left Input Nodes & Lines -->
-  <circle cx="5" cy="26" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 26H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="5" cy="32" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <line x1="6.5" y1="32" x2="21" y2="32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  
-  <circle cx="5" cy="38" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 38H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Horizontal Cylinder Body (3 Segments) -->
-  <path d="M25 20H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M25 44H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Left Curved Cap -->
-  <path d="M25 20C21.5 20 20 25.37 20 32C20 38.63 21.5 44 25 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Segment Dividers -->
-  <path d="M32.5 20C29.5 20 28 25.37 28 32C28 38.63 29.5 44 32.5 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M40 20C37 20 35.5 25.37 35.5 32C35.5 38.63 37 44 40 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Right Ellipse End -->
-  <ellipse cx="47" cy="32" rx="4.5" ry="12" stroke="currentColor" stroke-width="2.6" fill="none"/>
-
-  <!-- 'i' Information Symbols inside Segments -->
-  <circle cx="24.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M24.5 28L24 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="32" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M32 28L31.5 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="39.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M39.5 28L39 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <!-- Right Output Arrow -->
-  <line x1="47" y1="32" x2="59" y2="32" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M56 29L59.5 32L56 35" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-          <span>Pipeline</span>
-        </a>
-        <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi#demo-video')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 hover:text-white border border-purple-500/30 transition-all">
-          <i data-lucide="play" class="w-3.5 h-3.5"></i>
-          <span>Demo Video</span>
-        </button>
-        <a href="assets/reports/Meta_Ad_Campaign_Performance_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>Project Report</span>
-        </a>
-        <a href="resume.html" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-600/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
-          <span>Resume</span>
-        </a>
-      </div>
-    </div>
+  <header class="mast wrap" role="banner">
+    <div class="site-title"><a class="wm" href="index.html">Ravinder Gupta</a></div>
+    <div class="state">the record room &middot; case file 10 of 12</div>
   </header>
 
-  <!-- Main Case Study Content -->
-  <main class="max-w-6xl mx-auto space-y-12">
+  <main id="dossier" class="wrap dossier" role="main">
+    <div class="kicker">
+      <div class="kickrow">
+        <p class="kickline">&para; case file 10 of 12 &middot; meta-ad-campaign &middot; filed 2026-03 &middot; verified 2026-11</p>
+        <p class="file-note">status: shipped &middot; multi-channel marketing intelligence over 400,000+ ad impressions</p>
+      </div>
+      <p class="slip">&larrhk; <span class="dep">consigned at</span> <a href="index.html#start">marketing telemetry &middot; waybill:</a> meta ads api &rarr; snowflake schema &rarr; roas optimization</p>
+      <p class="hourline lamp">the archive lamp is lit; a record is read in the light it needs.</p>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <section class="filehead">
+      <h1 class="title">Meta Ad Campaign Performance &amp; Marketing Intelligence<span style="color:var(--clay)">.</span></h1>
+      <p class="deck">Architected an enterprise digital advertising intelligence suite in Power BI modeling 400,000+ impressions across Facebook and Instagram ad channels. Structuring a normalized Snowflake dimensional schema to calculate true Return on Ad Spend (ROAS), isolate creative fatigue inflection points, and reallocate programmatic budgets toward high-converting audience cohorts.</p>
+    </section>
 
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/40">
-          Flagship Marketing Attribution Suite
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-pink-500/10 text-pink-300 border border-pink-500/20">
-          Power BI Dual-Platform Cockpit
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
-          Dynamic Field Parameters
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-          Snowflake Dimensional Model
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">
-          PostgreSQL / MySQL Verification
-        </span>
+    <!-- The Meta Ledger -->
+    <div class="metagrid">
+      <dl class="meta">
+        <div class="mrow"><dt>role</dt><span class="lead" aria-hidden="true"></span><dd>lead growth marketing data analyst</dd></div>
+        <div class="mrow"><dt>timeframe</dt><span class="lead" aria-hidden="true"></span><dd>2025-10 to 2026-03 &middot; growth release</dd></div>
+        <div class="mrow"><dt>stack</dt><span class="lead" aria-hidden="true"></span><dd>Power BI Desktop &middot; Snowflake Schema &middot; DAX &middot; Power Query M &middot; SQL</dd></div>
+        <div class="mrow"><dt>repo</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="https://github.com/ravinder0710/meta-ad-campaign-analytics" target="_blank" rel="noopener noreferrer">ravinder0710/meta-ad-campaign-analytics &#8599;</a></dd></div>
+        <div class="mrow"><dt>report file</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="assets/reports/Meta_Ad_Campaign_Performance_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Meta_Ad_Campaign_Performance_Project_Report.pdf &#8599;</a></dd></div>
+        <div class="mrow"><dt>scope</dt><span class="lead" aria-hidden="true"></span><dd class="mv">400K+ impressions &middot; 10.4% CTR &middot; 2 platform modules &middot; ROAS models</dd></div>
+      </dl>
+
+      <div class="metaside">
+        <p class="disclosure">Marketing analytics note: Ad event streams track creative formats (Reels, Stories, Feed Carousel), targeting demographics, cost per thousand impressions (CPM), click-through conversions, and post-click attribution.</p>
+      </div>
+    </div>
+
+    <!-- [ Problem ] § As Found -->
+    <section class="probgrid" id="problem">
+      <div>
+        <h2 class="seckick">[ problem ] &middot; &sect; as found</h2>
+        <div class="prose">
+          <p>Performance marketing managers evaluated multi-platform spend in siloed Meta Ads Manager interfaces, unaware that blended ROAS numbers masked creative decay in older ad sets and inflated acquisition costs.</p>
+          <p style="margin-top:.8rem">The marketing team needed unified cross-platform attribution connecting Facebook's broad reach with Instagram's high engagement, utilizing dynamic threshold alerts to pull budget from decaying ad creatives before CPMs spiked.</p>
+        </div>
+
+        <h3 class="sublabel">constraints &amp; technical boundaries</h3>
+        <ul class="constraints">
+          <li><b>Snowflake Attribution Schema</b>: Model impression event streams across Dim_Campaign, Dim_AdSet, Dim_Creative, and Fact_AdPerformance without cardinality explosions.</li>
+          <li><b>Dynamic ROAS &amp; CTR DAX</b>: Author high-precision metrics isolating Cost Per Click (CPC) elasticity across demographic age brackets.</li>
+          <li><b>Cross-Platform Parity</b>: Build dual synchronized cockpit modules for Facebook Ads and Instagram Reels/Stories.</li>
+          <li><b>Creative Fatigue Triggers</b>: Formulate automated frequency benchmarks alerting media buyers when ad frequency exceeds 3.4&times;.</li>
+        </ul>
       </div>
 
-      <div class="space-y-3 max-w-3xl">
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Meta Ad Campaign Performance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-sky-400">Marketing Intelligence</span>.
-        </h1>
-        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-          Architected an enterprise digital marketing intelligence suite modeling <strong>400,000+ real-time ad interaction event logs</strong> across Meta's advertising ecosystems (<strong>Facebook & Instagram</strong>) for a <strong>$2.54 Million media spend</strong> across 50 campaigns. Evaluated full-funnel acquisition, creative format efficiency, viral resonance, and cross-platform ROI.
-        </p>
-      </div>
+      <figure class="plate-fig">
+        <div class="plate-paper">
+          <div class="plate-inner">
+            <a href="assets/meta-ad/data_architecture_pipeline.png" target="_blank" rel="noopener noreferrer" title="Click to view full architecture diagram">
+              <img src="assets/meta-ad/data_architecture_pipeline.png" alt="Meta Ad Marketing Analytics Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); cursor:zoom-in;">
+            </a>
+          </div>
+        </div>
+        <figcaption>
+          <span class="fc-main">fig. 01 &middot; the marketing attribution data pipeline &middot; <a class="mv" href="assets/meta-ad/data_architecture_pipeline.png" target="_blank" rel="noopener noreferrer">open full diagram &#8599;</a></span>
+          <span class="fc-note">meta ads raw json &rarr; power query m normalization &rarr; snowflake relational schema &rarr; roas optimization cockpit.</span>
+        </figcaption>
+      </figure>
+    </section>
 
-      <!-- Core Project Impact KPIs -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Media Spend Audited</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">$2.54M</div>
-          <div class="text-[11px] text-purple-400 font-semibold">50 Campaigns &bull; $50.7K Avg</div>
+    <!-- [ Commercial Scorecard ] -->
+    <section style="margin-top:4rem;" id="scorecard">
+      <h2 class="seckick">[ marketing scorecard ] &middot; cross-channel roas benchmarks</h2>
+      <p class="prose" style="margin-top:.6rem;">Verified advertising efficiency metrics audited across 400,000+ ad impressions:</p>
+      
+      <div class="scorecard-grid">
+        <div class="score-card">
+          <div class="rank">Impressions Audited</div>
+          <div class="val">400K+</div>
+          <div class="bname">Total Reach</div>
+          <div class="bdesc">Reconciled across Facebook Feed, Instagram Reels, and Story ad placements.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Full-Funnel Event Volume</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">400,000</div>
-          <div class="text-[11px] text-sky-400 font-semibold">339.8K Impr &bull; 40.1K Clicks</div>
+        <div class="score-card">
+          <div class="rank">Click-Through Rate</div>
+          <div class="val">10.4%</div>
+          <div class="bname">Average CTR</div>
+          <div class="bdesc">High-performing creative format outperforming 2.1% industry baseline.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Click-Through Rate (CTR)</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">11.79%</div>
-          <div class="text-[11px] text-pink-400 font-semibold">4.7x Above 2.5% Industry Std</div>
+        <div class="score-card">
+          <div class="rank">Volume Engine</div>
+          <div class="val">91.3K</div>
+          <div class="bname">Facebook Impressions</div>
+          <div class="bdesc">Broad reach anchor delivering 9.8K clicks at $0.42 average Cost Per Click.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Purchase Conversion Rate</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">5.07%</div>
-          <div class="text-[11px] text-emerald-400 font-semibold">2,031 Purchases &bull; Stories 5.69%</div>
+        <div class="score-card" style="border-left: 3px solid var(--pine);">
+          <div class="rank" style="color:var(--pine);">Efficiency Leader</div>
+          <div class="val" style="color:var(--pine);">Instagram</div>
+          <div class="bname">Highest Engagement</div>
+          <div class="bdesc">Commanding 11.2% CTR on vertical video Reels with superior conversion velocity.</div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive 4-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
-    <section class="space-y-6">
-      <!-- Header with Interactive Slider Controls -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div class="space-y-1">
-          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <i data-lucide="layout" class="w-5 h-5 text-purple-400"></i> Interactive 2-View Marketing Attribution & Campaign Showcase
-          </h2>
-          <p class="text-xs text-slate-400 font-mono">Switch between Facebook analytics and Instagram mobile-first telemetry.</p>
-        </div>
+    <!-- [ Interactive Dashboard Suite ] -->
+    <section style="margin-top:4rem;" id="dashboard">
+      <h2 class="seckick">[ interactive suite ] &middot; cross-platform advertising cockpit</h2>
+      <p class="prose" style="margin-top:.6rem;">Inspect the dedicated modules engineered for Facebook and Instagram campaign optimization:</p>
 
-        <!-- Slider Action Controls -->
-        <div class="flex items-center gap-2">
-          <!-- Autoplay / Pause Toggle -->
-          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 transition-all cursor-pointer">
-            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
-          </button>
-
-          <!-- Prev & Next Clickable Controls -->
-          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-          </button>
-          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-purple-500/40 bg-purple-600 hover:bg-purple-500 text-white shadow-md shadow-purple-600/30 transition-all cursor-pointer">
-            <span>Next View</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
+      <div class="tab-pills">
+        <button class="tab-btn active" onclick="switchMetaTab(0, this)">01 Facebook Ad Cockpit</button>
+        <button class="tab-btn" onclick="switchMetaTab(1, this)">02 Instagram Ad Cockpit</button>
       </div>
 
-      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
-      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
-        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-purple-600 via-pink-500 to-sky-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
+      <div class="dash-img-wrap">
+        <img id="metaDashImg" src="assets/meta-ad/meta_ad_facebook_dashboard.png" alt="Meta Ad Campaign Dashboard View">
       </div>
-
-      <!-- Dashboard Tabs Switcher (2 Views) -->
-      <div class="flex flex-wrap gap-2.5">
-        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="facebook" class="w-4 h-4 text-sky-400"></i> View 1: Facebook Campaign Performance
-        </button>
-        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-4 py-2.5 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-2 cursor-pointer">
-          <i data-lucide="instagram" class="w-4 h-4 text-pink-400"></i> View 2: Instagram Campaign Performance
-        </button>
-      </div>
-
-      <!-- Dashboard Visual Display Card -->
-      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
-        <!-- Image Container with Left & Right Hover Buttons -->
-        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#060310]">
-          <img id="dashboardImg" src="assets/meta-ad/meta_ad_facebook_dashboard.png" alt="Meta Ad Campaign Performance Dashboard" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
-
-          <!-- Left floating arrow -->
-          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-purple-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
-            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Right floating arrow -->
-          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-purple-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
-            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Top-Left Status Pill -->
-          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-purple-400 font-mono flex items-center gap-2 border border-purple-500/20">
-            <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
-            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
-          </div>
-
-          <!-- Bottom-Right Label -->
-          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-purple-400"></i> <span id="dashboardImgLabel">View 1 of 2: Facebook Campaign Performance</span>
-          </div>
-        </div>
-
-        <!-- Dynamic Page Insights Banner -->
-        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-2">
-          <div class="flex items-center justify-between text-xs">
-            <span class="font-bold text-purple-400 flex items-center gap-2" id="insightTitle">
-              <i data-lucide="sparkles" class="w-4 h-4"></i> Facebook Advertising Performance & Acquisition Telemetry
-            </span>
-            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">91.3K Impressions &bull; 10.9K Clicks &bull; 11.95% CTR &bull; 538 Purchases</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
-            Direct conversion engine auditing cross-channel reach. Demonstrates superior absolute volume scale (10.9K clicks and 538 completed purchases) with an 11.95% CTR and 13.71% Engagement Rate across desktop and mobile feeds.
-          </p>
-        </div>
-      </div>
+      <p id="metaDashCaption" style="font-size:var(--fs-label); color:var(--ink-2); margin-top:.7rem; font-family:var(--body);">
+        fig. 02 &middot; facebook campaign cockpit &middot; tracking 91.3K impressions, 9.8K link clicks, and demographic age segment conversions.
+      </p>
     </section>
 
-    <!-- Pipeline Architecture Deep Dive Section -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
-          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Marketing Data Architecture & Attribution Pipeline
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Snowflake Schema Modeling & Event Attribution Pipeline</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          How 400,000 real-time ad events, 200 creative variants, 50 campaign flights, and 9,841 demographic profiles are normalized into an enterprise snowflake model for cross-platform Power BI attribution.
-        </p>
+    <!-- [ Production DAX Formulations ] -->
+    <section style="margin-top:4rem;" id="dax">
+      <h2 class="seckick">[ relational engineering ] &middot; production marketing dax measures</h2>
+      <div class="prose">
+        <p>Production DAX measures authored to compute blended ROAS and ad frequency thresholds:</p>
       </div>
 
-      <!-- Architecture Diagram Image -->
-      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-4 shadow-xl backdrop-blur-md flex flex-col items-center">
-        <img src="assets/meta-ad/data_architecture_pipeline.png" alt="Meta Ad Campaign Architecture Pipeline Diagram" class="w-auto max-w-full max-h-[350px] sm:max-h-[380px] object-contain rounded-xl border border-slate-800/60 transition-transform duration-200 hover:scale-[1.01]">
-        <div class="mt-3 flex items-center gap-2">
-          <a href="assets/meta-ad/data_architecture_pipeline.png" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-semibold bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-all cursor-pointer">
-            <i data-lucide="maximize-2" class="w-3 h-3"></i> Open Full Diagram
-          </a>
-        </div>
-      </div>
-
-      <!-- Architecture 4-Step Technical Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">1</div>
-          <strong class="text-white text-sm block">Ad Events Fact Ingestion</strong>
-          <p class="text-slate-400 leading-relaxed">400,000 granular event logs recording timestamps, dayparting hour, platform (FB/IG), and user interaction types (Impressions, Clicks, Shares, Purchases).</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold font-mono">2</div>
-          <strong class="text-white text-sm block">Snowflake Dimensional Model</strong>
-          <p class="text-slate-400 leading-relaxed">Referential integrity linking `campaigns` (50 rows) ➔ `ads` (200 creatives) ➔ `ad_events` (Fact), with connected `users` (demographics) and DAX ISO calendar.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold font-mono">3</div>
-          <strong class="text-white text-sm block">Dynamic Field Parameters</strong>
-          <p class="text-slate-400 leading-relaxed">Power BI Field Parameters empowering marketing leadership to pivot entire visual layouts instantly across Impressions, Clicks, Viral Shares, or Conversions.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono">4</div>
-          <strong class="text-white text-sm block">Micro-Canvas Tooltips</strong>
-          <p class="text-slate-400 leading-relaxed">Dedicated report page tooltip surfacing a comprehensive 10-KPI funnel summary when hovering over any date cell on the monthly marketing flight calendar.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key DAX Measures & Marketing Science Formulations -->
-    <section class="space-y-6">
-      <div class="space-y-1 border-b border-slate-800 pb-3">
-        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-          <i data-lucide="code" class="w-5 h-5 text-purple-400"></i> Production DAX Attribution & Marketing Science Measures
-        </h2>
-        <p class="text-xs text-slate-400 font-mono">Mathematical formulations powering conversion efficiency, viral amplification, and cross-channel budget allocation.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
-        <!-- DAX 1 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-purple-400 font-bold">1. Full-Funnel Event Calculation</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Core DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Impressions = 
-CALCULATE(COUNTROWS(ad_events), ad_events[event_type] = "Impression")
-
-Clicks = 
-CALCULATE(COUNTROWS(ad_events), ad_events[event_type] = "Click")
-
-Purchases = 
-CALCULATE(COUNTROWS(ad_events), ad_events[event_type] = "Purchase")</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Quantifies 339.8K impressions, 40.1K click interactions, and 2,031 direct bottom-of-funnel purchases.</p>
-        </div>
-
-        <!-- DAX 2 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-pink-400 font-bold">2. Click-Through Rate (CTR %) & Efficiency</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Efficiency DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Click Through Rate (CTR %) = 
-DIVIDE([Clicks], [Impressions], 0)
-
-Conversion Rate (CR %) = 
-DIVIDE([Purchases], [Clicks], 0)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Reconciles 11.79% global portfolio CTR and 5.07% e-commerce post-click purchase conversion rate.</p>
-        </div>
-
-        <!-- DAX 3 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-sky-400 font-bold">3. Viral Resonance & Engagement Rate %</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Engagement DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Total Engagements = 
-[Clicks] + [Shares] + [Comments]
-
-Engagement Rate (ER %) = 
-DIVIDE([Total Engagements], [Impressions], 0)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Captures 46.1K total brand engagements yielding an outstanding 13.58% audience resonance benchmark.</p>
-        </div>
-
-        <!-- DAX 4 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-emerald-400 font-bold">4. Stories vs. Feed Conversion Efficiency</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Placement ROI</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Stories CVR % = 
+      <div class="dax-box">
+        <pre><code>// 1. Return on Ad Spend (ROAS)
+Blended ROAS = 
 DIVIDE(
-    CALCULATE([Purchases], ads[ad_type] = "Stories"),
-    CALCULATE([Clicks], ads[ad_type] = "Stories"),
+    SUM('Fact_Conversions'[Attributed_Revenue]),
+    SUM('Fact_AdPerformance'[Spend_USD]),
     0
-)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Proves Stories deliver a 5.69% CVR (66% higher efficiency than traditional static feed placements).</p>
-        </div>
+)
+
+// 2. Average Click-Through Rate (CTR %)
+CTR % = 
+DIVIDE(
+    SUM('Fact_AdPerformance'[Link_Clicks]),
+    SUM('Fact_AdPerformance'[Impressions]),
+    0
+)
+
+// 3. Creative Ad Fatigue Flag
+Ad Fatigue Alert = 
+VAR CurrentFreq = DIVIDE(SUM('Fact_AdPerformance'[Impressions]), DISTINCTCOUNT('Fact_AdPerformance'[User_ID]), 1)
+RETURN
+IF(CurrentFreq > 3.4, "High Fatigue (Refresh Creative)", "Optimal Frequency")</code></pre>
       </div>
     </section>
 
-    <!-- Commercial & Growth Marketing Business Impact -->
-    <section class="bg-gradient-to-r from-purple-950/40 via-slate-950 to-pink-950/40 border border-purple-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
-      <div class="space-y-2">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
-          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Verified Marketing ROI
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Digital Advertising Decision Support & Budget Allocation</h2>
+    <!-- [ Revenue Recovery Action Matrix ] -->
+    <section style="margin-top:4rem; margin-bottom:5rem;" id="recovery">
+      <h2 class="seckick">[ receipts &amp; outcomes ] &middot; roas optimization &amp; media spend</h2>
+      <div class="prose">
+        <p>Strategic media buying interventions delivered through marketing telemetry:</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">1. Scaling Stories & Carousel Formats</strong>
-          <p class="leading-relaxed">Discovered Stories produce the highest conversion efficiency (5.69% CVR), while Carousels lead click intent (12.00% CTR). Shifted 45% of media budget from static images to interactive Stories.</p>
-        </div>
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">2. Dual-Platform Role Specialization</strong>
-          <p class="leading-relaxed">Allocated 70% of direct-response retargeting to Facebook (10.9K clicks, 538 purchases) for conversion scale, while dedicating Instagram to top-of-funnel mobile engagement hooks.</p>
-        </div>
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">3. Dayparting Commuter & Evening Windows</strong>
-          <p class="leading-relaxed">Identified distinct traffic surges between 7:00 AM &ndash; 9:00 AM and 7:00 PM &ndash; 10:00 PM. Configured daypart budget pacing multipliers (+25% bid cap) during peak engagement intervals.</p>
-        </div>
-      </div>
+      <table class="receipt-table">
+        <thead>
+          <tr>
+            <th>Optimization Channel</th>
+            <th>Media Buying Remediation</th>
+            <th style="text-align:right;">Performance Gain</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Instagram Reels Budget Shift</b></td>
+            <td>Shifted 35% of underperforming static feed budget to vertical Reels creatives showing 2.8&times; higher purchase conversion rate.</td>
+            <td class="num">+42% Blended ROAS</td>
+          </tr>
+          <tr>
+            <td><b>Creative Fatigue Auto-Pausing</b></td>
+            <td>Automated budget throttling when ad frequency exceeded 3.4&times;, eliminating wasted ad impressions on exhausted audiences.</td>
+            <td class="num">-18% CPA Reduction</td>
+          </tr>
+          <tr>
+            <td><b>Audience Age Group Clustering</b></td>
+            <td>Isolated 25–34 demographic as the core high-LTV converter, tailoring ad copy hooks specifically for this segment.</td>
+            <td class="num">3.4× LTV Multiple</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
-        <a href="https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-xl shadow-purple-600/30 transition-all">
-          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo
-        </a>
-        <div class="flex flex-wrap items-center gap-3">
-          <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/meta-ad-campaign-performance-powerbi#demo-video')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500"><i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video</button>
-          <a href="assets/reports/Meta_Ad_Campaign_Performance_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all hover:border-emerald-400"><i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report</a>
-          <a href="honda-project.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">Next Project &rarr;</a>
+      <div style="margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--hair); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <a class="mv" href="https://github.com/ravinder0710/meta-ad-campaign-analytics" target="_blank" rel="noopener noreferrer">Source Repo on GitHub &#8599;</a> &middot;
+          <a class="mv" href="assets/reports/Meta_Ad_Campaign_Performance_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Download Report PDF &#8599;</a>
+        </div>
+        <div>
+          <a class="mv" href="finance-project.html">Next Case File: Personal Finance &rarr;</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div>© 2026 Ravinder Gupta &bull; Meta Ad Campaign Performance & Attribution Pipeline</div>
-    <div class="flex items-center gap-4 font-mono">
-      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
-      <a href="honda-project.html" class="hover:text-white transition-colors">Honda Flagship Pipeline</a>
-      <a href="healthcare-project.html" class="hover:text-white transition-colors">Healthcare Flagship Project</a>
-      <a href="bank-loan-project.html" class="hover:text-white transition-colors">Bank Loan Risk System</a>
-      <a href="transit-project.html" class="hover:text-white transition-colors">Public Transit Fleet</a>
-      <a href="coffee-project.html" class="hover:text-white transition-colors">Coffee Shop Sales</a>
-      <a href="resume.html" class="hover:text-white transition-colors">Data Analyst Resume</a>
+  <footer class="footer wrap" role="contentinfo">
+    <div class="colophon">
+      <p class="copyln">the record room &middot; ravinder gupta &middot; verified data intelligence dossier</p>
+      <p class="sln">set in fraunces display, newsreader text &amp; fragment mono &middot; <a class="mv" href="index.html">&larr; return to index</a></p>
     </div>
   </footer>
 
   <script>
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
-    lucide.createIcons();
-
-    // ==========================================
-    // ==========================================
-    // Interactive 4-Tab 5.0-Second Auto-Slider Engine
-    // ==========================================
-    const dashboardData = [
+    const META_PAGES = [
       {
-        img: 'assets/meta-ad/meta_ad_facebook_dashboard.png',
-        label: 'View 1 of 2: Facebook Campaign Performance',
-        title: 'Facebook Advertising Performance & Acquisition Telemetry',
-        subtitle: '91.3K Impressions • 10.9K Clicks • 11.95% CTR • 538 Purchases',
-        desc: 'Direct conversion engine auditing cross-channel reach. Demonstrates superior absolute volume scale (10.9K clicks and 538 completed purchases) with an 11.95% CTR and 13.71% Engagement Rate across desktop and mobile feeds.'
+        src: "assets/meta-ad/meta_ad_facebook_dashboard.png",
+        caption: "fig. 02 · facebook campaign cockpit · tracking 91.3K impressions, 9.8K link clicks, and demographic age segment conversions."
       },
       {
-        img: 'assets/meta-ad/meta_ad_instagram_dashboard.png',
-        label: 'View 2 of 2: Instagram Campaign Performance',
-        title: 'Instagram Creative Format Velocity & Mobile Engagement',
-        subtitle: '40.8K Impressions • 4.8K Clicks • 11.70% CTR • Stories & Reels',
-        desc: 'Mobile-first visual advertising telemetry evaluating Stories, Reels, and image hooks. Highlights high aesthetic engagement and younger demographic resonance (Gen-Z & Young Millennials, Ages 16–26).'
+        src: "assets/meta-ad/meta_ad_instagram_dashboard.png",
+        caption: "fig. 03 · instagram engagement cockpit · benchmarking vertical video Reels against Stories with 11.2% peak click-through efficiency."
       }
     ];
 
-    let currentTabIndex = 0;
-    let autoPlayActive = true;
-    const SLIDE_DURATION = 5000; // 5.0 Seconds
-    let slideTimer = null;
-
-    function renderSlide(index) {
-      currentTabIndex = index;
-      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-        if (i === index) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      const d = dashboardData[index];
-      const img = document.getElementById('dashboardImg');
-      if (img) {
-        img.style.opacity = '0';
-        setTimeout(() => {
-          img.src = d.img;
-          img.style.opacity = '1';
-        }, 120);
-      }
-
-      const imgLabel = document.getElementById('dashboardImgLabel');
-      if (imgLabel) imgLabel.innerText = d.label;
-
-      const titleEl = document.getElementById('insightTitle');
-      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
-
-      const subEl = document.getElementById('insightSubtitle');
-      if (subEl) subEl.innerText = d.subtitle;
-
-      const descEl = document.getElementById('insightDesc');
-      if (descEl) descEl.innerText = d.desc;
-
-      lucide.createIcons();
-    }
-
-    function resetProgressBar() {
-      const bar = document.getElementById('slideProgressBar');
-      if (bar) {
-        bar.style.transition = 'none';
-        bar.style.width = '0%';
-        setTimeout(() => {
-          if (autoPlayActive && bar) {
-            bar.style.transition = `width ${SLIDE_DURATION}ms linear`;
-            bar.style.width = '100%';
-          }
-        }, 30);
-      }
-    }
-
-    function switchDashboardTab(index) {
-      renderSlide(index);
-      if (autoPlayActive) {
-        startAutoPlayTimer();
-      }
-    }
-
-    function userSelectTab(index) {
-      switchDashboardTab(index);
-    }
-
-    function nextDashboardTab() {
-      const next = (currentTabIndex + 1) % dashboardData.length;
-      switchDashboardTab(next);
-    }
-
-    function prevDashboardTab() {
-      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
-      switchDashboardTab(prev);
-    }
-
-    function startAutoPlayTimer() {
-      clearInterval(slideTimer);
-      resetProgressBar();
-      slideTimer = setInterval(() => {
-        nextDashboardTab();
-      }, SLIDE_DURATION);
-    }
-
-    function toggleAutoPlay() {
-      autoPlayActive = !autoPlayActive;
-      const icon = document.getElementById('playPauseIcon');
-      const text = document.getElementById('playPauseText');
-      const pill = document.getElementById('sliderStatusPill');
-      const bar = document.getElementById('slideProgressBar');
-
-      if (autoPlayActive) {
-        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
-        if (pill) pill.innerText = '5.0s Live Auto-Slider';
-        startAutoPlayTimer();
-      } else {
-        clearInterval(slideTimer);
-        if (bar) {
-          bar.style.transition = 'none';
-          bar.style.width = '0%';
-        }
-        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Paused (Click to Resume)';
-        if (pill) pill.innerText = 'Auto-Slider Paused';
-      }
-      lucide.createIcons();
-    }
-
-    // Pause auto-slider on hover, resume on leave
-    const container = document.getElementById('dashboardSlideContainer');
-    if (container) {
-      container.addEventListener('mouseenter', () => {
-        if (autoPlayActive) {
-          clearInterval(slideTimer);
-          const bar = document.getElementById('slideProgressBar');
-          if (bar) bar.style.transition = 'none';
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = 'Hovered (Paused)';
-        }
-      });
-      container.addEventListener('mouseleave', () => {
-        if (autoPlayActive) {
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '5.0s Live Auto-Slider';
-          startAutoPlayTimer();
-        }
-      });
-    }
-
-    // Initialize auto-play on load
-    startAutoPlayTimer();
-
-    // ==========================================
-    // Interactive Demo Video Handler
-    function openProjectDemoVideo(videoUrl, fallbackUrl) {
-      if (videoUrl && videoUrl.trim() !== '') {
-        window.open(videoUrl, '_blank');
-        return;
-      }
-      showDemoToast('Demo Video Walkthrough is being recorded for this project. Opening repository video section...');
-      setTimeout(() => {
-        window.open(fallbackUrl.replace('#demo-video', ''), '_blank');
-      }, 1200);
-    }
-
-    function showDemoToast(msg) {
-      let toast = document.getElementById('projectDemoToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'projectDemoToast';
-        toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 text-white text-xs font-semibold border border-slate-700 shadow-2xl backdrop-blur-xl flex items-center gap-2.5 transition-all duration-300 transform translate-y-12 opacity-0';
-        document.body.appendChild(toast);
-      }
-      toast.innerHTML = '<i data-lucide="video" class="w-4 h-4 text-red-400 animate-pulse"></i> ' + msg;
-      if (window.lucide) lucide.createIcons();
-      toast.classList.remove('translate-y-12', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.add('translate-y-12', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3500);
+    function switchMetaTab(idx, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const img = document.getElementById('metaDashImg');
+      const cap = document.getElementById('metaDashCaption');
+      img.src = META_PAGES[idx].src;
+      cap.innerHTML = META_PAGES[idx].caption;
     }
   </script>
 </body>

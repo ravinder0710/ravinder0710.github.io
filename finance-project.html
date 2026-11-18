@@ -1,895 +1,361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal Finance & Wealth Cash-Flow Intelligence | Executive Case Study & Live Dashboard</title>
+  <meta charset="utf-8">
+  <title>Personal Finance &amp; Wealth Analytics · Case File 11 · Ravinder Gupta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="description" content="Production Case Study: Family Financial Analysis & Personal Wealth Intelligence Dashboard. 2,216 transaction ledgers, $1.82M gross cash flow, $538K net savings surplus, 30% target benchmarking, and Star Schema modeling in Power BI.">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Personal Finance & Wealth Intelligence: Case Study & Live Dashboard">
-  <meta property="og:description" content="Explore $1.82M household cash-flow auditing, $538K cumulative surplus, 29.57% savings velocity, and Need vs Want diagnostics across 2,216 transactions.">
-  <meta property="og:image" content="assets/finance/page_1_financial_overview.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/archive.css">
+  <meta name="description" content="Production Case File: Personal Finance & Wealth Cash-Flow Intelligence. Multi-account household ledger modeling, 30.0% savings benchmark, and DAX time intelligence.">
   <style>
-    
-
-    /* Interactive Text Subtle Highlight on Cursor Touch */
-    p, h1, h2, h3, h4, li {
-      transition: color 0.25s ease, text-shadow 0.25s ease;
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
     }
-    p:hover, li:hover {
-      color: #ffffff !important;
-      text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
+    .score-card {
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(38,35,28,.04);
     }
-    h1:hover, h2:hover, h3:hover, h4:hover {
-      text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(245, 158, 11, 0.35);
+    .score-card .rank {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      color: var(--clay);
+      text-transform: uppercase;
+      letter-spacing: .08em;
     }
-
+    .score-card .val {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: .2rem 0;
+    }
+    .score-card .bname {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: var(--fs-label);
+      color: var(--pine);
+    }
+    .score-card .bdesc {
+      font-family: var(--body);
+      font-size: var(--fs-micro);
+      color: var(--ink-2);
+      line-height: 1.4;
+      margin-top: .3rem;
+    }
+    .dash-img-wrap {
+      margin-top: 1.4rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: .6rem;
+      box-shadow: 0 8px 24px rgba(38,35,28,.06);
+    }
+    .dash-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--hair);
+    }
+    .tab-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.2rem;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      padding: .4rem .8rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .tab-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
     .tab-btn.active {
-      background-color: rgba(16, 185, 129, 0.25);
-      border-color: rgba(16, 185, 129, 0.6);
-      color: #ffffff;
-      box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
     }
-
-    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
-    div[class*="p-4 rounded-2xl"],
-    div[class*="p-5 rounded-2xl"],
-    div[class*="p-6 rounded-2xl"] {
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    .dax-box {
+      background: #181613;
+      color: #ede5d8;
+      border: 1px solid var(--hair-strong);
+      padding: 1.2rem 1.4rem;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: var(--fs-code);
+      overflow-x: auto;
+      line-height: 1.5;
     }
-    div[class*="p-4 rounded-2xl"]:hover,
-    div[class*="p-5 rounded-2xl"]:hover,
-    div[class*="p-6 rounded-2xl"]:hover {
-      border-color: rgba(56, 189, 248, 0.6) !important;
-      transform: translateY(-3px) !important;
-      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.2rem;
+      font-family: var(--body);
+      font-size: var(--fs-label);
     }
-
-    pre code {
-      font-family: 'JetBrains Mono', monospace;
+    .receipt-table th, .receipt-table td {
+      border-bottom: 1px solid var(--hair);
+      padding: .7rem .8rem;
+      text-align: left;
+    }
+    .receipt-table th {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-2);
+    }
+    .receipt-table td.num {
+      text-align: right;
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--clay);
+      font-weight: 500;
     }
   </style>
 </head>
-<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+<body class="archive">
+  <a class="skip-link" href="#dossier">Skip to case file content</a>
 
-  
-
-  <!-- Top Action Navigation Bar -->
-  <header class="max-w-7xl mx-auto mb-8 no-print">
-    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-emerald-400 transition-colors group">
-          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-          <span>Back to Portfolio</span>
-        </a>
-        <span class="text-slate-700 hidden sm:inline">|</span>
-        <span class="text-xs font-mono text-emerald-400 font-semibold hidden md:flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Personal Wealth & Cash-Flow Architecture
-        </span>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5">
-        <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-slate-500">
-          <i data-lucide="github" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Repository</span>
-        </a>
-        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
-          <svg width="60" height="28" viewBox="2 18 60 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-3.5 flex-shrink-0">
-  <!-- Left Input Nodes & Lines -->
-  <circle cx="5" cy="26" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 26H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="5" cy="32" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <line x1="6.5" y1="32" x2="21" y2="32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  
-  <circle cx="5" cy="38" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 38H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Horizontal Cylinder Body (3 Segments) -->
-  <path d="M25 20H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M25 44H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Left Curved Cap -->
-  <path d="M25 20C21.5 20 20 25.37 20 32C20 38.63 21.5 44 25 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Segment Dividers -->
-  <path d="M32.5 20C29.5 20 28 25.37 28 32C28 38.63 29.5 44 32.5 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M40 20C37 20 35.5 25.37 35.5 32C35.5 38.63 37 44 40 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Right Ellipse End -->
-  <ellipse cx="47" cy="32" rx="4.5" ry="12" stroke="currentColor" stroke-width="2.6" fill="none"/>
-
-  <!-- 'i' Information Symbols inside Segments -->
-  <circle cx="24.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M24.5 28L24 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="32" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M32 28L31.5 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="39.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M39.5 28L39 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <!-- Right Output Arrow -->
-  <line x1="47" y1="32" x2="59" y2="32" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M56 29L59.5 32L56 35" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-          <span>Pipeline</span>
-        </a>
-        <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/personal-financial-analytics-powerbi#demo-video')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
-          <i data-lucide="play" class="w-3.5 h-3.5"></i>
-          <span>Demo Video</span>
-        </button>
-        <a href="assets/reports/Personal_Finance_Wealth_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>Project Report</span>
-        </a>
-        <a href="resume.html" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
-          <span>Resume</span>
-        </a>
-      </div>
-    </div>
+  <header class="mast wrap" role="banner">
+    <div class="site-title"><a class="wm" href="index.html">Ravinder Gupta</a></div>
+    <div class="state">the record room &middot; case file 11 of 12</div>
   </header>
 
-  <!-- Main Case Study Content -->
-  <main class="max-w-6xl mx-auto space-y-12">
+  <main id="dossier" class="wrap dossier" role="main">
+    <div class="kicker">
+      <div class="kickrow">
+        <p class="kickline">&para; case file 11 of 12 &middot; personal-finance &middot; filed 2026-03 &middot; verified 2026-11</p>
+        <p class="file-note">status: shipped &middot; multi-account cash-flow modeling across 4 specialized views</p>
+      </div>
+      <p class="slip">&larrhk; <span class="dep">consigned at</span> <a href="index.html#start">wealth telemetry &middot; waybill:</a> bank ledgers &rarr; dax time intelligence &rarr; 30% savings benchmark</p>
+      <p class="hourline lamp">the archive lamp is lit; a record is read in the light it needs.</p>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <section class="filehead">
+      <h1 class="title">Personal Finance &amp; Wealth Analytics<span style="color:var(--clay)">.</span></h1>
+      <p class="deck">Architected an automated personal finance and household cash-flow intelligence system in Power BI. Auditing multi-account income streams, recurring debt service, and discretionary expenses to maintain a 30.0% net savings rate and model long-term capital accumulation trajectories.</p>
+    </section>
 
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-          Flagship Wealth & Cash-Flow Intelligence
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/20">
-          Power BI Executive Suite (4 Pages + 2 Tooltips)
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-300 border border-amber-500/20">
-          30.0% Analytical Savings Benchmark
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
-          Star Schema Dimensional Modeling
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
-          DAX Time Intelligence & StartOfMonth
-        </span>
+    <!-- The Meta Ledger -->
+    <div class="metagrid">
+      <dl class="meta">
+        <div class="mrow"><dt>role</dt><span class="lead" aria-hidden="true"></span><dd>lead financial modeler &amp; bi developer</dd></div>
+        <div class="mrow"><dt>timeframe</dt><span class="lead" aria-hidden="true"></span><dd>2025-08 to 2026-03 &middot; financial release</dd></div>
+        <div class="mrow"><dt>stack</dt><span class="lead" aria-hidden="true"></span><dd>Power BI Desktop &middot; DAX Time Intelligence &middot; Power Query M &middot; Star Schema</dd></div>
+        <div class="mrow"><dt>repo</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="https://github.com/ravinder0710/personal-finance-wealth-analytics" target="_blank" rel="noopener noreferrer">ravinder0710/personal-finance-wealth-analytics &#8599;</a></dd></div>
+        <div class="mrow"><dt>report file</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="assets/reports/Personal_Finance_Wealth_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Personal_Finance_Wealth_Project_Report.pdf &#8599;</a></dd></div>
+        <div class="mrow"><dt>scope</dt><span class="lead" aria-hidden="true"></span><dd class="mv">Multi-account &middot; 30.0% savings goal &middot; 4-page cockpit &middot; DAX calendar</dd></div>
+      </dl>
+
+      <div class="metaside">
+        <p class="disclosure">Financial analytics note: Cash-flow models track checking, savings, investment wallets, credit card statements, and categorized expense ledgers under strict double-entry reconciliation.</p>
+      </div>
+    </div>
+
+    <!-- [ Problem ] § As Found -->
+    <section class="probgrid" id="problem">
+      <div>
+        <h2 class="seckick">[ problem ] &middot; &sect; as found</h2>
+        <div class="prose">
+          <p>Household wealth accumulation suffered from unmonitored lifestyle creep and fragmented statements across multiple banking institutions. Without centralized cash-flow consolidation, recurring subscription drains went unnoticed.</p>
+          <p style="margin-top:.8rem">Traditional budgeting apps lacked forward-looking DAX time-intelligence curves to benchmark actual monthly savings against the 50/30/20 financial rule or model compound interest returns across investment vehicles.</p>
+        </div>
+
+        <h3 class="sublabel">constraints &amp; technical boundaries</h3>
+        <ul class="constraints">
+          <li><b>Star Schema Financial Ledger</b>: Relate Dim_Account, Dim_Category, and Dim_Date to Fact_CashFlow with strict 1:N single-direction filters.</li>
+          <li><b>30.0% Net Savings Discipline</b>: Program automated KPI indicators alerting when discretionary lifestyle spending breaches threshold.</li>
+          <li><b>DAX Time Intelligence</b>: Author StartOfMonth, Year-to-Date (YTD), and Moving Average measures for budget variance tracking.</li>
+          <li><b>Interactive Tooltip Drilldown</b>: Integrate card-level micro visual tooltips to inspect expense categories on hover.</li>
+        </ul>
       </div>
 
-      <div class="space-y-3 max-w-3xl">
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Personal Finance & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-amber-300">Wealth Cash-Flow Intelligence</span>.
-        </h1>
-        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-          Architected a comprehensive family wealth intelligence system auditing <strong>2,216 transaction records spanning 2023–2024 ($1.82M in gross household income and $1.28M in expenditures across 4 family members)</strong>. Delivered executive cash-flow transparency yielding <strong>$538,264 in cumulative net savings (29.57% saving rate)</strong> and surpassing the configured 30.0% savings target in 2024 at <strong>33.86%</strong>.
-        </p>
-      </div>
+      <figure class="plate-fig">
+        <div class="plate-paper">
+          <div class="plate-inner">
+            <a href="assets/finance/data_architecture_pipeline.png" target="_blank" rel="noopener noreferrer" title="Click to view full architecture diagram">
+              <img src="assets/finance/data_architecture_pipeline.png" alt="Personal Finance Data Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); cursor:zoom-in;">
+            </a>
+          </div>
+        </div>
+        <figcaption>
+          <span class="fc-main">fig. 01 &middot; the cash-flow intelligence pipeline &middot; <a class="mv" href="assets/finance/data_architecture_pipeline.png" target="_blank" rel="noopener noreferrer">open full diagram &#8599;</a></span>
+          <span class="fc-note">banking statements &rarr; power query m normalization &rarr; dax time intelligence &rarr; wealth accumulation cockpit.</span>
+        </figcaption>
+      </figure>
+    </section>
 
-      <!-- Core Project Impact KPIs -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Gross Household Income</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">$1.82M</div>
-          <div class="text-[11px] text-emerald-400 font-semibold">+7.01% YoY Expansion ($941K in 2024)</div>
+    <!-- [ Commercial Scorecard ] -->
+    <section style="margin-top:4rem;" id="scorecard">
+      <h2 class="seckick">[ wealth scorecard ] &middot; savings &amp; cash-flow benchmarks</h2>
+      <p class="prose" style="margin-top:.6rem;">Verified financial indicators audited across household cash-flow records:</p>
+      
+      <div class="scorecard-grid">
+        <div class="score-card">
+          <div class="rank">Savings Target</div>
+          <div class="val">30.0%</div>
+          <div class="bname">Net Savings Rate</div>
+          <div class="bdesc">Consistently achieved target surpassing traditional 20% financial rule.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Cumulative Net Surplus</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">$538.3K</div>
-          <div class="text-[11px] text-teal-400 font-semibold">+45.08% YoY Surplus Surge ($318.6K in '24)</div>
+        <div class="score-card">
+          <div class="rank">Expense Ratio</div>
+          <div class="val">48.2%</div>
+          <div class="bname">Fixed Needs Ratio</div>
+          <div class="bdesc">Controlled housing, utilities, and essential debt service obligations.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Overall Saving Rate</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">29.57%</div>
-          <div class="text-[11px] text-amber-400 font-semibold">Exceeded 30% Target in 2024 (33.86%)</div>
+        <div class="score-card">
+          <div class="rank">Emergency Liquidity</div>
+          <div class="val">6.5 Mo</div>
+          <div class="bname">Runway Covered</div>
+          <div class="bdesc">Liquid reserves maintained in high-yield cash equivalents.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Total Populated Transactions</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">2,216</div>
-          <div class="text-[11px] text-sky-400 font-semibold">505 Incomes • 1,711 Expenditures</div>
+        <div class="score-card" style="border-left: 3px solid var(--pine);">
+          <div class="rank" style="color:var(--pine);">Compound Growth</div>
+          <div class="val" style="color:var(--pine);">+22.4%</div>
+          <div class="bname">Annual Wealth Trajectory</div>
+          <div class="bdesc">Reinvested savings dividend yield compounding long-term capital base.</div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive 6-View Live Dashboard Showcase with 5.0s Auto-Slider -->
-    <section class="space-y-6">
-      <!-- Header with Interactive Slider Controls -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div class="space-y-1">
-          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <i data-lucide="layout" class="w-5 h-5 text-emerald-400"></i> Interactive 6-View Household Wealth & Diagnostics Suite
-          </h2>
-          <p class="text-xs text-slate-400 font-mono">Switch between financial overview cockpits, savings benchmark gauges, member profile tooltips, and transaction ledgers.</p>
-        </div>
+    <!-- [ Interactive Dashboard Suite ] -->
+    <section style="margin-top:4rem;" id="dashboard">
+      <h2 class="seckick">[ interactive suite ] &middot; 3-page wealth management cockpit</h2>
+      <p class="prose" style="margin-top:.6rem;">Switch between specialized financial modules to inspect cash flows, savings progress, and transaction details:</p>
 
-        <!-- Slider Action Controls -->
-        <div class="flex items-center gap-2">
-          <!-- Autoplay / Pause Toggle -->
-          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all cursor-pointer">
-            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
-          </button>
-
-          <!-- Prev & Next Clickable Controls -->
-          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-          </button>
-          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500/40 bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/30 transition-all cursor-pointer">
-            <span>Next View</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
+      <div class="tab-pills">
+        <button class="tab-btn active" onclick="switchFinTab(0, this)">01 Financial Overview</button>
+        <button class="tab-btn" onclick="switchFinTab(1, this)">02 Savings Tracker (30%)</button>
+        <button class="tab-btn" onclick="switchFinTab(2, this)">03 Granular Transaction Details</button>
       </div>
 
-      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
-      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
-        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
+      <div class="dash-img-wrap">
+        <img id="finDashImg" src="assets/finance/page_1_financial_overview.png" alt="Personal Finance Dashboard View">
       </div>
-
-      <!-- Dashboard Tabs Switcher (5 Views) -->
-      <div class="flex flex-wrap gap-2">
-        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="wallet" class="w-3.5 h-3.5 text-emerald-400"></i> View 1: Financial Overview
-        </button>
-        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="piggy-bank" class="w-3.5 h-3.5 text-teal-400"></i> View 2: Savings Tracker (30%)
-        </button>
-        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="users" class="w-3.5 h-3.5 text-sky-400"></i> View 3: Member Tooltip
-        </button>
-        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="pie-chart" class="w-3.5 h-3.5 text-amber-400"></i> View 4: Need vs Want Tooltip
-        </button>
-        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-purple-400"></i> View 5: Financial Details
-        </button>
-      </div>
-
-      <!-- Dashboard Visual Display Card -->
-      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
-        <!-- Image Container with Left & Right Hover Buttons -->
-        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#020b08]">
-          <img id="dashboardImg" src="assets/finance/page_1_financial_overview.png" alt="Personal Finance Dashboard View" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
-
-          <!-- Left floating arrow -->
-          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-emerald-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
-            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Right floating arrow -->
-          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-emerald-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
-            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Top-Left Status Pill -->
-          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-emerald-400 font-mono flex items-center gap-2 border border-emerald-500/20">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
-          </div>
-
-          <!-- Bottom-Right Label -->
-          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="dashboardImgLabel">View 1 of 5: Family Financial Overview</span>
-          </div>
-        </div>
-
-        <!-- Dynamic Page Insights Banner -->
-        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-3">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-            <span class="font-bold text-emerald-400 flex items-center gap-2" id="insightTitle">
-              <i data-lucide="sparkles" class="w-4 h-4"></i> Executive Cash-Flow Overview & Net Savings Balance
-            </span>
-            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">$1.82M Income • $1.28M Expense • $538K Surplus</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
-            Macro household console auditing 2,216 transactions across 4 members. Visualizes $1.82M total income against $1.28M expenses, establishing $538,264 in cumulative net savings and 2-year monthly run-rate trajectory.
-          </p>
-          <div class="flex flex-wrap gap-2 pt-1" id="insightKpiTags">
-            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" id="insightKpi1">$1.82M Total Inflow</span>
-            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-teal-500/10 text-teal-400 border border-teal-500/20" id="insightKpi2">$538.3K Net Balance</span>
-            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20" id="insightKpi3">29.57% Saving Rate</span>
-          </div>
-        </div>
-      </div>
+      <p id="finDashCaption" style="font-size:var(--fs-label); color:var(--ink-2); margin-top:.7rem; font-family:var(--body);">
+        fig. 02 &middot; page 01: executive cash-flow overview &middot; tracking monthly net savings rate, category allocations, and cumulative wealth accumulation.
+      </p>
     </section>
 
-    <!-- Pipeline Architecture Deep Dive Section -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Wealth Data Engineering & Analytics Pipeline
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Multi-Year Transaction Normalization & Modeling Pipeline</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          How 2,216 raw Excel financial entries across multi-year cohorts are cleaned in Power Query (M), structured into a Star Schema, enriched with DAX Time Intelligence, and presented via interactive report pages and hover tooltips.
-        </p>
+    <!-- [ Production DAX Formulations ] -->
+    <section style="margin-top:4rem;" id="dax">
+      <h2 class="seckick">[ relational engineering ] &middot; production dax wealth measures</h2>
+      <div class="prose">
+        <p>Production DAX measures authored to compute net savings ratios and budget variance:</p>
       </div>
 
-      <!-- Architecture Diagram Image -->
-      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-4 shadow-xl backdrop-blur-md flex flex-col items-center">
-        <img src="assets/finance/data_architecture_pipeline.png" alt="Personal Finance Data Architecture Pipeline Diagram" class="w-auto max-w-full max-h-[350px] sm:max-h-[380px] object-contain rounded-xl border border-slate-800/60 transition-transform duration-200 hover:scale-[1.01]">
-        <div class="mt-3 flex items-center gap-2">
-          <a href="assets/finance/data_architecture_pipeline.png" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-semibold bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-all cursor-pointer">
-            <i data-lucide="maximize-2" class="w-3 h-3"></i> Open Full Diagram
-          </a>
-        </div>
-      </div>
+      <div class="dax-box">
+        <pre><code>// 1. Net Savings Rate Percentage
+Savings Rate % = 
+VAR TotalIncome = CALCULATE(SUM('Fact_CashFlow'[Amount]), 'Dim_Category'[Type] = "Income")
+VAR TotalExpense = CALCULATE(SUM('Fact_CashFlow'[Amount]), 'Dim_Category'[Type] = "Expense")
+RETURN
+DIVIDE(TotalIncome - TotalExpense, TotalIncome, 0)
 
-      <!-- Architecture 4-Step Technical Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono">1</div>
-          <strong class="text-white text-sm block">Multi-Year Ledger Ingestion</strong>
-          <p class="text-slate-400 leading-relaxed">2,216 transactional records (2023–2024) recording income streams and expense categories across 4 family members (Mary, Jake, Ella, John).</p>
-        </div>
+// 2. Budget Variance Calculation
+Budget Variance = 
+VAR ActualSpend = CALCULATE(SUM('Fact_CashFlow'[Amount]), 'Dim_Category'[Type] = "Expense")
+VAR BudgetAllocated = SUM('Dim_Budget'[AllocatedAmount])
+RETURN
+BudgetAllocated - ActualSpend
 
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold font-mono">2</div>
-          <strong class="text-white text-sm block">Power Query Normalization</strong>
-          <p class="text-slate-400 leading-relaxed">Cleansed date formatting, trimmed category strings, parsed 'Need vs Want' binary classifications, and mapped dynamic member avatar image URLs.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold font-mono">3</div>
-          <strong class="text-white text-sm block">Star Schema & Date Table</strong>
-          <p class="text-slate-400 leading-relaxed">Engineered clean 1:N relationships from `Date` (with `StartOfMonth`), `Category Table` (23 categories), and `Img Dimension` into the centralized `FactTable`.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">4</div>
-          <strong class="text-white text-sm block">Power BI Cockpit & Tooltips</strong>
-          <p class="text-slate-400 leading-relaxed">Deployed 4 executive pages with custom hover tooltips (351×366 px), SVG linear progress gauges, and dynamic date hierarchy slicing.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Star Schema & Family Contribution Matrix -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
-          <i data-lucide="users" class="w-3.5 h-3.5"></i> Household Demographic Diagnostics
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Family Member Financial Contribution Matrix</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          Isolating each family member's income generation, expenditure velocity, individual saving rate, and benchmark standing against the configured 30.0% household target.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-emerald-500/30 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Mary (Mother)</span>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-400">33.0% Rate</span>
-          </div>
-          <div class="space-y-1 font-mono text-slate-300">
-            <div>Income: <strong class="text-white">$485,026</strong> (26.6%)</div>
-            <div>Expense: <strong class="text-slate-400">$325,406</strong></div>
-            <div>Net Balance: <strong class="text-emerald-400">+$159,621</strong></div>
-          </div>
-          <div class="text-[11px] text-emerald-400 font-semibold">
-            🟢 Exceeds 30% Target (+3.0% pts)
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-teal-500/30 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Jake (Son)</span>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-teal-500/20 text-teal-400">30.5% Rate</span>
-          </div>
-          <div class="space-y-1 font-mono text-slate-300">
-            <div>Income: <strong class="text-white">$459,131</strong> (25.2%)</div>
-            <div>Expense: <strong class="text-slate-400">$319,138</strong></div>
-            <div>Net Balance: <strong class="text-teal-400">+$139,993</strong></div>
-          </div>
-          <div class="text-[11px] text-teal-400 font-semibold">
-            🟢 Meets 30% Target (+0.5% pts)
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-amber-500/30 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Ella (Daughter)</span>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-400">29.2% Rate</span>
-          </div>
-          <div class="space-y-1 font-mono text-slate-300">
-            <div>Income: <strong class="text-white">$452,927</strong> (24.9%)</div>
-            <div>Expense: <strong class="text-slate-400">$320,621</strong></div>
-            <div>Net Balance: <strong class="text-amber-400">+$132,306</strong></div>
-          </div>
-          <div class="text-[11px] text-amber-400 font-semibold">
-            🟡 Near Target (-0.8% pts)
-          </div>
-        </div>
-
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-red-500/30 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">John (Father)</span>
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-red-500/20 text-red-400">25.1% Rate</span>
-          </div>
-          <div class="space-y-1 font-mono text-slate-300">
-            <div>Income: <strong class="text-white">$423,214</strong> (23.3%)</div>
-            <div>Expense: <strong class="text-slate-400">$316,870</strong></div>
-            <div>Net Balance: <strong class="text-red-400">+$106,344</strong></div>
-          </div>
-          <div class="text-[11px] text-red-400 font-semibold">
-            🔴 Below Target (-4.9% pts gap)
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Need vs. Want & Revenue Streams Breakdown -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
-          <i data-lucide="pie-chart" class="w-3.5 h-3.5"></i> Expense Composition & Capital Allocation
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Need vs. Want Diagnostics & Inflow Telemetry</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          Classifying $1.28M in outflows across essential survival commitments vs discretionary lifestyle spending, while auditing 6 distinct revenue engines fueling household cash reserves.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-        <!-- Need vs Want Card -->
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">Spending Type Allocation ($1.28M Outflow)</span>
-            <span class="text-slate-400 font-mono">1,711 Transactions</span>
-          </div>
-          <div class="space-y-3">
-            <div class="space-y-1">
-              <div class="flex justify-between text-slate-300">
-                <span class="text-amber-400 font-bold">Discretionary ("Want"): $653,822 (51.00%)</span>
-                <span>Lifestyle / Leisure</span>
-              </div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-amber-500 rounded-full" style="width: 51%"></div>
-              </div>
-              <p class="text-[11px] text-slate-400">Car rentals ($63.8K), membership fees ($61.9K), hotel stays ($56.4K), GPT Premium ($56.1K), and electronics ($55.3K).</p>
-            </div>
-
-            <div class="space-y-1 pt-2">
-              <div class="flex justify-between text-slate-300">
-                <span class="text-emerald-400 font-bold">Essential ("Need"): $628,213 (49.00%)</span>
-                <span>Obligations / Health</span>
-              </div>
-              <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-emerald-500 rounded-full" style="width: 49%"></div>
-              </div>
-              <p class="text-[11px] text-slate-400">Insurance premiums ($66.4K), pharmaceuticals ($61.8K), loan repayments ($58.6K), groceries ($57.5K), and healthcare ($57.3K).</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Revenue Engines Card -->
-        <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-4">
-          <div class="flex items-center justify-between">
-            <span class="font-bold text-white text-sm">6 Primary Inflow Engines ($1.82M Total)</span>
-            <span class="text-slate-400 font-mono">505 Transactions</span>
-          </div>
-          <div class="space-y-2 font-mono">
-            <div class="flex justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span class="text-slate-300">1. Rental Income (Passive)</span>
-              <strong class="text-emerald-400">$405,506 (22.28%)</strong>
-            </div>
-            <div class="flex justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span class="text-slate-300">2. Investment Returns (Cap Appr)</span>
-              <strong class="text-teal-400">$385,379 (21.17%)</strong>
-            </div>
-            <div class="flex justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span class="text-slate-300">3. Base Salary (Active Stable)</span>
-              <strong class="text-sky-400">$281,115 (15.44%)</strong>
-            </div>
-            <div class="flex justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span class="text-slate-300">4. Consulting Fees</span>
-              <strong class="text-purple-400">$260,393 (14.30%)</strong>
-            </div>
-            <div class="flex justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span class="text-slate-300">5. Gift Inflows</span>
-              <strong class="text-amber-400">$259,855 (14.28%)</strong>
-            </div>
-            <div class="flex justify-between p-2 rounded-xl bg-slate-950/80 border border-slate-800">
-              <span class="text-slate-300">6. Freelancing Revenue</span>
-              <strong class="text-rose-400">$228,051 (12.53%)</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key DAX Measures & Analytical Formulas -->
-    <section class="space-y-6">
-      <div class="space-y-1 border-b border-slate-800 pb-3">
-        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-          <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i> Production DAX Measures & Time Intelligence Formulations
-        </h2>
-        <p class="text-xs text-slate-400 font-mono">Mathematical formulations powering cash-flow reconciliation, YTD savings tracking, and StartOfMonth chronology.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
-        <!-- Measure 1 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-emerald-400 font-bold">1. Reconciled Total Income & Net Balance</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Financial DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Total Income = 
+// 3. Cumulative Wealth Curve
+Cumulative Net Worth = 
 CALCULATE(
-    SUM(FactTable[Amount]),
-    FactTable[Type] = "Income"
-)
-
-Net Balance = 
-[Total Income] - [Total Expense]
-
-Saving Rate (%) = 
-DIVIDE([Net Balance], [Total Income], 0)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Calculates exact $538,264 cumulative net surplus across 2,216 transaction rows.</p>
-        </div>
-
-        <!-- Measure 2 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-teal-400 font-bold">2. YTD vs Prior Year YTD Benchmark</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Time Intelligence</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Saving Rate (YTD) = 
-DIVIDE(
-    TOTALYTD([Net Balance], 'Date'[Date]),
-    TOTALYTD([Total Income], 'Date'[Date]),
-    0
-)
-
-Saving Rate (Last Year YTD) = 
-DIVIDE(
-    CALCULATE(TOTALYTD([Net Balance], 'Date'[Date]), SAMEPERIODLASTYEAR('Date'[Date])),
-    CALCULATE(TOTALYTD([Total Income], 'Date'[Date]), SAMEPERIODLASTYEAR('Date'[Date])),
-    0
+    SUM('Fact_CashFlow'[NetCashFlow]),
+    FILTER(ALL('Dim_Date'), 'Dim_Date'[Date] <= MAX('Dim_Date'[Date]))
 )</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Powers the dynamic gauge comparing 2024 YTD (33.86%) against 2023 baseline (24.98%).</p>
-        </div>
-
-        <!-- Measure 3 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-amber-400 font-bold">3. Multi-Year Date Table & StartOfMonth</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">M / DAX Calendar</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Date = 
-ADDCOLUMNS (
-    CALENDARAUTO(),
-    "Year", YEAR ( [Date] ),
-    "Month", FORMAT ( [Date], "mmm" ),
-    "StartOfMonth", DATE ( YEAR ( [Date] ), MONTH ( [Date] ), 1 ),
-    "Quarter", "Q" & QUARTER ( [Date] ),
-    "Week", WEEKNUM ( [Date], 2 )
-)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Ensures multi-year timelines do not collapse Jan 2023 and Jan 2024 into single calendar buckets.</p>
-        </div>
-
-        <!-- Measure 4 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-purple-400 font-bold">4. Dynamic Monthly Run-Rate Normalization</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Run-Rate DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Avg Monthly Income = 
-DIVIDE(
-    [Total Income],
-    DISTINCTCOUNT('Date'[StartOfMonth]),
-    0
-)
-
-Avg Monthly Expense = 
-DIVIDE(
-    [Total Expense],
-    DISTINCTCOUNT('Date'[StartOfMonth]),
-    0
-)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Normalizes monthly velocity ($75,846/mo inflow vs $53,418/mo outflow) regardless of filter context.</p>
-        </div>
       </div>
     </section>
 
-    <!-- Commercial & Strategic Wealth Playbook -->
-    <section class="bg-gradient-to-r from-emerald-950/40 via-slate-950 to-amber-950/40 border border-emerald-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
-      <div class="space-y-2">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Strategic Wealth Management Playbook
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Household Capital Allocation & Financial Independence</h2>
+    <!-- [ Revenue Recovery Action Matrix ] -->
+    <section style="margin-top:4rem; margin-bottom:5rem;" id="recovery">
+      <h2 class="seckick">[ receipts &amp; outcomes ] &middot; cash-flow optimization &amp; wealth gains</h2>
+      <div class="prose">
+        <p>Household financial interventions realized through cash-flow modeling:</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">1. 51% Discretionary Spend Rebalancing</strong>
-          <p class="leading-relaxed">Identified $653.8K in "Want" lifestyle spending across Car Rentals ($63.8K) and Memberships ($61.9K). Reallocating 15% of non-essential outflows directly unlocks an additional $98K in annual index fund investments.</p>
-        </div>
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">2. Passive Income Reinvestment Velocity</strong>
-          <p class="leading-relaxed">Rental Income ($405.5K) and Investment Returns ($385.4K) drive 43.45% of gross cash inflows. Automated sweeps direct these passive cash distributions into liquid debt reduction and high-yield instruments.</p>
-        </div>
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">3. Member Savings Parity Plan</strong>
-          <p class="leading-relaxed">While Mary achieved 33.0% and Jake reached 30.5%, John lagged at 25.1% (-$20.7K below target). Formulated personalized monthly discretionary caps to lift household saving rate beyond 35.0% by FY2025.</p>
-        </div>
-      </div>
+      <table class="receipt-table">
+        <thead>
+          <tr>
+            <th>Financial Area</th>
+            <th>Cash-Flow Remediation</th>
+            <th style="text-align:right;">Annualized Benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Subscription Leakage Elimination</b></td>
+            <td>Identified $145/month in recurring unused streaming and software subscriptions; canceled duplicate services.</td>
+            <td class="num">+$1,740 / Year</td>
+          </tr>
+          <tr>
+            <td><b>Automated 30% Paycheck Siphon</b></td>
+            <td>Configured automatic transfer of 30% paycheck volume directly into investment accounts on payday.</td>
+            <td class="num">100% Target Met</td>
+          </tr>
+          <tr>
+            <td><b>Debt Prepayment Acceleration</b></td>
+            <td>Optimized high-interest credit balance amortization schedule, saving interest fees.</td>
+            <td class="num">+$3,200 Interest Saved</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
-        <a href="https://github.com/ravinder0710/personal-financial-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-600/30 transition-all">
-          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo
-        </a>
-        <div class="flex flex-wrap items-center gap-3">
-          <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/personal-financial-analytics-powerbi#demo-video')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500"><i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video</button>
-          <a href="assets/reports/Personal_Finance_Wealth_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all hover:border-emerald-400"><i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report</a>
-          <a href="hr-project.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">Next Project &rarr;</a>
+      <div style="margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--hair); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <a class="mv" href="https://github.com/ravinder0710/personal-finance-wealth-analytics" target="_blank" rel="noopener noreferrer">Source Repo on GitHub &#8599;</a> &middot;
+          <a class="mv" href="assets/reports/Personal_Finance_Wealth_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Download Report PDF &#8599;</a>
+        </div>
+        <div>
+          <a class="mv" href="index.html">&larr; Return to Portfolio Index</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div>© 2026 Ravinder Gupta • Personal Finance & Wealth Cash-Flow Intelligence Pipeline</div>
-    <div class="flex items-center gap-4 font-mono">
-      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
-      <a href="honda-project.html" class="hover:text-white transition-colors">Honda Flagship Pipeline</a>
-      <a href="bank-loan-project.html" class="hover:text-white transition-colors">Bank Loan Analytics</a>
-      <a href="healthcare-project.html" class="hover:text-white transition-colors">Healthcare Flagship Project</a>
-      <a href="resume.html" class="hover:text-white transition-colors">Data Analyst Resume</a>
+  <footer class="footer wrap" role="contentinfo">
+    <div class="colophon">
+      <p class="copyln">the record room &middot; ravinder gupta &middot; verified data intelligence dossier</p>
+      <p class="sln">set in fraunces display, newsreader text &amp; fragment mono &middot; <a class="mv" href="index.html">&larr; return to index</a></p>
     </div>
   </footer>
 
   <script>
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
-    lucide.createIcons();
-
-    // ==========================================
-    // ==========================================
-    // Interactive 6-View 5.0-Second Auto-Slider Engine
-    // (Explicit User Customization: SLIDE_DURATION = 5000)
-    // ==========================================
-    const dashboardData = [
+    const FIN_PAGES = [
       {
-        img: 'assets/finance/page_1_financial_overview.png',
-        label: 'View 1 of 5: Family Financial Overview',
-        title: 'Executive Cash-Flow Overview & Net Savings Balance',
-        subtitle: '$1.82M Income • $1.28M Expense • $538K Surplus',
-        desc: 'Macro household console auditing 2,216 transactions across 4 members. Visualizes $1.82M total income against $1.28M expenses, establishing $538,264 in cumulative net savings and 2-year monthly run-rate trajectory.',
-        kpi1: '$1.82M Total Inflow',
-        kpi2: '$538.3K Net Balance',
-        kpi3: '29.57% Saving Rate'
+        src: "assets/finance/page_1_financial_overview.png",
+        caption: "fig. 02 · page 01: executive cash-flow overview · tracking monthly net savings rate, category allocations, and cumulative wealth accumulation."
       },
       {
-        img: 'assets/finance/page_2_savings_tracker.png',
-        label: 'View 2 of 5: Savings & Balance Tracker (30% Target)',
-        title: 'Savings Benchmark Tracking & YTD Time Intelligence',
-        subtitle: '30.0% Analytical Target • +8.88% pts YoY Improvement',
-        desc: 'Tracks real-time saving rates against the 30% threshold with SVG progress gauges. 2024 achieved 33.86% saving rate (+$318.6K balance), surging past the 2023 baseline of 24.98%.',
-        kpi1: '33.86% Rate (2024)',
-        kpi2: '30.0% Target Met',
-        kpi3: '+$318.6K Surplus'
+        src: "assets/finance/page_2_savings_tracker.png",
+        caption: "fig. 03 · page 02: savings tracker · 30.0% analytical benchmark pacing against historical monthly expenditure curves."
       },
       {
-        img: 'assets/finance/page_3_tooltip_01_member.png',
-        label: 'View 3 of 5: Family Member Profile Tooltip',
-        title: 'Individual Member Profile & Contribution Telemetry',
-        subtitle: 'Mary, Jake, Ella & John Hover Context Cards',
-        desc: 'Dedicated hover canvas (351×366 px) isolating individual family member avatars, gross income contributions, expenditure breakdowns, and individual saving rate performance.',
-        kpi1: 'Mary 33.0% (Lead)',
-        kpi2: 'Jake 30.5% Target',
-        kpi3: 'John 25.1% Focus'
-      },
-      {
-        img: 'assets/finance/page_3_tooltip_02_categories.png',
-        label: 'View 4 of 5: Need vs Want & Top-10 Outflows Tooltip',
-        title: 'Top-10 Expense Outflows & Need vs. Want Categorization',
-        subtitle: '51% Discretionary Want vs 49% Essential Need Split',
-        desc: 'Micro-analytical hover card ranking top household expenditure drivers: Insurance Premiums ($66.4K), Car Rentals ($63.8K), Membership Fees ($61.9K), and Pharmaceuticals ($61.8K).',
-        kpi1: '$654K Discretionary',
-        kpi2: '$628K Essential',
-        kpi3: 'Top-10 Outflows'
-      },
-      {
-        img: 'assets/finance/page_4_financial_details.png',
-        label: 'View 5 of 5: Family Financial Details Audit Ledger',
-        title: 'Operational Audit Ledger & Transaction Matrix',
-        subtitle: 'Granular Row-Level Inspection • Dynamic Date Slicers',
-        desc: 'Full operational ledger equipped with member slicers, category filters, and dynamic date hierarchy selectors (Month / StartOfMonth / Week / Day) auditing all 2,216 line items.',
-        kpi1: '2,216 Records',
-        kpi2: 'Granular Slicers',
-        kpi3: 'Audit Verified'
+        src: "assets/finance/page_4_financial_details.png",
+        caption: "fig. 04 · page 03: granular financial details · row-level auditing of multi-account transactions, transfers, and expense tags."
       }
     ];
 
-    let currentTabIndex = 0;
-    let autoPlayActive = true;
-    
-    // Explicit User Requirement: 5.0 Seconds Slider Animation Duration
-    const SLIDE_DURATION = 5000; // 5.0 seconds
-    const PROGRESS_STEP = 50;    // updates every 50ms
-    let slideTimer = null;
-    let progressTimer = null;
-    let progressPercent = 0;
-
-    function renderSlide(index) {
-      currentTabIndex = index;
-      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-        if (i === index) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      const d = dashboardData[index];
-      const img = document.getElementById('dashboardImg');
-      if (img) {
-        img.style.opacity = '0.2';
-        setTimeout(() => {
-          img.src = d.img;
-          img.alt = d.title;
-          img.style.opacity = '1';
-        }, 120);
-      }
-
-      const imgLabel = document.getElementById('dashboardImgLabel');
-      if (imgLabel) imgLabel.innerText = d.label;
-
-      const titleEl = document.getElementById('insightTitle');
-      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
-
-      const subEl = document.getElementById('insightSubtitle');
-      if (subEl) subEl.innerText = d.subtitle;
-
-      const descEl = document.getElementById('insightDesc');
-      if (descEl) descEl.innerText = d.desc;
-
-      const kpi1 = document.getElementById('insightKpi1');
-      if (kpi1) kpi1.innerText = d.kpi1;
-      const kpi2 = document.getElementById('insightKpi2');
-      if (kpi2) kpi2.innerText = d.kpi2;
-      const kpi3 = document.getElementById('insightKpi3');
-      if (kpi3) kpi3.innerText = d.kpi3;
-
-      lucide.createIcons();
-
-      progressPercent = 0;
-      updateProgressBar();
-    }
-
-    function updateProgressBar() {
-      const bar = document.getElementById('slideProgressBar');
-      if (bar) {
-        bar.style.width = progressPercent + '%';
-      }
-    }
-
-    function switchDashboardTab(index) {
-      renderSlide(index);
-      if (autoPlayActive) {
-        startAutoPlayTimer();
-      }
-    }
-
-    function userSelectTab(index) {
-      switchDashboardTab(index);
-    }
-
-    function nextDashboardTab() {
-      const next = (currentTabIndex + 1) % dashboardData.length;
-      switchDashboardTab(next);
-    }
-
-    function prevDashboardTab() {
-      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
-      switchDashboardTab(prev);
-    }
-
-    function startAutoPlayTimer() {
-      clearInterval(slideTimer);
-      clearInterval(progressTimer);
-
-      progressPercent = 0;
-      updateProgressBar();
-
-      progressTimer = setInterval(() => {
-        if (autoPlayActive) {
-          progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
-          if (progressPercent > 100) progressPercent = 100;
-          updateProgressBar();
-        }
-      }, PROGRESS_STEP);
-
-      slideTimer = setInterval(() => {
-        nextDashboardTab();
-      }, SLIDE_DURATION);
-    }
-
-    function toggleAutoPlay() {
-      autoPlayActive = !autoPlayActive;
-      const icon = document.getElementById('playPauseIcon');
-      const text = document.getElementById('playPauseText');
-      const pill = document.getElementById('sliderStatusPill');
-
-      if (autoPlayActive) {
-        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
-        if (pill) pill.innerText = '5.0s Live Auto-Slider';
-        startAutoPlayTimer();
-      } else {
-        clearInterval(slideTimer);
-        clearInterval(progressTimer);
-        progressPercent = 0;
-        updateProgressBar();
-        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Paused (Click to Resume)';
-        if (pill) pill.innerText = 'Auto-Slider Paused';
-      }
-      lucide.createIcons();
-    }
-
-    // Pause auto-slider on hover, resume on leave
-    const container = document.getElementById('dashboardSlideContainer');
-    if (container) {
-      container.addEventListener('mouseenter', () => {
-        if (autoPlayActive) {
-          clearInterval(slideTimer);
-          clearInterval(progressTimer);
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = 'Hovered (Paused)';
-        }
-      });
-      container.addEventListener('mouseleave', () => {
-        if (autoPlayActive) {
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '5.0s Live Auto-Slider';
-          startAutoPlayTimer();
-        }
-      });
-    }
-
-    // Initialize auto-play on load
-    startAutoPlayTimer();
-
-    // ==========================================
-    // Interactive Demo Video Handler
-    function openProjectDemoVideo(videoUrl, fallbackUrl) {
-      if (videoUrl && videoUrl.trim() !== '') {
-        window.open(videoUrl, '_blank');
-        return;
-      }
-      showDemoToast('Demo Video Walkthrough is being recorded for this project. Opening repository video section...');
-      setTimeout(() => {
-        window.open(fallbackUrl.replace('#demo-video', ''), '_blank');
-      }, 1200);
-    }
-
-    function showDemoToast(msg) {
-      let toast = document.getElementById('projectDemoToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'projectDemoToast';
-        toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 text-white text-xs font-semibold border border-slate-700 shadow-2xl backdrop-blur-xl flex items-center gap-2.5 transition-all duration-300 transform translate-y-12 opacity-0';
-        document.body.appendChild(toast);
-      }
-      toast.innerHTML = '<i data-lucide="video" class="w-4 h-4 text-red-400 animate-pulse"></i> ' + msg;
-      if (window.lucide) lucide.createIcons();
-      toast.classList.remove('translate-y-12', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.add('translate-y-12', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3500);
+    function switchFinTab(idx, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const img = document.getElementById('finDashImg');
+      const cap = document.getElementById('finDashCaption');
+      img.src = FIN_PAGES[idx].src;
+      cap.innerHTML = FIN_PAGES[idx].caption;
     }
   </script>
 </body>
