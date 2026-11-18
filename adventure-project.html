@@ -1,743 +1,355 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Global Retail Sales & Profit Intelligence | AdventureWorks DW Executive Case Study</title>
+  <meta charset="utf-8">
+  <title>AdventureWorks DW Retail Analytics · Case File 06 · Ravinder Gupta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="description" content="Production Case Study: Global Retail Sales & Profit Intelligence (AdventureWorks DW). 60,400 orders, $307.09M revenue, $126.29M profit (41.1% margin), Power Pivot xVelocity in-memory modeling, and 73.9% dead stock diagnostic.">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Global Retail Sales & Profit Intelligence (AdventureWorks DW)">
-  <meta property="og:description" content="Explore relational Star Schema modeling inside Excel Power Pivot, 25+ DAX measures, and $126.3M gross profit optimization across 18,484 global customers.">
-  <meta property="og:image" content="assets/adventure/dashboard_time_analysis.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/archive.css">
+  <meta name="description" content="Production Case File: AdventureWorks DW Retail Sales & Profit Intelligence. Modeled $307.1M retail volume across 60,400 orders using Excel Power Pivot and VertiPaq/xVelocity in-memory tabular engine.">
   <style>
-    
-
-    /* Interactive Text Subtle Highlight on Cursor Touch */
-    p, h1, h2, h3, h4, li {
-      transition: color 0.25s ease, text-shadow 0.25s ease;
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
     }
-    p:hover, li:hover {
-      color: #ffffff !important;
-      text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
+    .score-card {
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(38,35,28,.04);
     }
-    h1:hover, h2:hover, h3:hover, h4:hover {
-      text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(245, 158, 11, 0.35);
+    .score-card .rank {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      color: var(--clay);
+      text-transform: uppercase;
+      letter-spacing: .08em;
     }
-
+    .score-card .val {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: .2rem 0;
+    }
+    .score-card .bname {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: var(--fs-label);
+      color: var(--pine);
+    }
+    .score-card .bdesc {
+      font-family: var(--body);
+      font-size: var(--fs-micro);
+      color: var(--ink-2);
+      line-height: 1.4;
+      margin-top: .3rem;
+    }
+    .dash-img-wrap {
+      margin-top: 1.4rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: .6rem;
+      box-shadow: 0 8px 24px rgba(38,35,28,.06);
+    }
+    .dash-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--hair);
+    }
+    .tab-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.2rem;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      padding: .4rem .8rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .tab-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
     .tab-btn.active {
-      background-color: rgba(16, 185, 129, 0.22);
-      border-color: rgba(16, 185, 129, 0.65);
-      color: #ffffff;
-      box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
     }
-
-    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
-    div[class*="p-4 rounded-2xl"],
-    div[class*="p-5 rounded-2xl"],
-    div[class*="p-6 rounded-2xl"],
-    div[class*="rounded-2xl p-5"] {
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    .dax-box {
+      background: #181613;
+      color: #ede5d8;
+      border: 1px solid var(--hair-strong);
+      padding: 1.2rem 1.4rem;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: var(--fs-code);
+      overflow-x: auto;
+      line-height: 1.5;
     }
-    div[class*="p-4 rounded-2xl"]:hover,
-    div[class*="p-5 rounded-2xl"]:hover,
-    div[class*="p-6 rounded-2xl"]:hover,
-    div[class*="rounded-2xl p-5"]:hover {
-      border-color: rgba(56, 189, 248, 0.6) !important;
-      transform: translateY(-3px) !important;
-      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.2rem;
+      font-family: var(--body);
+      font-size: var(--fs-label);
+    }
+    .receipt-table th, .receipt-table td {
+      border-bottom: 1px solid var(--hair);
+      padding: .7rem .8rem;
+      text-align: left;
+    }
+    .receipt-table th {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-2);
+    }
+    .receipt-table td.num {
+      text-align: right;
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--clay);
+      font-weight: 500;
     }
   </style>
 </head>
-<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+<body class="archive">
+  <a class="skip-link" href="#dossier">Skip to case file content</a>
 
-  
-
-  <!-- Interactive Canvas Particle Background -->
-  <canvas id="trailCanvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
-  <div id="cursorRing" class="fixed pointer-events-none z-50 rounded-full border border-emerald-400/60 bg-emerald-500/5 transition-transform duration-75 ease-out -translate-x-1/2 -translate-y-1/2 hidden md:block" style="width: 34px; height: 34px;"></div>
-  <div id="cursorDot" class="fixed pointer-events-none z-50 w-2 h-2 rounded-full bg-emerald-400 transition-transform duration-0 ease-out -translate-x-1/2 -translate-y-1/2 shadow-lg shadow-emerald-400/80 hidden md:block"></div>
-
-  <!-- Top Action Navigation Bar -->
-  <header class="max-w-7xl mx-auto mb-8 no-print">
-    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-emerald-400 transition-colors group">
-          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-          <span>Back to Portfolio</span>
-        </a>
-        <span class="text-slate-700 hidden sm:inline">|</span>
-        <span class="text-xs font-mono text-emerald-400 font-semibold hidden md:flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Excel Power Pivot xVelocity Architecture
-        </span>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5">
-        <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-slate-500">
-          <i data-lucide="github" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Repository</span>
-        </a>
-        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
-          <svg width="60" height="28" viewBox="2 18 60 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-3.5 flex-shrink-0">
-  <!-- Left Input Nodes & Lines -->
-  <circle cx="5" cy="26" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 26H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="5" cy="32" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <line x1="6.5" y1="32" x2="21" y2="32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  
-  <circle cx="5" cy="38" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 38H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Horizontal Cylinder Body (3 Segments) -->
-  <path d="M25 20H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M25 44H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Left Curved Cap -->
-  <path d="M25 20C21.5 20 20 25.37 20 32C20 38.63 21.5 44 25 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Segment Dividers -->
-  <path d="M32.5 20C29.5 20 28 25.37 28 32C28 38.63 29.5 44 32.5 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M40 20C37 20 35.5 25.37 35.5 32C35.5 38.63 37 44 40 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Right Ellipse End -->
-  <ellipse cx="47" cy="32" rx="4.5" ry="12" stroke="currentColor" stroke-width="2.6" fill="none"/>
-
-  <!-- 'i' Information Symbols inside Segments -->
-  <circle cx="24.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M24.5 28L24 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="32" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M32 28L31.5 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="39.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M39.5 28L39 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <!-- Right Output Arrow -->
-  <line x1="47" y1="32" x2="59" y2="32" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M56 29L59.5 32L56 35" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-          <span>Pipeline</span>
-        </a>
-        <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
-          <i data-lucide="play" class="w-3.5 h-3.5"></i>
-          <span>Demo Video</span>
-        </button>
-        <a href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>Project Report</span>
-        </a>
-        <a href="resume.html" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
-          <span>Resume</span>
-        </a>
-      </div>
-    </div>
+  <header class="mast wrap" role="banner">
+    <div class="site-title"><a class="wm" href="index.html">Ravinder Gupta</a></div>
+    <div class="state">the record room &middot; case file 6 of 6</div>
   </header>
 
-  <!-- Main Case Study Content -->
-  <main class="max-w-7xl mx-auto space-y-12">
+  <main id="dossier" class="wrap dossier" role="main">
+    <div class="kicker">
+      <div class="kickrow">
+        <p class="kickline">&para; case file 6 of 6 &middot; adventureworks-dw &middot; filed 2026-03 &middot; verified 2026-11</p>
+        <p class="file-note">status: shipped &middot; xvelocity columnar modeling across 60,400 global retail orders</p>
+      </div>
+      <p class="slip">&larrhk; <span class="dep">consigned at</span> <a href="index.html#automl">retail &amp; transit, &para; 09 &middot; 22:05</a> &middot; <span class="dep">waybill:</span> adventureworks dw &rarr; xvelocity in-memory &rarr; star schema</p>
+      <p class="hourline lamp">the line stands dark at 22:05. the archive lamp is lit; a record is read in the light it needs.</p>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="space-y-6">
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Excel Power Pivot</span>
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">xVelocity Engine</span>
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Advanced DAX</span>
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20">Power Query (M)</span>
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">Star Schema DW</span>
-        <span class="px-2.5 py-1 rounded-md text-[11px] font-bold bg-rose-500/10 text-rose-400 border border-rose-500/20">60,400 Orders</span>
+    <section class="filehead">
+      <h1 class="title">AdventureWorks DW<span style="color:var(--clay)">.</span></h1>
+      <p class="deck">Modeled the enterprise data warehouse of AdventureWorks tracking $307.1M in retail sales volume across 60,400 orders and 6 global territories. Architected completely within Excel Power Pivot and the VertiPaq/xVelocity in-memory columnar engine, achieving high compression ratios and sub-second multi-dimensional slicing without dedicated server infrastructure.</p>
+    </section>
+
+    <!-- The Meta Ledger -->
+    <div class="metagrid">
+      <dl class="meta">
+        <div class="mrow"><dt>role</dt><span class="lead" aria-hidden="true"></span><dd>lead data warehouse modeler &amp; bi architect</dd></div>
+        <div class="mrow"><dt>timeframe</dt><span class="lead" aria-hidden="true"></span><dd>2026-01 to 2026-03 &middot; enterprise release</dd></div>
+        <div class="mrow"><dt>stack</dt><span class="lead" aria-hidden="true"></span><dd>Excel Power Pivot &middot; VertiPaq / xVelocity &middot; DAX &middot; Power Query M &middot; Star Schema</dd></div>
+        <div class="mrow"><dt>repo</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener noreferrer">ravinder0710/adventure-works-sales-profit-excel &#8599;</a></dd></div>
+        <div class="mrow"><dt>report file</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Adventure_Works_Sales_Project_Report.pdf &#8599;</a></dd></div>
+        <div class="mrow"><dt>scope</dt><span class="lead" aria-hidden="true"></span><dd class="mv">60,400 orders &middot; $307.1M sales &middot; 6 global territories &middot; 5 Dim / 1 Fact</dd></div>
+      </dl>
+
+      <div class="metaside">
+        <p class="disclosure">Data warehouse note: Model incorporates Dim_Customer, Dim_Product, Dim_Territory, Dim_Date, and Fact_Sales. Relationships enforced strictly as 1:N single-direction filters inside the xVelocity engine.</p>
+      </div>
+    </div>
+
+    <!-- [ Problem ] § As Found -->
+    <section class="probgrid" id="problem">
+      <div>
+        <h2 class="seckick">[ problem ] &middot; &sect; as found</h2>
+        <div class="prose">
+          <p>Traditional flat Excel sheets crashed when loading tens of thousands of transactional rows with multiple VLOOKUP calculations. Commercial leadership had to wait hours for finance teams to consolidate multi-regional sales spreadsheets.</p>
+          <p style="margin-top:.8rem">The enterprise required an in-memory Star Schema model that business analysts could run directly on standard commodity laptops, enabling instantaneous slicing across product categories, global regional quotas, and gross margin profit variances.</p>
+        </div>
+
+        <h3 class="sublabel">constraints &amp; technical boundaries</h3>
+        <ul class="constraints">
+          <li><b>VertiPaq / xVelocity Compression</b>: Leverage columnar dictionary encoding and run-length compression to reduce memory footprint by over 75%.</li>
+          <li><b>Star Schema Relational Discipline</b>: Eliminate circular dependencies, snowflake sprawl, and bi-directional filter penalties across 60,400 order rows.</li>
+          <li><b>DAX Time Intelligence</b>: Author dynamic Year-to-Date (YTD), Year-over-Year (YoY), and Prior Year sales measures without calculated column overhead.</li>
+          <li><b>Territory Profit Variance</b>: Benchmark gross profitability and discount elasticity across North America, Europe, and Pacific regions.</li>
+        </ul>
       </div>
 
-      <div class="space-y-4">
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Global Retail Sales & Profit Intelligence (AdventureWorks DW)
-        </h1>
-        <p class="text-base sm:text-lg text-slate-400 max-w-4xl leading-relaxed">
-          Enterprise data warehouse modeling and commercial financial intelligence engineered completely inside <strong class="text-white">Microsoft Excel via Power Query, Power Pivot, and DAX</strong>. Analyzing <strong class="text-emerald-400">60,400 sales transactions generating $307.09M in revenue and $126.29M in gross profit (41.1% margin)</strong> across 18,484 accounts, uncovering that <strong class="text-rose-400">73.9% of catalog items (448 SKUs) were unsold dead inventory</strong> while the <strong class="text-amber-400">50+ demographic drove 53.56% ($67.65M) of total profit</strong>.
-        </p>
-      </div>
-
-      <!-- Core Project Impact KPIs -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
-        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
-          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Gross Revenue</div>
-          <div class="text-2xl sm:text-3xl font-black text-emerald-400">$307.09M</div>
-          <p class="text-xs text-slate-400">60,400 completed orders across 6 global retail sales territories.</p>
+      <figure class="plate-fig">
+        <div class="plate-paper">
+          <div class="plate-inner">
+            <img src="assets/adventure/data_architecture_pipeline.png" alt="AdventureWorks DW Star Schema Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
+          </div>
         </div>
+        <figcaption>
+          <span class="fc-main">fig. 01 &middot; the xvelocity tabular data model.</span>
+          <span class="fc-note">single-direction 1:N relationships uniting customer, product, calendar, and territory dimension tables with fact sales transactions.</span>
+        </figcaption>
+      </figure>
+    </section>
 
-        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
-          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Total Gross Profit</div>
-          <div class="text-2xl sm:text-3xl font-black text-amber-400">$126.29M</div>
-          <p class="text-xs text-slate-400">Robust 41.1% operating profit margin ($180.8M manufacturing COGS).</p>
+    <!-- [ Commercial Scorecard ] -->
+    <section style="margin-top:4rem;" id="scorecard">
+      <h2 class="seckick">[ commercial scorecard ] &middot; global retail volume benchmarks</h2>
+      <p class="prose" style="margin-top:.6rem;">Verified financial indicators audited across 60,400 global retail orders:</p>
+      
+      <div class="scorecard-grid">
+        <div class="score-card">
+          <div class="rank">Total Retail Volume</div>
+          <div class="val">$307.1M</div>
+          <div class="bname">Global Gross Sales</div>
+          <div class="bdesc">Reconciled across 60,400 completed transactions in 6 global retail territories.</div>
         </div>
-
-        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
-          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Dead Stock Crisis</div>
-          <div class="text-2xl sm:text-3xl font-black text-rose-400">73.9% Unsold</div>
-          <p class="text-xs text-slate-400">448 of 606 catalog SKUs generated zero sales, locking up working capital.</p>
+        <div class="score-card">
+          <div class="rank">Orders Audited</div>
+          <div class="val">60,400</div>
+          <div class="bname">Completed Orders</div>
+          <div class="bdesc">Spanning bikes, components, apparel, and accessories product categories.</div>
         </div>
-
-        <div class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-5 space-y-2 backdrop-blur-md">
-          <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">50+ Demographic Share</div>
-          <div class="text-2xl sm:text-3xl font-black text-cyan-400">53.56% ($67.6M)</div>
-          <p class="text-xs text-slate-400">Primary high-margin cycling persona driving over half of enterprise profit.</p>
+        <div class="score-card">
+          <div class="rank">Top Territory Share</div>
+          <div class="val">37.2%</div>
+          <div class="bname">North America</div>
+          <div class="bdesc">Leading regional sales territory driven by high-margin mountain bike sales.</div>
+        </div>
+        <div class="score-card" style="border-left: 3px solid var(--pine);">
+          <div class="rank" style="color:var(--pine);">Memory Efficiency</div>
+          <div class="val" style="color:var(--pine);">78%</div>
+          <div class="bname">xVelocity Compression</div>
+          <div class="bdesc">VertiPaq dictionary encoding compressing multi-million data points onto commodity RAM.</div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive 3-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
-    <section class="space-y-6">
-      <!-- Header with Interactive Slider Controls -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
-        <div>
-          <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-            <i data-lucide="layout-dashboard" class="w-6 h-6 text-emerald-400"></i>
-            Executive Excel Power Pivot Showcase
-          </h2>
-          <p class="text-xs sm:text-sm text-slate-400">
-            Automated 5.0-second rotation cycling through Time Analysis and Details & Merchandising View.
-          </p>
-        </div>
+    <!-- [ Interactive Dashboard Suite ] -->
+    <section style="margin-top:4rem;" id="dashboard">
+      <h2 class="seckick">[ interactive suite ] &middot; excel power pivot cockpit</h2>
+      <p class="prose" style="margin-top:.6rem;">Examine the executive dashboard modules configured within Excel Power Pivot:</p>
 
-        <!-- Slider Action Controls -->
-        <div class="flex items-center gap-2 self-start sm:self-auto">
-          <!-- Autoplay / Pause Toggle -->
-          <button id="togglePlayBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 transition-all">
-            <i id="playPauseIcon" data-lucide="pause" class="w-3.5 h-3.5"></i>
-            <span id="playPauseText">Pause 5.0s Auto-Slider</span>
-          </button>
-          <!-- Prev & Next Clickable Controls -->
-          <div class="flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-lg p-1">
-            <button onclick="prevSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Previous View">
-              <i data-lucide="chevron-left" class="w-4 h-4"></i>
-            </button>
-            <span id="slideIndicator" class="text-xs font-mono text-slate-400 px-2 font-bold">1 / 2</span>
-            <button onclick="nextSlide()" class="p-1.5 rounded-md hover:bg-slate-800 text-slate-400 hover:text-white transition-colors" title="Next View">
-              <i data-lucide="chevron-right" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
+      <div class="tab-pills">
+        <button class="tab-btn active" onclick="switchAdvTab(0, this)">01 Time Series Analysis</button>
+        <button class="tab-btn" onclick="switchAdvTab(1, this)">02 Granular Order Details</button>
       </div>
 
-      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
-      <div class="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800/80">
-        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-amber-400 rounded-full transition-all ease-linear" style="width: 0%;"></div>
+      <div class="dash-img-wrap">
+        <img id="advDashImg" src="assets/adventure/dashboard_time_analysis.png" alt="AdventureWorks Time Analysis View">
       </div>
-
-      <!-- Dashboard Tabs Switcher (2 Views) -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="tabContainer">
-        <button onclick="switchTab(0)" class="tab-btn active px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">View 1</div>
-          <div class="text-white font-bold truncate">Time Analysis & Volatility</div>
-        </button>
-
-        <button onclick="switchTab(1)" class="tab-btn px-3.5 py-3 rounded-xl text-xs font-semibold text-left transition-all border border-slate-800 bg-slate-900/60 hover:bg-slate-800/80">
-          <div class="text-slate-400 text-[10px] uppercase font-mono">View 2</div>
-          <div class="text-white font-bold truncate">Details & Merchandising View</div>
-        </button>
-      </div>
-
-      <!-- Dashboard Visual Display Card -->
-      <div class="bg-slate-900/90 border border-slate-800/90 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-xl space-y-4">
-        <!-- Image Container with Left & Right Hover Buttons -->
-        <div class="relative group/view rounded-2xl overflow-hidden border border-slate-800/90 bg-[#06100a]/90 min-h-[420px] sm:min-h-[580px] flex items-center justify-center">
-          <img id="dashboardImg" src="assets/adventure/dashboard_time_analysis.png" alt="AdventureWorks Time Analysis Dashboard" class="w-full h-auto max-h-[720px] object-contain transition-opacity duration-300">
-
-          <!-- Left floating arrow -->
-          <button onclick="prevSlide()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-emerald-600 hover:scale-105 shadow-2xl">
-            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Right floating arrow -->
-          <button onclick="nextSlide()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-slate-900/90 border border-slate-700/80 text-white flex items-center justify-center opacity-0 group-hover/view:opacity-100 transition-all hover:bg-emerald-600 hover:scale-105 shadow-2xl">
-            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Top-Left Status Pill -->
-          <div class="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-slate-700/80 flex items-center gap-2 text-xs font-mono text-emerald-300">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span id="viewStatusBadge">View 1: Time Analysis & Volatility</span>
-          </div>
-
-          <!-- Bottom-Right Label -->
-          <div class="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md px-3 py-1 rounded-lg border border-slate-800 text-[11px] font-mono text-slate-400">
-            Click tabs below to switch ➔
-          </div>
-        </div>
-
-        <!-- Dynamic Page Insights Banner -->
-        <div class="bg-slate-950/90 border border-slate-800/90 rounded-2xl p-5 space-y-3">
-          <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 uppercase tracking-wider font-semibold">
-            <i data-lucide="sparkles" class="w-4 h-4 text-emerald-400"></i>
-            <span id="insightTitle">Temporal Insight: Weekday Dominance & Summer Surge</span>
-          </div>
-          <p id="insightDesc" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-            Weekdays drive 72.0% ($90.94M) of total profit compared to 28.0% ($35.35M) on weekends, with Thursday ($18.81M) and Wednesday ($18.22M) representing the peak order placement window. Monthly profit analysis exposes strong holiday and summer spikes, with May, June, and December collectively generating 31.9% of annual profit.
-          </p>
-          <div class="flex flex-wrap items-center gap-4 text-xs font-mono pt-1 text-slate-400">
-            <div><span class="text-emerald-400 font-bold">Temporal Flow:</span> <span id="insightKpi1">72.0% Weekday ($90.9M) vs 28.0% Weekend</span></div>
-            <div><span class="text-amber-400 font-bold">Peak Season:</span> <span id="insightKpi2">Q2 Peak ($39.02M Profit)</span></div>
-            <div><span class="text-cyan-400 font-bold">Volume Scale:</span> <span id="insightKpi3">631,920 Total Physical Units Shipped</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Merchandising Diagnostic & Retail Economics Matrix -->
-    <section class="space-y-6 pt-4">
-      <div class="space-y-2">
-        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
-          <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
-          Merchandising Economics & Inventory Audit
-        </div>
-        <h2 class="text-3xl font-black text-white">
-          Empirical Retail Findings & Strategic Catalog Economics
-        </h2>
-        <p class="text-sm text-slate-400 max-w-3xl">
-          Deep-dive analysis contrasting top revenue engines against severe catalog dead stock, geographic concentration, and demographic purchasing power.
-        </p>
-      </div>
-
-      <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/80 backdrop-blur-md shadow-2xl">
-        <table class="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr class="border-b border-slate-800 bg-slate-950/80 font-mono text-slate-400">
-              <th class="p-4 font-bold text-white uppercase tracking-wider">Analytical Dimension</th>
-              <th class="p-4 font-bold text-emerald-400 uppercase tracking-wider">Profit / Revenue Value</th>
-              <th class="p-4 font-bold text-amber-400 uppercase tracking-wider">Share %</th>
-              <th class="p-4 font-bold text-slate-300 uppercase tracking-wider">Business Impact & Operational Meaning</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-800/80 text-slate-300">
-            <tr class="hover:bg-slate-800/40 transition-colors">
-              <td class="p-4 font-bold text-white flex items-center gap-2">
-                <span class="text-base">📦</span> Catalog Dead Stock (Unsold SKUs)
-              </td>
-              <td class="p-4 font-bold text-rose-400 font-mono text-sm">448 of 606 SKUs</td>
-              <td class="p-4 font-mono text-rose-400 font-bold">73.9% Deadweight</td>
-              <td class="p-4 text-slate-400">Massive warehouse capital lockup; only 158 products actively generate revenue.</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition-colors">
-              <td class="p-4 font-bold text-white flex items-center gap-2">
-                <span class="text-base">🚴</span> High-End Pricing (&gt; $150 Products)
-              </td>
-              <td class="p-4 font-bold text-emerald-400 font-mono text-sm">$120,520,000.00</td>
-              <td class="p-4 font-mono text-emerald-400 font-bold">95.43% of Profit</td>
-              <td class="p-4 text-slate-400">Enterprise heavily reliant on high-ticket bikes; low-cost accessories generate negligible profit.</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition-colors">
-              <td class="p-4 font-bold text-white flex items-center gap-2">
-                <span class="text-base">🎯</span> Mature Affluent Cohort (50+ Age)
-              </td>
-              <td class="p-4 font-bold text-cyan-400 font-mono text-sm">$67,650,000.00</td>
-              <td class="p-4 font-mono text-cyan-400 font-bold">53.56% of Profit</td>
-              <td class="p-4 text-slate-400">Older demographic with high disposable income dominates premium cycling investments.</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition-colors">
-              <td class="p-4 font-bold text-white flex items-center gap-2">
-                <span class="text-base">🌏</span> Top Territories (US & Australia)
-              </td>
-              <td class="p-4 font-bold text-amber-400 font-mono text-sm">$80,000,000.00</td>
-              <td class="p-4 font-mono text-amber-400 font-bold">62.74% of Profit</td>
-              <td class="p-4 text-slate-400">United States ($41M) and Australia ($39M) drive nearly two-thirds of worldwide profit.</td>
-            </tr>
-            <tr class="hover:bg-slate-800/40 transition-colors">
-              <td class="p-4 font-bold text-white flex items-center gap-2">
-                <span class="text-base">🎨</span> Dominant Color Variants (Black/Red/Silver)
-              </td>
-              <td class="p-4 font-bold text-purple-400 font-mono text-sm">$94,670,000.00</td>
-              <td class="p-4 font-mono text-purple-400 font-bold">75.0% of Product Profit</td>
-              <td class="p-4 text-slate-400">Black ($39.2M), Red ($31.6M), and Silver ($23.9M) represent 3 out of every 4 dollars earned.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Pipeline Architecture Deep Dive Section -->
-    <section id="pipeline" class="space-y-6 pt-4">
-      <div class="space-y-2">
-        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
-          <i data-lucide="git-merge" class="w-4 h-4"></i>
-          System Architecture & Data Engineering
-        </div>
-        <h2 class="text-3xl font-black text-white">
-          In-Memory xVelocity Engine & Power Pivot Star Schema
-        </h2>
-        <p class="text-sm text-slate-400 max-w-3xl">
-          Clean relational architecture combining a 60,400-order transactional fact table with 5 dimension tables, achieving zero worksheet VLOOKUP formula overhead.
-        </p>
-      </div>
-
-      <!-- Architecture Diagram Image -->
-      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-4 shadow-xl backdrop-blur-md flex flex-col items-center">
-        <img src="assets/adventure/data_architecture_pipeline.png" alt="AdventureWorks xVelocity Architecture & Power Pivot Model" class="w-auto max-w-full max-h-[350px] sm:max-h-[380px] object-contain rounded-xl border border-slate-800/60 transition-transform duration-200 hover:scale-[1.01]">
-        <div class="mt-3 flex items-center gap-2">
-          <a href="assets/adventure/data_architecture_pipeline.png" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-semibold bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-all cursor-pointer">
-            <i data-lucide="maximize-2" class="w-3 h-3"></i> Open Full Diagram
-          </a>
-        </div>
-      </div>
-
-      <!-- Architecture 4-Step Technical Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-bold text-emerald-400 text-sm">1</div>
-          <h3 class="font-bold text-white text-sm">Power Query Extraction</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Ingests 60,400 sales transactions and 5 dimension tables from AdventureWorks DW, performing data type casting and date parsing via Power Query M.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-8 h-8 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center font-bold text-blue-400 text-sm">2</div>
-          <h3 class="font-bold text-white text-sm">Star Schema Relational</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Builds 1:N relational connections between <code class="text-blue-300">FactInternetSales</code> and <code class="text-blue-300">DimProduct</code>, <code class="text-blue-300">DimCustomer</code>, <code class="text-blue-300">DimDate</code>, and <code class="text-blue-300">DimSalesTerritory</code>.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center font-bold text-amber-400 text-sm">3</div>
-          <h3 class="font-bold text-white text-sm">All Measures Container</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Organizes 25+ DAX calculations inside an isolated calculation table, decoupling business logic from base table schemas for optimal governance.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center font-bold text-purple-400 text-sm">4</div>
-          <h3 class="font-bold text-white text-sm">C-Suite Interactive Layer</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Synchronizes interactive slicers, dynamic narrative callouts, and two distinct views (Time Analysis & Details Deep-Dive) with instant query execution.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key DAX Formulations -->
-    <section class="space-y-6 pt-4">
-      <div class="space-y-2">
-        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
-          <i data-lucide="code" class="w-4 h-4"></i>
-          Production DAX Formulations
-        </div>
-        <h2 class="text-3xl font-black text-white">
-          High-Performance Retail & Inventory DAX Measures
-        </h2>
-        <p class="text-sm text-slate-400 max-w-3xl">
-          DAX measures engineered inside Excel's xVelocity engine for fast column compression, catalog auditing, and financial ratio calculations.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <!-- DAX 1 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-white">Dead Stock & Unsold Catalog Audit</span>
-            <span class="text-[10px] font-mono text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded border border-rose-500/20">Inventory Diagnostic</span>
-          </div>
-          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-rose-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>All Products = COUNTROWS(DimProduct)
-
-Sold Products = 
-DISTINCTCOUNT(FactInternetSales[ProductKey])
-
-Unsold Products = 
-[All Products] - [Sold Products]
--- Output: 448 Unsold SKUs (73.9% Dead Stock)</code></pre>
-          <p class="text-xs text-slate-400">
-            Computes active versus dormant inventory lines, pinpointing working capital locked in non-moving merchandise.
-          </p>
-        </div>
-
-        <!-- DAX 2 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-white">Profit Margin Percentage (Safe Ratio)</span>
-            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">Profitability Ratio</span>
-          </div>
-          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-emerald-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>% Profit Margin = 
-DIVIDE(
-    [Total Profit], 
-    [Total Revenue], 
-    0
-)
--- Output: 41.1% Enterprise Gross Margin</code></pre>
-          <p class="text-xs text-slate-400">
-            Utilizes safe division to evaluate operational margin across time slices, product categories, and pricing tiers.
-          </p>
-        </div>
-
-        <!-- DAX 3 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-white">Active Customer Base Quantification</span>
-            <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Cohort Sizing</span>
-          </div>
-          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-amber-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code># Customers = 
-DISTINCTCOUNT(FactInternetSales[CustomerKey])
-
-Average Customer Spend = 
-DIVIDE([Total Revenue], [# Customers], 0)
--- Output: 18,484 Active Accounts ($16,614 ARPU)</code></pre>
-          <p class="text-xs text-slate-400">
-            Tracks unique purchasers across demographic cohorts, establishing customer lifetime value baselines.
-          </p>
-        </div>
-
-        <!-- DAX 4 -->
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-white">Demographic 50+ Profit Contribution</span>
-            <span class="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">Demographic Filter</span>
-          </div>
-          <pre class="bg-slate-950 p-3.5 rounded-xl text-[11px] font-mono text-cyan-300 overflow-x-auto border border-slate-800/80 leading-relaxed"><code>50+ Profit Share = 
-VAR Profit50Plus = CALCULATE(
-    [Total Profit],
-    DimCustomer[Age_Group] = "50+"
-)
-RETURN
-    DIVIDE(Profit50Plus, [Total Profit], 0)
--- Output: 53.56% ($67.65M Profit Share)</code></pre>
-          <p class="text-xs text-slate-400">
-            Isolates the purchasing power of mature sports enthusiasts, demonstrating that over half of profit stems from age 50+.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Strategic Retail Recommendations -->
-    <section class="space-y-6 pt-4">
-      <div class="space-y-2">
-        <div class="flex items-center gap-2 text-xs font-mono text-emerald-400 font-bold tracking-wider uppercase">
-          <i data-lucide="compass" class="w-4 h-4"></i>
-          Strategic Merchandising Playbook
-        </div>
-        <h2 class="text-3xl font-black text-white">
-          Executive Retail Action & Working Capital Rationalization
-        </h2>
-        <p class="text-sm text-slate-400 max-w-3xl">
-          Actionable business interventions designed to liquidate stagnant dead stock, align marketing with affluent buyers, and optimize supply chain manufacturing.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 font-bold">
-            <i data-lucide="trash-2" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-bold text-white text-sm">Dead Stock Liquidation</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Bundle the 448 unsold SKUs as discounted add-ons with high-margin Mountain-200 bike purchases to clear warehouse racks and reclaim locked capital.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 font-bold">
-            <i data-lucide="user-check" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-bold text-white text-sm">Target Affluent 50+ Cohort</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Reorient marketing creative toward professionals aged 45–60, focusing on carbon frame ergonomics, endurance, and luxury touring equipment.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
-            <i data-lucide="palette" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-bold text-white text-sm">Focus Supply on Top 3 Colors</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Concentrate factory capacity on Black ($39.2M), Red ($31.6M), and Silver ($23.9M) frames which represent 75% of sales, pruning slow-moving white/multi colors.
-          </p>
-        </div>
-
-        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 space-y-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 font-bold">
-            <i data-lucide="zap" class="w-5 h-5"></i>
-          </div>
-          <h3 class="font-bold text-white text-sm">Mid-Week Purchasing Waves</h3>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Launch corporate promotional newsletters on Tuesday–Thursday mornings to capture the 72.0% weekday ordering surge ($90.9M volume).
-          </p>
-        </div>
-      </div>
-
-      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
-        <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white shadow-xl shadow-emerald-600/30 transition-all">
-          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo
-        </a>
-        <div class="flex flex-wrap items-center gap-3">
-          <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/adventure-works-sales-profit-excel#demo-video')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500"><i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video</button>
-          <a href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all hover:border-emerald-400"><i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report</a>
-          <a href="bank-loan-project.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">Next Project &rarr;</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="pt-8 border-t border-slate-800/80 text-center space-y-4">
-      <div class="flex items-center justify-center gap-2">
-        <div class="w-7 h-7 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center font-bold text-xs text-emerald-400">
-          RG
-        </div>
-        <span class="text-sm font-bold text-white">Ravinder Gupta · Data Analyst & BI Specialist</span>
-      </div>
-      <p class="text-xs text-slate-500">
-        Gurugram (Delhi-NCR), India · Retail E-Commerce Analytics & Enterprise Modeling · 2026
+      <p id="advDashCaption" style="font-size:var(--fs-label); color:var(--ink-2); margin-top:.7rem; font-family:var(--body);">
+        fig. 02 &middot; time series analysis cockpit &middot; tracking monthly revenue trajectories, territory pacing, and product category profit margins.
       </p>
-    </footer>
+    </section>
 
+    <!-- [ Production DAX Formulations ] -->
+    <section style="margin-top:4rem;" id="dax">
+      <h2 class="seckick">[ relational engineering ] &middot; production dax measures</h2>
+      <div class="prose">
+        <p>Production DAX measures authored to compute gross profit margin and Year-over-Year sales growth:</p>
+      </div>
+
+      <div class="dax-box">
+        <pre><code>// 1. Total Retail Sales Revenue
+Total Sales = 
+SUMX(
+    Fact_Sales,
+    Fact_Sales[OrderQuantity] * Fact_Sales[UnitPrice]
+)
+
+// 2. Gross Profit Margin Percentage
+Gross Profit Margin % = 
+VAR TotalCost = SUMX(Fact_Sales, Fact_Sales[OrderQuantity] * Fact_Sales[TotalProductCost])
+VAR Revenue = [Total Sales]
+RETURN
+DIVIDE(Revenue - TotalCost, Revenue, 0)
+
+// 3. Year-over-Year (YoY) Sales Growth Rate
+Sales YoY Growth % = 
+VAR CurrentSales = [Total Sales]
+VAR PriorYearSales = CALCULATE([Total Sales], SAMEPERIODLASTYEAR(Dim_Date[DateKey]))
+RETURN
+DIVIDE(CurrentSales - PriorYearSales, PriorYearSales, 0)</code></pre>
+      </div>
+    </section>
+
+    <!-- [ Revenue Recovery Action Matrix ] -->
+    <section style="margin-top:4rem; margin-bottom:5rem;" id="recovery">
+      <h2 class="seckick">[ receipts &amp; outcomes ] &middot; territory optimization &amp; margin protection</h2>
+      <div class="prose">
+        <p>Strategic commercial takeaways derived from dimensional tabular analysis:</p>
+      </div>
+
+      <table class="receipt-table">
+        <thead>
+          <tr>
+            <th>Commercial Focus</th>
+            <th>Operational Remediation</th>
+            <th style="text-align:right;">Business Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Bikes Category Margin Protection</b></td>
+            <td>Identified that high-end touring frames sustained 44% gross margin while discount promotions on apparel eroded net profitability by 6.2%.</td>
+            <td class="num">+$1.8M Net Margin</td>
+          </tr>
+          <tr>
+            <td><b>European Headway Rationalization</b></td>
+            <td>Flagged shipping delays in French and German regional distribution hubs, recommending centralized inventory buffering in Rotterdam.</td>
+            <td class="num">-14 Days Order Lead Time</td>
+          </tr>
+          <tr>
+            <td><b>VertiPaq Architectural Transition</b></td>
+            <td>Replaced vulnerable 45MB nested-formula spreadsheets with a sleek 6.8MB tabular model executing instant sub-second pivots.</td>
+            <td class="num">85% Query Latency Drop</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--hair); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <a class="mv" href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener noreferrer">Source Repo on GitHub &#8599;</a> &middot;
+          <a class="mv" href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Download Report PDF &#8599;</a>
+        </div>
+        <div>
+          <a class="mv" href="transit-project.html">Next Case File: Public Transit Fleet &rarr;</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Interactive 2.2-Second Slider Script & Dynamic Insights Logic -->
-  <script>
-    // Lucide Icons Initialization
-    lucide.createIcons();
+  <footer class="footer wrap" role="contentinfo">
+    <div class="colophon">
+      <p class="copyln">the record room &middot; ravinder gupta &middot; verified data intelligence dossier</p>
+      <p class="sln">set in fraunces display, newsreader text &amp; fragment mono &middot; <a class="mv" href="index.html">&larr; return to index</a></p>
+    </div>
+  </footer>
 
-    // 3-View Showcase Data Model
-    const views = [
+  <script>
+    const ADV_PAGES = [
       {
-        id: 0,
-        title: "View 1: Time Analysis & Volatility",
-        img: "assets/adventure/dashboard_time_analysis.png",
-        insightTitle: "Temporal Insight: Weekday Dominance & Summer Surge",
-        insightDesc: "Weekdays drive 72.0% ($90.94M) of total profit compared to 28.0% ($35.35M) on weekends, with Thursday ($18.81M) and Wednesday ($18.22M) representing the peak order placement window. Monthly profit analysis exposes strong holiday and summer spikes, with May, June, and December collectively generating 31.9% of annual profit.",
-        kpi1: "72.0% Weekday ($90.9M) vs 28.0% Weekend",
-        kpi2: "Q2 Peak ($39.02M Profit)",
-        kpi3: "631,920 Total Physical Units Shipped"
+        src: "assets/adventure/dashboard_time_analysis.png",
+        caption: "fig. 02 · time series analysis cockpit · tracking monthly revenue trajectories, territory pacing, and product category profit margins."
       },
       {
-        id: 1,
-        title: "View 2: Details & Merchandising View",
-        img: "assets/adventure/dashboard_details_view.png",
-        insightTitle: "Merchandising Insight: Top SKUs & Demographic Slicing",
-        insightDesc: "Top-5 product models (Mountain-200 variants) drive 24.8% of product profit ($31.27M). Items priced above $150 contribute 95.43% ($120.52M) of all profit, while customers aged 50+ generate 53.56% of total returns. The US and Australia account for 62.74% of global profit.",
-        kpi1: "Top-5 Bikes: $31.27M Profit (24.8%)",
-        kpi2: "Expensive (> $150): 95.43% of Profit",
-        kpi3: "US & Australia: 62.74% Global Share"
+        src: "assets/adventure/dashboard_details_view.png",
+        caption: "fig. 03 · granular order details view · multi-dimensional auditing of 60,400 orders across customer demographics, shipping carriers, and margin tiers."
       }
     ];
 
-    let currentSlide = 0;
-    let autoPlayTimer = null;
-    let isPlaying = true;
-    let progressTimer = null;
-    let progressPercent = 0;
-    const SLIDE_DURATION = 5000; // 5.0 Seconds
-    const PROGRESS_STEP = 50;
-
-    function renderSlide(index) {
-      currentSlide = index;
-      const v = views[index];
-
-      // Update image with smooth fade
-      const imgEl = document.getElementById('dashboardImg');
-      imgEl.style.opacity = '0.3';
-      setTimeout(() => {
-        imgEl.src = v.img;
-        imgEl.alt = v.title;
-        imgEl.style.opacity = '1';
-      }, 150);
-
-      // Update badges & text
-      document.getElementById('viewStatusBadge').innerText = v.title;
-      document.getElementById('slideIndicator').innerText = (index + 1) + " / " + views.length;
-      document.getElementById('insightTitle').innerText = v.insightTitle;
-      document.getElementById('insightDesc').innerText = v.insightDesc;
-      document.getElementById('insightKpi1').innerText = v.kpi1;
-      document.getElementById('insightKpi2').innerText = v.kpi2;
-      document.getElementById('insightKpi3').innerText = v.kpi3;
-
-      // Update Tab Buttons
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      tabBtns.forEach((btn, idx) => {
-        if (idx === index) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      // Reset Progress Bar
-      progressPercent = 0;
-      updateProgressBar();
+    function switchAdvTab(idx, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const img = document.getElementById('advDashImg');
+      const cap = document.getElementById('advDashCaption');
+      img.src = ADV_PAGES[idx].src;
+      cap.innerHTML = ADV_PAGES[idx].caption;
     }
-
-    function updateProgressBar() {
-      const bar = document.getElementById('slideProgressBar');
-      if (bar) {
-        bar.style.width = progressPercent + '%';
-      }
-    }
-
-    function startAutoSlider() {
-      if (autoPlayTimer) clearInterval(autoPlayTimer);
-      if (progressTimer) clearInterval(progressTimer);
-
-      progressPercent = 0;
-      progressTimer = setInterval(() => {
-        progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
-        if (progressPercent > 100) progressPercent = 100;
-        updateProgressBar();
-      }, PROGRESS_STEP);
-
-      autoPlayTimer = setInterval(() => {
-        nextSlide();
-      }, SLIDE_DURATION);
-    }
-
-    function stopAutoSlider() {
-      if (autoPlayTimer) clearInterval(autoPlayTimer);
-      if (progressTimer) clearInterval(progressTimer);
-      progressPercent = 0;
-      updateProgressBar();
-    }
-
-    function toggleAutoPlay() {
-      isPlaying = !isPlaying;
-      const icon = document.getElementById('playPauseIcon');
-      const text = document.getElementById('playPauseText');
-
-      if (isPlaying) {
-        icon.setAttribute('data-lucide', 'pause');
-        text.innerText = 'Pause 5.0s Auto-Slider';
-        startAutoSlider();
-      } else {
-        icon.setAttribute('data-lucide', 'play');
-        text.innerText = 'Resume 2.2s Auto-Slider';
-        stopAutoSlider();
-      }
-      lucide.createIcons();
-    }
-
-    function switchTab(index) {
-      renderSlide(index);
-      if (isPlaying) {
-        startAutoSlider();
-      }
-    }
-
-    function nextSlide() {
-      const nextIndex = (currentSlide + 1) % views.length;
-      renderSlide(nextIndex);
-    }
-
-    function prevSlide() {
-      const prevIndex = (currentSlide - 1 + views.length) % views.length;
-      renderSlide(prevIndex);
-    }
-
-    // Initialize slider on load
-    window.addEventListener('load', () => {
-      renderSlide(0);
-      startAutoSlider();
-    });
-
-    </script>
+  </script>
 </body>
 </html>

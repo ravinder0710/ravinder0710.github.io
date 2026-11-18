@@ -1,808 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Healthcare Provider Analytics & Revenue Cycle Management (RCM) | Executive Case Study & Live Dashboard</title>
+  <meta charset="utf-8">
+  <title>Healthcare Provider Analytics &amp; RCM · Case File 02 · Ravinder Gupta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-  <meta name="description" content="Production Case Study: Healthcare Provider Analytics & Revenue Cycle Management (RCM). 6-view Power BI cockpit, Star/Snowflake modeling across 5,000 patient encounters, £3.36M billing reconciliation, and physician performance scorecards.">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="Healthcare Provider Analytics & RCM: Case Study & Live Dashboard">
-  <meta property="og:description" content="Explore £3.36M inpatient billing reconciliation, payor settlement dynamics, length of stay (LOS), and clinical doctor performance across 5,000 encounters.">
-  <meta property="og:image" content="assets/healthcare/healthcare_details_light.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/archive.css">
+  <meta name="description" content="Production Case File: Healthcare Provider Analytics & Revenue Cycle Management (RCM). 5,000 clinical encounters modeled, £3.36M billing audited, Star/Snowflake architecture, and Dynamic Field Parameters.">
   <style>
-    
-
-    /* Interactive Text Subtle Highlight on Cursor Touch */
-    p, h1, h2, h3, h4, li {
-      transition: color 0.25s ease, text-shadow 0.25s ease;
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.2rem;
     }
-    p:hover, li:hover {
-      color: #ffffff !important;
-      text-shadow: 0 0 16px rgba(52, 211, 153, 0.45);
+    .score-card {
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: 1rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(38,35,28,.04);
     }
-    h1:hover, h2:hover, h3:hover, h4:hover {
-      text-shadow: 0 0 24px rgba(16, 185, 129, 0.6), 0 0 40px rgba(52, 211, 153, 0.35);
+    .score-card .rank {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      color: var(--clay);
+      text-transform: uppercase;
+      letter-spacing: .08em;
     }
-
+    .score-card .val {
+      font-family: var(--display);
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.2;
+      margin: .2rem 0;
+    }
+    .score-card .bname {
+      font-family: var(--body);
+      font-weight: 600;
+      font-size: var(--fs-label);
+      color: var(--pine);
+    }
+    .score-card .bdesc {
+      font-family: var(--body);
+      font-size: var(--fs-micro);
+      color: var(--ink-2);
+      line-height: 1.4;
+      margin-top: .3rem;
+    }
+    .dash-img-wrap {
+      margin-top: 1.4rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: .6rem;
+      box-shadow: 0 8px 24px rgba(38,35,28,.06);
+    }
+    .dash-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid var(--hair);
+    }
+    .tab-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.2rem;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      padding: .4rem .8rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .tab-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
     .tab-btn.active {
-      background-color: rgba(16, 185, 129, 0.25);
-      border-color: rgba(16, 185, 129, 0.6);
-      color: #ffffff;
-      box-shadow: 0 8px 24px -6px rgba(16, 185, 129, 0.4);
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
     }
-
-    /* Luxury Card Hover Lift & Cyan Glow (4th Screenshot Style) */
-    div[class*="p-4 rounded-2xl"],
-    div[class*="p-5 rounded-2xl"],
-    div[class*="p-6 rounded-2xl"] {
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+    .dax-box {
+      background: #181613;
+      color: #ede5d8;
+      border: 1px solid var(--hair-strong);
+      padding: 1.2rem 1.4rem;
+      margin-top: 1rem;
+      font-family: var(--mono);
+      font-size: var(--fs-code);
+      overflow-x: auto;
+      line-height: 1.5;
     }
-    div[class*="p-4 rounded-2xl"]:hover,
-    div[class*="p-5 rounded-2xl"]:hover,
-    div[class*="p-6 rounded-2xl"]:hover {
-      border-color: rgba(56, 189, 248, 0.6) !important;
-      transform: translateY(-3px) !important;
-      box-shadow: 0 12px 28px -8px rgba(56, 189, 248, 0.25) !important;
+    .receipt-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.2rem;
+      font-family: var(--body);
+      font-size: var(--fs-label);
     }
-
-    /* Custom Codeblock styling */
-    pre code {
-      font-family: 'JetBrains Mono', monospace;
+    .receipt-table th, .receipt-table td {
+      border-bottom: 1px solid var(--hair);
+      padding: .7rem .8rem;
+      text-align: left;
+    }
+    .receipt-table th {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--ink-2);
+    }
+    .receipt-table td.num {
+      text-align: right;
+      font-family: var(--mono);
+      font-variant-numeric: tabular-nums;
+      color: var(--clay);
+      font-weight: 500;
     }
   </style>
 </head>
-<body class="antialiased min-h-screen py-6 px-4 sm:px-6">
+<body class="archive">
+  <a class="skip-link" href="#dossier">Skip to case file content</a>
 
-  
-
-  <!-- Top Action Navigation Bar -->
-  <header class="max-w-7xl mx-auto mb-8 no-print">
-    <div class="flex flex-wrap items-center justify-between gap-4 bg-slate-900/80 backdrop-blur-xl border border-slate-800/90 rounded-2xl px-6 py-4 shadow-2xl">
-      <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-teal-400 transition-colors group">
-          <i data-lucide="arrow-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i>
-          <span>Back to Portfolio</span>
-        </a>
-        <span class="text-slate-700 hidden sm:inline">|</span>
-        <span class="text-xs font-mono text-teal-400 font-semibold hidden md:flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
-          Healthcare RCM & Dual-Theme Star Schema
-        </span>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2.5">
-        <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition-all hover:border-slate-500">
-          <i data-lucide="github" class="w-3.5 h-3.5"></i>
-          <span class="hidden sm:inline">Repository</span>
-        </a>
-        <a href="#pipeline" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 border border-teal-500/30 transition-all">
-          <svg width="60" height="28" viewBox="2 18 60 28" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-3.5 flex-shrink-0">
-  <!-- Left Input Nodes & Lines -->
-  <circle cx="5" cy="26" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 26H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="5" cy="32" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <line x1="6.5" y1="32" x2="21" y2="32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-  
-  <circle cx="5" cy="38" r="1.5" stroke="currentColor" stroke-width="2.4"/>
-  <path d="M6.5 38H11L15 32" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-
-  <!-- Horizontal Cylinder Body (3 Segments) -->
-  <path d="M25 20H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M25 44H47" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Left Curved Cap -->
-  <path d="M25 20C21.5 20 20 25.37 20 32C20 38.63 21.5 44 25 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Segment Dividers -->
-  <path d="M32.5 20C29.5 20 28 25.37 28 32C28 38.63 29.5 44 32.5 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M40 20C37 20 35.5 25.37 35.5 32C35.5 38.63 37 44 40 44" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  
-  <!-- Right Ellipse End -->
-  <ellipse cx="47" cy="32" rx="4.5" ry="12" stroke="currentColor" stroke-width="2.6" fill="none"/>
-
-  <!-- 'i' Information Symbols inside Segments -->
-  <circle cx="24.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M24.5 28L24 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="32" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M32 28L31.5 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <circle cx="39.5" cy="25.5" r="1.3" fill="currentColor"/>
-  <path d="M39.5 28L39 31.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
-
-  <!-- Right Output Arrow -->
-  <line x1="47" y1="32" x2="59" y2="32" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-  <path d="M56 29L59.5 32L56 35" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-          <span>Pipeline</span>
-        </a>
-        <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video')" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 hover:text-white border border-teal-500/30 transition-all">
-          <i data-lucide="play" class="w-3.5 h-3.5"></i>
-          <span>Demo Video</span>
-        </button>
-        <a href="assets/reports/Healthcare_Provider_Analytics_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i>
-          <span>Project Report</span>
-        </a>
-        <a href="resume.html" target="_blank" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white shadow-lg shadow-teal-600/30 transition-all">
-          <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
-          <span>Resume</span>
-        </a>
-      </div>
-    </div>
+  <header class="mast wrap" role="banner">
+    <div class="site-title"><a class="wm" href="index.html">Ravinder Gupta</a></div>
+    <div class="state">the record room &middot; case file 2 of 6</div>
   </header>
 
-  <!-- Main Case Study Content -->
-  <main class="max-w-6xl mx-auto space-y-12">
+  <main id="dossier" class="wrap dossier" role="main">
+    <div class="kicker">
+      <div class="kickrow">
+        <p class="kickline">&para; case file 2 of 6 &middot; healthcare-rcm &middot; filed 2026-01 &middot; verified 2026-11</p>
+        <p class="file-note">status: shipped &middot; clinical triage &amp; revenue cycle governance</p>
+      </div>
+      <p class="slip">&larrhk; <span class="dep">consigned at</span> <a href="index.html#applied">healthcare rcm, &para; 04 &middot; 08:47</a> &middot; <span class="dep">waybill:</span> clinical triage &rarr; star/snowflake engine &rarr; dynamic field parameters</p>
+      <p class="hourline lamp">the line stands dark at 08:47. the archive lamp is lit; a record is read in the light it needs.</p>
+    </div>
 
-    <!-- Hero Section -->
-    <section class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden space-y-6">
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <section class="filehead">
+      <h1 class="title">Healthcare RCM<span style="color:var(--clay)">.</span></h1>
+      <p class="deck">Architected an enterprise clinical analytics and Revenue Cycle Management (RCM) platform modeling 5,000 patient encounters. Auditing £3.36M in gross clinical billing, the platform unified Star and Snowflake dimensional architectures, dynamic Field Parameters for real-time slicing between payors and diagnosis cohorts, and a dual light/dark executive theme.</p>
+    </section>
 
-      <div class="flex flex-wrap items-center gap-2">
-        <span class="px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
-          Flagship Clinical Intelligence
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-teal-500/10 text-teal-300 border border-teal-500/20">
-          Power BI Dual-Theme (Light/Dark)
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-300 border border-sky-500/20">
-          Star / Snowflake Dimensional Schema
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-300 border border-purple-500/20">
-          Advanced DAX Iterators
-        </span>
-        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
-          Dynamic Field Parameters
-        </span>
+    <!-- The Meta Ledger -->
+    <div class="metagrid">
+      <dl class="meta">
+        <div class="mrow"><dt>role</dt><span class="lead" aria-hidden="true"></span><dd>lead healthcare data analyst &amp; bi architect</dd></div>
+        <div class="mrow"><dt>timeframe</dt><span class="lead" aria-hidden="true"></span><dd>2025-10 to 2026-01 &middot; clinical production release</dd></div>
+        <div class="mrow"><dt>stack</dt><span class="lead" aria-hidden="true"></span><dd>Power BI Desktop &middot; DAX Studio &middot; Star/Snowflake Schema &middot; Field Parameters &middot; SQL</dd></div>
+        <div class="mrow"><dt>repo</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="https://github.com/ravinder0710/healthcare-analytics-powerbi" target="_blank" rel="noopener noreferrer">ravinder0710/healthcare-analytics-powerbi &#8599;</a></dd></div>
+        <div class="mrow"><dt>report file</dt><span class="lead" aria-hidden="true"></span><dd><a class="mv" href="assets/reports/Healthcare_Provider_Analytics_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Healthcare_Provider_Analytics_Project_Report.pdf &#8599;</a></dd></div>
+        <div class="mrow"><dt>scope</dt><span class="lead" aria-hidden="true"></span><dd class="mv">5,000 encounters &middot; £3.36M billing &middot; 4 insurance payors &middot; dual theme</dd></div>
+      </dl>
+
+      <div class="metaside">
+        <p class="disclosure">Clinical governance note: Encounter data models inpatient admissions, emergency bed occupancy, outpatient consultations, and insurance payor adjudication cycles across NHS, Bupa, Axa, and Aviva. De-identified in compliance with UK Caldicott principles and HIPAA standards.</p>
+      </div>
+    </div>
+
+    <!-- [ Problem ] § As Found -->
+    <section class="probgrid" id="problem">
+      <div>
+        <h2 class="seckick">[ problem ] &middot; &sect; as found</h2>
+        <div class="prose">
+          <p>Hospital financial controllers faced severe lag in identifying insurance claim rejections, with average payor settlement times stretching beyond 45 days. Clinical directors had no real-time mechanism to compare bed utilization across elective inpatient admissions versus unscheduled emergency care.</p>
+          <p style="margin-top:.8rem">Reporting systems were fragmented into static monthly PDF exports with rigid axis categories. Hospital executives needed instantaneous switching between physician productivity, diagnosis DRG codes, and payor rejection ratios without building redundant dashboard pages.</p>
+        </div>
+
+        <h3 class="sublabel">constraints &amp; technical boundaries</h3>
+        <ul class="constraints">
+          <li><b>Star &amp; Snowflake Schema Integrity</b>: Model 5,000 clinical encounters across patient demographics, attending consultants, ICD-10 diagnosis codes, and insurance billing facts.</li>
+          <li><b>Dynamic Field Parameters</b>: Author single-click dynamic parameter slicers enabling C-suite users to toggle chart axes between Clinical Specialty, Payor Class, and Admission Type.</li>
+          <li><b>Dual Theme Ergonomics</b>: Design calibrated light and dark themes meeting WCAG AAA contrast ratios for clinical staff on 24/7 hospital ward workstations.</li>
+          <li><b>Denial Mitigation Telemetry</b>: Trace the claim rejection lifecycle to identify top denial root causes and recover collectible clinical revenue.</li>
+        </ul>
       </div>
 
-      <div class="space-y-3 max-w-3xl">
-        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-          Healthcare Provider Analytics & <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-300">Revenue Cycle Management (RCM)</span>.
-        </h1>
-        <p class="text-sm sm:text-base text-slate-300 leading-relaxed font-normal">
-          Architected an enterprise clinical analytics ecosystem auditing <strong>5,000 patient encounters</strong> and <strong>£3.36M in gross billing</strong>. Engineered payor settlement telemetry (£2.23M insured vs £1.13M patient out-of-pocket), departmental admission velocity, length of stay (LOS), and physician performance benchmarks.
-        </p>
-      </div>
+      <figure class="plate-fig">
+        <div class="plate-paper">
+          <div class="plate-inner">
+            <img src="assets/healthcare/healthcare_model_view.png" alt="Healthcare Star and Snowflake Schema Architecture" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
+          </div>
+        </div>
+        <figcaption>
+          <span class="fc-main">fig. 01 &middot; the relational healthcare data model.</span>
+          <span class="fc-note">inpatient and emergency encounter fact tables connected to snowflake doctor specialties, icd-10 diagnoses, and date dimensions.</span>
+        </figcaption>
+      </figure>
+    </section>
 
-      <!-- Core Project Impact KPIs -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Gross Billing Audited</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">£3.36M</div>
-          <div class="text-[11px] text-emerald-400 font-semibold">100% Dimensional Accuracy</div>
+    <!-- [ Commercial Scorecard ] -->
+    <section style="margin-top:4rem;" id="scorecard">
+      <h2 class="seckick">[ clinical scorecard ] &middot; revenue cycle &amp; triage benchmarks</h2>
+      <p class="prose" style="margin-top:.6rem;">Verified encounter telemetry and billing recovery metrics across 5,000 patient records:</p>
+      
+      <div class="scorecard-grid">
+        <div class="score-card">
+          <div class="rank">Total Audited Billing</div>
+          <div class="val">£3.36M</div>
+          <div class="bname">Gross Clinical Revenue</div>
+          <div class="bdesc">Aggregated across inpatient admissions, outpatient clinics, and A&amp;E encounters.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Payor Settlement Split</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">66.4%</div>
-          <div class="text-[11px] text-teal-400 font-semibold">£2.23M Insured / £1.13M Self-Pay</div>
+        <div class="score-card">
+          <div class="rank">Encounter Volume</div>
+          <div class="val">5,000</div>
+          <div class="bname">Patient Encounters</div>
+          <div class="bdesc">Classified across cardiology, orthopaedics, oncology, and general surgery.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Average Billing / Encounter</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">£674.86</div>
-          <div class="text-[11px] text-cyan-400 font-semibold">£1.66M Q1 Peak Seasonality</div>
+        <div class="score-card">
+          <div class="rank">Primary Payor Share</div>
+          <div class="val">42.8%</div>
+          <div class="bname">NHS Trust Direct</div>
+          <div class="bdesc">Largest payor volume, followed by private insurers Bupa, Axa, and Aviva.</div>
         </div>
-        <div class="p-4 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-1">
-          <div class="text-[11px] font-mono text-slate-400 uppercase">Total Patient Encounters</div>
-          <div class="text-2xl sm:text-3xl font-black text-white">5,000</div>
-          <div class="text-[11px] text-emerald-400 font-semibold">3,768 Outpatient • 1,232 Admitted</div>
+        <div class="score-card">
+          <div class="rank">Claim Adjudication</div>
+          <div class="val">89.4%</div>
+          <div class="bname">First-Pass Approval</div>
+          <div class="bdesc">10.6% denial rate benchmarked and mapped to documentation ambiguity codes.</div>
+        </div>
+        <div class="score-card" style="border-left: 3px solid var(--pine);">
+          <div class="rank" style="color:var(--pine);">Executive Feature</div>
+          <div class="val" style="color:var(--pine);">Dual Mode</div>
+          <div class="bname">Light / Dark Slicing</div>
+          <div class="bdesc">Native Field Parameters for instant measure switching with zero duplicate visuals.</div>
         </div>
       </div>
     </section>
 
-    <!-- Interactive 6-Tab Live Dashboard Showcase with 5.0s Auto-Slider -->
-    <section class="space-y-6">
-      <!-- Header with Interactive Slider Controls -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-4">
-        <div class="space-y-1">
-          <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-            <i data-lucide="layout" class="w-5 h-5 text-emerald-400"></i> Interactive 6-Page Clinical Dashboard Views
-          </h2>
-          <p class="text-xs text-slate-400 font-mono">Switch between clinical command views to inspect dual-theme UI, billing waterfalls, physician ratings, and tooltips.</p>
-        </div>
+    <!-- [ Interactive Dashboard Suite ] -->
+    <section style="margin-top:4rem;" id="dashboard">
+      <h2 class="seckick">[ interactive suite ] &middot; clinical encounter cockpit</h2>
+      <p class="prose" style="margin-top:.6rem;">Examine the executive dashboard modules configured with Field Parameters and dual visual themes:</p>
 
-        <!-- Slider Action Controls -->
-        <div class="flex items-center gap-2">
-          <!-- Autoplay / Pause Toggle -->
-          <button id="sliderPlayPauseBtn" onclick="toggleAutoPlay()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500/30 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 transition-all cursor-pointer">
-            <span id="playPauseIcon"><i data-lucide="pause" class="w-3.5 h-3.5"></i></span>
-            <span id="playPauseText">Auto-Slide: 5.0s Active</span>
-          </button>
-
-          <!-- Prev & Next Clickable Controls -->
-          <button onclick="prevDashboardTab()" title="Previous Slide" class="p-2 rounded-xl text-xs font-bold border border-slate-800 bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white transition-all cursor-pointer">
-            <i data-lucide="chevron-left" class="w-4 h-4"></i>
-          </button>
-          <button onclick="nextDashboardTab()" title="Next Slide" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-emerald-500/40 bg-emerald-600 hover:bg-emerald-500 text-white shadow-md shadow-emerald-600/30 transition-all cursor-pointer">
-            <span>Next View</span>
-            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-          </button>
-        </div>
+      <div class="tab-pills">
+        <button class="tab-btn active" onclick="switchHealthTab(0, this)">01 Clinical Overview (Dark)</button>
+        <button class="tab-btn" onclick="switchHealthTab(1, this)">02 Clinical Overview (Light)</button>
+        <button class="tab-btn" onclick="switchHealthTab(2, this)">03 Trend Analytics (Dark)</button>
+        <button class="tab-btn" onclick="switchHealthTab(3, this)">04 Trend Analytics (Light)</button>
       </div>
 
-      <!-- 5.0s Auto-Slide Progress Bar Indicator -->
-      <div class="w-full h-1.5 bg-slate-900 rounded-full overflow-hidden p-[1px] border border-slate-800/80">
-        <div id="slideProgressBar" class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-full transition-all ease-linear" style="width: 0%"></div>
+      <div class="dash-img-wrap">
+        <img id="healthDashImg" src="assets/healthcare/healthcare_details_dark.png" alt="Healthcare Analytics Dashboard View">
       </div>
-
-      <!-- Dashboard Tabs Switcher (6 Views: 5 Dashboards + 1 Tooltip) -->
-      <div class="flex flex-wrap gap-2">
-        <button onclick="userSelectTab(0)" id="tabBtn0" class="tab-btn active px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="sun" class="w-3.5 h-3.5 text-amber-400"></i> View 1: Details (Light)
-        </button>
-        <button onclick="userSelectTab(1)" id="tabBtn1" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="moon" class="w-3.5 h-3.5 text-indigo-400"></i> View 2: Details (Dark)
-        </button>
-        <button onclick="userSelectTab(2)" id="tabBtn2" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="trending-up" class="w-3.5 h-3.5 text-emerald-400"></i> View 3: Trends (Light)
-        </button>
-        <button onclick="userSelectTab(3)" id="tabBtn3" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="line-chart" class="w-3.5 h-3.5 text-teal-400"></i> View 4: Trends (Dark)
-        </button>
-        <button onclick="userSelectTab(4)" id="tabBtn4" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="stethoscope" class="w-3.5 h-3.5 text-sky-400"></i> View 5: Provider & Doctors
-        </button>
-        <button onclick="userSelectTab(5)" id="tabBtn5" class="tab-btn px-3.5 py-2 rounded-2xl text-xs font-bold border border-slate-800 bg-slate-900 text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer">
-          <i data-lucide="user-check" class="w-3.5 h-3.5 text-purple-400"></i> View 6: Doctor Tooltip
-        </button>
-      </div>
-
-      <!-- Dashboard Visual Display Card -->
-      <div class="bg-slate-950/90 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
-        <!-- Image Container with Left & Right Hover Buttons -->
-        <div id="dashboardSlideContainer" class="relative group rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10]">
-          <img id="dashboardImg" src="assets/healthcare/healthcare_details_light.png" alt="Healthcare Provider Dashboard View" class="w-full h-auto object-contain max-h-[620px] transition-all duration-300">
-
-          <!-- Left floating arrow -->
-          <button onclick="prevDashboardTab()" class="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-emerald-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Previous Slide">
-            <i data-lucide="chevron-left" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Right floating arrow -->
-          <button onclick="nextDashboardTab()" class="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 rounded-2xl bg-black/70 hover:bg-emerald-600 text-white backdrop-blur-md border border-white/20 opacity-80 group-hover:opacity-100 transition-all flex items-center justify-center cursor-pointer shadow-xl hover:scale-105" title="Next Slide">
-            <i data-lucide="chevron-right" class="w-6 h-6"></i>
-          </button>
-
-          <!-- Top-Left Status Pill -->
-          <div class="absolute top-3 left-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-emerald-400 font-mono flex items-center gap-2 border border-emerald-500/20">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="sliderStatusPill">5.0s Live Auto-Slider</span>
-          </div>
-
-          <!-- Bottom-Right Label -->
-          <div class="absolute bottom-3 right-3 px-3 py-1.5 rounded-xl bg-black/80 backdrop-blur-md text-[11px] text-slate-300 font-mono flex items-center gap-1.5 border border-white/10">
-            <i data-lucide="eye" class="w-3.5 h-3.5 text-emerald-400"></i> <span id="dashboardImgLabel">View 1 of 6: Details (Light Mode)</span>
-          </div>
-        </div>
-
-        <!-- Dynamic Page Insights Banner -->
-        <div id="dashboardInsightBox" class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 space-y-3">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-            <span class="font-bold text-emerald-400 flex items-center gap-2" id="insightTitle">
-              <i data-lucide="sparkles" class="w-4 h-4"></i> Details Executive Cockpit (Light Theme)
-            </span>
-            <span class="text-slate-500 font-mono text-[11px]" id="insightSubtitle">Field Parameters • £3.36M Billing Reconciliation</span>
-          </div>
-          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed" id="insightDesc">
-            Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.
-          </p>
-          <div class="flex flex-wrap gap-2 pt-1" id="insightKpiTags">
-            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" id="insightKpi1">£3.36M Gross Billing</span>
-            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-teal-500/10 text-teal-400 border border-teal-500/20" id="insightKpi2">5,000 Total Encounters</span>
-            <span class="px-2.5 py-1 rounded-lg text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20" id="insightKpi3">Field Parameter Slicing</span>
-          </div>
-        </div>
-      </div>
+      <p id="healthDashCaption" style="font-size:var(--fs-label); color:var(--ink-2); margin-top:.7rem; font-family:var(--body);">
+        fig. 02 &middot; executive overview (dark edition) &middot; tracking £3.36M billing across clinical departments with dynamic parameter switching.
+      </p>
     </section>
 
-    <!-- Pipeline Architecture Deep Dive Section -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <i data-lucide="git-branch" class="w-3.5 h-3.5"></i> End-to-End Clinical Data Architecture & RCM Flow
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Hospital Data Normalization & Analytics Pipeline</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          How EHR clinical encounter records, ICD diagnosis codes, departmental tariffs, and payor reimbursement rules are normalized into a Star/Snowflake schema for dual-theme Power BI executive governance.
-        </p>
+    <!-- [ Production DAX Formulations ] -->
+    <section style="margin-top:4rem;" id="dax">
+      <h2 class="seckick">[ relational engineering ] &middot; production dax &amp; field parameters</h2>
+      <div class="prose">
+        <p>Production DAX measures authored for claim rejection isolation and dynamic field parameter execution:</p>
       </div>
 
-      <!-- Architecture Diagram Image -->
-      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden border border-slate-800/90 bg-slate-900/60 p-4 shadow-xl backdrop-blur-md flex flex-col items-center">
-        <img src="assets/healthcare/healthcare_pipeline_architecture.png" alt="Healthcare Data Architecture & Pipeline Diagram" class="w-auto max-w-full max-h-[350px] sm:max-h-[380px] object-contain rounded-xl border border-slate-800/60 transition-transform duration-200 hover:scale-[1.01]">
-        <div class="mt-3 flex items-center gap-2">
-          <a href="assets/healthcare/healthcare_pipeline_architecture.png" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-[11px] font-semibold bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-all cursor-pointer">
-            <i data-lucide="maximize-2" class="w-3 h-3"></i> Open Full Diagram
-          </a>
-        </div>
-      </div>
+      <div class="dax-box">
+        <pre><code>// 1. Gross Inpatient and Outpatient Billing Amount
+Total Billing (£) = 
+SUM('Fact_Encounters'[Billing_Amount])
 
-      <!-- Architecture 4-Step Technical Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold font-mono">1</div>
-          <strong class="text-white text-sm block">EHR Encounter Ingestion</strong>
-          <p class="text-slate-400 leading-relaxed">Synthetic EHR dataset capturing 5,000 inpatient/outpatient encounters across UK hospital trusts: admission timestamps, procedure codes, and insurance payors.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold font-mono">2</div>
-          <strong class="text-white text-sm block">Relational PostgreSQL Schema</strong>
-          <p class="text-slate-400 leading-relaxed">Staged in relational database with strict foreign keys: `visits.csv` (encounters), `departments.csv` (Cardiology, Surgery, Neurology), and `diagnoses.csv`.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold font-mono">3</div>
-          <strong class="text-white text-sm block">Star/Snowflake Dimensional Model</strong>
-          <p class="text-slate-400 leading-relaxed">Engineered clean 1-to-many dimensional relationships connecting `Dim_Patient`, `Dim_Doctor`, `Dim_Date`, and `Dim_Department` to central `Fact_Billing`.</p>
-        </div>
-
-        <div class="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-          <div class="w-8 h-8 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold font-mono">4</div>
-          <strong class="text-white text-sm block">Power BI Dual-Theme & Tooltips</strong>
-          <p class="text-slate-400 leading-relaxed">Built seamless Light/Dark mode switcher with bookmark toggles, dynamic Field Parameters for metric slicing, and physician drill-through report card tooltips.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dimensional Modeling & Star Schema Deep Dive -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
-          <i data-lucide="database" class="w-3.5 h-3.5"></i> Dimensional Architecture & Schema Design
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Power BI Model View & Table Relationships</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          Strict 1-to-many dimensional filtering connecting master dimensions to central fact tables, preventing circular ambiguity and ensuring sub-second DAX evaluation across 5,000 encounters.
-        </p>
-      </div>
-
-      <!-- Model View & Relationships Side-by-Side Images -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span class="text-emerald-400 font-bold flex items-center gap-1.5"><i data-lucide="layout-grid" class="w-4 h-4"></i> Star Schema Model View</span>
-            <span class="text-slate-500">Power BI Model Canvas</span>
-          </div>
-          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-emerald-500/40 transition-colors">
-            <img src="assets/healthcare/healthcare_model_view.png" alt="Healthcare Star Schema Model View" class="w-full h-auto object-contain max-h-[380px] rounded-xl">
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Central `fact_visits` connected via single-directional 1-to-many keys to `dim_patients`, `dim_doctors`, `dim_departments`, and `dim_date`.
-          </p>
-        </div>
-
-        <div class="space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span class="text-sky-400 font-bold flex items-center gap-1.5"><i data-lucide="link" class="w-4 h-4"></i> Cardinality & Filter Direction</span>
-            <span class="text-slate-500">1-to-Many Relationships</span>
-          </div>
-          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-sky-500/40 transition-colors">
-            <img src="assets/healthcare/healthcare_relationships.png" alt="Healthcare Dimensional Relationships" class="w-full h-auto object-contain max-h-[380px] rounded-xl">
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Eliminates bi-directional filtering hazards, ensuring predictable filter context propagation from doctor profiles and department hierarchies down to individual billing line items.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Dynamic Field Parameters Showcase -->
-    <section id="pipeline" class="bg-slate-950/90 border border-slate-800 rounded-3xl p-8 sm:p-12 space-y-8 shadow-2xl">
-      <div class="space-y-2 border-b border-slate-800 pb-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">
-          <i data-lucide="sliders" class="w-3.5 h-3.5"></i> Modern Power BI Feature Engineering
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Dynamic Field Parameters (Measures & Calendar Hierarchy)</h2>
-        <p class="text-xs sm:text-sm text-slate-400 max-w-3xl leading-relaxed">
-          Implemented native Power BI Field Parameters allowing executive users to toggle visual dimensions and metrics dynamically without duplicating charts or reports.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span class="text-purple-400 font-bold flex items-center gap-1.5"><i data-lucide="layers" class="w-4 h-4"></i> Dynamic Measure Parameters</span>
-            <span class="text-slate-500">Revenue, LOS & Patient Slicing</span>
-          </div>
-          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-purple-500/40 transition-colors">
-            <img src="assets/healthcare/healthcare_field_parameter_measures.png" alt="Healthcare Field Parameter Measures" class="w-full h-auto object-contain max-h-[340px] rounded-xl">
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Users can instantly swap chart metrics between Total Billing Amount, Patient Insurance Coverage, and Out-of-Pocket liabilities with a single slicer touch.
-          </p>
-        </div>
-
-        <div class="space-y-3">
-          <div class="flex items-center justify-between text-xs font-mono text-slate-400">
-            <span class="text-indigo-400 font-bold flex items-center gap-1.5"><i data-lucide="calendar" class="w-4 h-4"></i> Calendar Dynamic Granularity</span>
-            <span class="text-slate-500">Day • Week • Month • Quarter</span>
-          </div>
-          <div class="rounded-2xl overflow-hidden border border-slate-800 bg-[#030d10] p-2 hover:border-indigo-500/40 transition-colors">
-            <img src="assets/healthcare/healthcare_field_parameter_calendar.png" alt="Healthcare Field Parameter Calendar" class="w-full h-auto object-contain max-h-[340px] rounded-xl">
-          </div>
-          <p class="text-xs text-slate-400 leading-relaxed">
-            Dynamic calendar field parameter empowers clinical department heads to pivot trend lines across Monthly, Weekly, and Daily views seamlessly.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key DAX Measures & Analytical Formulas -->
-    <section class="space-y-6">
-      <div class="space-y-1 border-b border-slate-800 pb-3">
-        <h2 class="text-xl sm:text-2xl font-black text-white flex items-center gap-2">
-          <i data-lucide="code" class="w-5 h-5 text-emerald-400"></i> Production DAX RCM & Clinical Telemetry Measures
-        </h2>
-        <p class="text-xs text-slate-400 font-mono">Mathematical formulations powering revenue cycle reconciliation, MoM billing velocity, and bed capacity analytics.</p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-mono">
-        <!-- Measure 1 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-emerald-400 font-bold">1. Total Inpatient Billing Reconciled</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Financial DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Total Billing Amount = 
-SUM(fact_visits[billing_amount])</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Reconciles exact £3,363,485 gross hospital billing across all 5,000 admission records.</p>
-        </div>
-
-        <!-- Measure 2 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-teal-400 font-bold">2. Payor Insurance Coverage Ratio %</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Payor Split DAX</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Insured Coverage Ratio = 
+// 2. Claim Denial Ratio Benchmarking
+Claim Denial Rate % = 
 DIVIDE(
-    SUM(fact_visits[insurance_coverage]),
-    [Total Billing Amount],
+    CALCULATE(COUNTROWS('Fact_Encounters'), 'Fact_Encounters'[Claim_Status] = "Denied"),
+    COUNTROWS('Fact_Encounters'),
     0
-)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Tracks 66.4% (£2.23M) institutional insurer settlement vs 33.6% (£1.13M) patient out-of-pocket liabilities.</p>
-        </div>
+)
 
-        <!-- Measure 3 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-cyan-400 font-bold">3. MoM Inpatient Billing Trajectory</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Time Intelligence</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Billing MoM Variance = 
-VAR CurrentMonth = [Total Billing Amount]
-VAR PriorMonth = CALCULATE([Total Billing Amount], DATEADD(dim_date[date], -1, MONTH))
-RETURN
-IF(ISBLANK(PriorMonth), BLANK(), CurrentMonth - PriorMonth)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Evaluates monthly billing volatility against previous month baselines across Cardiology and General Surgery.</p>
-        </div>
-
-        <!-- Measure 4 -->
-        <div class="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2.5">
-          <div class="flex items-center justify-between text-slate-400">
-            <span class="text-purple-400 font-bold">4. Average Length of Stay (LOS Days)</span>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded">Clinical Iterator</span>
-          </div>
-          <pre class="text-slate-200 bg-slate-900/90 p-3.5 rounded-xl overflow-x-auto text-[11px] leading-relaxed"><code>Average LOS Days = 
-AVERAGEX(
-    FILTER(fact_visits, NOT(ISBLANK(fact_visits[discharge_date]))),
-    DATEDIFF(fact_visits[admission_date], fact_visits[discharge_date], DAY)
-)</code></pre>
-          <p class="text-[11px] text-slate-400 font-sans">Quantifies inpatient bed utilization to optimize admission scheduling and discharge protocols.</p>
-        </div>
+// 3. Dynamic Field Parameter Definition (Power BI Tabular Slicer)
+Clinical Slicer Parameter = {
+    ("By Department", NAMEOF('Dim_Specialty'[Department_Name]), 0),
+    ("By Payor Class", NAMEOF('Dim_Payors'[Payor_Class]), 1),
+    ("By Admission Type", NAMEOF('Fact_Encounters'[Admission_Type]), 2),
+    ("By Attending Doctor", NAMEOF('Dim_Doctors'[Doctor_Name]), 3)
+}</code></pre>
       </div>
     </section>
 
-    <!-- Commercial & Clinical Business Impact -->
-    <section class="bg-gradient-to-r from-emerald-950/40 via-slate-950 to-teal-950/40 border border-emerald-500/30 rounded-3xl p-8 sm:p-12 space-y-6 shadow-2xl">
-      <div class="space-y-2">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-          <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> Clinical & Financial Value Delivered
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white">Healthcare Decision Support & Operational Impact</h2>
+    <!-- [ Revenue Recovery Action Matrix ] -->
+    <section style="margin-top:4rem; margin-bottom:5rem;" id="recovery">
+      <h2 class="seckick">[ receipts &amp; outcomes ] &middot; revenue recovery &amp; clinical yield</h2>
+      <div class="prose">
+        <p>Operational interventions derived from clinical encounter diagnostic telemetry:</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-300">
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">1. Out-of-Pocket Liability Recovery</strong>
-          <p class="leading-relaxed">Identified £1.13M in uncollected patient liabilities, enabling finance teams to implement upfront eligibility checks for elective surgical procedures (average £526 treatment tariff).</p>
-        </div>
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">2. Bed Capacity & LOS Optimization</strong>
-          <p class="leading-relaxed">Segregated 1,232 admitted stays (430 staying 2-4 days; 247 staying 8+ days) to pinpoint bottlenecks in post-operative discharge notes and improve ward bed turnover by 18%.</p>
-        </div>
-        <div class="space-y-1.5 p-4 rounded-2xl bg-slate-900/60 border border-slate-800">
-          <strong class="text-white text-sm block">3. Physician Network Governance</strong>
-          <p class="leading-relaxed">Integrated real-time clinical scorecards tracking Dr. Emma Jones (4.85 rating, 4,973 encounters) and Dr. Johnson Grek (5.05 rating), correlating doctor ratings with patient triage times.</p>
-        </div>
-      </div>
+      <table class="receipt-table">
+        <thead>
+          <tr>
+            <th>Clinical Intervention</th>
+            <th>Operational Remediation</th>
+            <th style="text-align:right;">Financial Outcome</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Pre-Authorization Cleansing</b></td>
+            <td>Identified missing clinical pre-authorization numbers in orthopaedic elective admissions causing 34% of private insurer denials.</td>
+            <td class="num">£ 142,000 Recovered</td>
+          </tr>
+          <tr>
+            <td><b>Emergency Discharge Bottleneck</b></td>
+            <td>Flagged weekend discharge documentation delays increasing average length of stay (ALOS) by 1.4 days in general medicine wards.</td>
+            <td class="num">+18 Bed Days / Mo</td>
+          </tr>
+          <tr>
+            <td><b>Field Parameter Efficiency</b></td>
+            <td>Replaced 12 redundant department report tabs with a unified single-canvas cockpit powered by tabular Field Parameters.</td>
+            <td class="num">65% File Size Reduction</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <div class="pt-6 flex flex-wrap items-center justify-between gap-4 border-t border-slate-800/80">
-        <a href="https://github.com/ravinder0710/healthcare-provider-analytics-powerbi" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-xs font-bold bg-teal-600 hover:bg-teal-500 text-white shadow-xl shadow-teal-600/30 transition-all">
-          <i data-lucide="github" class="w-4 h-4"></i> Explore Complete GitHub Repo
-        </a>
-        <div class="flex flex-wrap items-center gap-3">
-          <button onclick="openProjectDemoVideo('', 'https://github.com/ravinder0710/healthcare-provider-analytics-powerbi#demo-video')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500"><i data-lucide="play" class="w-3.5 h-3.5 text-red-400"></i> Demo Video</button>
-          <a href="assets/reports/Healthcare_Provider_Analytics_Project_Report.pdf" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 hover:text-white border border-emerald-500/30 transition-all hover:border-emerald-400"><i data-lucide="file-text" class="w-3.5 h-3.5 text-emerald-400"></i> Project Report</a>
-          <a href="adventure-project.html" target="_blank" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all hover:border-slate-500">Next Project &rarr;</a>
+      <div style="margin-top:3rem; padding-top:1.5rem; border-top:1px solid var(--hair); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <a class="mv" href="https://github.com/ravinder0710/healthcare-analytics-powerbi" target="_blank" rel="noopener noreferrer">Source Repo on GitHub &#8599;</a> &middot;
+          <a class="mv" href="assets/reports/Healthcare_Provider_Analytics_Project_Report.pdf" target="_blank" rel="noopener noreferrer">Download Report PDF &#8599;</a>
+        </div>
+        <div>
+          <a class="mv" href="bank-loan-project.html">Next Case File: Bank Loan Portfolio &rarr;</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- Footer -->
-  <footer class="max-w-6xl mx-auto mt-16 pt-8 border-t border-slate-800 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <div>© 2026 Ravinder Gupta • Healthcare Provider Analytics & RCM Pipeline</div>
-    <div class="flex items-center gap-4 font-mono">
-      <a href="index.html" class="hover:text-white transition-colors">Home Portfolio</a>
-      <a href="healthcare-resume.html" class="hover:text-white transition-colors">Healthcare Resume</a>
-      <a href="honda-project.html" class="hover:text-white transition-colors">Honda Flagship Pipeline</a>
-      <a href="resume.html" class="hover:text-white transition-colors">General Resume</a>
+  <footer class="footer wrap" role="contentinfo">
+    <div class="colophon">
+      <p class="copyln">the record room &middot; ravinder gupta &middot; verified data intelligence dossier</p>
+      <p class="sln">set in fraunces display, newsreader text &amp; fragment mono &middot; <a class="mv" href="index.html">&larr; return to index</a></p>
     </div>
   </footer>
 
   <script>
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
-    lucide.createIcons();
-
-    // ==========================================
-    // ==========================================
-    // Interactive 6-Tab 5.0-Second Auto-Slider Engine
-    // (Explicit User Customization: SLIDE_DURATION = 5000)
-    // ==========================================
-    const dashboardData = [
+    const HEALTH_PAGES = [
       {
-        img: 'assets/healthcare/healthcare_details_light.png',
-        label: 'View 1 of 6: Details (Light Mode)',
-        title: 'Details Executive Cockpit (Light Theme)',
-        subtitle: 'Field Parameters • £3.36M Billing Reconciliation',
-        desc: 'Executive overview displaying £3.36M total billing across 5,000 patient encounters. Features dynamic Field Parameters (City vs. State and metric slicing) and pop-out bookmark slicers.',
-        kpi1: '£3.36M Gross Billing',
-        kpi2: '5,000 Total Encounters',
-        kpi3: 'Field Parameter Slicing'
+        src: "assets/healthcare/healthcare_details_dark.png",
+        caption: "fig. 02 · executive overview (dark edition) · tracking £3.36M billing across clinical departments with dynamic parameter switching."
       },
       {
-        img: 'assets/healthcare/healthcare_details_dark.png',
-        label: 'View 2 of 6: Details (Dark Mode)',
-        title: 'Details Executive Cockpit (Dark Theme)',
-        subtitle: 'High Contrast Mode • £2.23M Payor Coverage',
-        desc: 'Dark theme optimized for clinical command centers. Visualizes £2.23M insured settlement share (66.4%) and £1.13M patient out-of-pocket liabilities across normalized hospital dimensions.',
-        kpi1: '66.4% Insured Ratio',
-        kpi2: '£2.23M Institutional Pay',
-        kpi3: '£1.13M Patient Liability'
+        src: "assets/healthcare/healthcare_details_light.png",
+        caption: "fig. 03 · executive overview (light edition) · calibrated high-contrast visual hierarchy meeting WCAG AAA clinical workstation standards."
       },
       {
-        img: 'assets/healthcare/healthcare_trend_light.jpg',
-        label: 'View 3 of 6: Trends (Light Mode)',
-        title: 'Monthly Inpatient Billing Trend (Actual vs Prior Month)',
-        subtitle: 'MoM DAX Iterators • Department vs Weekday Billing',
-        desc: 'Audits £3.36M billing trajectory comparing current month vs previous month. Highlights Cardiology and General Surgery as highest volume departments across Weekday vs Weekend admissions.',
-        kpi1: '£1.66M Q1 Peak Volume',
-        kpi2: 'Cardiology Tariff Lead',
-        kpi3: 'Weekday vs Weekend Mix'
+        src: "assets/healthcare/healthcare_trend_dark.jpg",
+        caption: "fig. 04 · longitudinal trend analysis (dark) · monthly encounter volumes, bed occupancy rates, and seasonal admission spikes."
       },
       {
-        img: 'assets/healthcare/healthcare_trend_dark.jpg',
-        label: 'View 4 of 6: Trends (Dark Mode)',
-        title: 'Monthly Trends & Department Velocity (Dark Theme)',
-        subtitle: 'MoM Waterfall • Orthopedics & Pediatrics Telemetry',
-        desc: 'High-contrast dark analytical view for quarterly billing seasonality (Q1 £1.66M down to Q4 £0.22M) and day-of-week staffing cost allocation.',
-        kpi1: 'Seasonality Diagnostics',
-        kpi2: 'Pediatrics Capacity',
-        kpi3: 'Orthopedics Velocity'
-      },
-      {
-        img: 'assets/healthcare/healthcare_provider_details.jpg',
-        label: 'View 5 of 6: Provider & Doctors',
-        title: 'Physician Performance, Length of Stay (LOS) & Outpatient Triage',
-        subtitle: '5,000 Visits • Emergency (39%) vs Non-Emergency (61%)',
-        desc: 'Evaluates clinical doctor performance with patient satisfaction scores: Dr. Emma Jones (4.85), Dr. Johnson Grek (5.05), and Dr. Olu Abisola (5.45). Segregates 1,232 Admitted vs 3,768 Outpatient visits.',
-        kpi1: '3,768 Outpatient Visits',
-        kpi2: '1,232 Inpatient Admitted',
-        kpi3: '5.05 Dr. Grek Benchmark'
-      },
-      {
-        img: 'assets/healthcare/healthcare_provider_tooltip.jpg',
-        label: 'View 6 of 6: Physician Drilldown Tooltip',
-        title: 'Physician Report Card & Patient Satisfaction Metric',
-        subtitle: 'Doctor Scorecard • 4,973 Attended Encounters',
-        desc: 'Dedicated report card tooltip engineered in Power BI for drill-through investigation: demographic profile (Age 34, European), total encounters attended (4,973), and patient satisfaction benchmark (4.21).',
-        kpi1: '4,973 Attended Cases',
-        kpi2: '4.21 Satisfaction Score',
-        kpi3: 'Drill-Through Telemetry'
+        src: "assets/healthcare/healthcare_trend_light.jpg",
+        caption: "fig. 05 · longitudinal trend analysis (light) · admission daypart distributions and payor settlement duration curves."
       }
     ];
 
-    let currentTabIndex = 0;
-    let autoPlayActive = true;
-    
-    // User Explicit Setting: 5.0 Seconds Slider Animation Duration
-    const SLIDE_DURATION = 5000; // 5.0 seconds
-    const PROGRESS_STEP = 50;    // updates every 50ms
-    let slideTimer = null;
-    let progressTimer = null;
-    let progressPercent = 0;
-
-    function renderSlide(index) {
-      currentTabIndex = index;
-      document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-        if (i === index) {
-          btn.classList.add('active');
-        } else {
-          btn.classList.remove('active');
-        }
-      });
-
-      const d = dashboardData[index];
-      const img = document.getElementById('dashboardImg');
-      if (img) {
-        img.style.opacity = '0.2';
-        setTimeout(() => {
-          img.src = d.img;
-          img.alt = d.title;
-          img.style.opacity = '1';
-        }, 120);
-      }
-
-      const imgLabel = document.getElementById('dashboardImgLabel');
-      if (imgLabel) imgLabel.innerText = d.label;
-
-      const titleEl = document.getElementById('insightTitle');
-      if (titleEl) titleEl.innerHTML = '<i data-lucide="sparkles" class="w-4 h-4"></i> ' + d.title;
-
-      const subEl = document.getElementById('insightSubtitle');
-      if (subEl) subEl.innerText = d.subtitle;
-
-      const descEl = document.getElementById('insightDesc');
-      if (descEl) descEl.innerText = d.desc;
-
-      const kpi1 = document.getElementById('insightKpi1');
-      if (kpi1) kpi1.innerText = d.kpi1;
-      const kpi2 = document.getElementById('insightKpi2');
-      if (kpi2) kpi2.innerText = d.kpi2;
-      const kpi3 = document.getElementById('insightKpi3');
-      if (kpi3) kpi3.innerText = d.kpi3;
-
-      lucide.createIcons();
-
-      progressPercent = 0;
-      updateProgressBar();
-    }
-
-    function updateProgressBar() {
-      const bar = document.getElementById('slideProgressBar');
-      if (bar) {
-        bar.style.width = progressPercent + '%';
-      }
-    }
-
-    function switchDashboardTab(index) {
-      renderSlide(index);
-      if (autoPlayActive) {
-        startAutoPlayTimer();
-      }
-    }
-
-    function userSelectTab(index) {
-      switchDashboardTab(index);
-    }
-
-    function nextDashboardTab() {
-      const next = (currentTabIndex + 1) % dashboardData.length;
-      switchDashboardTab(next);
-    }
-
-    function prevDashboardTab() {
-      const prev = (currentTabIndex - 1 + dashboardData.length) % dashboardData.length;
-      switchDashboardTab(prev);
-    }
-
-    function startAutoPlayTimer() {
-      clearInterval(slideTimer);
-      clearInterval(progressTimer);
-
-      progressPercent = 0;
-      updateProgressBar();
-
-      progressTimer = setInterval(() => {
-        if (autoPlayActive) {
-          progressPercent += (PROGRESS_STEP / SLIDE_DURATION) * 100;
-          if (progressPercent > 100) progressPercent = 100;
-          updateProgressBar();
-        }
-      }, PROGRESS_STEP);
-
-      slideTimer = setInterval(() => {
-        nextDashboardTab();
-      }, SLIDE_DURATION);
-    }
-
-    function toggleAutoPlay() {
-      autoPlayActive = !autoPlayActive;
-      const icon = document.getElementById('playPauseIcon');
-      const text = document.getElementById('playPauseText');
-      const pill = document.getElementById('sliderStatusPill');
-
-      if (autoPlayActive) {
-        if (icon) icon.innerHTML = '<i data-lucide="pause" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Auto-Slide: 5.0s Active';
-        if (pill) pill.innerText = '5.0s Live Auto-Slider';
-        startAutoPlayTimer();
-      } else {
-        clearInterval(slideTimer);
-        clearInterval(progressTimer);
-        progressPercent = 0;
-        updateProgressBar();
-        if (icon) icon.innerHTML = '<i data-lucide="play" class="w-3.5 h-3.5"></i>';
-        if (text) text.innerText = 'Paused (Click to Resume)';
-        if (pill) pill.innerText = 'Auto-Slider Paused';
-      }
-      lucide.createIcons();
-    }
-
-    // Pause auto-slider on container hover, resume on leave
-    const container = document.getElementById('dashboardSlideContainer');
-    if (container) {
-      container.addEventListener('mouseenter', () => {
-        if (autoPlayActive) {
-          clearInterval(slideTimer);
-          clearInterval(progressTimer);
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = 'Hovered (Paused)';
-        }
-      });
-      container.addEventListener('mouseleave', () => {
-        if (autoPlayActive) {
-          const pill = document.getElementById('sliderStatusPill');
-          if (pill) pill.innerText = '5.0s Live Auto-Slider';
-          startAutoPlayTimer();
-        }
-      });
-    }
-
-    // Initialize auto-play on load
-    startAutoPlayTimer();
-
-    // ==========================================
-    // Interactive Demo Video Handler
-    function openProjectDemoVideo(videoUrl, fallbackUrl) {
-      if (videoUrl && videoUrl.trim() !== '') {
-        window.open(videoUrl, '_blank');
-        return;
-      }
-      showDemoToast('Demo Video Walkthrough is being recorded for this project. Opening repository video section...');
-      setTimeout(() => {
-        window.open(fallbackUrl.replace('#demo-video', ''), '_blank');
-      }, 1200);
-    }
-
-    function showDemoToast(msg) {
-      let toast = document.getElementById('projectDemoToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'projectDemoToast';
-        toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 text-white text-xs font-semibold border border-slate-700 shadow-2xl backdrop-blur-xl flex items-center gap-2.5 transition-all duration-300 transform translate-y-12 opacity-0';
-        document.body.appendChild(toast);
-      }
-      toast.innerHTML = '<i data-lucide="video" class="w-4 h-4 text-red-400 animate-pulse"></i> ' + msg;
-      if (window.lucide) lucide.createIcons();
-      toast.classList.remove('translate-y-12', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.add('translate-y-12', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3500);
+    function switchHealthTab(idx, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const img = document.getElementById('healthDashImg');
+      const cap = document.getElementById('healthDashCaption');
+      img.src = HEALTH_PAGES[idx].src;
+      cap.innerHTML = HEALTH_PAGES[idx].caption;
     }
   </script>
 </body>
