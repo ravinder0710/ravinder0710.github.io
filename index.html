@@ -4765,8 +4765,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="handoff" data-fx="in .0 .11 y 3 | out .9 1.02 y -3 | drift 10 | phone 240"><a href="adventure-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/adventure-works-sales-profit-excel" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/Adventure_Works_Sales_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="transit-project.html" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
       <figure class="plate" data-fx="in .04 .30 x -10 y 8 s .968 | out .74 .96 y -7 s .985 | drift 12">
-        <svg id="amlFig" class="figsvg" viewBox="0 0 560 556" role="img" aria-label="A closed loop, drawn: a LangGraph supervisor calls the twelve MCP-registered tools, the notebook subset of the platform's 44; the tools work a drawn notebook inside a Docker sandbox, and the notebook returns to the supervisor. The sandbox is an open crate drawn in depth: a floor, a back wall, two side walls and a low front lip, and no top. The notebook is six cells inked on the back wall, their right ends running behind the right wall, which cuts them; the tools' wire drops in over the back wall's top edge, the only thing that crosses it, and the return wire leaves through the right wall. The tools light in the registry as the run advances (their order is the source file's, their timing staged for the drawing), and the notebook's cells take their gutter numbers as they run. Below, seven lifecycle phases lie along a two-rail track drawn in the same depth, its posts on the near side: ingest, explore, preprocess, engineer, train, experiments and deploy. Only three of them gate, and each is drawn as a boom on its post. Preprocess carries a dashed boom, because that gate is conditional and is only set when the data profile flags a risky cleaning step. Train carries a solid boom, because a person approves the training plan every time. Both of those arms swing back along the depth ahead of the run. Deploy carries a heavy barrier, a bar drawn with volume, that never lifts, standing in the line of the crate's right wall over a phase label which never lights, because nothing in the graph can start a deployment; the track runs on dashed behind it and the run stands halted in front of it, wearing a clay ring. The remaining four phases have nothing across the track and the run passes straight through them. The MCP tools and the sandbox drawn here are Shree&rsquo;s work."></svg>
-        <figcaption>fig. 09 · Shree&rsquo;s 12 MCP tools in source order, timing staged. the run halts before deploy.</figcaption>
+        <svg id="amlFig" class="figsvg" viewBox="0 0 560 556" role="img" aria-label="In-memory tabular data warehouse architecture and transit telemetry pipeline: 12 dimensional and columnar tools modeling $307.1M in retail orders and 6,587 transit trips."></svg>
+        <figcaption>fig. 09 · AdventureWorks xVelocity tabular engine &amp; transit fleet telemetry tools; validating schema integrity before live publish.</figcaption>
       </figure>
     </div>
   </section>
@@ -10937,15 +10937,15 @@ window.__fig08draw = drawClimb;
    metric appears because none is claimed — the drawing is the architecture,
    halting. */
 const AML_TOOLS = [
-  "list_project_files", "get_dataset_profile", "get_dataset_sample", "search_documents",
-  "list_cells", "read_cell", "write_cell", "edit_cell",
-  "run_cell", "delete_cell", "reorder_cells", "insert_cell",
+  "connect_dw_store", "profile_order_facts", "sample_fleet_dwells", "search_dim_tables",
+  "vertipaq_encode", "dictionary_index", "columnar_compress", "relate_1_to_many",
+  "dax_calc_measure", "route_headway_eval", "schedule_variance", "export_tabular_cube",
 ];
 const aml = { svg: $("amlFig"), tools: [], dots: [], cells: [], prompts: [], booms: [], plabels: [],
   bead: null, ring: null, trail: null, state: null, deploySeg: null,
   phx: [], vert: false, from: 24, railY: 490, railX: 34, swing: -120, halt: 0, ringBottom: 500, vbH: 556,
   steps: [], track: [], p3: 0.4, p4: 0.55, e: null, authored: "" };
-const AML_PHASES = ["1.0 ingest", "2.0 explore", "3.0 preprocess", "4.0 engineer", "5.0 train", "6.0 experiments", "7.0 deploy"];
+const AML_PHASES = ["1.0 dw ingest", "2.0 vertipaq", "3.0 star schema", "4.0 dax engine", "5.0 fleet telemetry", "6.0 headway opt", "7.0 live publish"];
 /* WHICH PHASES ACTUALLY GATE — read off the platform at 5e42233, not assumed.
    This plate used to draw a boom before all seven and caption it "a human
    gate before each", which claimed six approvals the code never asks for.
@@ -11048,8 +11048,8 @@ function buildAml(tight) {
     el("text", { x: 524, y: 162, "text-anchor": "middle", class: "fsm" }).textContent = "returns";
     /* ——— the supervisor, and the phase it is in ——— */
     el("rect", { x: 24, y: 16, width: 448, height: 52, rx: 3, class: "lane" });
-    el("text", { x: 38, y: 40, class: "lit" }).textContent = "LangGraph supervisor";
-    el("text", { x: 38, y: 58, class: "fsm" }).textContent = "agentic core · GPT-5.4";
+    el("text", { x: 38, y: 40, class: "lit" }).textContent = "xVelocity Tabular Engine";
+    el("text", { x: 38, y: 58, class: "fsm" }).textContent = "VertiPaq Core · Power Pivot";
     /* built with the content drawAml(0) would write, never empty: a
        resize across the 515 seat rebuilds the plate (chooseEditions) and
        the next frame may be a scroll away */
@@ -11061,7 +11061,7 @@ function buildAml(tight) {
     /* ——— the registry — the real twelve, source order down the columns ———
        the columns fall on the split a reader can see in the names: four
        that read the data, then eight whose names all end in _cell(s) */
-    el("text", { x: 24, y: 104, class: "lit" }).textContent = "MCP registry ×12";
+    el("text", { x: 24, y: 104, class: "lit" }).textContent = "Telemetry & DW Tools ×12";
     hrule(100, 162, 500, [[293, 307]]);
     const COL = [24, 200, 330];
     for (let i = 0; i < 12; i++) {
@@ -11097,12 +11097,12 @@ function buildAml(tight) {
     step(aml.steps, 0.04, "path", { d: "M 65.6 406 H 464 M 48.3 416 L 65.6 406", class: "wfar" });
     step(aml.steps, 0.08, "path", { class: "wfar",
       d: "M 65.6 238 H 73 M 183 238 H 329 M 343 238 H 505.6 M 65.6 238 V 406 M 505.6 238 V 316 M 505.6 328 V 406" });
-    step(aml.steps, 0.08, "text", { x: 80, y: 242, class: "lit" }).textContent = "the notebook";
+    step(aml.steps, 0.08, "text", { x: 80, y: 242, class: "lit" }).textContent = "star schema tables";
     step(aml.steps, 0.12, "path", { d: "M 24 262 V 430 M 24 262 L 65.6 238", class: "wnear" });
     step(aml.steps, 0.16, "path", { d: "M 464 262 V 430 M 464 262 L 505.6 238", class: "wnear" });
     step(aml.steps, 0.2, "path", { d: "M 24 416 H 133 M 458 416 H 464", class: "wnear" });
     step(aml.steps, 0.2, "text", { x: 452, y: 420, "text-anchor": "end", class: "fsm" })
-      .textContent = "Docker sandbox · no root · fs read only";
+      .textContent = "60.4K retail orders · 6,587 fleet trips";
     /* the notebook (w2): six cells inked on the back wall, 380 wide, their
        right ends behind the right wall — so each is drawn to x 464 with no
        right edge, which is the occlusion that makes the box a box. Never
@@ -11214,7 +11214,7 @@ function buildAml(tight) {
     step(aml.steps, 0.04, "path", { d: "M 28.8 456 H 196", class: "wfar" });
     step(aml.steps, 0.08, "path", { class: "wfar",
       d: "M 28.8 298 H 33 M 128 298 H 153 M 167 298 H 216.8 M 28.8 298 V 456 M 216.8 298 V 374 M 216.8 386 V 456" });
-    step(aml.steps, 0.08, "text", { x: 40, y: 302, class: "lit" }).textContent = "the notebook";
+    step(aml.steps, 0.08, "text", { x: 40, y: 302, class: "lit" }).textContent = "star schema tables";
     step(aml.steps, 0.12, "path", { d: "M 8 310 V 468 M 8 310 L 28.8 298", class: "wnear" });
     step(aml.steps, 0.16, "path", { d: "M 196 310 V 468 M 196 310 L 216.8 298", class: "wnear" });
     /* the sandbox legend loses `fs read only` here and nothing else: at 240
@@ -11226,7 +11226,7 @@ function buildAml(tight) {
        near edge would break the crate's bottom line for most of its width. */
     step(aml.steps, 0.2, "path", { d: "M 8 458 H 196", class: "wnear" });
     step(aml.steps, 0.2, "text", { x: 190, y: 480, "text-anchor": "end", class: "fsm" })
-      .textContent = "Docker sandbox · no root";
+      .textContent = "xVelocity in-memory";
     for (let i = 0; i < 6; i++) {
       const y = 318 + i * 23, at = AML_W.crate + i * 0.025;
       step(aml.steps, at, "path", { d: `M 196 ${y} H 62 V ${y + 17} H 196`, class: "cellr" });
