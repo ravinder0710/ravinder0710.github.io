@@ -13,75 +13,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
-    /* Ultra-Sleek Narrow Scrollbar (Global, Inner Containers & Code Blocks) */
-    *, html, body {
-      scrollbar-width: thin;
-      scrollbar-color: #334155 transparent;
-    }
-    ::-webkit-scrollbar,
-    *::-webkit-scrollbar {
-      width: 5px !important;
-      height: 5px !important;
-    }
-    ::-webkit-scrollbar-track,
-    *::-webkit-scrollbar-track {
-      background: transparent !important;
-    }
-    ::-webkit-scrollbar-thumb,
-    *::-webkit-scrollbar-thumb {
-      background: #1e293b !important;
-      border-radius: 9999px !important;
-    }
-    ::-webkit-scrollbar-thumb:hover,
-    *::-webkit-scrollbar-thumb:hover {
-      background: #38bdf8 !important;
-    }
-    ::-webkit-scrollbar-corner,
-    *::-webkit-scrollbar-corner {
-      background: transparent !important;
-    }
-    ::-webkit-scrollbar-button,
-    *::-webkit-scrollbar-button {
-      display: none !important;
-      width: 0 !important;
-      height: 0 !important;
-    }
-
-    /* Dedicated Codeblock & Pre Horizontal Scrollbar Styling */
-    pre, pre code {
-      scrollbar-width: thin;
-      scrollbar-color: #334155 rgba(15, 23, 42, 0.7);
-    }
-    pre::-webkit-scrollbar {
-      height: 4px !important;
-      width: 4px !important;
-    }
-    pre::-webkit-scrollbar-track {
-      background: rgba(15, 23, 42, 0.7) !important;
-      border-radius: 9999px !important;
-    }
-    pre::-webkit-scrollbar-thumb {
-      background: #334155 !important;
-      border-radius: 9999px !important;
-    }
-    pre::-webkit-scrollbar-thumb:hover {
-      background: #38bdf8 !important;
-    }
-
-
-
-    body {
-      background-color: #070814;
-      color: #f1f5f9;
-      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* Luxury Electric Magenta & Coral Curtain Preloader */
-    #hrPreloader {
-      transition: transform 0.45s cubic-bezier(0.85, 0, 0.15, 1);
-      box-shadow: 0 25px 60px rgba(236, 72, 153, 0.35);
-    }
+    
 
     /* Interactive Text Subtle Highlight on Cursor Touch */
     p, h1, h2, h3, h4, li {
@@ -125,41 +57,7 @@
 </head>
 <body class="antialiased min-h-screen py-6 px-4 sm:px-6">
 
-  <!-- 2.8-Second Luxury Electric Magenta & Coral Curtain Preloader -->
-  <div id="hrPreloader" class="fixed inset-0 z-50 bg-[#04040a] flex flex-col items-center justify-center border-b border-pink-500/30">
-    <div class="relative flex flex-col items-center text-center space-y-6 max-w-md px-6">
-      <!-- Glowing HR People Shield / RG Themed Badge -->
-      <div class="relative">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-pink-600 via-rose-500 to-indigo-500 p-[2px] shadow-2xl shadow-pink-500/50">
-          <div class="w-full h-full bg-[#100918] rounded-2xl flex items-center justify-center font-black text-xl text-white tracking-wider">
-            RG
-          </div>
-        </div>
-        <div class="absolute -inset-2 bg-pink-500/20 blur-xl rounded-full -z-10 animate-pulse"></div>
-      </div>
-
-      <!-- Typography -->
-      <div class="space-y-2">
-        <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight">
-          HR Workforce Intelligence & Decision Support
-        </h2>
-        <p class="text-xs sm:text-sm text-pink-400/90 font-mono tracking-wide">
-          2,925 Employees · 16.82% Attrition · Promotion & Retrenchment
-        </p>
-      </div>
-
-      <!-- Progress Bar & Counter -->
-      <div class="w-64 space-y-2">
-        <div class="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-pink-500/20">
-          <div id="preloaderBar" class="h-full bg-gradient-to-r from-pink-600 via-rose-500 to-indigo-500 rounded-full w-0 transition-all duration-100 ease-out"></div>
-        </div>
-        <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
-          <span>Initializing Human Capital Decision Engine</span>
-          <span id="preloaderCount" class="text-pink-300 font-bold">0%</span>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
   <!-- Interactive Canvas Particle Background -->
   <canvas id="trailCanvas" class="fixed inset-0 pointer-events-none z-40"></canvas>
@@ -716,26 +614,6 @@ DIVIDE([Active Employees], [Total Employees], 0)
     // Lucide Icons Initialization
     lucide.createIcons();
 
-    // 2.8-Second Curtain Preloader Animation
-    window.addEventListener('DOMContentLoaded', () => {
-      const bar = document.getElementById('preloaderBar');
-      const count = document.getElementById('preloaderCount');
-      const preloader = document.getElementById('hrPreloader');
-      
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += 4;
-        if (progress > 100) progress = 100;
-        count.innerText = progress + '%';
-        bar.style.width = progress + '%';
-
-        if (progress >= 100) {
-          clearInterval(interval);
-          setTimeout(() => { preloader.style.transform = 'translateY(-100%)'; setTimeout(() => preloader.style.display = 'none', 450); }, 120);
-        }
-      }, 42); // Snappy 1.5s total duration
-    });
-
     // 6 Selected Showcase Views
     const views = [
       {
@@ -923,143 +801,6 @@ DIVIDE([Active Employees], [Total Employees], 0)
       startAutoSlider();
     });
 
-    // 60 FPS Cursor Particle Trail Effect in Electric Magenta & Coral Glow
-    (function initCursorTrail() {
-      const canvas = document.getElementById('trailCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const ring = document.getElementById('cursorRing');
-      const dot = document.getElementById('cursorDot');
-
-      let width = canvas.width = window.innerWidth;
-      let height = canvas.height = window.innerHeight;
-
-      window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
-
-      let mouseX = width / 2;
-      let mouseY = height / 2;
-      let ringX = mouseX;
-      let ringY = mouseY;
-      let lastX = mouseX;
-      let lastY = mouseY;
-
-      const particles = [];
-
-      class DottedParticle {
-        constructor(x, y) {
-          this.x = x;
-          this.y = y;
-          this.radius = Math.random() * 2.5 + 1.2;
-          this.alpha = 1;
-          this.vx = (Math.random() - 0.5) * 1.4;
-          this.vy = (Math.random() - 0.5) * 1.4;
-          this.decay = Math.random() * 0.03 + 0.02;
-        }
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          this.alpha -= this.decay;
-        }
-        draw(context) {
-          context.save();
-          context.beginPath();
-          context.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          context.fillStyle = 'rgba(244, 114, 182, ' + Math.max(this.alpha, 0) + ')';
-          context.shadowBlur = 8;
-          context.shadowColor = '#ec4899';
-          context.fill();
-          context.restore();
-        }
-      }
-
-      window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        dot.style.opacity = '1';
-        ring.style.opacity = '1';
-        dot.style.left = mouseX + 'px';
-        dot.style.top = mouseY + 'px';
-
-        const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
-        if (dist > 8) {
-          particles.push(new DottedParticle(mouseX, mouseY));
-          if (particles.length > 50) particles.shift();
-          lastX = mouseX;
-          lastY = mouseY;
-        }
-      });
-
-      document.addEventListener('mouseleave', () => {
-        dot.style.opacity = '0';
-        ring.style.opacity = '0';
-      });
-
-      document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          ring.style.width = '48px';
-          ring.style.height = '48px';
-          ring.style.borderColor = 'rgba(244, 114, 182, 0.9)';
-          ring.style.backgroundColor = 'rgba(236, 72, 153, 0.15)';
-        });
-        el.addEventListener('mouseleave', () => {
-          ring.style.width = '34px';
-          ring.style.height = '34px';
-          ring.style.borderColor = 'rgba(244, 114, 182, 0.6)';
-          ring.style.backgroundColor = 'rgba(236, 72, 153, 0.05)';
-        });
-      });
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        for (let i = particles.length - 1; i >= 0; i--) {
-          const p = particles[i];
-          p.update();
-          p.draw(ctx);
-          if (p.alpha <= 0) {
-            particles.splice(i, 1);
-          }
-        }
-        ringX += (mouseX - ringX) * 0.18;
-        ringY += (mouseY - ringY) * 0.18;
-        ring.style.left = ringX + 'px';
-        ring.style.top = ringY + 'px';
-        requestAnimationFrame(animate);
-      }
-      animate();
-    })();
-  
-    // Interactive Demo Video Handler
-    function openProjectDemoVideo(videoUrl, fallbackUrl) {
-      if (videoUrl && videoUrl.trim() !== '') {
-        window.open(videoUrl, '_blank');
-        return;
-      }
-      showDemoToast('Demo Video Walkthrough is being recorded for this project. Opening repository video section...');
-      setTimeout(() => {
-        window.open(fallbackUrl.replace('#demo-video', ''), '_blank');
-      }, 1200);
-    }
-
-    function showDemoToast(msg) {
-      let toast = document.getElementById('projectDemoToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'projectDemoToast';
-        toast.className = 'fixed bottom-6 right-6 z-50 px-5 py-3 rounded-2xl bg-slate-900/95 text-white text-xs font-semibold border border-slate-700 shadow-2xl backdrop-blur-xl flex items-center gap-2.5 transition-all duration-300 transform translate-y-12 opacity-0';
-        document.body.appendChild(toast);
-      }
-      toast.innerHTML = '<i data-lucide="video" class="w-4 h-4 text-red-400 animate-pulse"></i> ' + msg;
-      if (window.lucide) lucide.createIcons();
-      toast.classList.remove('translate-y-12', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.add('translate-y-12', 'opacity-0');
-        toast.classList.remove('translate-y-0', 'opacity-100');
-      }, 3500);
-    }
-  </script>
+    </script>
 </body>
 </html>
