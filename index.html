@@ -4351,7 +4351,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <li data-proj="2"><a class="mrow" href="#cadence"><i class="mt">12:06</i><span class="lab"><b>credit risk</b><span class="mnoun">Bank Loan Portfolio</span><span class="m"><b class="mv">$435.8M</b> portfolio</span></span></a></li>
           <li data-proj="3"><a class="mrow" href="#glyph"><i class="mt">15:23</i><span class="lab"><b>fraud intelligence</b><span class="mnoun">FastMCP + Claude AI</span><span class="m"><b class="mv">10.2×</b> anomaly</span></span></a></li>
           <li data-proj="4"><a class="mrow" href="#jetpack-compress"><i class="mt">19:36</i><span class="lab"><b>emperor bi</b><span class="mnoun">Restaurant Analytics</span><span class="m"><b class="mv">RM20.7M</b> sales</span></span></a></li>
-          <li data-proj="5"><a class="mrow" href="#lifequest"><i class="mt">21:07</i><span class="lab"><b>hr attrition</b><span class="mnoun">Workforce Diagnostics</span><span class="m"><b class="mv">1,470</b> talent</span></span></a></li>
+          <li data-proj="5"><a class="mrow" href="#lifequest"><i class="mt">21:07</i><span class="lab"><b>churn analysis</b><span class="mnoun">10,000 Cohorts</span><span class="m"><b class="mv">27.3%</b> churn</span></span></a></li>
+          <li data-proj="6"><a class="mrow" href="#hr-station"><i class="mt">21:38</i><span class="lab"><b>hr attrition</b><span class="mnoun">Workforce Diagnostics</span><span class="m"><b class="mv">16.1%</b> turnover</span></span></a></li>
           <li data-proj="6" data-print="night"><a class="mrow" href="#automl"><i class="mt">22:05</i><span class="lab"><b>retail &amp; fleet</b><span class="mnoun">xVelocity Engine</span><span class="m"><b class="mv">$307.1M</b> volume</span></span></a></li>
           <li data-print="night"><a class="mrow" href="#review"><i class="mt">22:23</i><span class="lab"><b>the review</b></span></a></li>
           <li data-print="night"><a class="mrow" href="#cosigners"><i class="mt">22:32</i><span class="lab"><b>credentials</b></span></a></li>
@@ -4718,25 +4719,114 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
        own content — p.handoff never rendered at 1440×900). The declared
        in/out fractions below are pre-boot values only; x/y/drift stay
        live. The beat's height is derived from the same contract. -->
-  <section id="lifequest" class="beat station b6" data-beat="7">
-    <div class="beat-inner">
+    <section id="lifequest" class="beat station b6" data-beat="7">
+    <!-- 1. CUSTOMER CHURN ANALYSIS -->
+    <div class="beat-inner" style="margin-bottom:6rem;">
       <div class="prose">
-        <p class="kicker" data-fx="in .05 .28 y 4 | out .48 .58 y 4" data-fx-sync="dusk">¶ 08 · project 5 of 6 · <i>21:07</i></p>
-        <p class="hourline" data-fx="in .05 .24 y 3 | out .94 1.04 y -3 | drift 8">dusk. isolating employee turnover and early career attrition.</p>
-        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .48 .58 y 4 | drift 14" data-fx-sync="dusk" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">HR Attrition Analytics<span style="color:var(--clay)">.</span></h2>
+        <p class="kicker" data-fx="in .05 .28 y 4 | out .94 1.04 y -4" data-fx-sync="dusk">¶ 08 · project 5 of 7 · <i>21:07</i></p>
+        <p class="hourline" data-fx="in .05 .24 y 3 | out .94 1.04 y -3 | drift 8">dusk. isolating subscriber churn before cancellation occurs.</p>
+        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .94 1.04 y -4 | drift 14" data-fx-sync="dusk" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">Churn Analysis<span style="color:var(--clay)">.</span></h2>
+        <p class="codename">Customer Churn &amp; Subscription Lifetime Value</p>
         <figure class="borrowed" data-fx="in .09 .32 y 5 | drift 11" data-fx-sync="dusk">
+          <blockquote>&ldquo;Retention is the only metric that compounds; acquisition without retention is a leaky bucket.&rdquo;</blockquote>
+          <figcaption>Customer Analytics Principle &middot; 2026</figcaption>
+        </figure>
+        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Isolating contract tenure hazard and payment friction across 10,000 subscribers.</p>
+        <p class="mutedln" data-fx="in .1 .36 y 5 | out .94 1.04 y -4 | drift 12" data-fx-sync="dusk" style="font-style:italic; color:var(--ink-2); margin-top:.6rem; max-width:52ch">Analyzed 10,000 telecom subscribers using Python (Pandas, Seaborn, NumPy). Segmented contract tenures to isolate the 1-to-6 month vulnerability cliff, correlation between electronic payment friction and churn, and lifetime value decay.</p>
+        <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">10,000</b> customer cohort records &middot; <b class="mv">27.27%</b> overall churn &middot; Survival tenure curves<br>
+          Correlation matrices &middot; Month-to-month vulnerability benchmarked &middot; Python Exploratory Data Analysis (EDA)</p>
+        <p class="prov mono">Python &middot; Pandas &middot; NumPy &middot; Seaborn &middot; Matplotlib &middot; Jupyter</p>
+        <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4" data-fx-sync="dusk"><a href="churn-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/Customer_Churn_Analysis_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="churn-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
+      </div>
+      <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12" data-fx-sync="dusk">
+        <svg id="questFig" class="figsvg" viewBox="0 0 490 410" role="img" aria-label="Customer cohort survival stages: isolating tenure cliff, payment friction, and subscription lifetime value across 10,000 records."></svg>
+        <figcaption>fig. 08 &middot; cohort survival stages &middot; churn trigger isolation &amp; tenure cliff.</figcaption>
+      </figure>
+    </div>
+
+    <!-- 2. HR ATTRITION ANALYTICS (IN THE VACANT CORRIDOR RIGHT BELOW CHURN!) -->
+    <div id="hr-station" class="beat-inner" style="padding-top:4rem; border-top:1px dashed rgba(246,239,226,.15);">
+      <div class="prose">
+        <p class="kicker" data-fx="in .05 .28 y 4 | out .94 1.04 y -4">¶ 08b · project 6 of 7 · <i>21:38</i></p>
+        <p class="hourline" data-fx="in .05 .24 y 3 | out .94 1.04 y -3 | drift 8">dusk. isolating employee turnover and early career attrition.</p>
+        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .94 1.04 y -4 | drift 14" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">HR Attrition Analytics<span style="color:var(--clay)">.</span></h2>
+        <p class="codename">Workforce Intelligence &amp; Retention Diagnostics</p>
+        <figure class="borrowed" data-fx="in .09 .32 y 5 | drift 11">
           <blockquote>&ldquo;People don&rsquo;t leave bad organizations; they leave unmeasured overtime fatigue and career stagnation.&rdquo;</blockquote>
           <figcaption>Human Capital Principle &middot; 2026</figcaption>
         </figure>
-        <p class="mutedln" data-fx="in .1 .36 y 5 | out .48 .58 y 4 | drift 12" data-fx-sync="dusk" style="font-style:italic; color:var(--ink-2); margin-top:.6rem; max-width:52ch">Modeled 1,470 enterprise employee profiles across 35 attributes using Power BI and DAX. Diagnosed the 16.1% attrition cliff, isolating overtime fatigue (30.5% turnover), early 0-2 year tenure vulnerability, and departmental pay disparities across R&amp;D, Sales, and HR.</p>
+        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Diagnosing turnover risk, overtime fatigue, and appraisal velocity across 1,470 employees.</p>
+        <p class="mutedln" data-fx="in .1 .36 y 5 | out .94 1.04 y -4 | drift 12" style="font-style:italic; color:var(--ink-2); margin-top:.6rem; max-width:52ch">Modeled 1,470 enterprise employee profiles across 35 attributes using Power BI and DAX. Diagnosed the 16.1% attrition cliff, isolating overtime fatigue (30.5% turnover), early 0-2 year tenure vulnerability, and departmental pay disparities across R&amp;D, Sales, and HR.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">1,470</b> employee profiles &middot; <b class="mv">16.1%</b> overall attrition &middot; 6-page Power BI suite<br>
           Overtime fatigue benchmarks &middot; Job satisfaction matrices &middot; Retention playbooks</p>
         <p class="prov mono">Power BI Desktop &middot; DAX &middot; Power Query M &middot; Statistical EDA &middot; People Analytics</p>
-        <p class="handoff" data-fx="in .14 .4 y 3 | out .48 .58 y 4" data-fx-sync="dusk"><a href="hr-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/HR_Analytics_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="hr-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
+        <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4"><a href="hr-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/HR_Analytics_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="hr-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
-      <figure class="plate bare" data-fx="in .08 .34 y 8 | out .48 .58 y 4 | drift 12" data-fx-sync="dusk">
-        <svg id="questFig" class="figsvg" viewBox="0 0 490 410" role="img" aria-label="HR workforce attrition diagnostic stages: isolating early career tenure turnover, overtime burnout, and retention tiers across 1,470 employees."></svg>
-        <figcaption>fig. 08 &middot; hr attrition diagnostic stages &middot; overtime burnout &amp; early tenure isolation.</figcaption>
+      <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12">
+        <svg id="hrFig" class="figsvg" viewBox="0 0 490 410" role="img" aria-label="HR workforce attrition diagnostic stages: isolating early career tenure turnover, overtime burnout, and retention tiers across 1,470 employees.">
+          <!-- Background coordinate grid / ground line -->
+          <line x1="16" y1="368" x2="474" y2="368" stroke="var(--ink)" stroke-width="0.8" opacity="0.4"/>
+          
+          <!-- Isometric 3-Tier Staging Box (Same footprint as Fig. 08: x0=44, x1=212, dz=60) -->
+          <!-- Rear pencil projection (unfilled / potential workforce) -->
+          <path d="M 44 244 L 74 214 L 242 214 L 212 244 Z M 242 214 L 242 120 L 212 150 M 74 214 L 74 120 L 44 150" fill="none" stroke="var(--ink)" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.5"/>
+          
+          <!-- Tier 3: Active Headcount & Baseline (Top Tier) -->
+          <polygon points="44,244 212,244 212,182 44,182" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.4"/>
+          <polygon points="44,182 212,182 242,152 74,152" fill="rgba(246,239,226,.06)" stroke="var(--ink)" stroke-width="1.2"/>
+          <polygon points="212,244 242,214 242,152 212,182" fill="rgba(246,239,226,.03)" stroke="var(--ink)" stroke-width="1.2"/>
+          
+          <!-- Tier 2: Overtime Fatigue Gate (Middle Tier) -->
+          <polygon points="44,306 212,306 212,244 44,244" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.4"/>
+          <polygon points="212,306 242,276 242,214 212,244" fill="rgba(246,239,226,.03)" stroke="var(--ink)" stroke-width="1.2"/>
+          
+          <!-- Tier 1: 0-2 Yr Tenure Cliff (Bottom Tier) -->
+          <polygon points="44,368 212,368 212,306 44,306" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.8"/>
+          <polygon points="212,368 242,338 242,276 212,306" fill="rgba(246,239,226,.03)" stroke="var(--ink)" stroke-width="1.4"/>
+          
+          <!-- Floor Icons & Badges inside tiers -->
+          <!-- Tier 1 icon: Early Tenure Staircase -->
+          <path d="M 116 348 H 126 V 338 H 136 V 328 H 146" fill="none" stroke="var(--clay-g)" stroke-width="1.6" stroke-linecap="round"/>
+          <text x="128" y="360" font-family="var(--mono)" font-size="10" fill="var(--ink-2)" text-anchor="middle">0-2 yr tenure cliff</text>
+          
+          <!-- Tier 2 icon: Overtime Alert Indicator -->
+          <circle cx="128" cy="275" r="9" fill="none" stroke="var(--clay-g)" stroke-width="1.4"/>
+          <line x1="128" y1="269" x2="128" y2="276" stroke="var(--clay-g)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="128" cy="280" r="1" fill="var(--clay-g)"/>
+          <text x="128" y="297" font-family="var(--mono)" font-size="10" fill="var(--ink-2)" text-anchor="middle">overtime burnout: 30.5%</text>
+
+          <!-- Tier 3 icon: Active Retained Ledger -->
+          <rect x="115" y="202" width="26" height="18" rx="2" fill="none" stroke="var(--pine)" stroke-width="1.4"/>
+          <line x1="120" y1="208" x2="136" y2="208" stroke="var(--pine)" stroke-width="1.2"/>
+          <line x1="120" y1="213" x2="131" y2="213" stroke="var(--pine)" stroke-width="1.2"/>
+          <text x="128" y="235" font-family="var(--mono)" font-size="10" fill="var(--ink-2)" text-anchor="middle">1,470 headcount active</text>
+
+          <!-- Right-side Stage Labels & Connectors (Matching Fig. 08 style) -->
+          <!-- Leader 3 -->
+          <line x1="212" y1="213" x2="260" y2="213" stroke="var(--ink-2)" stroke-width="0.8"/>
+          <path d="M 266 211 l 3 2.5 l 6 -6" fill="none" stroke="var(--pine)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="282" y="216" font-family="var(--mono)" font-size="12" fill="var(--ink)">144 promotion-ready staff</text>
+          
+          <!-- Leader 2 -->
+          <line x1="212" y1="275" x2="260" y2="275" stroke="var(--ink-2)" stroke-width="0.8"/>
+          <path d="M 266 273 l 3 2.5 l 6 -6" fill="none" stroke="var(--pine)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="282" y="278" font-family="var(--mono)" font-size="12" fill="var(--ink)">234 retention watch (overtime)</text>
+
+          <!-- Leader 1 -->
+          <line x1="212" y1="337" x2="260" y2="337" stroke="var(--ink-2)" stroke-width="0.8"/>
+          <path d="M 266 335 l 3 2.5 l 6 -6" fill="none" stroke="var(--pine)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <text x="282" y="340" font-family="var(--mono)" font-size="12" fill="var(--ink)">DAX appraisal rules · 60% faster</text>
+          
+          <!-- Projected Upper Tier (Held Retention Ladder) -->
+          <line x1="212" y1="151" x2="260" y2="151" stroke="var(--ink-2)" stroke-width="0.8" stroke-dasharray="2 2"/>
+          <text x="266" y="146" font-family="var(--mono)" font-size="11" fill="var(--clay-g)">83.9% retained baseline</text>
+          <text x="266" y="160" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">$480K replacement cost saved</text>
+
+          <!-- Base Footnotes -->
+          <text x="16" y="388" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">ink: 16.1% attrition cliff &middot; pencil: 83.9% retained talent</text>
+          <text x="16" y="404" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">1,470 enterprise personnel &middot; power bi &amp; dax rule engine</text>
+        </svg>
+        <figcaption>fig. 08b &middot; hr workforce attrition stages &middot; overtime burnout &amp; early tenure isolation.</figcaption>
       </figure>
     </div>
   </section>
@@ -5024,7 +5114,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <li data-ph="4"><span class="lt">12:06</span><span class="st">credit risk</span><span class="pr"><b class="mv">$435.8M</b> portfolio</span></li>
         <li data-ph="5"><span class="lt">15:23</span><span class="st">fraud intelligence</span><span class="pr"><b class="mv">10.2×</b> anomaly</span></li>
         <li data-ph="6"><span class="lt">19:36</span><span class="st">emperor bi</span><span class="pr"><b class="mv">RM20.7M</b> sales</span></li>
-        <li data-ph="7"><span class="lt">21:07</span><span class="st">retention</span><span class="pr"><b class="mv">10,000</b> cohorts</span></li>
+        <li data-ph="7"><span class="lt">21:07</span><span class="st">churn analysis</span><span class="pr"><b class="mv">10,000</b> cohorts</span></li>
+        <li data-ph="8"><span class="lt">21:38</span><span class="st">hr attrition</span><span class="pr"><b class="mv">1,470</b> profiles</span></li>
         <li data-ph="8"><span class="lt">22:05</span><span class="st">retail &amp; fleet</span><span class="pr"><b class="mv">$307.1M</b> volume</span></li>
         <li data-ph="9"><span class="lt">22:23</span><span class="st">the review</span></li>
         <li data-ph="10"><span class="lt">22:32</span><span class="st">credentials</span></li>
@@ -10554,20 +10645,20 @@ function buildClimb(tight) {
         ys: [246, 206, 166, 126, 86, 46], gx: [8, 232], dy: 3, ldy: 11,
         names: ["01", "02", "03"],
         holds: [["04", "held"], ["05", "held"]],
-        foot: [[270, "01 tenure cliff · 02 overtime burnout"],
-               [286, "03 role attrition · 04 retained talent"],
-               [302, "05 retention ladder"],
-               [324, "ink: early tenure attrition · pencil: active talent"],
-               [340, "1,470 employee records · power bi"],
-               [356, "workforce analytics"]] }
+        foot: [[270, "01 tenure split · 02 payment friction"],
+               [286, "03 cohort survival · 04 1-yr locked"],
+               [302, "05 2-yr lifetime value"],
+               [324, "ink: month-to-month hazard · pencil: multi-year locked"],
+               [340, "10,000 subscribers · python"],
+               [356, "pandas & seaborn analytics"]] }
     : { vb: "0 0 490 410", vw: 490, vh: 410, dz: 60, th: 5,
         x0: 44, x1: 212, lead: 228, lx: 236, pole: 26, bulge: 7,
         ys: [368, 306, 244, 182, 120, 58], gx: [16, 474], dy: 4, ldy: 16,
-        names: ["0-2 yr tenure cliff", "overtime burnout (30.5%)", "departmental pay disparity"],
-        holds: [["active retained talent", "83.9% retention rate"],
-                ["predictive retention ladder", "$480K turnover saved"]],
-        foot: [[386, "ink: early tenure attrition · pencil: active retained talent"],
-               [404, "1,470 employee records · power bi workforce analytics"]] };
+        names: ["contract tenure split", "electronic payment friction", "cohort survival model"],
+        holds: [["1-yr locked cohort", "88% retention rate"],
+                ["2-yr locked cohort", "97% lifetime value"]],
+        foot: [[386, "ink: month-to-month hazard · pencil: multi-year locked"],
+               [404, "10,000 telecom subscribers · python pandas eda"]] };
   climb.g = g;
   s.setAttribute("viewBox", g.vb);
   const { x0, x1, ys, dz, th } = g, Yg = ys[0], top = ys[5];
@@ -12057,7 +12148,7 @@ function setStop(beat) {
    beat: 22:32 is the co-signers, 22:41 the gate. */
 const CLOCKS = [372, 418, 472, 527, 726, 923, 1176, 1267, 1325, 1343, 1352, 1361, 1812];
 const GATE_BEAT = 11; /* ¶12, the gate: the beat whose name changes when it opens */
-const PHASE_NAMES = ["the start", "who", "honda sales", "healthcare rcm", "bank loan analytics", "fraud intelligence", "emperor cuisine bi", "hr workforce", "retail & transit", "the review", "credentials", "the approval gate · held", "the next morning"];
+const PHASE_NAMES = ["the start", "who", "honda sales", "healthcare rcm", "bank loan analytics", "fraud intelligence", "emperor cuisine bi", "churn analysis", "retail & transit", "the review", "credentials", "the approval gate · held", "the next morning"];
 let lastClock = -1, lastPhase = -1;
 /* THE HOUR ANCHORS ON KICKER CROSSINGS, NOT ON BEAT BOXES.
    Reported 2026-08-08: at scrollY 0, with nothing scrolled, the masthead read
