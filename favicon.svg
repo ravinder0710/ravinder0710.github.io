@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <style>
+      .bg { fill: #24201c; stroke: #c4532e; stroke-width: 2.2; }
+      .inset { stroke: #fbf3e7; stroke-opacity: 0.22; }
+      .mono { fill: #fbf3e7; }
+      .dot { fill: #c4532e; }
+      .spark { stroke: #2f5d50; opacity: 0.7; }
+      .node { fill: #a8760c; }
+
+      @media (prefers-color-scheme: light) {
+        .bg { fill: #fbf3e7; stroke: #c4532e; }
+        .inset { stroke: #26231c; stroke-opacity: 0.15; }
+        .mono { fill: #26231c; }
+        .dot { fill: #c4532e; }
+        .spark { stroke: #2f5d50; opacity: 0.6; }
+        .node { fill: #a8760c; }
+      }
+    </style>
+  </defs>
+
+  <!-- Luxury Squircle Badge -->
+  <rect class="bg" x="2.5" y="2.5" width="59" height="59" rx="14"/>
+  
+  <!-- Archival Inset Border -->
+  <rect class="inset" x="5.5" y="5.5" width="53" height="53" rx="11" fill="none" stroke-width="0.75" stroke-dasharray="2 2"/>
+
+  <!-- Analytical Pipeline Sparkline -->
+  <path class="spark" d="M 12 47 L 22 41 L 34 44 L 46 33" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle class="node" cx="46" cy="33" r="1.75"/>
+
+  <!-- Serif Monogram 'RG' (Editorial Fraunces / Georgia) -->
+  <text class="mono" x="29" y="39.5" font-family="'Fraunces', 'Newsreader', Georgia, serif" font-size="26" font-weight="600" text-anchor="middle" letter-spacing="-0.5">RG</text>
+
+  <!-- Signature Editorial Terracotta Punctuation Dot -->
+  <circle class="dot" cx="48.5" cy="38.5" r="3.2"/>
+</svg>

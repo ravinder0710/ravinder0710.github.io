@@ -1,25 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#020617"/>
-    </linearGradient>
-    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#2563eb"/>
-    </linearGradient>
-    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#e0f2fe"/>
-    </linearGradient>
+    <style>
+      .bg { fill: #24201c; stroke: #c4532e; stroke-width: 2.2; }
+      .inset { stroke: #fbf3e7; stroke-opacity: 0.22; }
+      .mono { fill: #fbf3e7; }
+      .dot { fill: #c4532e; }
+      .spark { stroke: #2f5d50; opacity: 0.7; }
+      .node { fill: #a8760c; }
+
+      @media (prefers-color-scheme: light) {
+        .bg { fill: #fbf3e7; stroke: #c4532e; }
+        .inset { stroke: #26231c; stroke-opacity: 0.15; }
+        .mono { fill: #26231c; }
+        .dot { fill: #c4532e; }
+        .spark { stroke: #2f5d50; opacity: 0.6; }
+        .node { fill: #a8760c; }
+      }
+    </style>
   </defs>
-  <!-- Background Card -->
-  <rect x="2" y="2" width="60" height="60" rx="16" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="2.5"/>
-  <!-- Subtly Glowing Data Grid Lines -->
-  <path d="M 16 46 L 26 34 L 38 40 L 48 22" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.4"/>
-  <circle cx="48" cy="22" r="2.5" fill="#38bdf8" opacity="0.7"/>
-  <!-- Monogram RG -->
-  <text x="32" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="900" fill="url(#textGrad)" text-anchor="middle" letter-spacing="-0.5">RG</text>
-  <!-- Active Indicator Dot -->
-  <circle cx="50" cy="14" r="3.5" fill="#10b981"/>
+
+  <!-- Luxury Squircle Badge -->
+  <rect class="bg" x="2.5" y="2.5" width="59" height="59" rx="14"/>
+  
+  <!-- Archival Inset Border -->
+  <rect class="inset" x="5.5" y="5.5" width="53" height="53" rx="11" fill="none" stroke-width="0.75" stroke-dasharray="2 2"/>
+
+  <!-- Analytical Pipeline Sparkline -->
+  <path class="spark" d="M 12 47 L 22 41 L 34 44 L 46 33" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle class="node" cx="46" cy="33" r="1.75"/>
+
+  <!-- Serif Monogram 'RG' (Editorial Fraunces / Georgia) -->
+  <text class="mono" x="29" y="39.5" font-family="'Fraunces', 'Newsreader', Georgia, serif" font-size="26" font-weight="600" text-anchor="middle" letter-spacing="-0.5">RG</text>
+
+  <!-- Signature Editorial Terracotta Punctuation Dot -->
+  <circle class="dot" cx="48.5" cy="38.5" r="3.2"/>
 </svg>
