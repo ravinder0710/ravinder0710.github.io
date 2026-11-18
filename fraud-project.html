@@ -183,14 +183,18 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper">
-          <div class="plate-inner">
-            <img src="assets/fraud/data_architecture_pipeline.png" alt="FastMCP Forensic Engine Architecture" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
-          </div>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+          <a href="assets/fraud/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
+            <img src="assets/fraud/data_architecture_pipeline.png" alt="FastMCP Forensic Engine Architecture" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+          </a>
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+            <span>fig. 01 &middot; the behavioral risk &amp; fastmcp architecture &middot; </span>
+            <a href="assets/fraud/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+          </p>
         </div>
-        <figcaption>
-          <span class="fc-main">fig. 01 &middot; the fastmcp + claude ai forensic architecture.</span>
-          <span class="fc-note">banking raw logs &rarr; postgresql analytical views &rarr; fastmcp protocol &rarr; claude ai forensic anomaly detection.</span>
+        <figcaption style="margin-top:1.2rem;">
+          <span class="fc-main">fig. 01 &middot; the behavioral risk &amp; fastmcp surveillance architecture.</span>
+          <span class="fc-note">37,901 transactional logs ($784M volume) &rarr; power query etl &rarr; star schema model &rarr; ai-augmented dax surveillance engine via fastmcp.</span>
         </figcaption>
       </figure>
     </section>
