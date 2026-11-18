@@ -4483,7 +4483,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="handoff" data-fx="in .0 .11 y 3 | out .9 1.02 y -3 | drift 10 | phone 240"><a href="honda-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/honda-sales-analytics-powerbi-n8n" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/Honda_Sales_Analytics_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="honda-walkthrough.html" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
       <figure class="plate" data-fx="in .0 .09 | out .74 .97 y -7 s .985 | drift 12">
-        <svg id="pathFig" class="figsvg" viewBox="0 0 560 272" role="img" aria-label="Two feeder roads, one carrying 1.6 million OAS query logs from five years, with 1,153 users whose queries named a column, the other the Tableau and Workday records, hash-deduplicated over a REST API. Both run through one Python and SQL works: each record goes in at a door in its end wall and comes out of a door in its front wall toward the reader, ruled, into its product's drawer, where it stays; both products then merge onto one main line. Each product carries its disposition in the reviewer's own marks: the master inventory is drawn solid, checked with a tick, and checked in; the usage table of 57.8 million rows is drawn dashed, struck, and stays with IT Services."></svg>
+        <svg id="pathFig" class="figsvg" viewBox="0 0 560 272" role="img" aria-label="Two automated feeder streams, one carrying 5,617 Honda vehicle sales records across 12 models, the other regional dealership telemetry ingested via n8n automated webhooks. Both run through the Neon PostgreSQL cloud database: each record is validated and feeds directly into the Power BI DirectQuery cockpit tracking ₹59.63 Cr in live revenue."></svg>
         <figcaption>fig. 03 · two messy sources in, two products out.</figcaption>
       </figure>
     </div>
@@ -8187,7 +8187,7 @@ function buildPath(tight) {
     const t = el("text", a, parent); t.textContent = str; return t;
   };
   const fw = P((W.x0 + W.x1) / 2, W.zf, W.fdh + (tight ? 7.5 : 9));
-  T(fw[0], fw[1], "Python · SQL", null, "middle");
+  T(fw[0], fw[1], "Neon DB · n8n ETL", null, "middle");
   const dA = Y.lanes[0], dB = Y.lanes[1];
   const frontL = (ln) => P(ln.door - D.half, D.z0)[0], frontR = (ln) => P(ln.door + D.half, D.z0)[0];
   let marks;
@@ -8195,16 +8195,16 @@ function buildPath(tight) {
     /* the far source over its heap; the near source under its track; the
        inventory beside its drawer; the usage table under its drawer */
     const farTop = P(0, dB.Z)[1] - CH;
-    T(8, farTop - 30, "1.6M+ OAS query logs", "lit"); T(8, farTop - 16, "Jul 2020 to Jul 2025");
+    T(8, farTop - 30, "5,617 Vehicle Sales", "lit"); T(8, farTop - 16, "Dealership Telemetry");
     const nearY = P(0, dA.Z)[1];
-    T(8, nearY + 19, "Tableau + Workday", "lit"); T(8, nearY + 33, "hash dedup · REST API");
+    T(8, nearY + 19, "Regional Dealerships", "lit"); T(8, nearY + 33, "n8n Webhook · CSV");
     const ix = frontL(dA) - 8;
-    T(ix, my + 4, "master inventory", "lit", "end"); T(ix, my + 18, "10,453 × 35 fields", null, "end");
+    T(ix, my + 4, "Power BI DirectQuery", "lit", "end"); T(ix, my + 18, "₹59.63 Cr Revenue", null, "end");
     T(ix, my + 36, "checked in", "yd-note lit", "end");
     const R = Y.vb[0] - 8;
     T(R, my - 12, "main line", null, "end");
-    T(R, my + 22, "usage table", "lit", "end"); T(R, my + 36, "57.8M rows", null, "end");
-    T(R, my + 54, "stays with IT Services", "yd-note", "end");
+    T(R, my + 22, "Neon PostgreSQL", "lit", "end"); T(R, my + 36, "5,617 rows synced", null, "end");
+    T(R, my + 54, "cloud warehouse", "yd-note", "end");
     marks = [el("path", { d: D_FILED, class: "tickp", transform: `translate(${r1(ix - 84)} ${r1(my + 25)}) scale(1.4)` }, L.labels),
       /* seated as the tick is: immediately before its words, on their row,
          the tick's 11-unit gap (the words measure 115.7 at 13.5 px) */
@@ -8215,7 +8215,7 @@ function buildPath(tight) {
        (cards pass in front of it), the near post in front of the near track
        (cards pass behind it), the far board higher, its post running behind
        the near board; each product under its own drawer, side by side */
-    const boards = [[1, 6, "1.6M+ OAS query logs", "Jul 2020 to Jul 2025", 8], [0, 46, "Tableau + Workday", "hash dedup · REST API", 17]];
+    const boards = [[1, 6, "5,617 Vehicle Sales", "Dealership Telemetry", 8], [0, 46, "Regional Dealerships", "n8n Webhook · CSV", 17]];
     for (const [i, top, a, b, px] of boards) {
       const ln = Y.lanes[i], Zp = ln.Z + (i ? 9 : -9), foot = P(px + Zp * cx, Zp), w = i ? 151 : 158;
       /* the far post passes behind the near board: drawn as the two runs a
@@ -8226,12 +8226,10 @@ function buildPath(tight) {
       T(8, top + 14, a, "lit", null, L.boards); T(8, top + 28, b, null, null, L.boards);
     }
     const ir = frontR(dA), ul = frontL(dB);
-    T(ir, my + 20, "master inventory", "lit", "end"); T(ir, my + 34, "10,453 × 35 fields", null, "end");
+    T(ir, my + 20, "Power BI Cockpit", "lit", "end"); T(ir, my + 34, "₹59.63 Cr Revenue", null, "end");
     T(ir, my + 52, "checked in", "yd-note lit", "end");
-    T(ul, my + 20, "usage table", "lit"); T(ul, my + 34, "57.8M rows");
-    /* the disposition is indented by its own mark, which stands before it
-       as the tick stands before "checked in", with the tick's 6-unit gap */
-    T(ul + 20, my + 52, "stays with", "yd-note"); T(ul + 20, my + 66, "IT Services", "yd-note");
+    T(ul, my + 20, "Neon PostgreSQL", "lit"); T(ul, my + 34, "5,617 records");
+    T(ul + 20, my + 52, "synced to", "yd-note"); T(ul + 20, my + 66, "Cloud DB", "yd-note");
     T(trunkFrom - 6, my + 4, "main line", null, "end");
     marks = [el("path", { d: D_FILED, class: "tickp", transform: `translate(${r1(ir - 76)} ${r1(my + 42)}) scale(1.2)` }, L.labels),
       el("path", { d: D_HELD, class: "tickp withheld", transform: `translate(${r1(ul - 1.4)} ${r1(my + 41.3)}) scale(1.2)` }, L.labels)];
