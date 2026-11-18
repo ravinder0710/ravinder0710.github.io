@@ -87,15 +87,30 @@
       border-color: var(--ink);
     }
     .dax-box {
-      background: #181613;
-      color: #ede5d8;
+      background: var(--plate-solid, #fefbf2);
+      color: var(--ink, #26231c);
       border: 1px solid var(--hair-strong);
-      padding: 1.2rem 1.4rem;
-      margin-top: 1rem;
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      margin-top: 1.2rem;
       font-family: var(--mono);
-      font-size: var(--fs-code);
+      font-size: var(--fs-code, 0.85rem);
       overflow-x: auto;
-      line-height: 1.5;
+      line-height: 1.65;
+      box-shadow: 0 4px 20px rgba(38,35,28,.04);
+    }
+    .dax-box pre {
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background: none;
+    }
+    .dax-box code {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background: none;
     }
     .receipt-table {
       width: 100%;

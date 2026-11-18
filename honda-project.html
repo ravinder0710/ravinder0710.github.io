@@ -87,15 +87,30 @@
       border-color: var(--ink);
     }
     .dax-box {
-      background: #181613;
-      color: #ede5d8;
+      background: var(--plate-solid, #fefbf2);
+      color: var(--ink, #26231c);
       border: 1px solid var(--hair-strong);
-      padding: 1.2rem 1.4rem;
-      margin-top: 1rem;
+      border-radius: 4px;
+      padding: 1.4rem 1.6rem;
+      margin-top: 1.2rem;
       font-family: var(--mono);
-      font-size: var(--fs-code);
+      font-size: var(--fs-code, 0.85rem);
       overflow-x: auto;
-      line-height: 1.5;
+      line-height: 1.65;
+      box-shadow: 0 4px 20px rgba(38,35,28,.04);
+    }
+    .dax-box pre {
+      margin: 0;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background: none;
+    }
+    .dax-box code {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      background: none;
     }
     .receipt-table {
       width: 100%;
@@ -183,9 +198,9 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
           <a href="assets/honda/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
-            <img src="assets/honda/data_architecture_pipeline.png" alt="Honda Two-Wheelers Cloud Data Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+            <img src="assets/honda/data_architecture_pipeline.png" alt="Honda Two-Wheelers Cloud Data Architecture Pipeline" style="width:100%; height:auto; display:block; border:none; border-radius:2px; margin:0 auto; cursor:zoom-in; mix-blend-mode:multiply;">
           </a>
           <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
             <span>fig. 01 &middot; the automated etl &amp; directquery architecture &middot; </span>

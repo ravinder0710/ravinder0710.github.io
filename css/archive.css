@@ -769,3 +769,36 @@ html, * {
   background: var(--paper, #fbf3e7);
 }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   EDITORIAL THEME ENHANCEMENTS — Bespoke Paper & Light Dockets
+   ═══════════════════════════════════════════════════════════════ */
+.plate-paper {
+  background: var(--paper, #fbf3e7) !important;
+}
+
+.plate-paper img {
+  mix-blend-mode: multiply !important;
+  border: none !important;
+}
+
+.dax-box {
+  background: var(--plate-solid, #fefbf2) !important;
+  color: var(--ink, #26231c) !important;
+  border: 1px solid var(--hair-strong) !important;
+  border-radius: 4px !important;
+  padding: 1.4rem 1.6rem !important;
+  margin-top: 1.2rem !important;
+  font-family: var(--mono) !important;
+  font-size: var(--fs-code, 0.85rem) !important;
+  overflow-x: auto !important;
+  line-height: 1.65 !important;
+  box-shadow: 0 4px 20px rgba(38,35,28,.04) !important;
+}
+
+.dax-box pre,
+.dax-box code {
+  background: transparent !important;
+  color: var(--ink, #26231c) !important;
+  font-family: var(--mono) !important;
+}
