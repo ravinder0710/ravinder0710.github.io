@@ -183,14 +183,18 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper">
-          <div class="plate-inner">
-            <img src="assets/healthcare/healthcare_model_view.png" alt="Healthcare Star and Snowflake Schema Architecture" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
-          </div>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+          <a href="assets/healthcare/healthcare_model_view.png" target="_blank" title="Click to view full-resolution diagram">
+            <img src="assets/healthcare/healthcare_model_view.png" alt="Healthcare Star and Snowflake Schema Architecture" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+          </a>
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+            <span>fig. 01 &middot; the healthcare clinical encounters &amp; rcm relational model &middot; </span>
+            <a href="assets/healthcare/healthcare_model_view.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+          </p>
         </div>
-        <figcaption>
-          <span class="fc-main">fig. 01 &middot; the relational healthcare data model.</span>
-          <span class="fc-note">inpatient and emergency encounter fact tables connected to snowflake doctor specialties, icd-10 diagnoses, and date dimensions.</span>
+        <figcaption style="margin-top:1.2rem;">
+          <span class="fc-main">fig. 01 &middot; the healthcare provider &amp; rcm data architecture.</span>
+          <span class="fc-note">Snowflake schema uniting cities &rarr; patients, departments, diagnoses, insurance, procedures, providers, and dual-active Date_Table into central visits fact table (5,000 clinical encounters, treatment &amp; medication costs).</span>
         </figcaption>
       </figure>
     </section>
