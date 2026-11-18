@@ -4351,7 +4351,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <li data-proj="2"><a class="mrow" href="#cadence"><i class="mt">12:06</i><span class="lab"><b>credit risk</b><span class="mnoun">Bank Loan Portfolio</span><span class="m"><b class="mv">$435.8M</b> portfolio</span></span></a></li>
           <li data-proj="3"><a class="mrow" href="#glyph"><i class="mt">15:23</i><span class="lab"><b>fraud intelligence</b><span class="mnoun">FastMCP + Claude AI</span><span class="m"><b class="mv">10.2×</b> anomaly</span></span></a></li>
           <li data-proj="4"><a class="mrow" href="#jetpack-compress"><i class="mt">19:36</i><span class="lab"><b>emperor bi</b><span class="mnoun">Restaurant Analytics</span><span class="m"><b class="mv">RM20.7M</b> sales</span></span></a></li>
-          <li data-proj="5"><a class="mrow" href="#lifequest"><i class="mt">21:07</i><span class="lab"><b>retention</b><span class="mnoun">Customer Churn</span><span class="m"><b class="mv">10,000</b> cohorts</span></span></a></li>
+          <li data-proj="5"><a class="mrow" href="#lifequest"><i class="mt">21:07</i><span class="lab"><b>customer churn</b><span class="mnoun">Tenure &amp; Cohort EDA</span><span class="m"><b class="mv">10,000</b> cohorts</span></span></a></li>
           <li data-proj="6" data-print="night"><a class="mrow" href="#automl"><i class="mt">22:05</i><span class="lab"><b>retail &amp; fleet</b><span class="mnoun">xVelocity Engine</span><span class="m"><b class="mv">$307.1M</b> volume</span></span></a></li>
           <li data-print="night"><a class="mrow" href="#review"><i class="mt">22:23</i><span class="lab"><b>the review</b></span></a></li>
           <li data-print="night"><a class="mrow" href="#cosigners"><i class="mt">22:32</i><span class="lab"><b>credentials</b></span></a></li>
@@ -4722,7 +4722,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
       <div class="prose">
         <p class="kicker" data-fx="in .05 .28 y 4 | out .48 .58 y 4" data-fx-sync="dusk">¶ 08 · project 5 of 6 · <i>21:07</i></p>
         <p class="hourline" data-fx="in .05 .24 y 3 | out .94 1.04 y -3 | drift 8">dusk. isolating subscriber churn before cancellation occurs.</p>
-        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .48 .58 y 4 | drift 14" data-fx-sync="dusk" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">Retention Dynamics<span style="color:var(--clay)">.</span></h2>
+        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .48 .58 y 4 | drift 14" data-fx-sync="dusk" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">Customer Churn Analysis<span style="color:var(--clay)">.</span></h2>
         <figure class="borrowed" data-fx="in .09 .32 y 5 | drift 11" data-fx-sync="dusk">
           <blockquote>&ldquo;Retention is the only metric that compounds; acquisition without retention is a leaky bucket.&rdquo;</blockquote>
           <figcaption>Customer Analytics Principle &middot; 2026</figcaption>
@@ -6682,7 +6682,7 @@ const TRAV = [
      redraw. The freight is unchanged and still true — five columns, three
      inked full length and two stopping in mid-air over a clay hold, which
      is fig. 08's stair in miniature — so only the word for it moves. */
-  { beat: 6, n: 1, label: "lifequest’s three built, two held", draw: (c) => { /* three full, two stopping short */
+  { beat: 6, n: 1, label: "10,000 subscriber cohorts → python churn engine", draw: (c) => { /* three full, two stopping short */
       c.fillStyle = inkC["--plate-solid"]; c.strokeStyle = inkC["--ink"]; c.lineWidth = 1.2;
       c.beginPath(); c.roundRect(-8, -7.5, 16, 15, 2); c.fill(); c.stroke();
       c.beginPath(); /* the built three, full length */
@@ -10561,20 +10561,20 @@ function buildClimb(tight) {
         ys: [246, 206, 166, 126, 86, 46], gx: [8, 232], dy: 3, ldy: 11,
         names: ["01", "02", "03"],
         holds: [["04", "held"], ["05", "held"]],
-        foot: [[270, "01 mission card · 02 tier ladder"],
-               [286, "03 backend · 04 scale"],
-               [302, "05 finished product"],
-               [324, "ink: built · pencil: not"],
-               [340, "born march 2025, at the"],
-               [356, "social innovation weekend"]] }
+        foot: [[270, "01 tenure split · 02 payment friction"],
+               [286, "03 cohort survival · 04 1-yr locked"],
+               [302, "05 2-yr lifetime value"],
+               [324, "ink: month-to-month · pencil: locked"],
+               [340, "10,000 subscribers · python"],
+               [356, "pandas & seaborn analytics"]] }
     : { vb: "0 0 490 410", vw: 490, vh: 410, dz: 60, th: 5,
         x0: 44, x1: 212, lead: 228, lx: 236, pole: 26, bulge: 7,
         ys: [368, 306, 244, 182, 120, 58], gx: [16, 474], dy: 4, ldy: 16,
-        names: ["mission card", "tier ladder", "backend"],
-        holds: [["scale", "held · partner or funder"],
-                ["finished product", "held · not claimed"]],
-        foot: [[386, "ink: built · pencil: not"],
-               [404, "born at social innovation weekend, march 2025"]] };
+        names: ["contract tenure split", "payment friction eda", "cohort survival model"],
+        holds: [["1-yr locked cohort", "88% retention rate"],
+                ["2-yr locked cohort", "97% lifetime value"]],
+        foot: [[386, "ink: month-to-month hazard · pencil: multi-year locked"],
+               [404, "10,000 telecom subscribers · python pandas eda"]] };
   climb.g = g;
   s.setAttribute("viewBox", g.vb);
   const { x0, x1, ys, dz, th } = g, Yg = ys[0], top = ys[5];
