@@ -183,14 +183,18 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper">
-          <div class="plate-inner">
-            <img src="assets/transit/data_architecture_pipeline.png" alt="Public Transit Data Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
-          </div>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+          <a href="assets/transit/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
+            <img src="assets/transit/data_architecture_pipeline.png" alt="Public Transit Data Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+          </a>
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+            <span>fig. 01 &middot; the transit ridership star schema &middot; </span>
+            <a href="assets/transit/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+          </p>
         </div>
-        <figcaption>
-          <span class="fc-main">fig. 01 &middot; the transit telemetry pipeline.</span>
-          <span class="fc-note">gps dispatch logs &rarr; excel tabular star schema &rarr; claude ai mcp tool server &rarr; headway rebalancing cockpit.</span>
+        <figcaption style="margin-top:1.2rem;">
+          <span class="fc-main">fig. 01 &middot; the public transit ridership &amp; fleet data pipeline.</span>
+          <span class="fc-note">single-direction 1:N relationships uniting demographics, calendar, buses, and routes dimension tables with facttable ridership (6,587 trip records / $145K fares).</span>
         </figcaption>
       </figure>
     </section>
