@@ -183,14 +183,18 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper">
-          <div class="plate-inner">
-            <img src="assets/bank-loan/data_architecture_pipeline.png" alt="Bank Loan Risk Analytics Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair);">
-          </div>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper-2); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
+          <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
+            <img src="assets/bank-loan/data_architecture_pipeline.png" alt="Bank Loan Risk Analytics Architecture Pipeline" style="width:100%; height:auto; display:block; border:1px solid var(--hair); border-radius:2px; margin:0 auto; cursor:zoom-in;">
+          </a>
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+            <span>fig. 01 &middot; the bank loan data pipeline &middot; </span>
+            <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+          </p>
         </div>
-        <figcaption>
+        <figcaption style="margin-top:1.2rem;">
           <span class="fc-main">fig. 01 &middot; the bank loan analytics pipeline.</span>
-          <span class="fc-note">raw banking ledgers &rarr; mysql 8.0 cte window functions &rarr; tabular dax model &rarr; executive credit surveillance cockpit.</span>
+          <span class="fc-note">raw banking ledgers (38,576 records / $435M disbursed) &rarr; mysql 8.0 cte engine + python exploratory pipeline &rarr; power bi liquidity &amp; risk model.</span>
         </figcaption>
       </figure>
     </section>
