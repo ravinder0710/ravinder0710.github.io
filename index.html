@@ -13,6 +13,23 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <script>
 document.documentElement.classList.add("js");
+/* PERMANENT TOP-ON-REFRESH SETTING:
+   Always land at the top hero page (¶ 01 · the start) on page load or browser refresh.
+   Prevents browser scroll restoration or URL hash from bypassing the start of the journey. */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+if (location.hash && location.hash !== '#top' && location.hash !== '#start') {
+  history.replaceState(null, "", location.pathname + location.search);
+}
+window.scrollTo(0, 0);
+window.addEventListener('beforeunload', () => { window.scrollTo(0, 0); });
+window.addEventListener('pagehide', () => { window.scrollTo(0, 0); });
+window.addEventListener('DOMContentLoaded', () => { window.scrollTo(0, 0); });
+window.addEventListener('load', () => {
+  window.scrollTo(0, 0);
+  setTimeout(() => window.scrollTo(0, 0), 10);
+});
 /* THE REJOIN GUARD. A cold hash arrival is the one scroll offset this page
    is deterministic about, and the manifest dock was measured sitting on the
    very glyphs the citation names — 6 of 13 rejoin ids, worst case ¶04's
@@ -20104,7 +20121,8 @@ async function boot() {
      load painted the figures one frame before the rail (5 of 5). So the work
      is done here, before this frame paints, the way a scroll that finds the
      engine stopped does it, and the loop is told this y is already drawn. */
-  const y0 = scrollY;
+  window.scrollTo(0, 0);
+  const y0 = 0;
   if (PROF) {
     const t0 = performance.now();
     work(y0);
