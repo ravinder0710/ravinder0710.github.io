@@ -447,24 +447,24 @@ if (location.hash.length > 1) window.__arrive();
   .station .beat-inner{
     max-width:min(1380px, 94vw);
     max-height:calc(100vh - 60px);
-    display:grid; grid-template-columns:minmax(0,28.5rem) minmax(0,1fr);
+    display:grid; grid-template-columns:minmax(0,29.2rem) minmax(0,1fr);
     gap:clamp(1.5rem, 2.8vw, 2.75rem); align-items:center; width:100%;
   }
-  .station.flip .beat-inner{grid-template-columns:minmax(0,1fr) minmax(0,28.5rem)}
+  .station.flip .beat-inner{grid-template-columns:minmax(0,1fr) minmax(0,29.2rem)}
   .station.flip .prose{order:2}
   .station.flip .plate{order:1}
   .b4 .beat-inner{grid-template-columns:minmax(0,24rem) minmax(0,1fr)} /* the pad+net row needs the width */
   #netwrap{max-width:min(720px, 100%)}
   .station .plate{
     width:100%;
-    max-width:min(780px, 58vw);
+    max-width:min(730px, 55vw);
     max-height:calc(100vh - 70px);
     display:flex; flex-direction:column; justify-content:center;
-    padding:clamp(0.5rem, 1.2vw, 1rem);
+    padding:clamp(0.75rem, 1.6vw, 1.25rem);
     box-sizing:border-box;
   }
   .station .figsvg{
-    max-height:calc(100vh - 100px);
+    max-height:calc(100vh - 115px);
     width:100%; height:auto;
   }
   .station .prose{
@@ -634,7 +634,7 @@ if (location.hash.length > 1) window.__arrive();
        the meet lips on a side    measured: #c4532e on #e8dfcb — 3.43:1 / Lc 52.4
        the 12:00 on its tile      measured: #a03f20 on #fbf3e7 — 5.91:1 / Lc 74.9 */
   #cadFig{position:relative; padding-bottom:.6rem}
-  #cadFig .sent{position:relative; z-index:1; font-size:clamp(1.15rem, 1.8vw, 1.35rem); line-height:1.6; max-width:38ch}
+  #cadFig .sent{position:relative; z-index:1; font-size:clamp(1.1rem, 1.7vw, 1.32rem); line-height:1.6; max-width:38ch}
   /* a word's opacity is the parse's (--cad-o, written from p), never a
      transition: the same p is the same plate */
   #cadFig .sent .w{padding:.06em .12em; border-radius:2px; opacity:var(--cad-o, 1); transition:background .3s ease}
@@ -643,12 +643,12 @@ if (location.hash.length > 1) window.__arrive();
   #cadFig[data-hl="meet"] .w-meet{background:rgba(196,83,46,.16); opacity:1}
   /* the week stands flush left on the plate, 10 px short of its right edge:
      the plinth's step runs that far toward the reader */
-  #cadWeek{margin-top:1.5rem; width:min(540px, calc(100% - 14px)); position:relative}
+  #cadWeek{margin-top:1.5rem; width:min(490px, calc(100% - 12px)); position:relative}
   #cadWeek .hd{display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--hair);
-    font-family:var(--mono); font-size:.84rem; text-align:center; color:var(--ink-2)}
-  #cadWeek .hd span{padding:.45rem 0}
+    font-family:var(--mono); font-size:.77rem; text-align:center; color:var(--ink-2)}
+  #cadWeek .hd span{padding:.4rem 0}
   #cadWeek .hd span.tu{color:var(--clay)}
-  #cadWeek .grid{display:grid; grid-template-columns:repeat(7,1fr); grid-template-rows:repeat(4, 52px)}
+  #cadWeek .grid{display:grid; grid-template-columns:repeat(7,1fr); grid-template-rows:repeat(4, 42px)}
   #cadWeek .grid i{border-top:1px solid var(--hair); border-left:1px solid var(--hair)}
   #cadWeek .grid i:nth-child(7n+1){border-left-color:transparent}
   /* the tuesday slat's own head and cells: opaque paper over the drawing,
@@ -662,11 +662,11 @@ if (location.hash.length > 1) window.__arrive();
   #cadWeek .hd span.tu{border:1px solid var(--ink); border-bottom-color:var(--hair); margin:-1px 0 -1px}
   #cadWeek .grid i:nth-child(7n+2){border-left-color:var(--ink); border-right:1px solid var(--ink)}
   #cadWeek .grid i:nth-child(23){border-bottom:1px solid var(--ink)}
-#cadWeek .grid i{display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.86rem; font-style:normal; color:var(--ink)}
+#cadWeek .grid i{display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.77rem; font-style:normal; color:var(--ink)}
 #cadWeek .grid i.val-good{color:var(--pine); font-weight:600}
 #cadWeek .grid i.val-risk{color:var(--clay); font-weight:600}
 #cadWeek .grid i.val-num{color:var(--ink); font-weight:500}
-#cadWeek .grid i.val-cnt{color:var(--ink-2); font-size:.76rem}
+#cadWeek .grid i.val-cnt{color:var(--ink-2); font-size:.70rem}
 #cadWeek .grid i.val-hol{color:var(--ink-2); opacity:.35}
 #cadWeek .hd span.gr-act{font-weight:600; color:var(--ink)}
 #cadWeek .hd span.gr-hol{opacity:.4}
@@ -687,11 +687,11 @@ if (location.hash.length > 1) window.__arrive();
   /* the plinth's front: the event's three fields in a row, each chip's
      own box laid out here (rule 4 again); 17 px in is the step (10) plus
      the plinth's margin (7) */
-  #cadDock{margin:18px 0 0 17px; width:min(520px, calc(100% - 24px)); display:flex; flex-wrap:wrap; gap:12px .6rem}
+  #cadDock{margin:18px 0 0 17px; width:min(473px, calc(100% - 24px)); display:flex; flex-wrap:wrap; gap:12px .6rem}
   .chip{
     position:relative; z-index:5; white-space:nowrap;
-    font-family:var(--mono); font-size:.82rem; letter-spacing:.04em;
-    padding:.35rem .65rem; background:var(--ink-inverse); border:1px solid var(--ink-2);
+    font-family:var(--mono); font-size:.77rem; letter-spacing:.04em;
+    padding:.32rem .6rem; background:var(--ink-inverse); border:1px solid var(--ink-2);
     color:var(--ink); opacity:0; cursor:default;
   }
   .chip.meet{border-color:var(--clay-g); color:var(--clay)}
