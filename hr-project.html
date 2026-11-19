@@ -198,13 +198,92 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
-          <a href="assets/hr/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
-            <img src="assets/hr/data_architecture_pipeline.png" alt="HR Workforce Intelligence &amp; Decision Support Pipeline" style="width:100%; height:auto; display:block; border:none; border-radius:2px; margin:0 auto; cursor:zoom-in; mix-blend-mode:multiply;">
-          </a>
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+          <div class="arch-diagram-wrap">
+            <div class="arch-flow">
+
+              <!-- Stage 1 -->
+              <div class="arch-card">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Enterprise Personnel Roster</span>
+                  <span class="arch-metric-pill">2,925 Total Headcount</span>
+                </div>
+                <div class="arch-title">Raw HR Personnel Records</div>
+                <div class="arch-detail">Multi-departmental HRMS logs capturing salary tiers, job roles, commute distance, overtime hours, tenure milestones, and voluntary departure flags.</div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>Power Query M-Engine ETL &amp; Bucket Binning</span></div>
+
+              <!-- Stage 2 -->
+              <div class="arch-card">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Feature Transformation</span>
+                  <span class="arch-metric-pill">M-Code Pipeline</span>
+                </div>
+                <div class="arch-title">Age Grouping &amp; Distance Buckets</div>
+                <div class="arch-detail">Categorizes continuous employee attributes into analytical bins: 5 age bands (Under 25 to 55+), 3 distance zones, and job satisfaction ratings (1 to 4).</div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>Tabular Semantic Normalization</span></div>
+
+              <!-- Stage 3 -->
+              <div class="arch-card" style="border-left:3px solid var(--clay);">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Analytical Model</span>
+                  <span class="arch-metric-pill">2,925 Rows &times; 35 Dimensions</span>
+                </div>
+                <div class="arch-title">Master Workforce Data Model</div>
+                <div class="arch-detail">Clean dimensional architecture powering 6 analytical views (Overview, Demographics, Job Roles, Compensation, Performance, Retention).</div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>DAX Business Rule Engine</span></div>
+
+              <!-- Stage 4: Dual Decision Engines -->
+              <div class="arch-grid-2">
+                <!-- Engine A: Attrition Intelligence -->
+                <div class="arch-group" style="background:#ffffff; border:1px solid var(--clay);">
+                  <div class="arch-group-title" style="color:var(--clay);">Attrition Intelligence</div>
+                  
+                  <div class="arch-subcard" style="border-left:3px solid var(--clay);">
+                    <div class="arch-kicker">High-Risk Cohort</div>
+                    <div class="arch-subcard-title">R&amp;D (56.7%) &middot; Entry-Level (57.1%)</div>
+                    <div class="arch-subcard-desc">Flight-risk concentrated in mandatory overtime technical positions.</div>
+                  </div>
+
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Baseline Census</div>
+                    <div class="arch-subcard-title">Active: 2,433 &middot; Departed: 492</div>
+                    <div class="arch-subcard-desc">16.82% overall workforce attrition benchmark across operational facilities.</div>
+                  </div>
+                </div>
+
+                <!-- Engine B: Decision Support -->
+                <div class="arch-group" style="background:#ffffff; border:1px solid var(--pine, #2d5a27);">
+                  <div class="arch-group-title" style="color:var(--pine);">Decision Support System</div>
+                  
+                  <div class="arch-subcard" style="border-left:3px solid var(--pine, #2d5a27);">
+                    <div class="arch-kicker" style="color:var(--pine);">Stagnation Risk</div>
+                    <div class="arch-subcard-title">Promotion Review: 144 Staff</div>
+                    <div class="arch-subcard-desc">10-15 years company tenure without promotion; targeted career pathway staging.</div>
+                  </div>
+
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Transition Review</div>
+                    <div class="arch-subcard-title">Retrenchment Review: 234 Staff</div>
+                    <div class="arch-subcard-desc">18+ years service; severance liability modeling &amp; succession planning.</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
             <span>fig. 01 &middot; the hr workforce &amp; decision support pipeline architecture &middot; </span>
-            <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+            <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
           </p>
         </div>
         <figcaption style="margin-top:1.2rem;">

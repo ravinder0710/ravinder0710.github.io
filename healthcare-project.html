@@ -198,13 +198,101 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
-          <a href="assets/healthcare/healthcare_model_view.png" target="_blank" title="Click to view full-resolution diagram">
-            <img src="assets/healthcare/healthcare_model_view.png" alt="Healthcare Star and Snowflake Schema Architecture" style="width:100%; height:auto; display:block; border:none; border-radius:2px; margin:0 auto; cursor:zoom-in; mix-blend-mode:multiply;">
-          </a>
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+          <div class="arch-diagram-wrap">
+            <div class="arch-flow">
+
+              <!-- Dimension Tables Layer -->
+              <div class="arch-group">
+                <div class="arch-group-title">Normalized Clinical &amp; Provider Dimensions</div>
+                
+                <div class="arch-grid-3">
+                  <!-- Cities -> Patients Hierarchy -->
+                  <div class="arch-subcard" style="border-left:3px solid var(--clay);">
+                    <div class="arch-kicker">Patient Snowflake</div>
+                    <div class="arch-subcard-title">cities &rarr; patients</div>
+                    <div class="arch-subcard-desc">City_ID normalized into patient demographics &amp; regional cohorts</div>
+                  </div>
+
+                  <!-- Departments & Diagnoses -->
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Clinical Specialty</div>
+                    <div class="arch-subcard-title">departments &middot; diagnoses</div>
+                    <div class="arch-subcard-desc">ICD-10 clinical diagnosis mappings &amp; triage specialty wings</div>
+                  </div>
+
+                  <!-- Insurance & Providers -->
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Payer &amp; Staff</div>
+                    <div class="arch-subcard-title">insurance &middot; providers</div>
+                    <div class="arch-subcard-desc">Payer commercial contracts &amp; attending physician profiles</div>
+                  </div>
+                </div>
+
+                <!-- Date Table with Inactive Relationship -->
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--pine, #2d5a27);">
+                  <div class="arch-card-header">
+                    <span class="arch-kicker" style="color:var(--pine);">Time Intelligence &middot; Dual-Role Calendar</span>
+                    <span class="arch-metric-pill">Active + Inactive Relationship</span>
+                  </div>
+                  <div class="arch-subcard-title">Date_Table (Calendar Dimension)</div>
+                  <div class="arch-subcard-desc">Active relationship on <code>Date_of_Visit</code>; secondary role-playing relationship on <code>Admitted_Date</code> activated via DAX <code>USERELATIONSHIP()</code>.</div>
+                </div>
+
+              </div>
+
+              <!-- Relationship Connectors -->
+              <div class="arch-arrow">
+                <span>&darr; 1:N Single-Direction Relational Integrity (PK &rarr; FK Enforced)</span>
+              </div>
+
+              <!-- Central Visits Fact Table -->
+              <div class="arch-card" style="border:1.5px solid var(--clay);">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Central Encounter Ledger</span>
+                  <span class="arch-metric-pill">5,000 Clinical Encounters</span>
+                </div>
+                <div class="arch-title">visits Fact Table</div>
+                <div class="arch-detail" style="margin-bottom:0.6rem;">Consolidates inpatient, outpatient, emergency admissions, bed stay charges, medication expenditure, insurance claim recovery, and denial audit flags.</div>
+
+                <div class="arch-grid-2">
+                  <table class="arch-schema-table">
+                    <thead><tr><th>Key Fields</th><th>Type</th></tr></thead>
+                    <tbody>
+                      <tr><td><span class="pk">visit_id (PK)</span></td><td>int</td></tr>
+                      <tr><td><span class="fk">Date_of_Visit (FK)</span></td><td>date</td></tr>
+                      <tr><td><span class="fk">Admitted_Date (FK)</span></td><td>date</td></tr>
+                      <tr><td>Discharge_Date</td><td>date</td></tr>
+                      <tr><td><span class="fk">Patient_ID (FK)</span></td><td>int</td></tr>
+                      <tr><td><span class="fk">Provider_ID (FK)</span></td><td>int</td></tr>
+                      <tr><td><span class="fk">Department_ID (FK)</span></td><td>int</td></tr>
+                      <tr><td><span class="fk">Diagnosis_ID (FK)</span></td><td>int</td></tr>
+                    </tbody>
+                  </table>
+
+                  <table class="arch-schema-table">
+                    <thead><tr><th>Financial / Clinical Measures</th><th>Type</th></tr></thead>
+                    <tbody>
+                      <tr><td><span class="fk">Procedure_ID (FK)</span></td><td>int</td></tr>
+                      <tr><td><span class="fk">Insurance_ID (FK)</span></td><td>int</td></tr>
+                      <tr><td>Service_Type</td><td>string</td></tr>
+                      <tr><td>Treatment_Cost</td><td>decimal</td></tr>
+                      <tr><td>Medication_Cost</td><td>decimal</td></tr>
+                      <tr><td>Insurance_Coverage</td><td>decimal</td></tr>
+                      <tr><td>Room_Charges_daily_rate</td><td>decimal</td></tr>
+                      <tr><td>Patient_Satisfaction_Score</td><td>int</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
             <span>fig. 01 &middot; the healthcare clinical encounters &amp; rcm relational model &middot; </span>
-            <a href="assets/healthcare/healthcare_model_view.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+            <a href="assets/healthcare/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
           </p>
         </div>
         <figcaption style="margin-top:1.2rem;">

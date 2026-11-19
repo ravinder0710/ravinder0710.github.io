@@ -198,13 +198,73 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
-          <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" title="Click to view full-resolution diagram">
-            <img src="assets/bank-loan/data_architecture_pipeline.png" alt="Bank Loan Risk Analytics Architecture Pipeline" style="width:100%; height:auto; display:block; border:none; border-radius:2px; margin:0 auto; cursor:zoom-in; mix-blend-mode:multiply;">
-          </a>
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:0.8rem; text-align:center;">
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+          <div class="arch-diagram-wrap">
+            <div class="arch-flow">
+
+              <!-- Stage 1 -->
+              <div class="arch-card">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Core Banking Ledger</span>
+                  <span class="arch-metric-pill">$435M Disbursed &middot; 38,576 Accounts</span>
+                </div>
+                <div class="arch-title">Raw Transactional Loan Ledger</div>
+                <div class="arch-detail">Enterprise retail loan origination database tracking disbursement amounts, funded values, installment terms, interest rates, DTI ratios, and credit grades A through G.</div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>Data Ingestion &amp; Date Normalization</span></div>
+
+              <!-- Stage 2: Dual Branch (MySQL + Python) -->
+              <div class="arch-grid-2">
+                <div class="arch-card" style="border-left:3px solid var(--clay);">
+                  <div class="arch-kicker">SQL Engineering</div>
+                  <div class="arch-title" style="font-size:0.95rem;">MySQL Analytical Engine</div>
+                  <div class="arch-detail">37 production SQL CTEs &amp; window functions calculating MoM loan application growth, revolving balance exposure, and grade-level repayment ratios.</div>
+                </div>
+
+                <div class="arch-card" style="border-left:3px solid var(--pine, #2d5a27);">
+                  <div class="arch-kicker" style="color:var(--pine);">Statistical Audit</div>
+                  <div class="arch-title" style="font-size:0.95rem;">Python Exploratory Pipeline</div>
+                  <div class="arch-detail">Seaborn &amp; Matplotlib visual distributions profiling default hazard rate, term spread (36 vs 60 mo), and home ownership risk clustering.</div>
+                </div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>Reconciled Semantic Modeling</span></div>
+
+              <!-- Stage 3: Power BI Architecture -->
+              <div class="arch-card" style="border:1.5px solid var(--clay);">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Executive BI Cockpit</span>
+                  <span class="arch-metric-pill">Star Schema Modeling</span>
+                </div>
+                <div class="arch-title">Power BI Liquidity &amp; Risk Architecture</div>
+                <div class="arch-detail">Interactive liquidity cockpit featuring dynamic DAX tranche filters, loan purpose breakdown, regional state heatmaps, and cashflow recovery projections.</div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>Portfolio Tranche Classification</span></div>
+
+              <!-- Stage 4: Outcomes Grid -->
+              <div class="arch-grid-2">
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--pine, #2d5a27);">
+                  <div class="arch-subcard-title" style="color:var(--pine);">Good Loan Surplus: +$65.56M Net</div>
+                  <div class="arch-subcard-desc">86.2% of total portfolio performing cleanly; $370.2M principal active with healthy repayment velocity.</div>
+                </div>
+
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--clay);">
+                  <div class="arch-subcard-title" style="color:var(--clay);">Bad Loan Recovery: 56.9% ($28.25M)</div>
+                  <div class="arch-subcard-desc">13.8% non-performing asset isolation; $65.5M charged-off balances mitigated through structured recovery tracing.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
             <span>fig. 01 &middot; the bank loan data pipeline &middot; </span>
-            <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open full diagram &#8599;</a>
+            <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
           </p>
         </div>
         <figcaption style="margin-top:1.2rem;">

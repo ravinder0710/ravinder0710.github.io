@@ -802,3 +802,34 @@ html, * {
   color: var(--ink, #26231c) !important;
   font-family: var(--mono) !important;
 }
+
+
+/* ————— ARCHITECTURE VECTOR DIAGRAMS (CASE STUDIES FIG. 01) ————— */
+.arch-diagram-wrap { width: 100%; margin: 0 auto; text-align: left; }
+.arch-flow { display: flex; flex-direction: column; gap: 0.45rem; width: 100%; }
+.arch-card { background: #ffffff; border: 1px solid var(--hair, rgba(0,0,0,0.12)); border-radius: 4px; padding: 0.75rem 1rem; box-shadow: 0 1px 4px rgba(0,0,0,0.03); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+.arch-card:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,0.06); }
+.arch-card-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; }
+.arch-kicker { font-family: var(--mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--clay, #c4532e); font-weight: 700; }
+.arch-metric-pill { font-family: var(--mono); font-size: 0.65rem; font-weight: 600; color: var(--ink, #1a1714); background: rgba(196,83,46,0.08); border: 1px solid rgba(196,83,46,0.22); border-radius: 3px; padding: 0.1rem 0.4rem; }
+.arch-title { font-family: var(--display, serif); font-size: 1.05rem; font-weight: 600; color: var(--ink, #1a1714); line-height: 1.25; }
+.arch-detail { font-family: var(--sans, sans-serif); font-size: 0.76rem; color: var(--ink-2, #6b6357); margin-top: 0.25rem; line-height: 1.35; }
+.arch-arrow { display: flex; align-items: center; justify-content: center; gap: 0.4rem; font-family: var(--mono); font-size: 0.72rem; color: var(--ink-2); padding: 0.1rem 0; }
+.arch-arrow span { font-size: 0.65rem; letter-spacing: 0.04em; color: var(--clay); font-weight: 600; }
+.arch-group { background: rgba(251, 243, 231, 0.5); border: 1px dashed rgba(196, 83, 46, 0.35); border-radius: 6px; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.arch-group-title { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--clay); }
+.arch-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+.arch-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+.arch-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.arch-grid-5 { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.5rem; }
+.arch-subcard { background: #ffffff; border: 1px solid var(--hair, rgba(0,0,0,0.12)); border-radius: 4px; padding: 0.55rem 0.65rem; }
+.arch-subcard-title { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; color: var(--ink); line-height: 1.2; }
+.arch-subcard-desc { font-family: var(--sans); font-size: 0.72rem; color: var(--ink-2); margin-top: 0.2rem; line-height: 1.25; }
+.arch-schema-table { width: 100%; border-collapse: collapse; font-family: var(--mono); font-size: 0.72rem; background: #ffffff; border: 1px solid var(--hair); border-radius: 4px; overflow: hidden; }
+.arch-schema-table th { background: #f4ede2; color: var(--ink); font-weight: 700; padding: 0.35rem 0.6rem; text-align: left; border-bottom: 1px solid var(--hair); font-size: 0.7rem; }
+.arch-schema-table td { padding: 0.25rem 0.6rem; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--ink-2); }
+.arch-schema-table tr:last-child td { border-bottom: none; }
+.arch-schema-table .pk { color: var(--clay); font-weight: 700; }
+.arch-schema-table .fk { color: var(--pine, #2d5a27); font-weight: 600; }
+@media (max-width: 768px) { .arch-grid-3, .arch-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .arch-grid-2, .arch-grid-3, .arch-grid-4 { grid-template-columns: 1fr; } }
