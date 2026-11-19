@@ -7187,6 +7187,13 @@ function appliedWide(s, el) {
         const [tx, ty] = appliedP(x0 + 6, base - (words.length - 1 - li) * 16, z0);
         return appliedText(el, L.cab, tx, ty, wd, "a4hole");
       }));
+      /* Seeded 2 patients in each slot (matching 3 patients per slot red-dots) */
+      const pType = APPLIED_PLAN.findIndex(([d, w]) => d === k && w[0] === words[0]);
+      [36, 50].forEach((dx) => {
+        const [px, py] = appliedP(x0 + dx, base + 8, z0);
+        const pg = el("g", { transform: `translate(${a4n(px)} ${a4n(py)})`, opacity: "0.85" }, L.cab);
+        makePatientFigure(el, pg, pType >= 0 ? pType : 0);
+      });
     });
     right = x1 + 0.866 * z1;
   }
@@ -7253,6 +7260,17 @@ function appliedWide(s, el) {
     const e = slot[k]++, r = rows[k].length - 1 - e;
     const way = [start, [X[k], G.yb, lane], [X[k], G.yb, z0 + 6], [X[k], rows[k][r], z0 + 6]];
     M.pieces.push(appliedPiece(i, k, way, holes[k][e]));
+  });
+  /* 3 Patients queued on left intake belt & 3 under intake desks */
+  [12, 28, 44].forEach((qx, qi) => {
+    const [px, py] = appliedP(qx, G.yb + 2, G.lanes[qi % 2]);
+    const qg = el("g", { transform: `translate(${a4n(px)} ${a4n(py)})` }, L.front);
+    makePatientFigure(el, qg, (qi + 2) % 4);
+  });
+  X.forEach((xd, xi) => {
+    const [px, py] = appliedP(xd, G.yb + 2, G.lanes[xi % 2]);
+    const dg = el("g", { transform: `translate(${a4n(px)} ${a4n(py)})` }, L.front);
+    makePatientFigure(el, dg, xi % 4);
   });
   M.ringC = appliedP(held, G.yb - 7, G.lanes[1]);
   M.ringR = 17;
@@ -7343,6 +7361,50 @@ function appliedTight(s, el) {
   return { M, L };
 }
 
+function makePatientFigure(el, g, idx) {
+  /* Clean editorial line-art patient encounter person (H=20, W=14) */
+  const m = (idx % 8 + 8) % 8;
+  /* Head */
+  el("circle", { cx: "0", cy: "-15", r: "3.5", fill: "var(--plate)", stroke: "var(--ink)", "stroke-width": "1.3" }, g);
+  /* Torso */
+  el("polygon", { points: "-4.5,-10 4.5,-10 3.5,0 -3.5,0", fill: "var(--ink-inverse)", stroke: "var(--ink)", "stroke-width": "1.3" }, g);
+  /* Legs */
+  el("line", { x1: "-2", y1: "0", x2: "-2", y2: "7", stroke: "var(--ink)", "stroke-width": "1.5" }, g);
+  el("line", { x1: "2", y1: "0", x2: "2", y2: "7", stroke: "var(--ink)", "stroke-width": "1.5" }, g);
+
+  if (m === 0) {
+    /* 0: Inpatient (Hospital gown with admission wristband) */
+    el("polygon", { points: "-5.5,-10 5.5,-10 7,2 -7,2", fill: "var(--ink-inverse)", stroke: "var(--ink)", "stroke-width": "1.2" }, g);
+    el("rect", { x: "3.5", y: "-5", width: "3", height: "2", fill: "var(--clay)" }, g);
+  } else if (m === 1) {
+    /* 1: Outpatient (Clinical health record file folder) */
+    el("rect", { x: "2", y: "-8", width: "5.5", height: "7", fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1" }, g);
+    el("line", { x1: "3.5", y1: "-5", x2: "6", y2: "-5", stroke: "var(--clay)", "stroke-width": "0.7" }, g);
+  } else if (m === 2) {
+    /* 2: Emergency (Terracotta arm sling & head bandage) */
+    el("line", { x1: "-3", y1: "-15", x2: "3", y2: "-15", stroke: "var(--clay)", "stroke-width": "1.4" }, g);
+    el("polygon", { points: "-2.5,-8 4,-4 -1,0", fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1.2" }, g);
+  } else if (m === 3) {
+    /* 3: Day Care (Senior patient with support cane) */
+    el("line", { x1: "6", y1: "-5", x2: "6", y2: "7", stroke: "var(--ink)", "stroke-width": "1.4" }, g);
+    el("path", { d: "M 4 -7 A 2 2 0 0 1 6 -5", fill: "none", stroke: "var(--ink)", "stroke-width": "1.4" }, g);
+  } else if (m === 4) {
+    /* 4: Paid Claim (Green verification checkmark) */
+    el("circle", { cx: "5", cy: "-12", r: "2.2", fill: "var(--pine)" }, g);
+    el("path", { d: "M 4 -12 L 5 -11 L 6.5 -13", stroke: "var(--ink-inverse)", "stroke-width": "0.7", fill: "none" }, g);
+  } else if (m === 5) {
+    /* 5: Remittance (Remittance statement EOB token) */
+    el("rect", { x: "2.5", y: "-8", width: "5", height: "6", fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "0.9" }, g);
+  } else if (m === 6) {
+    /* 6: Adjudication Pending (Amber pending review badge) */
+    el("circle", { cx: "5", cy: "-12", r: "2.2", fill: "var(--clay)" }, g);
+  } else {
+    /* 7: Denial Audit (Flagged claim patient with red appeal flag) */
+    el("line", { x1: "4", y1: "-14", x2: "4", y2: "2", stroke: "var(--clay)", "stroke-width": "1.2" }, g);
+    el("polygon", { points: "4,-14 9,-11 4,-8", fill: "var(--clay)" }, g);
+  }
+}
+
 function buildApplied(tight) {
   const s = applied.svg, el = svgIn(s);
   s.textContent = ""; s.classList.toggle("tight", !!tight);
@@ -7361,8 +7423,7 @@ function buildApplied(tight) {
       const host = band < 2 ? layer : L.back.querySelector(`[data-case="${pc.k}"]`) ||
         el("g", { "data-case": pc.k, "clip-path": `url(#a4-case${Math.min(pc.k, 2)})` }, L.back);
       const g = el("g", { class: cls, visibility: "hidden" }, host);
-      el("rect", { x: -10, y: -14, width: 20, height: 14, class: "mk a4paper" }, g);
-      el("path", { d: "M -10 -14 L 0 -6.5 L 10 -14", class: "mkflap" }, g);
+      makePatientFigure(el, g, pc.i);
       applied.marks.push({ g, k: pc.k });
       return g;
     });
