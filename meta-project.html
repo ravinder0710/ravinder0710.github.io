@@ -197,74 +197,68 @@
         </ul>
       </div>
 
-      <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
-          <div class="arch-diagram-wrap">
-            <div class="arch-flow">
+            <figure class="plate-fig">
+        <div class="v-canvas">
+          <div style="width:100%; max-width:620px; display:flex; flex-direction:column; align-items:center;">
 
-              <!-- Dimensions Group -->
-              <div class="arch-group">
-                <div class="arch-group-title">Dimensions Layer (Snowflake Star Model)</div>
+            <div class="v-group">
+              <div class="v-group-tag">Dimensions</div>
+              <div class="v-row" style="align-items:flex-start;">
                 
-                <div class="arch-grid-2">
-                  <!-- Campaigns & Creatives Hierarchy -->
-                  <div class="arch-subcard" style="border-left:3px solid var(--clay);">
-                    <div class="arch-kicker">Campaign Hierarchy</div>
-                    <div class="arch-subcard-title">Campaigns Dim &middot; 50 Campaigns</div>
-                    <div class="arch-subcard-desc">Budget allocation, campaign objective &amp; flight duration</div>
-                    <div style="margin:0.4rem 0 0.2rem; font-family:var(--mono); font-size:0.65rem; color:var(--clay); text-align:center;">&darr; 1:N (campaign_id)</div>
-                    <div class="arch-subcard-title">Ads Dim &middot; 200 Creatives</div>
-                    <div class="arch-subcard-desc">Ad format, creative variant, placement target</div>
+                <div style="flex:1.2; display:flex; flex-direction:column; align-items:center;">
+                  <div class="v-box" style="width:100%;">
+                    <b>Campaigns Dim - 50 Campaigns</b>
+                    <div class="v-box-sm">(Budget &amp; Duration)</div>
                   </div>
-
-                  <!-- Audience Demographics -->
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Audience Cohort</div>
-                    <div class="arch-subcard-title">Users Dim &middot; 9,841 Users</div>
-                    <div class="arch-subcard-desc">Age brackets, gender segmentation, geo-location telemetry &amp; device categories</div>
+                  <div class="v-arrow-down" style="margin:0.2rem 0;">
+                    <div class="v-arrow-label" style="font-size:0.58rem;">1:N (campaign_id)</div>
+                    <div class="v-arrow-line" style="height:12px;"></div><div class="v-arrow-head"></div>
+                  </div>
+                  <div class="v-box" style="width:100%;">
+                    <b>Ads Dim - 200 Creatives</b>
+                    <div class="v-box-sm">(Format, Platform, Target)</div>
                   </div>
                 </div>
 
-                <div class="arch-grid-2">
-                  <!-- Calendar Time Dimension -->
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Time Intelligence</div>
-                    <div class="arch-subcard-title">Calendar Table Dim</div>
-                    <div class="arch-subcard-desc">Date, Fiscal Month, ISO Week, Weekday/Weekend seasonality markers</div>
-                  </div>
+                <div class="v-box" style="flex:1;">
+                  <b>Users Dim - 9,841 Users</b>
+                  <div class="v-box-sm">(Age, Gender, Country)</div>
+                </div>
 
-                  <!-- Dynamic Field Parameter Switcher -->
-                  <div class="arch-subcard" style="border-left:3px solid var(--pine, #2d5a27);">
-                    <div class="arch-kicker" style="color:var(--pine);">Interactive Engine</div>
-                    <div class="arch-subcard-title">Field Parameter Switcher</div>
-                    <div class="arch-subcard-desc">Dynamic measure binding: toggles ROAS, CPA, CVR &amp; CTR on a single chart visual</div>
-                  </div>
+                <div class="v-box" style="flex:1;">
+                  <b>Calendar Table Dim</b>
+                  <div class="v-box-sm">Date, Month, Weekday</div>
+                </div>
+
+                <div class="v-box" style="flex:1;">
+                  <b>Select Dynamic Measure</b>
+                  <div class="v-box-sm">Field Parameter Switcher</div>
                 </div>
 
               </div>
-
-              <!-- Relationship Connectors -->
-              <div class="arch-arrow">
-                <span>&darr; 1:N (ad_id) &middot; 1:N (user_id) &middot; 1:N (event_date) &middot; Dynamic Parameter Binding</span>
-              </div>
-
-              <!-- Central Fact Layer -->
-              <div class="arch-card" style="border:1.5px solid var(--clay); background:#ffffff;">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Central Fact Ledger</span>
-                  <span class="arch-metric-pill">400,000 Event Logs</span>
-                </div>
-                <div class="arch-title">ad_events Fact Table</div>
-                <div class="arch-detail">Single-direction 1:N relational bridge tracking raw impression logs, click-through timestamps, conversion funnels, ad spend currency, and attributed e-commerce revenue.</div>
-              </div>
-
             </div>
+
+            <div style="width:100%; display:flex; justify-content:space-around; margin:0.3rem 0; font-family:var(--mono); font-size:0.62rem; color:#444;">
+              <div style="text-align:center;">&darr; 1:N (ad_id)</div>
+              <div style="text-align:center;">&darr; 1:N (user_id)</div>
+              <div style="text-align:center;">&darr; 1:N (event_date)</div>
+              <div style="text-align:center;">&darr; Parameter Binding</div>
+            </div>
+
+            <div class="v-group" style="padding:1rem 0.8rem 0.6rem; max-width:440px;">
+              <div class="v-group-tag">Fact</div>
+              <div class="v-box" style="width:100%;">
+                <b>ad_events Fact - 400,000</b>
+                <div class="v-box-sm">Interaction Logs</div>
+              </div>
+            </div>
+
           </div>
 
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
+          <div class="v-footer-link">
             <span>fig. 01 &middot; the marketing attribution data pipeline &middot; </span>
-            <a href="assets/meta-ad/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
-          </p>
+            <a href="assets/meta-ad/data_architecture_pipeline.png" target="_blank">open full diagram &#8599;</a>
+          </div>
         </div>
       </figure>
     </section>

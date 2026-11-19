@@ -197,103 +197,71 @@
         </ul>
       </div>
 
-      <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
-          <div class="arch-diagram-wrap">
-            <div class="arch-flow">
-              
-              <!-- Stage 1 -->
-              <div class="arch-card">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Data Ingestion Endpoint</span>
-                  <span class="arch-metric-pill">5,617 Records &middot; 12 Models</span>
-                </div>
-                <div class="arch-title">Multi-Branch Showroom Endpoints</div>
-                <div class="arch-detail">Dealership network CSV exports ingested via webhook listeners; captures vehicle sales, ex-showroom pricing, and regional delivery logs.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>Automated Webhook Payload (JSON)</span></div>
-
-              <!-- Stage 2 -->
-              <div class="arch-card">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Workflow Automation</span>
-                  <span class="arch-metric-pill">Zero Recurring Licensing</span>
-                </div>
-                <div class="arch-title">n8n Automated ETL Webhook &amp; Cron Engine</div>
-                <div class="arch-detail">Serverless cron schedules and real-time webhook endpoints automate batch file processing without expensive enterprise ETL tooling.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>Data Cleansing &amp; Transformation</span></div>
-
-              <!-- Stage 3 -->
-              <div class="arch-card">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Schema Validation</span>
-                  <span class="arch-metric-pill">Python / n8n Nodes</span>
-                </div>
-                <div class="arch-title">Data Cleansing &amp; Schema Normalization</div>
-                <div class="arch-detail">Enforces strict column casting, date standardization, deduplication, and anomaly logging before staging into PostgreSQL tables.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>Continuous Cloud Staging</span></div>
-
-              <!-- Stage 4 -->
-              <div class="arch-card" style="border-left:3px solid var(--pine, #2d5a27);">
-                <div class="arch-card-header">
-                  <span class="arch-kicker" style="color:var(--pine, #2d5a27);">Cloud Data Warehouse</span>
-                  <span class="arch-metric-pill" style="color:var(--pine, #2d5a27); background:rgba(45,90,39,0.08); border-color:rgba(45,90,39,0.25);">&#8377;0.00 / mo &middot; AWS Singapore</span>
-                </div>
-                <div class="arch-title">Neon Serverless PostgreSQL</div>
-                <div class="arch-detail">Serverless managed Postgres instance hosting optimized transactional tables and analytical views; scales down to zero when idle.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span style="background:rgba(196,83,46,0.1); padding:2px 8px; border-radius:3px; border:1px solid rgba(196,83,46,0.25);">DirectQuery (Sub-Second Ingestion &middot; Zero Refresh Delay)</span></div>
-
-              <!-- Stage 5 -->
-              <div class="arch-card">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Semantic Model</span>
-                  <span class="arch-metric-pill">&#8377;59.63 Cr Revenue Monitored</span>
-                </div>
-                <div class="arch-title">Power BI Enterprise Semantic Model</div>
-                <div class="arch-detail">Star Schema dimensional model with 40+ DAX business measures, holding cycle metrics (24 days), and SKU volume distribution.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>Surfaced in 4 Executive Analytical Suites</span></div>
-
-              <!-- Stage 6: 4 Dashboard Pages -->
-              <div class="arch-grid-4">
-                <div class="arch-subcard">
-                  <div class="arch-subcard-title">Page 1</div>
-                  <div class="arch-subcard-desc">Brand &amp; Model Landing Showcase</div>
-                </div>
-                <div class="arch-subcard">
-                  <div class="arch-subcard-title">Page 2</div>
-                  <div class="arch-subcard-desc">Executive Operational Cockpit</div>
-                </div>
-                <div class="arch-subcard">
-                  <div class="arch-subcard-title">Page 3</div>
-                  <div class="arch-subcard-desc">Transaction Sales Ledger</div>
-                </div>
-                <div class="arch-subcard">
-                  <div class="arch-subcard-title">Page 4</div>
-                  <div class="arch-subcard-desc">Segment Matrix &amp; Sparklines</div>
-                </div>
-              </div>
-
+            <figure class="plate-fig">
+        <div class="v-canvas">
+          <div style="width:100%; max-width:540px; display:flex; flex-direction:column; align-items:center;">
+            
+            <div class="v-box" style="width:260px;">
+              <b>Multi-Branch Showroom Endpoints</b>
+              <div class="v-box-sm">(CSV Telemetry)</div>
             </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-box" style="width:260px;">
+              <b>n8n Automated ETL Webhook &amp; Cron Engine</b>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-box" style="width:260px;">
+              <b>Data Cleansing &amp; Schema Validation</b>
+              <div class="v-box-sm">(Python / n8n)</div>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-cylinder" style="width:260px;">
+              <b>Neon Serverless PostgreSQL</b>
+              <div class="v-box-sm">(AWS Singapore &middot; Free Tier)</div>
+            </div>
+
+            <div class="v-arrow-down">
+              <div class="v-arrow-label">DirectQuery (Zero Ingestion Latency)</div>
+              <div class="v-arrow-line"></div><div class="v-arrow-head"></div>
+            </div>
+
+            <div class="v-box" style="width:260px;">
+              <b>Power BI Enterprise Semantic Model</b>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-row">
+              <div class="v-box">
+                <b>Page 1: Brand &amp; Model</b>
+                <div class="v-box-sm">Landing Showcase</div>
+              </div>
+              <div class="v-box">
+                <b>Page 2: Executive</b>
+                <div class="v-box-sm">Operational Cockpit</div>
+              </div>
+              <div class="v-box">
+                <b>Page 3: Transaction</b>
+                <div class="v-box-sm">Sales Ledger</div>
+              </div>
+              <div class="v-box">
+                <b>Page 4: Segment Matrix</b>
+                <div class="v-box-sm">&amp; Sparklines</div>
+              </div>
+            </div>
+
           </div>
 
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
+          <div class="v-footer-link">
             <span>fig. 01 &middot; the automated etl &amp; directquery architecture &middot; </span>
-            <a href="assets/honda/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
-          </p>
+            <a href="assets/honda/data_architecture_pipeline.png" target="_blank">open full diagram &#8599;</a>
+          </div>
         </div>
       </figure>
     </section>

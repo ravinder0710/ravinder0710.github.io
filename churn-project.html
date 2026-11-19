@@ -197,81 +197,69 @@
         </ul>
       </div>
 
-      <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
-          <div class="arch-diagram-wrap">
-            <div class="arch-flow">
+            <figure class="plate-fig">
+        <div class="v-canvas">
+          <div style="width:100%; max-width:580px; display:flex; flex-direction:column; align-items:center;">
 
-              <!-- Group 1: DataSources -->
-              <div class="arch-group">
-                <div class="arch-group-title">Source Data Ingestion Layer</div>
-                <div class="arch-grid-3">
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Support Desk</div>
-                    <div class="arch-subcard-title">db_support</div>
-                    <div class="arch-subcard-desc">4,647 Logs &middot; Ticket severity, CSAT ratings &amp; complaint escalations</div>
-                  </div>
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Accounts</div>
-                    <div class="arch-subcard-title">db_customer</div>
-                    <div class="arch-subcard-desc">10,000 Accounts &middot; Age, gender, country &amp; partner status</div>
-                  </div>
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Billing</div>
-                    <div class="arch-subcard-title">db_subscription</div>
-                    <div class="arch-subcard-desc">10,000 Accounts &middot; Contract tier, payment method, tenure &amp; churn flag</div>
-                  </div>
+            <div class="v-group">
+              <div class="v-group-tag">DataSources</div>
+              <div class="v-row">
+                <div class="v-box">
+                  <b>db_support</b>
+                  <div class="v-box-sm">4,647 Logs (Complaints, CSAT &amp; Escalations)</div>
+                </div>
+                <div class="v-box">
+                  <b>db_customer</b>
+                  <div class="v-box-sm">10,000 Accounts (Demographics &amp; Geography)</div>
+                </div>
+                <div class="v-box">
+                  <b>db_subscription</b>
+                  <div class="v-box-sm">10,000 Accounts (Billing, Tenure &amp; Churn Flag)</div>
                 </div>
               </div>
-
-              <!-- Relationship Connectors -->
-              <div class="arch-arrow">
-                <span>&darr; customerid Relational Joins (1:N &amp; 1:1 Keys)</span>
-              </div>
-
-              <!-- Group 2: Pipeline Processing -->
-              <div class="arch-group" style="background:#ffffff; border:1px solid var(--clay);">
-                <div class="arch-group-title" style="color:var(--clay);">Feature Engineering &amp; Statistical Modeling</div>
-                <div class="arch-card" style="box-shadow:none; border:1px solid var(--hair);">
-                  <div class="arch-kicker">Python Engine</div>
-                  <div class="arch-title" style="font-size:0.95rem;">Python EDA &amp; Feature Engineering Pipeline</div>
-                  <div class="arch-detail">Automated Pandas and Scikit-Learn pipeline isolating electronic check friction, correlation matrices, and survival tenure probability curves.</div>
-                </div>
-
-                <div class="arch-arrow" style="margin:0;">&darr; <span>Tenure &amp; Contract Disaggregation</span></div>
-
-                <div class="arch-card" style="box-shadow:none; border:1px solid var(--hair);">
-                  <div class="arch-kicker">Cohort Segmentation</div>
-                  <div class="arch-title" style="font-size:0.95rem;">Tenure Cohort &amp; Risk Tier Segmentation</div>
-                  <div class="arch-detail">Stratifies subscriber lifetime into 4 distinct maturity buckets (0-12m, 13-24m, 25-48m, 49-72m) to isolate hazard acceleration.</div>
-                </div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>Validated Executive Findings</span></div>
-
-              <!-- Group 3: Output Findings -->
-              <div class="arch-grid-2">
-                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--clay);">
-                  <div class="arch-kicker" style="color:var(--clay);">Macro Metric</div>
-                  <div class="arch-subcard-title">27.27% Overall Churn Rate</div>
-                  <div class="arch-subcard-desc">Baseline defect rate benchmarking enterprise subscription attrition across all account tiers.</div>
-                </div>
-
-                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--pine, #2d5a27);">
-                  <div class="arch-kicker" style="color:var(--pine);">Vulnerability Cliff</div>
-                  <div class="arch-subcard-title" style="color:var(--pine);">Tipping Point: Tenure &lt; 12 Mo</div>
-                  <div class="arch-subcard-desc">47.8% hazard concentration in month 1 to 12; retention intervention playbooks trigger at month 9.</div>
-                </div>
-              </div>
-
             </div>
+
+            <div style="width:100%; display:flex; justify-content:space-around; margin:0.25rem 0; font-family:var(--mono); font-size:0.62rem; color:#444;">
+              <div>&darr; customerid (1:N)</div>
+              <div>&darr; customerid</div>
+              <div>&darr; customerid</div>
+            </div>
+
+            <div class="v-group" style="max-width:360px;">
+              <div class="v-group-tag">Pipeline</div>
+              <div class="v-box" style="width:100%;">
+                <b>Python EDA &amp; Feature Engineering Pipeline</b>
+              </div>
+              <div class="v-arrow-down" style="margin:0.2rem 0;">
+                <div class="v-arrow-line" style="height:10px;"></div><div class="v-arrow-head"></div>
+              </div>
+              <div class="v-box" style="width:100%;">
+                <b>Tenure Cohort &amp; Risk Tier Segmentation</b>
+              </div>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-group" style="max-width:440px;">
+              <div class="v-group-tag">Output</div>
+              <div class="v-row">
+                <div class="v-box">
+                  <b>Key Finding:</b>
+                  <div class="v-box-sm">27.27% Overall Churn Rate</div>
+                </div>
+                <div class="v-box">
+                  <b>Tipping Point:</b>
+                  <div class="v-box-sm">Tenure &lt; 12 Months</div>
+                </div>
+              </div>
+            </div>
+
           </div>
 
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
+          <div class="v-footer-link">
             <span>fig. 01 &middot; the subscriber retention pipeline architecture &middot; </span>
-            <a href="assets/churn/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
-          </p>
+            <a href="assets/churn/data_architecture_pipeline.png" target="_blank">open full diagram &#8599;</a>
+          </div>
         </div>
       </figure>
     </section>

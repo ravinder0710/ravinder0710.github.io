@@ -197,71 +197,68 @@
         </ul>
       </div>
 
-      <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
-          <div class="arch-diagram-wrap">
-            <div class="arch-flow">
+            <figure class="plate-fig">
+        <div class="v-canvas">
+          <div style="width:100%; max-width:620px; display:flex; flex-direction:column; align-items:center;">
 
-              <!-- Group 1: Dimensions Layer -->
-              <div class="arch-group">
-                <div class="arch-group-title">4 Dimensions Layer (In-Memory Tabular Star Schema)</div>
+            <div class="v-group">
+              <div class="v-group-tag">Dimensions</div>
+              <div class="v-row" style="align-items:flex-start;">
                 
-                <div class="arch-grid-2">
-                  <!-- Geography -> Customer Snowflake -->
-                  <div class="arch-subcard" style="border-left:3px solid var(--clay);">
-                    <div class="arch-kicker">Regional Hierarchy</div>
-                    <div class="arch-subcard-title">DimGeography &rarr; DimCustomer</div>
-                    <div class="arch-subcard-desc">18,484 Accounts binned by age group, gender, yearly income &amp; regional territory</div>
-                  </div>
+                <div class="v-box" style="flex:1;">
+                  <b>DimProduct - 606 SKUs</b>
+                  <div class="v-box-sm">(Color, Model, Cost)</div>
+                </div>
 
-                  <!-- Product Dimension -->
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Merchandising Catalog</div>
-                    <div class="arch-subcard-title">DimProduct &middot; 606 SKUs</div>
-                    <div class="arch-subcard-desc">Product categories, sub-categories, color variants, standard costs &amp; list prices</div>
+                <div class="v-box" style="flex:1;">
+                  <b>DimDate - Calendar Dimension</b>
+                  <div class="v-box-sm">(Year, Month, WeekTypes)</div>
+                </div>
+
+                <div style="flex:1.2; display:flex; flex-direction:column; align-items:center;">
+                  <div class="v-box" style="width:100%;">
+                    <b>DimGeography - Regional</b>
+                    <div class="v-box-sm">Territories</div>
+                  </div>
+                  <div class="v-arrow-down" style="margin:0.2rem 0;">
+                    <div class="v-arrow-label">GeographyKey</div>
+                    <div class="v-arrow-line" style="height:10px;"></div><div class="v-arrow-head"></div>
+                  </div>
+                  <div class="v-box" style="width:100%;">
+                    <b>DimCustomer - 18,484</b>
+                    <div class="v-box-sm">Accounts (Age Group, Gender)</div>
                   </div>
                 </div>
 
-                <div class="arch-grid-2">
-                  <!-- Calendar Dimension -->
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Fiscal Time Dimension</div>
-                    <div class="arch-subcard-title">DimDate &middot; Calendar Master</div>
-                    <div class="arch-subcard-desc">Calendar year, fiscal quarter, month number, English month name &amp; week types</div>
-                  </div>
-
-                  <!-- Sales Territory -->
-                  <div class="arch-subcard">
-                    <div class="arch-kicker">Commercial Territories</div>
-                    <div class="arch-subcard-title">DimSalesTerritory &middot; 6 Regions</div>
-                    <div class="arch-subcard-desc">Global sales territories spanning North America, Europe, and Pacific operations</div>
-                  </div>
+                <div class="v-box" style="flex:1;">
+                  <b>DimSalesTerritory</b>
+                  <div class="v-box-sm">- 6 Global Sales Regions</div>
                 </div>
 
               </div>
-
-              <!-- Relationship Connectors -->
-              <div class="arch-arrow">
-                <span>&darr; ProductKey &middot; OrderDateKey &middot; CustomerKey &middot; SalesTerritoryKey (1:N Single-Direction)</span>
-              </div>
-
-              <!-- Group 2: Central Fact Layer -->
-              <div class="arch-card" style="border:1.5px solid var(--clay); background:#ffffff;">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Central Tabular Fact</span>
-                  <span class="arch-metric-pill">$307M Revenue &middot; 60,400 Orders</span>
-                </div>
-                <div class="arch-title">FactInternetSales Table</div>
-                <div class="arch-detail">In-memory VertiPaq tabular model compressing 60,400 transaction rows with dictionary encoding; enables sub-second DAX time-intelligence calculations (YoY growth, YTD sales, margin variance).</div>
-              </div>
-
             </div>
+
+            <div style="width:100%; display:flex; justify-content:space-around; margin:0.3rem 0; font-family:var(--mono); font-size:0.62rem; color:#444;">
+              <div>&darr; ProductKey</div>
+              <div>&darr; OrderDateKey</div>
+              <div>&darr; CustomerKey</div>
+              <div>&darr; SalesTerritoryKey</div>
+            </div>
+
+            <div class="v-group" style="max-width:380px;">
+              <div class="v-group-tag">Fact</div>
+              <div class="v-box" style="width:100%;">
+                <b>FactInternetSales</b>
+                <div class="v-box-sm">60,400 Orders ($307M Revenue)</div>
+              </div>
+            </div>
+
           </div>
 
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
+          <div class="v-footer-link">
             <span>fig. 01 &middot; the 4-dimension 1-fact star schema architecture &middot; </span>
-            <a href="assets/adventure/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
-          </p>
+            <a href="assets/adventure/data_architecture_pipeline.png" target="_blank">open full diagram &#8599;</a>
+          </div>
         </div>
       </figure>
     </section>

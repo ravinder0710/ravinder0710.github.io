@@ -197,87 +197,74 @@
         </ul>
       </div>
 
-      <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
-          <div class="arch-diagram-wrap">
-            <div class="arch-flow">
+            <figure class="plate-fig">
+        <div class="v-canvas">
+          <div style="width:100%; max-width:540px; display:flex; flex-direction:column; align-items:center;">
 
-              <!-- Stage 1 -->
-              <div class="arch-card">
-                <div class="arch-card-header">
-                  <span class="arch-kicker">Highbridge Core Ingestion</span>
-                  <span class="arch-metric-pill">37,901 Logs &middot; $784M Flow</span>
-                </div>
-                <div class="arch-title">Raw Transactional Banking Stream</div>
-                <div class="arch-detail">High-velocity streaming logs capturing international wire transfers, domestic clearing, merchant card swipes, foreign IP logins, and failed auth vectors.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>Power Query ETL &amp; Data Profiling</span></div>
-
-              <!-- Stage 2: Star Schema In-Memory Cube -->
-              <div class="arch-group">
-                <div class="arch-group-title">Forensic Star Schema Model</div>
-                
-                <div class="arch-subcard">
-                  <div class="arch-kicker">Time Dimension</div>
-                  <div class="arch-subcard-title">Calendar Dimension (Date, Month, Quarter, DayPart)</div>
-                  <div class="arch-subcard-desc">Hourly time intelligence isolating midnight fraud bursts (01:00 &ndash; 04:00 AM)</div>
-                </div>
-
-                <div class="arch-arrow" style="margin:0;">&darr; <span>1:N (Transaction Date &amp; Timestamp)</span></div>
-
-                <div class="arch-subcard" style="border:1.5px solid var(--clay); background:#ffffff;">
-                  <div class="arch-kicker" style="color:var(--clay);">Compromised Transactions Fact</div>
-                  <div class="arch-subcard-title">FraudTransactions Fact &middot; 37,901 Records</div>
-                  <div class="arch-subcard-desc">$19M fraudulent loss exposure modeled into dimensional risk matrices</div>
-                </div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>AI-Augmented DAX Surveillance via FastMCP</span></div>
-
-              <!-- Stage 3: FastMCP Engine -->
-              <div class="arch-card" style="border-left:3px solid var(--pine, #2d5a27);">
-                <div class="arch-card-header">
-                  <span class="arch-kicker" style="color:var(--pine);">Forensic Copilot</span>
-                  <span class="arch-metric-pill" style="color:var(--pine); background:rgba(45,90,39,0.08); border-color:rgba(45,90,39,0.25);">FastMCP + Claude AI</span>
-                </div>
-                <div class="arch-title">Automated Forensic Surveillance Engine</div>
-                <div class="arch-detail">Zero credential leakage runtime parsing DAX measures in real time to generate anomaly confidence scores and executive escalation briefs.</div>
-              </div>
-
-              <!-- Connector -->
-              <div class="arch-arrow">&darr; <span>3 Validated Anomaly Signals</span></div>
-
-              <!-- Stage 4: 3 Risk Signals Grid -->
-              <div class="arch-grid-3">
-                <div class="arch-subcard" style="border-left:3px solid var(--clay);">
-                  <div class="arch-kicker">Signal 1 &middot; 10.2&times; Uplift</div>
-                  <div class="arch-subcard-title">Foreign IP Anomaly</div>
-                  <div class="arch-subcard-desc">24.8% fraud probability when login origin deviates from customer country registry.</div>
-                </div>
-
-                <div class="arch-subcard" style="border-left:3px solid var(--clay);">
-                  <div class="arch-kicker">Signal 2 &middot; 6.6&times; Uplift</div>
-                  <div class="arch-subcard-title">3+ Failed Logins</div>
-                  <div class="arch-subcard-desc">16.1% fraud rate; credential stuffing triggers automatic step-up MFA challenge.</div>
-                </div>
-
-                <div class="arch-subcard" style="border-left:3px solid var(--clay);">
-                  <div class="arch-kicker">Signal 3 &middot; 3.6&times; Uplift</div>
-                  <div class="arch-subcard-title">New Beneficiary</div>
-                  <div class="arch-subcard-desc">8.7% fraud rate on rapid transfers executed within 60 minutes of payee addition.</div>
-                </div>
-              </div>
-
+            <div class="v-box" style="width:280px;">
+              <b>Raw Transactional Stream</b>
+              <div class="v-box-sm">37,901 Highbridge Logs ($784M Volume)</div>
             </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-box" style="width:280px;">
+              <b>Power Query ETL &amp; Data Profiling</b>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-box" style="width:280px;">
+              <b>Relational Star Schema Model</b>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-group" style="width:300px;">
+              <div class="v-group-tag">StarSchema</div>
+              <div class="v-box" style="width:100%;">
+                <b>Calendar Dimension</b>
+                <div class="v-box-sm">Date, Month, Quarter</div>
+              </div>
+              <div class="v-arrow-down" style="margin:0.2rem 0;">
+                <div class="v-arrow-label">1:N (Transaction Date)</div>
+                <div class="v-arrow-line" style="height:12px;"></div><div class="v-arrow-head"></div>
+              </div>
+              <div class="v-box" style="width:100%;">
+                <b>FraudTransactions Fact</b>
+                <div class="v-box-sm">37,901 Records ($19M Compromised)</div>
+              </div>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-box" style="width:280px;">
+              <b>Surveillance Engine via FastMCP</b>
+            </div>
+
+            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
+
+            <div class="v-row">
+              <div class="v-box">
+                <b>Signal 1: Foreign IP</b>
+                <div class="v-box-sm">(24.8% Fraud Rate, 10.2&times; Uplift)</div>
+              </div>
+              <div class="v-box">
+                <b>Signal 2: 3+ Failed Logins</b>
+                <div class="v-box-sm">(16.1% Fraud Rate, 6.6&times; Uplift)</div>
+              </div>
+              <div class="v-box">
+                <b>Signal 3: New Beneficiary</b>
+                <div class="v-box-sm">Transfers (8.7% Fraud, 3.6&times; Uplift)</div>
+              </div>
+            </div>
+
           </div>
 
-          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
+          <div class="v-footer-link">
             <span>fig. 01 &middot; the behavioral risk &amp; fastmcp architecture &middot; </span>
-            <a href="assets/fraud/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
-          </p>
+            <a href="assets/fraud/data_architecture_pipeline.png" target="_blank">open full diagram &#8599;</a>
+          </div>
         </div>
       </figure>
     </section>
