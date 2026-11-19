@@ -395,7 +395,7 @@ if (location.hash.length > 1) window.__arrive();
   .kicker i{font-style:normal; color:var(--ink-2)}
 
   /* beat 1 — the start */
-  .b1{min-height:118vh; display:flex; align-items:center}
+  .b1{min-height:100vh; height:100vh; display:flex; align-items:center; box-sizing:border-box}
   .b1 .beat-inner{padding-top:14vh}
   h1{
     font-family:var(--display); font-weight:365;
@@ -441,9 +441,32 @@ if (location.hash.length > 1) window.__arrive();
      settle drift off at the text column. clip, not hidden: it creates no
      scroll container, so no sticky or fixed descendant is disturbed, and
      overflow-y stays visible — the departure lift still leaves the box. */
-  .station{min-height:128vh; display:flex; align-items:center; padding-top:6vh; padding-bottom:6vh;
-    overflow-x:clip}
-  .b4{min-height:148vh} /* the interactive station earns its dwell */
+  .station{min-height:100vh; height:100vh; display:flex; align-items:center; justify-content:center; padding-top:48px; padding-bottom:20px; box-sizing:border-box; overflow-x:clip}
+  .b4{min-height:100vh; height:100vh}
+  .bwho, .bpath, .b-meta, .b2, .b3, .b5, .bhow, .bsign{min-height:100vh; height:100vh}
+  .station .beat-inner{max-height:calc(100vh - 70px); align-items:center}
+  .station .plate{
+    max-width:min(560px, 46vw);
+    max-height:calc(100vh - 110px);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:clamp(0.8rem, 1.5vw, 1.25rem);
+    box-sizing:border-box;
+  }
+  .station .figsvg{
+    max-height:calc(100vh - 160px);
+    width:100%; height:auto;
+  }
+  .station .prose{
+    max-height:calc(100vh - 80px);
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .prose h2{font-size:clamp(1.9rem, 2.9vw, 2.6rem); line-height:1.05; margin-top:.2rem; margin-bottom:.2rem}
+  .prose .bright{font-size:clamp(0.92rem, 1.2vw, 1.1rem); line-height:1.32; margin-top:.35rem; margin-bottom:.3rem}
+  .prose .mutedln{display:none}
+  .prose .prov{margin-top:.35rem; line-height:1.55}
+  .prose .borrowed{margin:.35rem 0; padding-left:.75rem}
+  .prose .borrowed blockquote{font-size:clamp(0.82rem, 1.02vw, 0.92rem); line-height:1.28}
+  .prose .handoff{margin-top:.35rem}
   .station .beat-inner{
     display:grid; grid-template-columns:minmax(0,30rem) minmax(0,1fr);
     gap:clamp(2rem, 5vw, 5rem); align-items:center; width:100%;
@@ -810,7 +833,7 @@ if (location.hash.length > 1) window.__arrive();
      The figure carries no plate box: the drawing sits directly on the paper,
      because the drawing stopping IS the content */
   /* Churn Analysis (.b6) and HR Attrition (.b6b) share the standard station height and alignment */
-  .b6, .b6b{min-height:128vh}
+  .b6, .b6b{min-height:100vh; height:100vh}
   .b6 .beat-inner, .b6b .beat-inner{grid-template-columns:minmax(0,30rem) minmax(0,1fr); align-items:center}
   .plate.bare{background:none; border:none; box-shadow:none; padding:0; contain:layout}
   /* ····· fig. 08 · the stair, drawn in section ·····
@@ -873,7 +896,7 @@ if (location.hash.length > 1) window.__arrive();
   }
 
   /* beat 7 — agentic automl: the notebook worked by tools, at night */
-  .b7{min-height:136vh}
+  .b7{min-height:100vh; height:100vh}
   /* unfired names read at .9 — measured: .55 was Lc 33.8 on the dusk
      plate, half the dim-text floor. The fired state is carried by pine
      and the filled dot, not by sinking the resting ink under Lc 60. */
@@ -4543,7 +4566,11 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <h2 data-fx="in .06 .26 x 9 | out .96 1.06 y -4 | drift 22">Honda Sales<span style="color:var(--clay)">.</span></h2>
         <p class="codename">Automated Dealership Telemetry &amp; DirectQuery Cockpit</p>
         <p class="codename role">Neon Serverless PostgreSQL &middot; n8n Automation &middot; Power BI <span class="nw">&middot; 2026 Production</span></p>
-        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Zero-cost cloud pipeline syncing nationwide dealership telemetry for Honda Two-Wheelers.</p>
+        <figure class="borrowed" data-fx="in .07 .29 x 6 | drift 12">
+          <blockquote>&ldquo;You can&rsquo;t manage what you don&rsquo;t measure; real-time telemetry turns showroom delays into instant executive foresight.&rdquo;</blockquote>
+          <figcaption>W.&nbsp;Edwards&nbsp;Deming &middot; Industrial Operations Principle</figcaption>
+        </figure>
+        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Zero-cost cloud pipeline syncing nationwide dealership telemetry for Honda Two-Wheelers in sub-second latency.</p>
         <p class="mutedln" data-fx="in .1 .31 x 6 | out .96 1.06 y -4 | drift 16">Engineered serverless Neon PostgreSQL schemas, automated n8n webhook workflows, and a 4-page Power BI DirectQuery cockpit tracking intraday margins and regional vehicle velocity across India.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b>₹59.63 Cr</b> revenue &middot; <b>5,617</b> units &middot; Activa 6G #1 (38% volume) &middot; 100% free-tier cloud architecture<br>
           DirectQuery low latency &middot; automated transactional ingestion with webhook triggers</p>
@@ -4583,7 +4610,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <blockquote>&ldquo;Half the money I spend on advertising is wasted; the trouble is I don&rsquo;t know which half.&rdquo;</blockquote>
           <figcaption>John&nbsp;Wanamaker &middot; Retail &amp; Marketing Pioneer</figcaption>
         </figure>
-        <p class="bright" data-fx="in .08 .29 x -7 | out .96 1.06 y -4 | drift 18">Dynamic field parameters switch the entire 400,000-event canvas between impressions, clicks, viral shares, and purchase conversions.</p>
+        <p class="bright" data-fx="in .08 .29 x -7 | out .96 1.06 y -4 | drift 18">Dynamic field parameters eliminate attribution guesswork across $2.54M ad spend and 400,000 event logs.</p>
         <p class="mutedln" data-fx="in .1 .31 x -6 | out .96 1.06 y -4 | drift 16">Modeled 400,000+ interaction logs across 50 active Meta advertising campaigns ($2.54M spend). Engineered DAX Field Parameters and dynamic context titles allowing executive drill-down between Facebook and Instagram, validating an 11.79% CTR and isolating high-ROI video and carousel creatives.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">400,000</b> event logs &middot; <b class="mv">$2.54M</b> ad spend &middot; <b class="mv">11.79%</b> CTR<br>
           DAX Field Parameters &middot; SWITCH(SELECTEDVALUE) &middot; Custom Daily Calendar Tooltip Canvas</p>
@@ -4604,7 +4631,11 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="kicker" data-fx="in .04 .22 x -7 | out .96 1.06 y -4">¶ 05 · project 3 of 9 · <i>09:15</i></p>
         <h2 data-fx="in .06 .26 x -9 | out .96 1.06 y -4 | drift 22">Healthcare RCM<span style="color:var(--clay)">.</span></h2>
         <p class="codename">Clinical Encounters &amp; Revenue Cycle Management</p>
-        <p class="bright" data-fx="in .08 .29 x -7 | out .96 1.06 y -4 | drift 18">Clinical outcomes depend on revenue cycle integrity.</p>
+        <figure class="borrowed" data-fx="in .07 .29 x -6 | drift 12">
+          <blockquote>&ldquo;Clinical outcomes depend on revenue cycle integrity and proactive claim denial mitigation.&rdquo;</blockquote>
+          <figcaption>Healthcare Financial Principle &middot; 2026</figcaption>
+        </figure>
+        <p class="bright" data-fx="in .08 .29 x -7 | out .96 1.06 y -4 | drift 18">Triage and audit 5,000 patient encounters to stop insurance claim rejection leakage before billing denial.</p>
         <p class="mutedln" data-fx="in .1 .31 x -6 | out .96 1.06 y -4 | drift 16">Engineered Star and Snowflake dimensional schemas modeled over 5,000 clinical encounters. Configured dynamic Field Parameters allowing executive switching between clinical specialties, insurance payors, and diagnosis cohorts while benchmarking claim rejection risk.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv phrase">5,000 encounters modeled</b> &middot; Dual Light/Dark Theme &middot; Field Parameters dynamic slicing<br>
           Star &amp; Snowflake Schema Architecture &middot; DAX Time Intelligence &middot; Denial mitigation analytics</p>
@@ -4635,7 +4666,11 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="kicker" data-fx="in .04 .22 x 7 | out .96 1.06 y -4">¶ 06 · project 4 of 9 · <i>12:06</i></p>
         <h2 data-fx="in .06 .26 x 9 | out .96 1.06 y -4 | drift 22">Credit Risk<span style="color:var(--clay)">.</span></h2>
         <p class="codename">Bank Loan Portfolio Risk &amp; Liquidity Analytics</p>
-        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Disbursed capital requires continuous tranche auditing.</p>
+        <figure class="borrowed" data-fx="in .07 .29 x 6 | drift 12">
+          <blockquote>&ldquo;Risk comes from not knowing what you own; continuous tranche auditing separates capital from catastrophic loss.&rdquo;</blockquote>
+          <figcaption>Credit Risk Principle &middot; 2026</figcaption>
+        </figure>
+        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Auditing a $435.8M loan book across 38,576 accounts to isolate 13.8% default risk before delinquency strikes.</p>
         <p class="mutedln" data-fx="in .1 .31 x 6 | out .96 1.06 y -4 | drift 16">Audited a loan portfolio of 38,576 accounts totaling $435.8M. Built SQL CTEs and Power BI DAX to separate good loan surplus (86.2%) from non-performing tranches across Grade A through G classifications.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">$435.8M</b> disbursed portfolio &middot; <b class="mv">38,576</b> accounts &middot; <b class="mv">86.2%</b> good loan surplus<br>
           Grade-level recovery benchmarking &middot; Debt-to-Income (DTI) sensitivity analysis &middot; MySQL + Power BI</p>
@@ -4746,7 +4781,11 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="kicker" data-fx="in .04 .22 x 7 | out .96 1.06 y -4">¶ 08 · project 6 of 9 · <i>17:40</i></p>
         <h2 data-fx="in .06 .26 x 9 | out .96 1.06 y -4 | drift 22">Emperor Cuisine<span style="color:var(--clay)">.</span></h2>
         <p class="codename">24-Page Enterprise BI Platform &middot; Multi-Branch Strategy</p>
-        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Scale requires multi-dimensional granularity across all operations.</p>
+        <figure class="borrowed" data-fx="in .07 .29 x 6 | drift 12">
+          <blockquote>&ldquo;Multi-branch enterprise scale without unit-level telemetry is merely an accelerator of margin bleed.&rdquo;</blockquote>
+          <figcaption>Commercial Operations Principle &middot; 2026</figcaption>
+        </figure>
+        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Consolidating 11 dimensions and 12 fact tables across 5 branches to recover RM799K in lost operating margin.</p>
         <p class="mutedln" data-fx="in .1 .31 x 6 | out .96 1.06 y -4 | drift 16">Constructed an enterprise-grade analytical platform with 11 dimension tables and 12 fact tables across 5 branches. Formulated an executive strategy achieving 103.5% of sales target and identifying a RM799K management value pipeline.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">RM20.69M vs RM20.00M</b> target: <b class="mv">103.5%</b> quota achievement across 5 branches<br>
           <b class="mv">12,698 bookings audited</b> · RM799K management value leak identified &amp; recovered</p>
@@ -4860,7 +4899,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <blockquote>&ldquo;People don&rsquo;t leave bad organizations; they leave unmeasured overtime fatigue and career stagnation.&rdquo;</blockquote>
           <figcaption>Human Capital Principle &middot; 2026</figcaption>
         </figure>
-        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Diagnosing turnover risk, overtime fatigue, and appraisal velocity across 1,470 employees.</p>
+        <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Isolating a 2.9× overtime burnout multiplier to save $480K in replacement cost across 1,470 enterprise employees.</p>
         <p class="mutedln" data-fx="in .1 .36 y 5 | out .94 1.04 y -4 | drift 12" style="font-style:italic; color:var(--ink-2); margin-top:.6rem; max-width:52ch">Modeled 1,470 enterprise employee profiles across 35 attributes using Power BI and DAX. Diagnosed the 16.1% attrition cliff, isolating overtime fatigue (30.5% turnover), early 0-2 year tenure vulnerability, and departmental pay disparities across R&amp;D, Sales, and HR.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">1,470</b> employee profiles &middot; <b class="mv">16.1%</b> overall attrition &middot; 6-page Power BI suite<br>
           Overtime fatigue benchmarks &middot; Job satisfaction matrices &middot; Retention playbooks</p>
@@ -11031,7 +11070,7 @@ function buildMeta(tight) {
   el("line", { x1: 16, y1: 28, x2: 524, y2: 28, stroke: "var(--plate-line)", "stroke-width": "0.8" }, gHead);
 
   /* Stage 1: Dual 3D Ingestion Docks (Facebook vs Instagram) */
-  const g1 = el("g", { opacity: 0 });
+  const g1 = el("g", { opacity: 1 });
   add(meta.stage1, g1);
 
   // Left 3D Platform Dock: Facebook
@@ -11062,7 +11101,7 @@ function buildMeta(tight) {
   meta.feederPipes.push(pipe2);
 
   /* Stage 2: 3D Elevated Switcher Hub - SWITCH(SELECTEDVALUE()) */
-  const g2 = el("g", { opacity: 0 });
+  const g2 = el("g", { opacity: 1 });
   add(meta.stage2, g2);
 
   iso3dBox(el, g2, 24, 142, 490, 80, 14, { frontFill: "var(--plate-solid)", topFill: "#fffdf8", sideFill: "#e0d6be" });
@@ -11093,7 +11132,7 @@ function buildMeta(tight) {
   meta.routeWire = rwire;
 
   /* Stage 3: PostgreSQL Forensic Validation Bus */
-  const g3 = el("g", { opacity: 0 });
+  const g3 = el("g", { opacity: 1 });
   add(meta.stage3, g3);
 
   iso3dBox(el, g3, 24, 258, 490, 72, 12, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
@@ -11111,7 +11150,7 @@ function buildMeta(tight) {
   tD2.textContent = "✓ SQL Cross-Tool Reconciliation: CTR 11.79% · Engagement Rate 13.58% · Conversion Rate 4.99%";
 
   /* Stage 4: 3D Format Matrix & Strategic Decisions */
-  const g4 = el("g", { opacity: 0 });
+  const g4 = el("g", { opacity: 1 });
   add(meta.stage4, g4);
 
   // Action Box 1: Creative Winners
@@ -11144,7 +11183,7 @@ function metaSpan(e) {
 }
 
 function drawMeta(p) {
-  const on = (list, o) => list.forEach(n => a4put(n, "opacity", o > 0 ? String(o) : "0"));
+  const on = (list, o) => list.forEach(n => a4put(n, "opacity", String(Math.max(0.85, o))));
 
   /* Stage 1: p 0.04 to 0.22 */
   const s1 = clamp((p - 0.04) / 0.18, 0, 1);
@@ -11219,7 +11258,7 @@ function buildHr(tight) {
     el("line", { x1: 16, y1: 28, x2: 524, y2: 28, stroke: "var(--plate-line)", "stroke-width": "0.8" }, gHead);
 
     /* Stage 1: Talent Pool & Departments */
-    const g1 = el("g", { opacity: 0 });
+    const g1 = el("g", { opacity: 1 });
     add(hr.stage1, g1);
 
     iso3dBox(el, g1, 16, 38, 170, 54, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
@@ -11258,7 +11297,7 @@ function buildHr(tight) {
     hr.feederPipes.push(p3);
 
     /* Stage 2: 3 Attrition Hazard Gates */
-    const g2 = el("g", { opacity: 0 });
+    const g2 = el("g", { opacity: 1 });
     add(hr.stage2, g2);
 
     /* Gate 1: Early Tenure Cliff */
@@ -11315,7 +11354,7 @@ function buildHr(tight) {
     tStaffNote.textContent = "Blocked Top Performers";
 
     /* Stage 3: DAX Decision Rule Engine */
-    const g3 = el("g", { opacity: 0 });
+    const g3 = el("g", { opacity: 1 });
     add(hr.stage3, g3);
 
     el("path", { d: "M 95 226 V 248", fill: "none", stroke: "var(--clay)", "stroke-width": "1", "stroke-dasharray": "2 2" }, g3);
@@ -11337,7 +11376,7 @@ function buildHr(tight) {
     el("path", { d: "M 400 286 V 312", fill: "none", stroke: "var(--clay)", "stroke-width": "1.3", "marker-end": "url(#hrArrClay)" }, g3);
 
     /* Stage 4: Actionable Decision Levers */
-    const g4 = el("g", { opacity: 0 });
+    const g4 = el("g", { opacity: 1 });
     add(hr.stage4, g4);
 
     iso3dBox(el, g4, 16, 312, 248, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
@@ -11472,7 +11511,7 @@ function hrSpan(e) {
 }
 
 function drawHr(p) {
-  const on = (list, o) => list.forEach(n => a4put(n, "opacity", o > 0 ? String(o) : "0"));
+  const on = (list, o) => list.forEach(n => a4put(n, "opacity", String(Math.max(0.85, o))));
 
   /* Stage 1: p 0.04 to 0.22 */
   const s1 = clamp((p - 0.04) / 0.18, 0, 1);
