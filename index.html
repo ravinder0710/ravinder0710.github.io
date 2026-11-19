@@ -623,6 +623,14 @@ if (location.hash.length > 1) window.__arrive();
   #cadWeek .hd span.tu{border:1px solid var(--ink); border-bottom-color:var(--hair); margin:-1px 0 -1px}
   #cadWeek .grid i:nth-child(7n+2){border-left-color:var(--ink); border-right:1px solid var(--ink)}
   #cadWeek .grid i:nth-child(23){border-bottom:1px solid var(--ink)}
+#cadWeek .grid i{display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:.68rem; font-style:normal; color:var(--ink)}
+#cadWeek .grid i.val-good{color:var(--pine); font-weight:600}
+#cadWeek .grid i.val-risk{color:var(--clay); font-weight:600}
+#cadWeek .grid i.val-num{color:var(--ink); font-weight:500}
+#cadWeek .grid i.val-cnt{color:var(--ink-2); font-size:.64rem}
+#cadWeek .grid i.val-hol{color:var(--ink-2); opacity:.35}
+#cadWeek .hd span.gr-act{font-weight:600; color:var(--ink)}
+#cadWeek .hd span.gr-hol{opacity:.4}
   /* THE EVENT IS A GRID CHILD, NOT A COORDINATE (FIGURES.md rule 4, kept
      from 2026-08-06): the tuesday noon cell IS the event's place and the
      12:00 is its child, so at rest it cannot leave its own column */
@@ -4592,12 +4600,16 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <div id="cadFig">
           <p class="sent">&ldquo;<span class="w">audit 38,576 loans:</span> <span class="w w-who">$435.8M portfolio</span>, <span class="w w-when">86.2% good loans</span>, <span class="w w-meet">13.8% default risk</span>.&rdquo;</p>
           <div id="cadWeek" aria-hidden="true">
-            <div class="hd"><span>gr.A</span><span class="tu">gr.B</span><span>gr.C</span><span>gr.D</span><span>gr.E</span><span>gr.F</span><span>gr.G</span></div>
+            <div class="hd"><span class="gr-act">gr.A</span><span class="tu gr-act">gr.B</span><span class="gr-act">gr.C</span><span class="gr-act">gr.D</span><span class="gr-act">gr.E</span><span class="gr-hol">gr.F</span><span class="gr-hol">gr.G</span></div>
             <div class="grid">
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              <i></i><i id="slotWhen"><b>86.2%</b></i><i></i><i></i><i></i><i></i><i></i>
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <!-- Row 1: Good Loan Surplus % (Pine Green) -->
+              <i class="val-good">94.3%</i><i class="val-good" id="slotWhen"><b>88.5%</b></i><i class="val-good">84.0%</i><i class="val-good">79.3%</i><i class="val-good">75.2%</i><i class="val-hol">&mdash;</i><i class="val-hol">&mdash;</i>
+              <!-- Row 2: Default Risk % (Terracotta Red) -->
+              <i class="val-risk">5.7%</i><i class="val-risk">11.5%</i><i class="val-risk">16.0%</i><i class="val-risk">20.7%</i><i class="val-risk">24.8%</i><i class="val-hol">&mdash;</i><i class="val-hol">&mdash;</i>
+              <!-- Row 3: Funded Principal ($M) -->
+              <i class="val-num">$84M</i><i class="val-num">$131M</i><i class="val-num">$88M</i><i class="val-num">$64M</i><i class="val-num">$44M</i><i class="val-hol">&mdash;</i><i class="val-hol">&mdash;</i>
+              <!-- Row 4: Audited Loan Accounts -->
+              <i class="val-cnt">9.7k</i><i class="val-cnt">11.7k</i><i class="val-cnt">7.9k</i><i class="val-cnt">5.2k</i><i class="val-cnt">2.8k</i><i class="val-hol">&mdash;</i><i class="val-hol">&mdash;</i>
             </div>
           </div>
           <div id="cadDock">
@@ -6895,7 +6907,7 @@ const APPLIED_REASON = ["flagged for claim denial mitigation: ", "code mismatch 
 /* motion, in the local u: a piece is let go every STAGGER, every leg of every
    path runs at one speed, the held piece arrives at HELD and its ring is
    inked over RING; what is left of u is rest */
-const APPLIED_U = { stagger: 0.05, held: 0.86, ring: [0.88, 0.96] };
+const APPLIED_U = { stagger: 0.025, held: 0.88, ring: [0.89, 0.98] };
 /* a point at depth d behind the paper: cabinet oblique, 30 degrees */
 const appliedP = (x, y, d = 0) => [x + d * 0.866, y - d * 0.5];
 function svgIn(s) {
@@ -7187,14 +7199,7 @@ function appliedWide(s, el) {
         const [tx, ty] = appliedP(x0 + 6, base - (words.length - 1 - li) * 16, z0);
         return appliedText(el, L.cab, tx, ty, wd, "a4hole");
       }));
-      /* Seeded 2 patients in each slot (matching 3 patients per slot red-dots) */
-      const pType = APPLIED_PLAN.findIndex(([d, w]) => d === k && w[0] === words[0]);
-      [36, 50].forEach((dx) => {
-        const [px, py] = appliedP(x0 + dx, base + 8, z0);
-        const pg = el("g", { transform: `translate(${a4n(px)} ${a4n(py)})`, opacity: "0.85" }, L.cab);
-        makePatientFigure(el, pg, pType >= 0 ? pType : 0);
       });
-    });
     right = x1 + 0.866 * z1;
   }
   /* THE PORCH: the authored desk, two walls the belt runs between, folded
@@ -7251,27 +7256,38 @@ function appliedWide(s, el) {
 
   /* THE POST: two lanes at the belt's head, 12 apart in each and offset by
      half, so every letter shows its own flap; the first piece is in front */
-  const slot = [0, 0, 0];
+  const slotCount = [0, 0, 0];
+  let pIdx = 0;
   APPLIED_PLAN.forEach(([k], i) => {
-    const lane = G.lanes[i % 2], x = G.qx - 6 * i;
-    const start = [x, G.yb, lane];
-    if (k === 3) { M.pieces.push(appliedPiece(i, k, [start, [held, G.yb, lane]], null)); return; }
-    /* the cases fill from the top: a piece rising inside passes only empty holes */
-    const e = slot[k]++, r = rows[k].length - 1 - e;
-    const way = [start, [X[k], G.yb, lane], [X[k], G.yb, z0 + 6], [X[k], rows[k][r], z0 + 6]];
-    M.pieces.push(appliedPiece(i, k, way, holes[k][e]));
+    if (k === 3) {
+      /* Denial audit piece at end of conveyor */
+      const lane = G.lanes[pIdx % 2], x = G.qx - 8 * pIdx;
+      const start = [x, G.yb, lane];
+      M.pieces.push(appliedPiece(pIdx, k, [start, [held, G.yb, lane]], null));
+      pIdx++;
+      return;
+    }
+    const e = slotCount[k]++, r = rows[k].length - 1 - e;
+    const x0 = k === 0 ? G.qx + 30 - 14 : Math.ceil(X[k] - 14);
+    const destY = rows[k][r] - G.lip; /* bottom lip of slot opening */
+    
+    /* 3 Patients per department slot, arriving into the red boxes on scroll! */
+    const offsets = [14, 30, 46];
+    offsets.forEach((dx) => {
+      const lane = G.lanes[pIdx % 2], x = G.qx - 8 * pIdx;
+      const start = [x, G.yb, lane];
+      const way = [
+        start,
+        [X[k], G.yb, lane],
+        [X[k], G.yb, z0 + 6],
+        [X[k], destY, z0 + 6],
+        [x0 + dx, destY, z0 + 6]
+      ];
+      M.pieces.push(appliedPiece(pIdx, k, way, holes[k][e]));
+      pIdx++;
+    });
   });
-  /* 3 Patients queued on left intake belt & 3 under intake desks */
-  [12, 28, 44].forEach((qx, qi) => {
-    const [px, py] = appliedP(qx, G.yb + 2, G.lanes[qi % 2]);
-    const qg = el("g", { transform: `translate(${a4n(px)} ${a4n(py)})` }, L.front);
-    makePatientFigure(el, qg, (qi + 2) % 4);
-  });
-  X.forEach((xd, xi) => {
-    const [px, py] = appliedP(xd, G.yb + 2, G.lanes[xi % 2]);
-    const dg = el("g", { transform: `translate(${a4n(px)} ${a4n(py)})` }, L.front);
-    makePatientFigure(el, dg, xi % 4);
-  });
+  
   M.ringC = appliedP(held, G.yb - 7, G.lanes[1]);
   M.ringR = 17;
   M.region = G.yb + 1; /* the post's lowest edge: the motion waits until it is on screen */
@@ -7362,46 +7378,47 @@ function appliedTight(s, el) {
 }
 
 function makePatientFigure(el, g, idx) {
-  /* Clean editorial line-art patient encounter person (H=20, W=14) */
+  /* Clean editorial line-art patient encounter person (H=16, W=11)
+     Origin (0,0) is at the slot lip floor.
+     Head top is at y = -11.3, leaving 9.5px clearance below department text! */
   const m = (idx % 8 + 8) % 8;
-  /* Head */
-  el("circle", { cx: "0", cy: "-15", r: "3.5", fill: "var(--plate)", stroke: "var(--ink)", "stroke-width": "1.3" }, g);
-  /* Torso */
-  el("polygon", { points: "-4.5,-10 4.5,-10 3.5,0 -3.5,0", fill: "var(--ink-inverse)", stroke: "var(--ink)", "stroke-width": "1.3" }, g);
-  /* Legs */
-  el("line", { x1: "-2", y1: "0", x2: "-2", y2: "7", stroke: "var(--ink)", "stroke-width": "1.5" }, g);
-  el("line", { x1: "2", y1: "0", x2: "2", y2: "7", stroke: "var(--ink)", "stroke-width": "1.5" }, g);
+  /* Head: cy: -9, r: 2.3 -> top of head is -11.3 */
+  el("circle", { cx: "0", cy: "-9", r: "2.3", fill: "var(--plate)", stroke: "var(--ink)", "stroke-width": "1.2" }, g);
+  /* Torso: -6.5 to 0 */
+  el("polygon", { points: "-3.2,-6.5 3.2,-6.5 2.5,0 -2.5,0", fill: "var(--ink-inverse)", stroke: "var(--ink)", "stroke-width": "1.2" }, g);
+  /* Legs: 0 to 5 (submerged behind lip inside slot, visible on belt) */
+  el("line", { x1: "-1.5", y1: "0", x2: "-1.5", y2: "5", stroke: "var(--ink)", "stroke-width": "1.3" }, g);
+  el("line", { x1: "1.5", y1: "0", x2: "1.5", y2: "5", stroke: "var(--ink)", "stroke-width": "1.3" }, g);
 
   if (m === 0) {
-    /* 0: Inpatient (Hospital gown with admission wristband) */
-    el("polygon", { points: "-5.5,-10 5.5,-10 7,2 -7,2", fill: "var(--ink-inverse)", stroke: "var(--ink)", "stroke-width": "1.2" }, g);
-    el("rect", { x: "3.5", y: "-5", width: "3", height: "2", fill: "var(--clay)" }, g);
+    /* 0: Inpatient (Hospital gown + wristband) */
+    el("polygon", { points: "-4,-6.5 4,-6.5 5,1 -5,1", fill: "var(--ink-inverse)", stroke: "var(--ink)", "stroke-width": "1" }, g);
+    el("rect", { x: "2.5", y: "-3.5", width: "2", height: "1.5", fill: "var(--clay)" }, g);
   } else if (m === 1) {
-    /* 1: Outpatient (Clinical health record file folder) */
-    el("rect", { x: "2", y: "-8", width: "5.5", height: "7", fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1" }, g);
-    el("line", { x1: "3.5", y1: "-5", x2: "6", y2: "-5", stroke: "var(--clay)", "stroke-width": "0.7" }, g);
+    /* 1: Outpatient (Clinical chart folder) */
+    el("rect", { x: "1.5", y: "-5.5", width: "4", height: "5", fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "0.8" }, g);
   } else if (m === 2) {
-    /* 2: Emergency (Terracotta arm sling & head bandage) */
-    el("line", { x1: "-3", y1: "-15", x2: "3", y2: "-15", stroke: "var(--clay)", "stroke-width": "1.4" }, g);
-    el("polygon", { points: "-2.5,-8 4,-4 -1,0", fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1.2" }, g);
+    /* 2: Emergency (Terracotta arm sling + headband) */
+    el("line", { x1: "-2", y1: "-9", x2: "2", y2: "-9", stroke: "var(--clay)", "stroke-width": "1.3" }, g);
+    el("polygon", { points: "-2,-4.5 3,-2 -1,0", fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1" }, g);
   } else if (m === 3) {
     /* 3: Day Care (Senior patient with support cane) */
-    el("line", { x1: "6", y1: "-5", x2: "6", y2: "7", stroke: "var(--ink)", "stroke-width": "1.4" }, g);
-    el("path", { d: "M 4 -7 A 2 2 0 0 1 6 -5", fill: "none", stroke: "var(--ink)", "stroke-width": "1.4" }, g);
+    el("line", { x1: "4.5", y1: "-4", x2: "4.5", y2: "5", stroke: "var(--ink)", "stroke-width": "1.2" }, g);
+    el("path", { d: "M 3 -5 A 1.5 1.5 0 0 1 4.5 -4", fill: "none", stroke: "var(--ink)", "stroke-width": "1.2" }, g);
   } else if (m === 4) {
     /* 4: Paid Claim (Green verification checkmark) */
-    el("circle", { cx: "5", cy: "-12", r: "2.2", fill: "var(--pine)" }, g);
-    el("path", { d: "M 4 -12 L 5 -11 L 6.5 -13", stroke: "var(--ink-inverse)", "stroke-width": "0.7", fill: "none" }, g);
+    el("circle", { cx: "3.5", cy: "-8.5", r: "1.8", fill: "var(--pine)" }, g);
+    el("path", { d: "M 2.6 -8.5 L 3.3 -7.8 L 4.5 -9.2", stroke: "var(--ink-inverse)", "stroke-width": "0.6", fill: "none" }, g);
   } else if (m === 5) {
-    /* 5: Remittance (Remittance statement EOB token) */
-    el("rect", { x: "2.5", y: "-8", width: "5", height: "6", fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "0.9" }, g);
+    /* 5: Remittance (Statement token) */
+    el("rect", { x: "1.8", y: "-5.5", width: "3.5", height: "4.5", fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "0.8" }, g);
   } else if (m === 6) {
-    /* 6: Adjudication Pending (Amber pending review badge) */
-    el("circle", { cx: "5", cy: "-12", r: "2.2", fill: "var(--clay)" }, g);
+    /* 6: Adjudication Pending (Amber badge) */
+    el("circle", { cx: "3.5", cy: "-8.5", r: "1.8", fill: "var(--clay)" }, g);
   } else {
-    /* 7: Denial Audit (Flagged claim patient with red appeal flag) */
-    el("line", { x1: "4", y1: "-14", x2: "4", y2: "2", stroke: "var(--clay)", "stroke-width": "1.2" }, g);
-    el("polygon", { points: "4,-14 9,-11 4,-8", fill: "var(--clay)" }, g);
+    /* 7: Denial Audit (Red appeal flag) */
+    el("line", { x1: "3", y1: "-10", x2: "3", y2: "1", stroke: "var(--clay)", "stroke-width": "1" }, g);
+    el("polygon", { points: "3,-10 7.5,-7.5 3,-5", fill: "var(--clay)" }, g);
   }
 }
 
@@ -7423,7 +7440,7 @@ function buildApplied(tight) {
       const host = band < 2 ? layer : L.back.querySelector(`[data-case="${pc.k}"]`) ||
         el("g", { "data-case": pc.k, "clip-path": `url(#a4-case${Math.min(pc.k, 2)})` }, L.back);
       const g = el("g", { class: cls, visibility: "hidden" }, host);
-      makePatientFigure(el, g, pc.i);
+      makePatientFigure(el, g, pc.k === 3 ? 7 : Math.floor(pc.i / 3));
       applied.marks.push({ g, k: pc.k });
       return g;
     });
