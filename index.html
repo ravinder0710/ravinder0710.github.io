@@ -1022,7 +1022,7 @@ if (location.hash.length > 1) window.__arrive();
      60px at 1512×982, 31px at 1456×949, 21px at 1440×900 and 10px at both
      1375×800 and 1280×800: a breath before the last act on the tall seats,
      and one continuous board on the short ones. */
-  .ladder{--row:clamp(30px, 7vh, 66px); list-style:none;
+  .ladder{--row:clamp(24px, 3.8vh, 44px); list-style:none;
     font-family:var(--mono); font-size:.78rem; letter-spacing:.055em;
     color:var(--ink-2); margin:0;
     display:flex; flex-direction:column}
@@ -5110,7 +5110,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
              is the approver. "one approval missing", not "one signature": the
              thing that is missing is the press, and the page should name the
              act it is asking for. -->
-        <p class="mono">twelve analytical projects · open-source on GitHub · ready for hire<br>
+        <p class="mono">nine analytical projects &middot; all fourteen stops &middot; open-source on GitHub &middot; ready for hire<br>
           042 is the day&rsquo;s serial, not a visit counter.</p>
         <!-- reserved, so a reader who draws a digit on ¶07's pad and comes back
              here does not watch the card grow a line under them. The sample is
@@ -5131,40 +5131,24 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <div id="stamp" aria-hidden="true">APPROVED</div>
       </div>
       <!-- THE LADDER BECOMES THE TIMETABLE, AND ITS LAST ROW IS THE BUTTON.
-           Twelve times with nothing beside them was a list of when, and the
-           run’s argument is what. Each project stop carries the one number it
-           proved, read off the manifest panel that has carried it since ¶03,
-           so nothing new is claimed at the one moment the page asks to be
-           believed. The empty column between the stop and the proof is the
-           rail’s lane, 88px of it, and the line runs down the middle of it.
-           22:41 is a ROW OF THIS TABLE and not a bar under it: same grid, same
-           columns, so the hour sits in the hour column, the button begins on
-           the same x as every stop name, and the socket the rail docks on sits
-           in the lane the rail has been running down for twelve stops. It is
-           pushed to the foot of the column by margin-top:auto, which puts it
-           level with the manifest opposite and leaves the slack ABOVE it,
-           where the rail’s last clean vertical runs. -->
+           Fourteen times across the full journey. Each project stop carries the
+           one number it proved, read off the manifest panel that has carried it
+           since ¶03. -->
       <ul class="ladder tt" data-fx="in .12 .4 y 0 | out 2 2.5 | drift 0">
         <li data-ph="0"><span class="lt">06:12</span><span class="st">the start</span></li>
         <li data-ph="1"><span class="lt">06:58</span><span class="st">who</span></li>
         <li data-ph="2"><span class="lt">07:52</span><span class="st">honda sales</span><span class="pr"><b class="mv">₹59.6 Cr</b> telemetry</span></li>
-        <li data-ph="3"><span class="lt">08:47</span><span class="st">healthcare rcm</span><span class="pr"><b class="mv">5,000</b> encounters</span></li>
-        <li data-ph="4"><span class="lt">12:06</span><span class="st">credit risk</span><span class="pr"><b class="mv">$435.8M</b> portfolio</span></li>
-        <li data-ph="5"><span class="lt">15:23</span><span class="st">fraud intelligence</span><span class="pr"><b class="mv">10.2×</b> anomaly</span></li>
-        <li data-ph="6"><span class="lt">19:36</span><span class="st">emperor bi</span><span class="pr"><b class="mv">RM20.7M</b> sales</span></li>
-        <li data-ph="7"><span class="lt">21:07</span><span class="st">churn analysis</span><span class="pr"><b class="mv">10,000</b> cohorts</span></li>
-        <li data-ph="8"><span class="lt">21:38</span><span class="st">hr attrition</span><span class="pr"><b class="mv">1,470</b> profiles</span></li>
-        <li data-ph="8"><span class="lt">22:05</span><span class="st">retail &amp; fleet</span><span class="pr"><b class="mv">$307.1M</b> volume</span></li>
-        <li data-ph="9"><span class="lt">22:23</span><span class="st">the review</span></li>
-        <li data-ph="10"><span class="lt">22:32</span><span class="st">credentials</span></li>
-        <!-- 22:41 IS THE LAST RUNG OF THE LADDER, and that is what retires the
-             separate `run 043` line the far side used to carry. `data-ph` is
-             the first attribute because check-beat-tables reads the rungs with
-             `<li data-ph="…"`, and 11 is the highest and the last in the
-             document because DEPLOY_PH is `phases.length - 1` in document
-             order. The rule it stands for is unchanged and now says something
-             truer: this is the one rung no amount of scrolling can light. -->
-        <li data-ph="11" class="approvebar">
+        <li data-ph="3"><span class="lt">08:24</span><span class="st">meta ad intelligence</span><span class="pr"><b class="mv">400,000</b> events</span></li>
+        <li data-ph="4"><span class="lt">09:15</span><span class="st">healthcare rcm</span><span class="pr"><b class="mv">5,000</b> encounters</span></li>
+        <li data-ph="5"><span class="lt">12:06</span><span class="st">credit risk</span><span class="pr"><b class="mv">$435.8M</b> portfolio</span></li>
+        <li data-ph="6"><span class="lt">15:23</span><span class="st">fraud intelligence</span><span class="pr"><b class="mv">10.2×</b> anomaly</span></li>
+        <li data-ph="7"><span class="lt">17:40</span><span class="st">emperor bi</span><span class="pr"><b class="mv">RM20.7M</b> sales</span></li>
+        <li data-ph="8"><span class="lt">19:20</span><span class="st">churn analysis</span><span class="pr"><b class="mv">10,000</b> cohorts</span></li>
+        <li data-ph="9"><span class="lt">21:15</span><span class="st">hr attrition</span><span class="pr"><b class="mv">1,470</b> profiles</span></li>
+        <li data-ph="10"><span class="lt">22:05</span><span class="st">retail &amp; fleet</span><span class="pr"><b class="mv">$307.1M</b> volume</span></li>
+        <li data-ph="11"><span class="lt">22:23</span><span class="st">the review</span></li>
+        <li data-ph="12"><span class="lt">22:32</span><span class="st">credentials</span></li>
+        <li data-ph="13" class="approvebar">
           <span class="lt">22:41</span>
           <!-- THE SOCKET HANGS OFF THE BUTTON. Positioned against the button's
                own box rather than against the row, so the ring the canvas
@@ -13174,17 +13158,17 @@ function work(y) {
      while the drawing was still off screen: ¶10 is a tall station and most of
      its range has the plate nowhere near the reading line. The junctions are
      measured page positions now, so the row acts as the line reaches it. */
-  if (Math.abs(beat - 10) <= 1) scrubGates(tokenY);
-  if (Math.abs(beat - 11) <= 1) scrubSigns(tokenY);
-  if (beat >= 11) scrubGate(beat < 12 ? 0 : bp);
+  if (Math.abs(beat - 11) <= 1) scrubGates(tokenY);
+  if (Math.abs(beat - 12) <= 1) scrubSigns(tokenY);
+  if (beat >= 12) scrubGate(beat < 13 ? 0 : bp);
   /* the assembled figures run off their own drawings' positions, not the
      beats' (the v4.2 depth layers, deepNet and deepJet, stood here) */
   asmWork(y);
 
   /* manifest stamps: one line as each station completes (reversible).
-     The six stations ride beats 3–8 now. */
+     The nine stations ride beats 2–10 now. */
   let stamped = 0;
-  for (let i = 3; i <= 9; i++) stamped += (beat > i || (beat === i && bp > 0.78)) ? 1 : 0;
+  for (let i = 2; i <= 10; i++) stamped += (beat > i || (beat === i && bp > 0.78)) ? 1 : 0;
   if (stamped !== window.__world.stamped) setStamps(stamped);
   /* at the gate, the corner manifest LANDS into the page's own ledger;
      at a stop it folds to a pill so the work owns the corner */
