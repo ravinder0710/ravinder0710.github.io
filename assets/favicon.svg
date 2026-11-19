@@ -1,37 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
   <defs>
-    <style>
-      .bg { fill: #24201c; stroke: #c4532e; stroke-width: 2.2; }
-      .inset { stroke: #fbf3e7; stroke-opacity: 0.22; }
-      .mono { fill: #fbf3e7; }
-      .dot { fill: #c4532e; }
-      .spark { stroke: #2f5d50; opacity: 0.7; }
-      .node { fill: #a8760c; }
-
-      @media (prefers-color-scheme: light) {
-        .bg { fill: #fbf3e7; stroke: #c4532e; }
-        .inset { stroke: #26231c; stroke-opacity: 0.15; }
-        .mono { fill: #26231c; }
-        .dot { fill: #c4532e; }
-        .spark { stroke: #2f5d50; opacity: 0.6; }
-        .node { fill: #a8760c; }
-      }
-    </style>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b1728"/>
+      <stop offset="100%" stop-color="#040912"/>
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#1d4ed8" stop-opacity="0.45"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.8" flood-color="#10b981" flood-opacity="0.85"/>
+    </filter>
   </defs>
 
-  <!-- Luxury Squircle Badge -->
-  <rect class="bg" x="2.5" y="2.5" width="59" height="59" rx="14"/>
-  
-  <!-- Archival Inset Border -->
-  <rect class="inset" x="5.5" y="5.5" width="53" height="53" rx="11" fill="none" stroke-width="0.75" stroke-dasharray="2 2"/>
+  <!-- Dark Rounded Squircle Badge -->
+  <rect x="2.5" y="2.5" width="59" height="59" rx="16" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="2.2"/>
 
-  <!-- Analytical Pipeline Sparkline -->
-  <path class="spark" d="M 12 47 L 22 41 L 34 44 L 46 33" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle class="node" cx="46" cy="33" r="1.75"/>
+  <!-- Bold Modern Sans-Serif Monogram RG -->
+  <text x="26.5" y="41.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', 'Montserrat', Arial, sans-serif" font-size="27" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="-0.8">RG</text>
 
-  <!-- Serif Monogram 'RG' (Editorial Fraunces / Georgia) -->
-  <text class="mono" x="29" y="39.5" font-family="'Fraunces', 'Newsreader', Georgia, serif" font-size="26" font-weight="600" text-anchor="middle" letter-spacing="-0.5">RG</text>
-
-  <!-- Signature Editorial Terracotta Punctuation Dot -->
-  <circle class="dot" cx="48.5" cy="38.5" r="3.2"/>
+  <!-- Glowing Live Telemetry Dot at Top Right -->
+  <circle cx="48" cy="18.5" r="4.5" fill="#10b981" filter="url(#glow)"/>
+  <circle cx="48" cy="18.5" r="2.8" fill="#6ee7b7"/>
 </svg>
