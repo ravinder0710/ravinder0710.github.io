@@ -10917,7 +10917,7 @@ const AML_TIGHT_SWAP = [
    (Authentic bespoke People Analytics design, fully scroll-driven transition)
    ======================================================================= */
 const hr = {
-  svg: null,
+  svg: $("hrFig"),
   stage1: [], feederPipes: [],
   stage2: [], cliffPath: null, otBar: null, nonOtBar: null, gaugeNeedle: null, gaugeLine: null,
   stage3: [], daxStream: null,
@@ -10926,7 +10926,7 @@ const hr = {
 };
 
 function buildHr(tight) {
-  hr.svg = $("hrFig");
+  if (!hr.svg) hr.svg = $("hrFig");
   const s = hr.svg;
   if (!s) return;
   const el = svgIn(s);
@@ -11673,7 +11673,7 @@ function chooseEditions() {
   const seats = {
     applied: [innerW(applied.svg.parentElement), 515, buildApplied],
     jet: [innerW(jet.svg.parentElement), 515, buildJet],
-    hr: [innerW(hr.svg.parentElement), 515, buildHr],
+    hr: [hr.svg && hr.svg.parentElement ? innerW(hr.svg.parentElement) : 515, 515, buildHr],
     aml: [innerW(aml.svg.parentElement), 515, buildAml],
     quest: [innerW(climb.svg.parentElement), 450, buildClimb],
     net: [netSeat(), 355, buildNet],
