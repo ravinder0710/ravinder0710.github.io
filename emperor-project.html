@@ -276,60 +276,104 @@
         </ul>
       </div>
 
-            <figure class="plate-fig">
-        <div class="v-canvas">
-          <div style="width:100%; max-width:620px; display:flex; flex-direction:column; align-items:center;">
+      <figure class="plate-fig">
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+          <div class="arch-diagram-wrap">
+            <div class="arch-flow">
 
-            <div class="v-group">
-              <div class="v-group-tag">Dimensions</div>
-              <div class="v-row">
-                <div class="v-box"><b>Dim_Customer</b><div class="v-box-sm">8,001 Loyalty (Bronze to Corporate)</div></div>
-                <div class="v-box"><b>Dim_Date</b><div class="v-box-sm">Marked Calendar (2025)</div></div>
-                <div class="v-box"><b>Dim_Branch</b><div class="v-box-sm">5 Outlets (KL, Klang, Cheras, Puchong, Subang)</div></div>
-                <div class="v-box"><b>Dim_MenuItem</b><div class="v-box-sm">320 Dishes (Seafood, Dim Sum, Drinks)</div></div>
-                <div class="v-box"><b>Dim_Platform</b><div class="v-box-sm">10 Channels (TikTok, IG, WhatsApp, Search)</div></div>
+              <!-- Group 1: Dimensions -->
+              <div class="arch-group">
+                <div class="arch-group-title">11 Dimensions Layer (Kimball Dimensional Architecture)</div>
+                <div class="arch-grid-5">
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Customers</div>
+                    <div class="arch-subcard-title">Dim_Customer</div>
+                    <div class="arch-subcard-desc">8,001 Accounts &middot; Bronze to Corporate tiers</div>
+                  </div>
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Calendar</div>
+                    <div class="arch-subcard-title">Dim_Date</div>
+                    <div class="arch-subcard-desc">2025 Daily calendar &amp; holiday markers</div>
+                  </div>
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Outlets</div>
+                    <div class="arch-subcard-title">Dim_Branch</div>
+                    <div class="arch-subcard-desc">5 Outlets (KL, Klang, Cheras, Puchong, Subang)</div>
+                  </div>
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Menu</div>
+                    <div class="arch-subcard-title">Dim_MenuItem</div>
+                    <div class="arch-subcard-desc">320 Dishes (Seafood, Dim Sum, Beverage)</div>
+                  </div>
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Marketing</div>
+                    <div class="arch-subcard-title">Dim_Platform</div>
+                    <div class="arch-subcard-desc">10 Digital acquisition channels</div>
+                  </div>
+                </div>
               </div>
+
+              <!-- Relationship Connectors -->
+              <div class="arch-arrow">
+                <span>&darr; 1:N Single-Direction Relational Integrity (Zero Bi-Directional Penalties)</span>
+              </div>
+
+              <!-- Group 2: Core Facts -->
+              <div class="arch-group" style="background:#ffffff; border:1px solid var(--clay);">
+                <div class="arch-group-title" style="color:var(--clay);">12 Fact Tables Layer (Transactional Lineage)</div>
+                <div class="arch-grid-4">
+                  <div class="arch-subcard" style="border-left:3px solid var(--clay);">
+                    <div class="arch-kicker">POS Register</div>
+                    <div class="arch-subcard-title">Fact_Sales</div>
+                    <div class="arch-subcard-desc">45K Bills &middot; RM20.69M Total Gross Sales</div>
+                  </div>
+                  <div class="arch-subcard" style="border-left:3px solid var(--pine, #2d5a27);">
+                    <div class="arch-kicker" style="color:var(--pine);">Table Yield</div>
+                    <div class="arch-subcard-title">Fact_Booking</div>
+                    <div class="arch-subcard-desc">12.6K Table Bookings &middot; VIP utilization</div>
+                  </div>
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Attribution</div>
+                    <div class="arch-subcard-title">Fact_PlatformEnquiry</div>
+                    <div class="arch-subcard-desc">Omnichannel leads &amp; WhatsApp inquiries</div>
+                  </div>
+                  <div class="arch-subcard">
+                    <div class="arch-kicker">Itemized Lineage</div>
+                    <div class="arch-subcard-title">Fact_OrderItems</div>
+                    <div class="arch-subcard-desc">376K Lines &middot; Margin &amp; dish cost audit</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Connector -->
+              <div class="arch-arrow">&darr; <span>Executive Action Outcomes</span></div>
+
+              <!-- Group 3: Business Outcomes -->
+              <div class="arch-grid-3">
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--pine, #2d5a27);">
+                  <div class="arch-kicker" style="color:var(--pine);">Target Benchmark</div>
+                  <div class="arch-subcard-title" style="color:var(--pine);">103.5% Target Met</div>
+                  <div class="arch-subcard-desc">RM20.69M revenue vs RM20M board target across 12 cycles.</div>
+                </div>
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--clay);">
+                  <div class="arch-kicker">Loyalty Penetration</div>
+                  <div class="arch-subcard-title">60.2% Member Sales</div>
+                  <div class="arch-subcard-desc">RM12.45M member spend driven by tiered wallet reloads.</div>
+                </div>
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--ink);">
+                  <div class="arch-kicker">Margin Leakage</div>
+                  <div class="arch-subcard-title">RM799K Recovered</div>
+                  <div class="arch-subcard-desc">Operations action plan recovering idle table revenue leaks.</div>
+                </div>
+              </div>
+
             </div>
-
-            <div class="v-arrow-down" style="margin:0.25rem 0;">
-              <div class="v-arrow-label">1:N Relationships</div>
-              <div class="v-arrow-line"></div><div class="v-arrow-head"></div>
-            </div>
-
-            <div class="v-group">
-              <div class="v-group-tag">CoreFacts</div>
-              <div class="v-row" style="margin-bottom:0.3rem;">
-                <div class="v-box"><b>Fact_Sales</b><div class="v-box-sm">45K Bills &middot; RM20.69M Total Sales</div></div>
-                <div class="v-box"><b>Fact_Booking</b><div class="v-box-sm">12.6K Table Reservations</div></div>
-                <div class="v-box"><b>Fact_PlatformEnquiry</b><div class="v-box-sm">Omnichannel Lead Generation</div></div>
-              </div>
-              <div class="v-arrow-down" style="margin:0.2rem 0;">
-                <div class="v-arrow-label">1:N</div>
-                <div class="v-arrow-line" style="height:10px;"></div><div class="v-arrow-head"></div>
-              </div>
-              <div class="v-box" style="max-width:320px; margin:0 auto;">
-                <b>Fact_OrderItems</b>
-                <div class="v-box-sm">376K Lines (Margin &amp; Cost)</div>
-              </div>
-            </div>
-
-            <div class="v-arrow-down"><div class="v-arrow-line"></div><div class="v-arrow-head"></div></div>
-
-            <div class="v-group">
-              <div class="v-group-tag">BusinessOutcomes</div>
-              <div class="v-row">
-                <div class="v-box"><b>Revenue Outperformance:</b><div class="v-box-sm">103.5% vs RM20M Target</div></div>
-                <div class="v-box"><b>Member Sales Share:</b><div class="v-box-sm">60.2% (RM12.45M Loyalty)</div></div>
-                <div class="v-box"><b>Operations Action Plan:</b><div class="v-box-sm">RM799K Value Pipeline</div></div>
-              </div>
-            </div>
-
           </div>
 
-          <div class="v-footer-link">
+          <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
             <span>fig. 01 &middot; the 11D + 12F star schema architecture &middot; </span>
-            <a href="assets/emperor/data_architecture_pipeline.png" target="_blank">open full diagram &#8599;</a>
-          </div>
+            <a href="assets/emperor/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
+          </p>
         </div>
       </figure>
     </section>
