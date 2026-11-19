@@ -4794,7 +4794,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
   <section id="hr-station" class="beat station flip b6b" data-beat="8">
     <div class="beat-inner">
 <div class="prose">
-        <p class="kicker" data-fx="in .05 .28 y 4 | out .94 1.04 y -4">¶ 08b · project 6 of 7 · <i>21:38</i></p>
+        <p class="kicker" data-fx="in .05 .28 y 4 | out .94 1.04 y -4">¶ 09 · project 6 of 7 · <i>21:38</i></p>
         <p class="hourline" data-fx="in .05 .24 y 3 | out .94 1.04 y -3 | drift 8">dusk. isolating employee turnover and early career attrition.</p>
         <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .94 1.04 y -4 | drift 14" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">HR Attrition Analytics<span style="color:var(--clay)">.</span></h2>
         <p class="codename">Workforce Intelligence &amp; Retention Diagnostics</p>
@@ -4810,70 +4810,142 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4"><a href="hr-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/HR_Analytics_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="hr-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
       <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12">
-        <svg id="hrFig" class="figsvg" viewBox="0 0 490 410" role="img" aria-label="HR workforce attrition diagnostic stages: isolating early career tenure turnover, overtime burnout, and retention tiers across 1,470 employees.">
-          <!-- Background coordinate grid / ground line -->
-          <line x1="16" y1="368" x2="474" y2="368" stroke="var(--ink)" stroke-width="0.8" opacity="0.4"/>
-          
-          <!-- Isometric 3-Tier Staging Box (Same footprint as Fig. 08: x0=44, x1=212, dz=60) -->
-          <!-- Rear pencil projection (unfilled / potential workforce) -->
-          <path d="M 44 244 L 74 214 L 242 214 L 212 244 Z M 242 214 L 242 120 L 212 150 M 74 214 L 74 120 L 44 150" fill="none" stroke="var(--ink)" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.5"/>
-          
-          <!-- Tier 3: Active Headcount & Baseline (Top Tier) -->
-          <polygon points="44,244 212,244 212,182 44,182" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.4"/>
-          <polygon points="44,182 212,182 242,152 74,152" fill="rgba(246,239,226,.06)" stroke="var(--ink)" stroke-width="1.2"/>
-          <polygon points="212,244 242,214 242,152 212,182" fill="rgba(246,239,226,.03)" stroke="var(--ink)" stroke-width="1.2"/>
-          
-          <!-- Tier 2: Overtime Fatigue Gate (Middle Tier) -->
-          <polygon points="44,306 212,306 212,244 44,244" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.4"/>
-          <polygon points="212,306 242,276 242,214 212,244" fill="rgba(246,239,226,.03)" stroke="var(--ink)" stroke-width="1.2"/>
-          
-          <!-- Tier 1: 0-2 Yr Tenure Cliff (Bottom Tier) -->
-          <polygon points="44,368 212,368 212,306 44,306" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.8"/>
-          <polygon points="212,368 242,338 242,276 212,306" fill="rgba(246,239,226,.03)" stroke="var(--ink)" stroke-width="1.4"/>
-          
-          <!-- Floor Icons & Badges inside tiers -->
-          <!-- Tier 1 icon: Early Tenure Staircase -->
-          <path d="M 116 348 H 126 V 338 H 136 V 328 H 146" fill="none" stroke="var(--clay-g)" stroke-width="1.6" stroke-linecap="round"/>
-          <text x="128" y="360" font-family="var(--mono)" font-size="10" fill="var(--ink-2)" text-anchor="middle">0-2 yr tenure cliff</text>
-          
-          <!-- Tier 2 icon: Overtime Alert Indicator -->
-          <circle cx="128" cy="275" r="9" fill="none" stroke="var(--clay-g)" stroke-width="1.4"/>
-          <line x1="128" y1="269" x2="128" y2="276" stroke="var(--clay-g)" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="128" cy="280" r="1" fill="var(--clay-g)"/>
-          <text x="128" y="297" font-family="var(--mono)" font-size="10" fill="var(--ink-2)" text-anchor="middle">overtime burnout: 30.5%</text>
+        <svg id="hrFig" class="figsvg" viewBox="0 0 490 410" role="img" aria-label="HR workforce intelligence &amp; decision support architecture: diagnosing attrition risks, overtime burnout, and retention actions across 1,470 employees.">
+          <defs>
+            <marker id="hr-arr" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+              <path d="M 0 1 L 5 3 L 0 5 z" fill="var(--ink-2)"/>
+            </marker>
+            <marker id="hr-arr-pine" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+              <path d="M 0 1 L 5 3 L 0 5 z" fill="var(--pine)"/>
+            </marker>
+            <marker id="hr-arr-clay" viewBox="0 0 6 6" refX="5" refY="3" markerWidth="4" markerHeight="4" orient="auto-start-reverse">
+              <path d="M 0 1 L 5 3 L 0 5 z" fill="var(--clay)"/>
+            </marker>
+          </defs>
 
-          <!-- Tier 3 icon: Active Retained Ledger -->
-          <rect x="115" y="202" width="26" height="18" rx="2" fill="none" stroke="var(--pine)" stroke-width="1.4"/>
-          <line x1="120" y1="208" x2="136" y2="208" stroke="var(--pine)" stroke-width="1.2"/>
-          <line x1="120" y1="213" x2="131" y2="213" stroke="var(--pine)" stroke-width="1.2"/>
-          <text x="128" y="235" font-family="var(--mono)" font-size="10" fill="var(--ink-2)" text-anchor="middle">1,470 headcount active</text>
+          <!-- Ground coordinate grid / hairline accent -->
+          <line x1="20" y1="395" x2="470" y2="395" stroke="var(--ink)" stroke-width="0.8" opacity="0.25"/>
 
-          <!-- Right-side Stage Labels & Connectors (Matching Fig. 08 style) -->
-          <!-- Leader 3 -->
-          <line x1="212" y1="213" x2="260" y2="213" stroke="var(--ink-2)" stroke-width="0.8"/>
-          <path d="M 266 211 l 3 2.5 l 6 -6" fill="none" stroke="var(--pine)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="282" y="216" font-family="var(--mono)" font-size="12" fill="var(--ink)">144 promotion-ready staff</text>
+          <!-- ================= TIER 1: WORKFORCE INGESTION & ROSTER (Y: 18 - 85) ================= -->
+          <!-- Main Talent Pool Card -->
+          <rect x="25" y="18" width="160" height="52" rx="3" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.3"/>
+          <rect x="35" y="12" width="72" height="12" rx="6" fill="var(--bg, #fbf3e7)" stroke="var(--ink-2)" stroke-width="0.8"/>
+          <text x="71" y="21" font-family="var(--mono)" font-size="8" fill="var(--ink-2)" text-anchor="middle" letter-spacing="0.05em">TALENT POOL</text>
           
-          <!-- Leader 2 -->
-          <line x1="212" y1="275" x2="260" y2="275" stroke="var(--ink-2)" stroke-width="0.8"/>
-          <path d="M 266 273 l 3 2.5 l 6 -6" fill="none" stroke="var(--pine)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="282" y="278" font-family="var(--mono)" font-size="12" fill="var(--ink)">234 retention watch (overtime)</text>
+          <text x="35" y="38" font-family="var(--display)" font-size="14" font-weight="500" fill="var(--ink)">1,470 Headcount</text>
+          <text x="35" y="58" font-family="var(--mono)" font-size="9" fill="var(--ink-2)">35 Dimensions &middot; Active Roster</text>
 
-          <!-- Leader 1 -->
-          <line x1="212" y1="337" x2="260" y2="337" stroke="var(--ink-2)" stroke-width="0.8"/>
-          <path d="M 266 335 l 3 2.5 l 6 -6" fill="none" stroke="var(--pine)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="282" y="340" font-family="var(--mono)" font-size="12" fill="var(--ink)">DAX appraisal rules · 60% faster</text>
+          <!-- Departmental Cohort Distribution -->
+          <!-- R&D -->
+          <rect x="200" y="16" width="82" height="24" rx="2" fill="var(--plate)" stroke="var(--ink)" stroke-width="0.9"/>
+          <text x="208" y="32" font-family="var(--mono)" font-size="9" fill="var(--ink)">R&amp;D <tspan fill="var(--ink-2)" font-size="8">833</tspan></text>
+          <text x="276" y="32" font-family="var(--mono)" font-size="8" fill="var(--clay)" text-anchor="end">56.7%</text>
+
+          <!-- Sales -->
+          <rect x="290" y="16" width="82" height="24" rx="2" fill="var(--plate)" stroke="var(--ink)" stroke-width="0.9"/>
+          <text x="298" y="32" font-family="var(--mono)" font-size="9" fill="var(--ink)">Sales <tspan fill="var(--ink-2)" font-size="8">462</tspan></text>
+          <text x="366" y="32" font-family="var(--mono)" font-size="8" fill="var(--ink-2)" text-anchor="end">31.4%</text>
+
+          <!-- HR -->
+          <rect x="380" y="16" width="85" height="24" rx="2" fill="var(--plate)" stroke="var(--ink)" stroke-width="0.9"/>
+          <text x="388" y="32" font-family="var(--mono)" font-size="9" fill="var(--ink)">HR <tspan fill="var(--ink-2)" font-size="8">175</tspan></text>
+          <text x="458" y="32" font-family="var(--mono)" font-size="8" fill="var(--ink-2)" text-anchor="end">11.9%</text>
+
+          <!-- Power Query M ETL bar -->
+          <rect x="200" y="48" width="265" height="22" rx="2" fill="none" stroke="var(--ink-2)" stroke-width="0.8" stroke-dasharray="3 2"/>
+          <text x="332" y="63" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)" text-anchor="middle">Power Query M-ETL &middot; Age &amp; Commute Buckets</text>
+
+          <!-- Feed lines from Tier 1 to Tier 2 -->
+          <line x1="105" y1="70" x2="105" y2="92" stroke="var(--ink-2)" stroke-width="1" marker-end="url(#hr-arr)"/>
+          <line x1="332" y1="70" x2="332" y2="92" stroke="var(--ink-2)" stroke-width="1" marker-end="url(#hr-arr)"/>
+
+          <!-- ================= TIER 2: ATTRITION HAZARD & DIAGNOSTIC GATES (Y: 96 - 212) ================= -->
+          <text x="25" y="106" font-family="var(--mono)" font-size="8.5" letter-spacing="0.08em" fill="var(--ink-2)">DIAGNOSTIC HAZARD GATES &middot; POWER BI ATTRITION MODELING</text>
           
-          <!-- Projected Upper Tier (Held Retention Ladder) -->
-          <line x1="212" y1="151" x2="260" y2="151" stroke="var(--ink-2)" stroke-width="0.8" stroke-dasharray="2 2"/>
-          <text x="266" y="146" font-family="var(--mono)" font-size="11" fill="var(--clay-g)">83.9% retained baseline</text>
-          <text x="266" y="160" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">$480K replacement cost saved</text>
+          <!-- Gate 1: 0-2 Yr Early Tenure Cliff -->
+          <rect x="25" y="115" width="138" height="92" rx="3" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.1"/>
+          <rect x="33" y="123" width="6" height="6" fill="var(--clay)"/>
+          <text x="45" y="130" font-family="var(--mono)" font-size="8.5" font-weight="600" fill="var(--ink)">TENURE CLIFF</text>
+          <path d="M 35 170 L 55 170 L 55 158 L 85 158 L 85 145 L 125 145" fill="none" stroke="var(--clay)" stroke-width="1.4"/>
+          <circle cx="55" cy="158" r="2.5" fill="var(--clay)"/>
+          <text x="35" y="188" font-family="var(--display)" font-size="13" font-weight="600" fill="var(--clay)">57.1% Hazard</text>
+          <text x="35" y="200" font-family="var(--mono)" font-size="8" fill="var(--ink-2)">0&ndash;2 Yr Early Career Peak</text>
 
-          <!-- Base Footnotes -->
-          <text x="16" y="388" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">ink: 16.1% attrition cliff &middot; pencil: 83.9% retained talent</text>
-          <text x="16" y="404" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">1,470 enterprise personnel &middot; power bi &amp; dax rule engine</text>
+          <!-- Gate 2: Overtime Fatigue Gate -->
+          <rect x="176" y="115" width="138" height="92" rx="3" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.1"/>
+          <circle cx="187" cy="126" r="4" fill="none" stroke="var(--clay)" stroke-width="1.2"/>
+          <line x1="187" y1="123.5" x2="187" y2="126.5" stroke="var(--clay)" stroke-width="1.2"/>
+          <circle cx="187" cy="128.5" r="0.6" fill="var(--clay)"/>
+          <text x="196" y="130" font-family="var(--mono)" font-size="8.5" font-weight="600" fill="var(--ink)">OVERTIME FATIGUE</text>
+          
+          <rect x="186" y="146" width="80" height="7" rx="1.5" fill="rgba(196,83,46,0.18)" stroke="var(--clay)" stroke-width="0.8"/>
+          <rect x="186" y="159" width="27" height="7" rx="1.5" fill="rgba(45,90,63,0.18)" stroke="var(--pine)" stroke-width="0.8"/>
+          <text x="272" y="153" font-family="var(--mono)" font-size="7.5" fill="var(--clay)">30.5% OT</text>
+          <text x="220" y="165" font-family="var(--mono)" font-size="7.5" fill="var(--pine)">10.4% Non</text>
+          
+          <text x="186" y="188" font-family="var(--display)" font-size="13" font-weight="600" fill="var(--ink)">2.9&times; Turnover</text>
+          <text x="186" y="200" font-family="var(--mono)" font-size="8" fill="var(--ink-2)">Unmeasured Work Hours</text>
+
+          <!-- Gate 3: Appraisal & Promotion Stagnation -->
+          <rect x="327" y="115" width="138" height="92" rx="3" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.1"/>
+          <circle cx="338" cy="126" r="4.5" fill="none" stroke="var(--pine)" stroke-width="1.2"/>
+          <polyline points="338,123.5 338,126 340.5,126" fill="none" stroke="var(--pine)" stroke-width="1.2"/>
+          <text x="347" y="130" font-family="var(--mono)" font-size="8.5" font-weight="600" fill="var(--ink)">PROMOTION LAG</text>
+          
+          <line x1="337" y1="156" x2="445" y2="156" stroke="var(--ink-2)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="395" cy="156" r="4" fill="var(--pine)"/>
+          <text x="395" y="148" font-family="var(--mono)" font-size="7.5" fill="var(--pine)" text-anchor="middle">5+ yrs stalled</text>
+
+          <text x="337" y="188" font-family="var(--display)" font-size="13" font-weight="600" fill="var(--ink)">144 Flight Risks</text>
+          <text x="337" y="200" font-family="var(--mono)" font-size="8" fill="var(--ink-2)">High Performers Blocked</text>
+
+          <!-- ================= TIER 3: DAX DECISION & POLICY ENGINE (Y: 226 - 264) ================= -->
+          <line x1="94" y1="207" x2="94" y2="225" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="245" y1="207" x2="245" y2="225" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="2 2"/>
+          <line x1="396" y1="207" x2="396" y2="225" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="2 2"/>
+
+          <rect x="25" y="226" width="440" height="34" rx="3" fill="var(--plate)" stroke="var(--ink)" stroke-width="1.2"/>
+          <circle cx="42" cy="243" r="3.5" fill="var(--clay)"/>
+          <text x="54" y="247" font-family="var(--mono)" font-size="9" font-weight="600" fill="var(--ink)">DAX BUSINESS RULE ENGINE</text>
+          <text x="215" y="247" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)">&bull; Flight-Risk Scoring &middot; Compensation Parity &middot; Severance Triage</text>
+          <line x1="420" y1="236" x2="455" y2="236" stroke="var(--pine)" stroke-width="1.5"/>
+          <line x1="420" y1="243" x2="455" y2="243" stroke="var(--clay)" stroke-width="1.5"/>
+          <line x1="420" y1="250" x2="445" y2="250" stroke="var(--ink-2)" stroke-width="1.5"/>
+
+          <!-- Directional splits to Outcomes -->
+          <line x1="135" y1="260" x2="135" y2="280" stroke="var(--pine)" stroke-width="1.2" marker-end="url(#hr-arr-pine)"/>
+          <line x1="355" y1="260" x2="355" y2="280" stroke="var(--clay)" stroke-width="1.2" marker-end="url(#hr-arr-clay)"/>
+
+          <!-- ================= TIER 4: ACTIONABLE EXECUTIVE OUTCOMES (Y: 282 - 374) ================= -->
+          <!-- Left: Retention & Promotion Acceleration (Pine / Protected) -->
+          <rect x="25" y="282" width="212" height="92" rx="3" fill="var(--plate)" stroke="var(--pine)" stroke-width="1.3"/>
+          <rect x="35" y="276" width="134" height="13" rx="6.5" fill="var(--bg, #fbf3e7)" stroke="var(--pine)" stroke-width="0.8"/>
+          <text x="102" y="285.5" font-family="var(--mono)" font-size="7.5" font-weight="600" fill="var(--pine)" text-anchor="middle">RETENTION LEVER &middot; ACTIONED</text>
+          
+          <text x="37" y="306" font-family="var(--display)" font-size="13" font-weight="600" fill="var(--ink)">144 Fast-Track Promotions</text>
+          <text x="37" y="321" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)">&bull; Comp Parity &amp; Role Reclassification</text>
+          <text x="37" y="335" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)">&bull; 83.9% Talent Retained Baseline</text>
+          
+          <rect x="37" y="344" width="188" height="20" rx="2" fill="rgba(45,90,63,0.1)"/>
+          <text x="43" y="358" font-family="var(--mono)" font-size="8.5" font-weight="600" fill="var(--pine)">&#10003; $480K Replacement Cost Avoidance</text>
+
+          <!-- Right: Overtime Capping & Hazard Mitigation (Clay / Intervention) -->
+          <rect x="253" y="282" width="212" height="92" rx="3" fill="var(--plate)" stroke="var(--clay)" stroke-width="1.3"/>
+          <rect x="263" y="276" width="144" height="13" rx="6.5" fill="var(--bg, #fbf3e7)" stroke="var(--clay)" stroke-width="0.8"/>
+          <text x="335" y="285.5" font-family="var(--mono)" font-size="7.5" font-weight="600" fill="var(--clay)" text-anchor="middle">WORKFORCE INTERVENTION</text>
+          
+          <text x="265" y="306" font-family="var(--display)" font-size="13" font-weight="600" fill="var(--ink)">234 Overtime Rebalancings</text>
+          <text x="265" y="321" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)">&bull; Shift Capping &amp; Wellness Monitoring</text>
+          <text x="265" y="335" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)">&bull; 0&ndash;2 Yr Mentorship Cohort Routing</text>
+          
+          <rect x="265" y="344" width="188" height="20" rx="2" fill="rgba(196,83,46,0.1)"/>
+          <text x="271" y="358" font-family="var(--mono)" font-size="8.5" font-weight="600" fill="var(--clay)">! 16.1% Exit Cliff Contained (236 exits)</text>
+
+          <!-- ================= TIER 5: BASELINE METRICS (Y: 388 - 404) ================= -->
+          <text x="25" y="390" font-family="var(--mono)" font-size="8.5" fill="var(--ink-2)">ink: 1,470 enterprise personnel &middot; 35 dimensions &middot; power bi dax engine</text>
+          <text x="465" y="390" font-family="var(--mono)" font-size="8.5" fill="var(--pine)" text-anchor="end">retention impact: $480K &middot; 83.9% retained</text>
         </svg>
-        <figcaption>fig. 08b &middot; hr workforce attrition stages &amp; overtime burnout &middot; <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
+        <figcaption>fig. 09 &middot; workforce flight-risk triage &amp; retention decision architecture &middot; <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
