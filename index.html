@@ -11115,7 +11115,11 @@ function buildMeta(tight) {
   const tA2b = el("text", { x: 292, y: 404, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--clay);" }, g4);
   tA2b.textContent = "! Fatigue Threshold: 14-Day Cycle";
 
-  meta.e = asmFigure("fig03b", { box: () => layoutBox(meta.svg), draw: drawMeta, span: metaSpan, window: metaWindow });
+    meta.e = asmFigure("fig03b", { box: () => layoutBox(meta.svg), draw: drawMeta, span: metaSpan, window: metaWindow });
+}
+/* Initial boot for meta */
+if (typeof window !== "undefined" && $("metaFig")) {
+  buildMeta(false);
 }
 
 function metaWindow(e) {
@@ -11897,7 +11901,7 @@ function drawAml(p) {
    Wide 560-unit boxes author at 12 ⟶ need a ≥515px seat; the 440-unit
    climb at 11 ⟶ ≥450 (margin over 405); the net authors at 14.5 on 460
    ⟶ ≥355. Anything narrower rebuilds on its tight 240-unit plate. */
-const editions = { applied: null, jet: null, aml: null, hr: null, quest: null, net: null, path: null };
+const editions = { applied: null, meta: null, jet: null, aml: null, hr: null, quest: null, net: null, path: null };
 function innerW(el) {
   const cs = getComputedStyle(el);
   return el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
@@ -11905,6 +11909,7 @@ function innerW(el) {
 function chooseEditions() {
   const seats = {
     applied: [innerW(applied.svg.parentElement), 515, buildApplied],
+    meta: [meta.svg && meta.svg.parentElement ? innerW(meta.svg.parentElement) : ($("metaFig") ? innerW($("metaFig").parentElement) : 515), 515, buildMeta],
     jet: [innerW(jet.svg.parentElement), 515, buildJet],
     hr: [hr.svg && hr.svg.parentElement ? innerW(hr.svg.parentElement) : 515, 515, buildHr],
     aml: [innerW(aml.svg.parentElement), 515, buildAml],
