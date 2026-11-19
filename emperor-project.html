@@ -101,6 +101,118 @@
       display: block;
       border: 1px solid var(--hair);
     }
+    .tab-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.2rem;
+    }
+    .tab-btn {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      padding: .4rem .8rem;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .tab-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+    .tab-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .page-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+      background: var(--plate-solid);
+      border: 1px solid var(--hair-strong);
+      padding: .8rem 1rem;
+    }
+    .page-selector {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-family: var(--mono);
+      font-size: var(--fs-small);
+      color: var(--ink);
+    }
+    .page-select {
+      font-family: var(--mono);
+      font-size: var(--fs-small);
+      padding: .4rem .8rem;
+      background: var(--paper);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink);
+      cursor: pointer;
+      max-width: 340px;
+    }
+    .nav-btn-group {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .nav-btn {
+      font-family: var(--mono);
+      font-size: var(--fs-micro);
+      padding: .4rem .9rem;
+      background: var(--paper);
+      border: 1px solid var(--hair-strong);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all .15s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .nav-btn:disabled {
+      opacity: .35;
+      cursor: not-allowed;
+    }
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: .6rem;
+      margin-top: 1.5rem;
+    }
+    .thumb-item {
+      border: 1px solid var(--hair-strong);
+      background: var(--plate-solid);
+      padding: .3rem;
+      cursor: pointer;
+      transition: all .2s ease;
+      text-align: center;
+    }
+    .thumb-item:hover, .thumb-item.active {
+      border-color: var(--clay);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    }
+    .thumb-item img {
+      width: 100%;
+      height: 72px;
+      object-fit: cover;
+      display: block;
+    }
+    .thumb-label {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--ink-2);
+      margin-top: .3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   </style>
 </head>
 <body class="archive">
@@ -217,14 +329,58 @@
     <!-- [ Executive 24-Page Suite Showcase Plate ] -->
     <section style="margin-top:4rem;" id="dashboard">
       <h2 class="seckick">[ interactive suite ] &middot; 24-page corporate cockpit</h2>
-      <p class="prose" style="margin-top:.6rem;">The primary executive cockpit displaying revenue pacing, target variance, and branch performance:</p>
+      <p class="prose" style="margin-top:.6rem;">Explore all 24 production dashboard modules engineered for revenue pacing, reservation tracking, loyalty wallets, and operational remediation:</p>
       
-      <div class="dash-img-wrap">
-        <img src="assets/emperor/page_01_overview.png" alt="Emperor Cuisine Executive Overview Dashboard">
+      <!-- Quick Module Tabs -->
+      <div class="tab-pills" id="emperorPills">
+        <button class="tab-btn active" onclick="switchEmperorPage(0)">01 Overview</button>
+        <button class="tab-btn" onclick="switchEmperorPage(1)">02 Target Pacing</button>
+        <button class="tab-btn" onclick="switchEmperorPage(2)">03 5-Branch Ranking</button>
+        <button class="tab-btn" onclick="switchEmperorPage(3)">04 Daily Sales</button>
+        <button class="tab-btn" onclick="switchEmperorPage(5)">06 Promotion ROI</button>
+        <button class="tab-btn" onclick="switchEmperorPage(7)">08 Menu Engineering</button>
+        <button class="tab-btn" onclick="switchEmperorPage(9)">10 Reservations</button>
+        <button class="tab-btn" onclick="switchEmperorPage(11)">12 VIP Suites</button>
+        <button class="tab-btn" onclick="switchEmperorPage(12)">13 Membership</button>
+        <button class="tab-btn" onclick="switchEmperorPage(13)">14 Stored Wallets</button>
+        <button class="tab-btn" onclick="switchEmperorPage(15)">16 10-Platform Inquiries</button>
+        <button class="tab-btn" onclick="switchEmperorPage(17)">18 Omnichannel Attribution</button>
+        <button class="tab-btn" onclick="switchEmperorPage(19)">20 AI Bot SLA</button>
+        <button class="tab-btn" onclick="switchEmperorPage(20)">21 Staff Turnaround</button>
+        <button class="tab-btn" onclick="switchEmperorPage(21)">22 Customer Sentiment</button>
+        <button class="tab-btn" onclick="switchEmperorPage(22)">23 90-Day Forecast</button>
+        <button class="tab-btn" onclick="switchEmperorPage(23)">24 Action Plan</button>
       </div>
-      <p style="font-size:var(--fs-label); color:var(--ink-2); margin-top:.7rem; font-family:var(--body);">
-        fig. 02 &middot; executive overview module &middot; tracking RM20.69M cumulative sales vs RM20M board target pacing across 12 monthly cycles.
+
+      <!-- Controls: Select Dropdown & Prev/Next -->
+      <div class="page-controls">
+        <div class="page-selector">
+          <span>Jump to Page:</span>
+          <select id="emperorPageSelect" class="page-select" onchange="switchEmperorPage(parseInt(this.value))">
+            <!-- Populated dynamically via JS -->
+          </select>
+        </div>
+        <div class="nav-btn-group">
+          <button id="prevBtn" class="nav-btn" onclick="prevEmperorPage()" disabled>&larr; Prev Page</button>
+          <span id="pageCounter" style="font-family:var(--mono); font-size:var(--fs-micro); color:var(--ink-2); padding:0 .5rem;">Page 1 of 24</span>
+          <button id="nextBtn" class="nav-btn" onclick="nextEmperorPage()">Next Page &rarr;</button>
+        </div>
+      </div>
+
+      <div class="dash-img-wrap">
+        <img id="emperorDashImg" src="assets/emperor/page_01_overview.png" alt="Emperor Cuisine Executive Overview Dashboard">
+      </div>
+      <p id="emperorDashCaption" style="font-size:var(--fs-label); color:var(--ink-2); margin-top:.7rem; font-family:var(--body);">
+        fig. 02 &middot; page 01: executive overview module &middot; tracking RM20.69M cumulative sales vs RM20M board target pacing across 12 monthly cycles.
       </p>
+
+      <!-- Thumbnail Grid Strip -->
+      <div style="margin-top:2rem;">
+        <p class="seckick" style="font-size:0.75rem;">[ visual navigation ] &middot; click any module to inspect</p>
+        <div class="thumb-grid" id="emperorThumbs">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
     </section>
 
     <!-- [ Production DAX Formulations ] -->
@@ -316,5 +472,207 @@ IF(
       </div>
     </footer>
   </main>
+
+  <script>
+    const EMPEROR_PAGES = [
+      {
+        title: "01 Executive Overview",
+        src: "assets/emperor/page_01_overview.png",
+        caption: "fig. 02 &middot; page 01: executive overview module &middot; tracking RM20.69M cumulative sales vs RM20M board target pacing across 12 monthly cycles."
+      },
+      {
+        title: "02 RM20M Target Pacing",
+        src: "assets/emperor/page_02_rm20m_target.png",
+        caption: "fig. 03 &middot; page 02: RM20M target pacing module &middot; monthly run-rate pacing, daily variance monitoring, and target achievement trajectory."
+      },
+      {
+        title: "03 Branch Performance",
+        src: "assets/emperor/page_03_branch_performance.png",
+        caption: "fig. 04 &middot; page 03: 5-branch performance benchmarking &middot; KL flagship, Klang, Subang, Puchong, and Cheras outlet revenue rankings and quota yields."
+      },
+      {
+        title: "04 Daily Sales Cycles - 1",
+        src: "assets/emperor/page_04_daily_sales_1.png",
+        caption: "fig. 05 &middot; page 04: daily sales &amp; meal session analysis &middot; lunch vs dinner revenue split, weekday vs weekend volume dynamics."
+      },
+      {
+        title: "05 Daily Sales Cycles - 2",
+        src: "assets/emperor/page_05_daily_sales_2.png",
+        caption: "fig. 06 &middot; page 05: intraday hourly transaction velocity &middot; peak kitchen load times, table turnover intervals, and hourly gross margin distribution."
+      },
+      {
+        title: "06 Promotion ROI & Banquet - 1",
+        src: "assets/emperor/page_06_promotion_1.png",
+        caption: "fig. 07 &middot; page 06: promotion &amp; campaign effectiveness &middot; VIP dining, wedding banquet, birthday event, and set-menu campaign yield."
+      },
+      {
+        title: "07 Promotion Margins - 2",
+        src: "assets/emperor/page_07_promotion_2.png",
+        caption: "fig. 08 &middot; page 07: promotional margin erosion analysis &middot; gross profit impact of discount vouchers and net incremental ticket spend."
+      },
+      {
+        title: "08 Menu & Dish Sales - 1",
+        src: "assets/emperor/page_08_menu_dish_1.png",
+        caption: "fig. 09 &middot; page 08: menu engineering &amp; dish sales &middot; signature seafood dishes, dim sum velocity, and category volume contributions."
+      },
+      {
+        title: "09 Dish Margin & Wastage - 2",
+        src: "assets/emperor/page_09_menu_dish_2.png",
+        caption: "fig. 10 &middot; page 09: recipe cost &amp; food margin audit &middot; ingredient price sensitivity, kitchen recipe margins, and high-profit stars vs dogs."
+      },
+      {
+        title: "10 Booking Performance - 1",
+        src: "assets/emperor/page_10_booking_1.png",
+        caption: "fig. 11 &middot; page 10: reservation conversion &amp; capacity &middot; 13K total bookings, channel conversion rates, and advance reservation lead times."
+      },
+      {
+        title: "11 Booking No-Shows & Turnaround - 2",
+        src: "assets/emperor/page_11_booking_2.png",
+        caption: "fig. 12 &middot; page 11: table utilization &amp; no-show diagnostics &middot; table turnover times, peak seating bottlenecks, and cancellation leakage."
+      },
+      {
+        title: "12 VIP Rooms & Event Sales",
+        src: "assets/emperor/page_12_vip_rooms_events.png",
+        caption: "fig. 13 &middot; page 12: VIP suites &amp; banquet event revenue &middot; private dining room utilization, corporate function spends, and banquet package margins."
+      },
+      {
+        title: "13 Membership Tiers",
+        src: "assets/emperor/page_13_membership.png",
+        caption: "fig. 14 &middot; page 13: customer loyalty tier distribution &middot; 8,000+ members across Bronze, Silver, Gold, Platinum, and Corporate VIP accounts."
+      },
+      {
+        title: "14 Membership Wallet - 1",
+        src: "assets/emperor/page_14_membership_wallet_1.png",
+        caption: "fig. 15 &middot; page 14: stored-value wallet liquidity &middot; RM1.45M stored top-ups, member spend velocity, and wallet redemption frequency."
+      },
+      {
+        title: "15 Membership Wallet Dormancy - 2",
+        src: "assets/emperor/page_15_membership_wallet_2.png",
+        caption: "fig. 16 &middot; page 15: dormant wallet capital recovery &middot; identifying &gt;90-day inactive balances across 2,400 members for automated reactivation campaigns."
+      },
+      {
+        title: "16 10-Platform Inquiries - 1",
+        src: "assets/emperor/page_16_platform_overview_1.png",
+        caption: "fig. 17 &middot; page 16: 10-platform omnichannel traffic overview &middot; WhatsApp (4,241), Website (2,017), App (1,762), Google, Instagram, and TikTok lead volume."
+      },
+      {
+        title: "17 Platform Conversion - 2",
+        src: "assets/emperor/page_17_platform_overview_2.png",
+        caption: "fig. 18 &middot; page 17: platform inquiry-to-booking conversion &middot; lead qualification velocity and platform attribution efficiency across digital channels."
+      },
+      {
+        title: "18 Omnichannel Attribution - 1",
+        src: "assets/emperor/page_18_omnichannel_attribution_1.png",
+        caption: "fig. 19 &middot; page 18: multi-touch digital attribution modeling &middot; first-touch discovery vs last-touch reservation booking conversion paths."
+      },
+      {
+        title: "19 Customer Journey Touchpoints - 2",
+        src: "assets/emperor/page_19_omnichannel_attribution_2.png",
+        caption: "fig. 20 &middot; page 19: cross-channel conversion touchpoints &middot; social media ad engagement leading to WhatsApp reservations and in-dining visits."
+      },
+      {
+        title: "20 AI Auto-Reply Performance",
+        src: "assets/emperor/page_20_ai_autoreply_performance.png",
+        caption: "fig. 21 &middot; page 20: AI auto-reply bot SLA &amp; resolution &middot; automated response speed, bot-handled inquiry resolution rate, and handoff to front-desk."
+      },
+      {
+        title: "21 Staff Performance & SLA",
+        src: "assets/emperor/page_21_staff_performance.png",
+        caption: "fig. 22 &middot; page 21: service staff turnaround &amp; order efficiency &middot; food running latencies, server table assignment loads, and outlet service ratings."
+      },
+      {
+        title: "22 Customer Reviews & Sentiment",
+        src: "assets/emperor/page_22_customer_reviews.png",
+        caption: "fig. 23 &middot; page 22: sentiment analysis &amp; customer feedback &middot; 4.08 average rating audit, dish sentiment word clouds, and service complaints."
+      },
+      {
+        title: "23 Forecast & Growth Projections",
+        src: "assets/emperor/page_23_forecast_growth_1.png",
+        caption: "fig. 24 &middot; page 23: predictive revenue &amp; capacity forecasting &middot; 90-day Holt-Winters time-series projections and banquet seasonal uplift."
+      },
+      {
+        title: "24 Executive Action Plan Matrix",
+        src: "assets/emperor/page_24_management_action_plan.png",
+        caption: "fig. 25 &middot; page 24: management action plan &amp; remediation matrix &middot; prioritized operational interventions, accountable department leads, and milestone tracking."
+      }
+    ];
+
+    let currentPageIdx = 0;
+
+    function initEmperorControls() {
+      const sel = document.getElementById('emperorPageSelect');
+      const thumbGrid = document.getElementById('emperorThumbs');
+      if (!sel || !thumbGrid) return;
+      
+      sel.innerHTML = '';
+      thumbGrid.innerHTML = '';
+
+      EMPEROR_PAGES.forEach((p, idx) => {
+        // Option in select
+        const opt = document.createElement('option');
+        opt.value = idx;
+        opt.textContent = `Page ${idx + 1}: ${p.title}`;
+        sel.appendChild(opt);
+
+        // Thumbnail item
+        const thumb = document.createElement('div');
+        thumb.className = `thumb-item ${idx === 0 ? 'active' : ''}`;
+        thumb.onclick = () => switchEmperorPage(idx);
+        thumb.innerHTML = `
+          <img src="${p.src}" alt="${p.title}" loading="lazy">
+          <div class="thumb-label">${p.title}</div>
+        `;
+        thumbGrid.appendChild(thumb);
+      });
+    }
+
+    function switchEmperorPage(idx) {
+      if (idx < 0 || idx >= EMPEROR_PAGES.length) return;
+      currentPageIdx = idx;
+
+      // Update main image and caption
+      const img = document.getElementById('emperorDashImg');
+      const cap = document.getElementById('emperorDashCaption');
+      if (img) img.src = EMPEROR_PAGES[idx].src;
+      if (cap) cap.innerHTML = EMPEROR_PAGES[idx].caption;
+
+      // Update dropdown selector
+      const sel = document.getElementById('emperorPageSelect');
+      if (sel) sel.value = idx;
+
+      // Update counter and nav buttons
+      const counter = document.getElementById('pageCounter');
+      const prev = document.getElementById('prevBtn');
+      const next = document.getElementById('nextBtn');
+      if (counter) counter.textContent = `Page ${idx + 1} of ${EMPEROR_PAGES.length}`;
+      if (prev) prev.disabled = (idx === 0);
+      if (next) next.disabled = (idx === EMPEROR_PAGES.length - 1);
+
+      // Update active pills
+      document.querySelectorAll('#emperorPills .tab-btn').forEach(btn => {
+        const matches = btn.getAttribute('onclick')?.includes(`(${idx})`);
+        btn.classList.toggle('active', !!matches);
+      });
+
+      // Update active thumbnail
+      document.querySelectorAll('.thumb-item').forEach((t, i) => {
+        t.classList.toggle('active', i === idx);
+      });
+    }
+
+    function prevEmperorPage() {
+      if (currentPageIdx > 0) switchEmperorPage(currentPageIdx - 1);
+    }
+
+    function nextEmperorPage() {
+      if (currentPageIdx < EMPEROR_PAGES.length - 1) switchEmperorPage(currentPageIdx + 1);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initEmperorControls);
+    } else {
+      initEmperorControls();
+    }
+  </script>
 </body>
 </html>
