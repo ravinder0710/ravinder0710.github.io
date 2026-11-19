@@ -5233,7 +5233,6 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <a href="https://github.com/ravinder0710" target="_blank" rel="noopener">github &#8599;</a>
           <a href="https://www.linkedin.com/in/ravinder-gupta-da" target="_blank" rel="noopener">linkedin &#8599;</a>
           <a href="resume.html" target="_blank" rel="noopener">official résumé &#10230;</a>
-          <a href="honda-project.html" target="_blank" rel="noopener">honda enterprise pipeline &#10230;</a>
         </div>
         </div>
         <p class="dawnrun">run <b class="mv">043</b> &middot; not yet begun</p>
@@ -13182,7 +13181,7 @@ function work(y) {
      masthead earlier when the columns are a single stack. Round-3
      leftover: the trigger also fires EARLIER now (.5/.32, was .6/.4),
      so the fade completes before the card's headline reaches the clock */
-  $("mast").classList.toggle("gone", beat === 13 && bp > (stacked ? 0.32 : 0.5));
+  $("mast").classList.toggle("gone", beat >= RUN_BEATS && bp > 0.16);
   /* the waiting mark on the button runs only while the gate is the station
      on screen, so nothing on this page is animating anywhere else. Written
      here with the rest of the body classes, off the same beat reading. */
