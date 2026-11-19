@@ -445,54 +445,47 @@ if (location.hash.length > 1) window.__arrive();
   .b4{min-height:100vh; height:100vh}
   .bwho, .bpath, .b-meta, .b2, .b3, .b5, .bhow, .bsign{min-height:100vh; height:100vh}
   .station .beat-inner{
-    max-width:min(1280px, 92vw);
+    max-width:min(1380px, 94vw);
     max-height:calc(100vh - 60px);
-    align-items:center;
-    gap:clamp(1.5rem, 3.5vw, 3.5rem);
+    display:grid; grid-template-columns:minmax(0,28.5rem) minmax(0,1fr);
+    gap:clamp(1.5rem, 2.8vw, 2.75rem); align-items:center; width:100%;
   }
-  .station .plate{
-    width:100%;
-    max-width:min(680px, 52vw);
-    max-height:calc(100vh - 80px);
-    display:flex; flex-direction:column; justify-content:center;
-    padding:clamp(1rem, 2vw, 1.5rem);
-    box-sizing:border-box;
-  }
-  .station .figsvg{
-    max-height:calc(100vh - 130px);
-    width:100%; height:auto;
-  }
-  .station .prose{
-    max-height:calc(100vh - 80px);
-    display:flex; flex-direction:column; justify-content:center;
-  }
-  .prose h2{font-size:clamp(1.9rem, 2.9vw, 2.6rem); line-height:1.05; margin-top:.2rem; margin-bottom:.2rem}
-  .prose .bright{font-size:clamp(0.92rem, 1.2vw, 1.1rem); line-height:1.32; margin-top:.35rem; margin-bottom:.3rem}
-  .prose .mutedln{display:none}
-  .prose .prov{margin-top:.35rem; line-height:1.55}
-  .prose .borrowed{margin:.35rem 0; padding-left:.75rem}
-  .prose .borrowed blockquote{font-size:clamp(0.82rem, 1.02vw, 0.92rem); line-height:1.28}
-  .prose .handoff{margin-top:.35rem}
-  .station .beat-inner{
-    display:grid; grid-template-columns:minmax(0,30rem) minmax(0,1fr);
-    gap:clamp(2rem, 5vw, 5rem); align-items:center; width:100%;
-  }
-  .station.flip .beat-inner{grid-template-columns:minmax(0,1fr) minmax(0,30rem)}
+  .station.flip .beat-inner{grid-template-columns:minmax(0,1fr) minmax(0,28.5rem)}
   .station.flip .prose{order:2}
   .station.flip .plate{order:1}
   .b4 .beat-inner{grid-template-columns:minmax(0,24rem) minmax(0,1fr)} /* the pad+net row needs the width */
-  #netwrap{max-width:520px}
+  #netwrap{max-width:min(720px, 100%)}
+  .station .plate{
+    width:100%;
+    max-width:min(780px, 58vw);
+    max-height:calc(100vh - 70px);
+    display:flex; flex-direction:column; justify-content:center;
+    padding:clamp(0.5rem, 1.2vw, 1rem);
+    box-sizing:border-box;
+  }
+  .station .figsvg{
+    max-height:calc(100vh - 100px);
+    width:100%; height:auto;
+  }
+  .station .prose{
+    max-height:calc(100vh - 75px);
+    display:flex; flex-direction:column; justify-content:center;
+  }
   .prose h2{
     font-family:var(--display); font-weight:430; font-variation-settings:"opsz" 100, "SOFT" 40;
-    font-size:clamp(2.1rem, 4.2vw, 3.4rem); letter-spacing:-.015em; line-height:1.06;
+    font-size:clamp(1.9rem, 2.8vw, 2.5rem); letter-spacing:-.015em; line-height:1.05;
+    margin-top:.2rem; margin-bottom:.2rem;
   }
   .prose .bright{
-    font-family:var(--display); font-weight:430; font-size:clamp(1.25rem, 1.9vw, 1.6rem);
-    line-height:1.3; margin-top:1.1rem; letter-spacing:-.005em;
+    font-family:var(--display); font-weight:430; font-size:clamp(0.95rem, 1.25vw, 1.15rem);
+    line-height:1.32; margin-top:.35rem; margin-bottom:.3rem; letter-spacing:-.005em;
   }
-  .prose .mutedln{font-style:italic; color:var(--ink-2); font-size:1.08rem; margin-top:.5rem; max-width:42ch}
-  .prose .prov{margin-top:1.4rem; line-height:1.9; max-width:46ch}
+  .prose .mutedln{display:none}
+  .prose .prov{margin-top:.35rem; line-height:1.55; max-width:46ch}
   .prose .prov b{font-weight:400; color:var(--ink)}
+  .prose .borrowed{margin:.35rem 0; padding-left:.75rem}
+  .prose .borrowed blockquote{font-size:clamp(0.82rem, 1.02vw, 0.92rem); line-height:1.28}
+  .prose .handoff{margin-top:.35rem}
   .plate{
     background:var(--plate); border:1px solid var(--plate-line); box-shadow:var(--shadow);
     padding:clamp(1rem, 2vw, 1.6rem); contain:paint;
@@ -4660,7 +4653,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
              controls inside it now exist. Each carries its own name.
              `check-figures.mjs` §1 encodes the pair of rules. -->
         <svg id="appliedFig" class="figsvg" viewBox="0 0 560 400" role="group" aria-label="5,000 patient clinical encounters ride the intake line past three analytical triage desks: Clinical Triage, which settles inpatient, outpatient, emergency, and day care admissions; the Star Schema Engine linking claims to payers and diagnoses; and Field Parameters dynamic cohort switching. The eighth record is flagged for claim denial mitigation and audits."></svg>
-        <figcaption>fig. 04 &middot; clinical encounter triage line; 5,000 patient encounters classified through Star Schema &amp; denial mitigation engine &middot; <a href="assets/healthcare/healthcare_model_view.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open architecture diagram &#8599;</a> &middot; <i><span class="p-tap">tap</span><span class="p-hov">hover</span> a desk to see the encounters that reached it.</i></figcaption>
+        <figcaption>fig. 04 &middot; clinical encounter triage line; 5,000 patient encounters classified through Star Schema &amp; denial mitigation engine &middot; <a href="assets/healthcare/healthcare_model_view.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open architecture diagram &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -4705,7 +4698,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
             <span class="chip meet" id="chMeet" data-w="meet">13.8% at risk</span>
           </div>
         </div>
-        <figcaption>fig. 05 &middot; credit risk tranche matrix across Grades A through G &middot; <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open architecture diagram &#8599;</a>. <i><span class="p-tap">tap</span><span class="p-hov">hover</span> a chip to see its tranche.</i></figcaption>
+        <figcaption>fig. 05 &middot; credit risk tranche matrix across Grades A through G &middot; <a href="assets/bank-loan/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open architecture diagram &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -4851,7 +4844,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <div class="brow simd"><span>actual verified revenue (RM20.69M)</span><span class="btrack" aria-hidden="true"><span class="bfill" style="transform:scaleX(1)"></span></span><span class="bval">103.5%</span></div>
           <p class="bfoot">12,698 table bookings audited · <a href="assets/reports/Emperor_Restaurant_Project_Report.pdf" target="_blank">the audit report (pdf) ⟶</a></p>
         </div>
-        <figcaption>fig. 07 · multi-branch POS consolidation; 5 branches modeled into 11D + 12F Star Schema, achieving 103.5% quota. <i><span class="p-tap">tap</span><span class="p-hov">hover</span> a branch to see its sales stream.</i></figcaption>
+        <figcaption>fig. 07 &middot; multi-branch POS consolidation; 5 branches modeled into 11D + 12F Star Schema, achieving 103.5% quota &middot; <a href="assets/fraud/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open architecture diagram &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
