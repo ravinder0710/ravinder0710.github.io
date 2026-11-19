@@ -483,7 +483,7 @@ if (location.hash.length > 1) window.__arrive();
      inside the same 11–15px band the wide editions live in. */
   .figsvg.tight{max-width:330px; margin-inline:auto}
   .figsvg.tight text{font-size:11px; letter-spacing:.03em}
-  #amlFig.tight{max-width:330px}
+  #amlFig.tight, #hrFig.tight{max-width:330px}
   .figsvg .lit{fill:var(--ink)}
   .figsvg .lane{stroke:var(--hair-strong); stroke-width:1; fill:none}
   /* `.figsvg .gsq{fill:var(--clay-g)}` STOOD HERE and is deliberately gone.
@@ -569,8 +569,8 @@ if (location.hash.length > 1) window.__arrive();
      Lc 70.1 on the day field, over the Lc 60 dim floor. */
   #appliedFig.tracing .tracebtn:not(:hover) text.desklab{fill:var(--ink-2)}
   #jetFig .tracebtn:hover .jlab{fill:var(--ink)}
-  #amlFig text.tname:hover{fill:var(--ink); cursor:default}
-  #amlFig .tdot.hot{stroke:var(--ink)}
+  #amlFig text.tname:hover, #hrFig text.tname:hover{fill:var(--ink); cursor:default}
+  #amlFig .tdot.hot, #hrFig .tdot.hot{stroke:var(--ink)}
 
   /* ····· cadence · the parse, set into the week (v13, in depth) ·····
      fig. 05 drawn the family's way (the drawing's own note is in the
@@ -4810,10 +4810,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4"><a href="hr-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/HR_Analytics_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="hr-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
       <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12">
-        <div style="position:relative; width:100%; border-radius:4px; overflow:hidden; border:1px solid var(--plate-line); box-shadow:0 4px 20px rgba(0,0,0,0.25);">
-          <img src="assets/hr/workforce_pipeline_animated.gif" alt="HR Workforce Flight-Risk &amp; Retention Decision Architecture" style="width:100%; height:auto; display:block;" />
-        </div>
-        <figcaption>fig. 09 &middot; workforce flight-risk triage &amp; retention decision architecture &middot; <a href="assets/hr/workforce_pipeline_animated.gif" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open animated architecture &#8599;</a> &middot; <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--ink-2);">static schematic &#8599;</a></figcaption>
+        <svg id="hrFig" class="figsvg" viewBox="0 0 560 556" role="img" aria-label="Workforce flight-risk triage and retention decision architecture across 1,470 enterprise personnel."></svg>
+        <figcaption>fig. 09 &middot; HR workforce telemetry &amp; retention decision architecture &middot; <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -10913,6 +10911,332 @@ const AML_TIGHT_SWAP = [
   ["the track runs on dashed", "the rail runs on dashed"],
   ["nothing across the track", "nothing across the rail"],
 ];
+
+/* =======================================================================
+   FIGURE 08b / 09: HR ATTRITION WORKFORCE INTELLIGENCE ARCHITECTURE
+   (Matches Retail & Transit architecture theme, fully scroll-driven)
+   ======================================================================= */
+const HR_TOOLS = [
+  "ingest_talent_census", "profile_dept_cohorts", "sample_early_tenure", "search_flight_risks",
+  "powerquery_m_etl", "commute_distance_bin", "tenure_hazard_scan", "overtime_fatigue_meter",
+  "dax_attrition_calc", "appraisal_stagnation", "comp_parity_eval", "executive_retention_kpis",
+];
+const hr = { svg: $("hrFig"), tools: [], dots: [], cells: [], prompts: [], booms: [], plabels: [],
+  bead: null, ring: null, trail: null, state: null, deploySeg: null,
+  phx: [], vert: false, from: 24, railY: 490, railX: 34, swing: -120, halt: 0, ringBottom: 500, vbH: 556,
+  steps: [], track: [], p3: 0.4, p4: 0.55, e: null, authored: "" };
+const HR_PHASES = ["1.0 talent ingest", "2.0 m-etl engine", "3.0 tenure cliff", "4.0 ot burnout", "5.0 dax rules", "6.0 promotion action", "7.0 $480K saved"];
+const HR_GATES = [null, null, "maybe", null, "always", null, "human"];
+const HR_BOOM_CLASS = { maybe: "boom maybe", always: "boom", human: "boom held" };
+const HR_W = { crate: 0.22, track: [0.37, 0.4], run: 0.45 };
+const HR_SPAN = 1.6;
+const HR_PARK = 0.72;
+const HR_FOLD = 0.88;
+const HR_TIGHT_SWAP = [
+  ["a two-rail track drawn in the same depth, its posts on the near side", "a rail"],
+  ["Both of those arms swing back along the depth ahead of the run.", "Both of those booms lift ahead of the run."],
+  ["a heavy barrier, a bar drawn with volume, that never lifts, standing in the line of the crate's right wall over", "a heavy boom that never lifts, over"],
+  ["the track runs on dashed", "the rail runs on dashed"],
+  ["nothing across the track", "nothing across the rail"],
+];
+
+function buildHr(tight) {
+  const s = hr.svg;
+  if (!s) return;
+  const el = svgIn(s);
+  s.textContent = ""; s.classList.toggle("tight", !!tight);
+  hr.tools = []; hr.dots = []; hr.cells = []; hr.prompts = [];
+  hr.booms = []; hr.plabels = []; hr.steps = []; hr.track = [];
+  hr._lit = -1; hr._st = "";
+  hr.vert = !!tight;
+  if (!hr.authored) hr.authored = s.getAttribute("aria-label") || "Workforce flight-risk triage and retention decision architecture across 1,470 enterprise personnel.";
+  s.setAttribute("aria-label", tight
+    ? HR_TIGHT_SWAP.reduce((t, [wide, own]) => t.replace(wide, own), hr.authored)
+    : hr.authored);
+
+  const hrule = (y, x0, x1, gaps) => {
+    let d = "", cur = x0;
+    for (const [a, b] of gaps || []) { if (a > cur) d += `M ${cur} ${y} H ${a} `; cur = b; }
+    if (x1 > cur) d += `M ${cur} ${y} H ${x1}`;
+    el("path", { d: d.trim(), class: "lane" });
+  };
+  const step = (list, at, t, a, parent) => {
+    const n = el(t, { ...a, opacity: 0 }, parent); list.push([n, at]); return n;
+  };
+  const tipDown = (x, y, list, at) => (list
+    ? step(list, at, "path", { d: `M ${x} ${y} l -4 -8 h 8 z`, class: "wiretip" })
+    : el("path", { d: `M ${x} ${y} l -4 -8 h 8 z`, class: "wiretip" }));
+
+  if (!tight) {
+    s.setAttribute("viewBox", "0 0 560 556");
+    const R = 490;
+    hr.railY = R; hr.from = 24; hr.swing = -120;
+
+    /* Loop wire */
+    el("path", { d: "M 476 322 H 524 V 172 M 524 152 V 34 H 478", class: "lane" });
+    el("path", { d: "M 472 34 l 8 -4 v 8 z", class: "wiretip" });
+    el("text", { x: 524, y: 162, "text-anchor": "middle", class: "fsm" }).textContent = "returns";
+
+    /* Supervisor */
+    el("rect", { x: 24, y: 16, width: 448, height: 52, rx: 3, class: "lane" });
+    el("text", { x: 38, y: 40, class: "lit" }).textContent = "People Analytics & DAX Intelligence Engine";
+    el("text", { x: 38, y: 58, class: "fsm" }).textContent = "Power BI Desktop · Power Query M · VertiPaq Core";
+    hr.state = el("text", { x: 458, y: 58, "text-anchor": "end", class: "lit" });
+    hr.state.textContent = `state · ${HR_PHASES[0]}`;
+    el("path", { d: "M 300 68 V 92", class: "lane" });
+    tipDown(300, 100);
+    el("text", { x: 310, y: 86, class: "fsm" }).textContent = "calls";
+
+    /* Registry of 12 tools */
+    el("text", { x: 24, y: 104, class: "lit" }).textContent = "Workforce Diagnostics & Tools ×12";
+    hrule(100, 214, 500, [[293, 307]]);
+    const COL = [24, 200, 330];
+    for (let i = 0; i < 12; i++) {
+      const cx = COL[(i / 4) | 0], y = 130 + (i % 4) * 20;
+      hr.dots.push(el("rect", { x: cx, y: y - 7, width: 5, height: 5, class: "tdot" }));
+      const t = el("text", { x: cx + 13, y, class: "tname" }); t.textContent = HR_TOOLS[i];
+      hr.tools.push(t);
+    }
+    el("text", { x: 24, y: 218, class: "staged" }).textContent = "timing staged · columnar order";
+    hrule(214, 243, 500, [[329, 343]]);
+
+    step(hr.steps, 0.37, "path", { d: "M 336 214 V 240", class: "lane" });
+    tipDown(336, 248, hr.steps, 0.37);
+    step(hr.steps, 0.37, "text", { x: 344, y: 232, class: "fsm" }).textContent = "models attrition dimensions";
+
+    /* Crate in cabinet oblique */
+    step(hr.steps, 0.04, "path", { d: "M 24 430 H 464 L 505.6 406", class: "wnear" });
+    step(hr.steps, 0.04, "path", { d: "M 65.6 406 H 464 M 48.3 416 L 65.6 406", class: "wfar" });
+    step(hr.steps, 0.08, "path", { class: "wfar",
+      d: "M 65.6 238 H 73 M 183 238 H 329 M 343 238 H 505.6 M 65.6 238 V 406 M 505.6 238 V 316 M 505.6 328 V 406" });
+    step(hr.steps, 0.08, "text", { x: 80, y: 242, class: "lit" }).textContent = "workforce intelligence model";
+    step(hr.steps, 0.12, "path", { d: "M 24 262 V 430 M 24 262 L 65.6 238", class: "wnear" });
+    step(hr.steps, 0.16, "path", { d: "M 464 262 V 430 M 464 262 L 505.6 238", class: "wnear" });
+    step(hr.steps, 0.2, "path", { d: "M 24 416 H 133 M 458 416 H 464", class: "wnear" });
+    step(hr.steps, 0.2, "text", { x: 452, y: 420, "text-anchor": "end", class: "fsm" })
+      .textContent = "1,470 enterprise employees · 16.1% overall attrition";
+
+    /* 6 Cells on back wall */
+    for (let i = 0; i < 6; i++) {
+      const y = 262 + i * 24, at = HR_W.crate + i * 0.025;
+      step(hr.steps, at, "path", { d: `M 464 ${y} H 106 V ${y + 18} H 464`, class: "cellr" });
+      const pr = step(hr.steps, at, "text", { x: 74, y: y + 13, class: "prompt" });
+      pr.textContent = "[ ]"; hr.prompts.push(pr);
+      const len = [236, 292, 198, 310, 262, 216][i];
+      const ln = el("path", { d: `M 116 ${y + 9} h ${len}`, class: "cellink" });
+      ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len; ln._len = len;
+      hr.cells.push(ln);
+    }
+
+    /* Track at bottom */
+    const PHX = Array.from({ length: 7 }, (_, i) => (i === 6 ? 496 : 56 + i * 73));
+    const rails = step(hr.track, 0.05, "g", {});
+    el("text", { x: 24, y: 448, class: "lit" }, rails).textContent = "seven phases · workforce lifecycle & retention triage";
+    el("path", { d: `M 24 ${R} H 492`, class: "lane" }, rails);
+    let far = "", cur = 44.8;
+    for (const [a, b] of PHX.slice(0, 6).map((x) => [x - 2.5, x + 2.5]).concat([[491, 504]])) {
+      far += `M ${cur} ${R - 12} H ${a} `; cur = b;
+    }
+    el("path", { d: far.trim(), class: "lane" }, rails);
+    el("path", { d: `M 24 ${R} L 44.8 ${R - 12}`, class: "wfar" }, rails);
+    hr.deploySeg = el("path", { d: `M 500 ${R} H 536 M 504 ${R - 12} H 556.8`, class: "lane", "stroke-dasharray": "3 6" }, rails);
+    hr.trail = el("path", { d: `M 24 ${R}`, class: "trail" });
+
+    for (let i = 0; i < 7; i++) {
+      const g = step(hr.track, 0.15 + i * 0.09, "g", {});
+      el("path", { class: "lane", d: i === 6
+        ? `M ${PHX[i]} ${R + 6} V ${R + 17}`
+        : `M ${PHX[i]} ${R - 20} V ${i % 2 ? R + 37 : R + 17}` }, g);
+      const lbl = el("text", { x: PHX[i], y: i % 2 ? R + 48 : R + 28, class: i === 6 ? "phlbl deplbl" : "phlbl dim" }, g);
+      lbl.textContent = HR_PHASES[i]; hr.plabels.push(lbl);
+    }
+
+    for (let i = 0; i < 7; i++) {
+      hr.booms.push(HR_GATES[i]
+        ? (HR_GATES[i] === "human"
+            ? el("rect", { x: PHX[i] - 5, y: R - 20, width: 10, height: 26, rx: 2, class: "boom held" })
+            : step(hr.track, HR_GATES[i] === "human" ? 0.92 : 0.8, "line",
+                { x1: PHX[i], y1: R - 20, x2: PHX[i] + 28, y2: R - 20, class: HR_BOOM_CLASS[HR_GATES[i]] }))
+        : null);
+    }
+    hr.phx = PHX; hr.halt = PHX[6] - 15;
+    hr.ringBottom = R + 10; hr.vbH = 556;
+    hr.ring = el("circle", { cx: 0, cy: R, r: 9, fill: "none", stroke: "var(--clay-g)", "stroke-width": 2.2, opacity: 0 });
+    hr.bead = el("circle", { cx: 0, cy: R, r: 4.5, fill: "var(--ink)", opacity: 0 });
+
+  } else {
+    /* Tight Edition (Mobile) */
+    s.setAttribute("viewBox", "0 0 240 730");
+    const X = 24;
+    hr.railX = X; hr.from = 514; hr.swing = 90;
+
+    el("path", { d: "M 208 430 H 228 V 162 M 228 142 V 34 H 212", class: "lane" });
+    el("path", { d: "M 206 34 l 8 -4 v 8 z", class: "wiretip" });
+    el("text", { x: 228, y: 152, "text-anchor": "middle", class: "fsm" }).textContent = "returns";
+
+    el("rect", { x: 8, y: 16, width: 196, height: 52, rx: 3, class: "lane" });
+    el("text", { x: 18, y: 40, class: "lit" }).textContent = "People Analytics Engine";
+    el("text", { x: 18, y: 58, class: "fsm" }).textContent = "Power BI & DAX Rules";
+    hr.state = el("text", { x: 196, y: 58, "text-anchor": "end", class: "lit" });
+    hr.state.textContent = `state · ${HR_PHASES[0]}`;
+    el("path", { d: "M 130 68 V 92", class: "lane" });
+    tipDown(130, 100);
+    el("text", { x: 140, y: 86, class: "fsm" }).textContent = "calls";
+
+    el("text", { x: 8, y: 104, class: "lit" }).textContent = "Diagnostics Tools ×12";
+    hrule(100, 145, 204, [[123, 137]]);
+    const COL = [8, 114];
+    for (let i = 0; i < 12; i++) {
+      const cx = COL[(i / 6) | 0], y = 126 + (i % 6) * 18;
+      hr.dots.push(el("rect", { x: cx, y: y - 7, width: 5, height: 5, class: "tdot" }));
+      const t = el("text", { x: cx + 11, y, class: "tname" }); t.textContent = HR_TOOLS[i];
+      hr.tools.push(t);
+    }
+    el("text", { x: 8, y: 242, class: "staged" }).textContent = "timing staged";
+    hrule(238, 100, 204, [[145, 159]]);
+
+    step(hr.steps, 0.37, "path", { d: "M 152 238 V 296", class: "lane" });
+    tipDown(152, 304, hr.steps, 0.37);
+    step(hr.steps, 0.37, "text", { x: 160, y: 260, class: "fsm" }).textContent = "dimensions";
+
+    step(hr.steps, 0.04, "path", { d: "M 8 468 H 196 L 216.8 456", class: "wnear" });
+    step(hr.steps, 0.04, "path", { d: "M 28.8 456 H 196 M 20.2 461 L 28.8 456", class: "wfar" });
+    step(hr.steps, 0.08, "path", { class: "wfar",
+      d: "M 28.8 298 H 35 M 95 298 H 145 M 159 298 H 216.8 M 28.8 298 V 456 M 216.8 298 V 424 M 216.8 436 V 456" });
+    step(hr.steps, 0.08, "text", { x: 40, y: 302, class: "lit" }).textContent = "workforce model";
+    step(hr.steps, 0.12, "path", { d: "M 8 310 V 468 M 8 310 L 28.8 298", class: "wnear" });
+    step(hr.steps, 0.16, "path", { d: "M 196 310 V 468 M 196 310 L 216.8 298", class: "wnear" });
+    step(hr.steps, 0.2, "path", { d: "M 8 458 H 196", class: "wnear" });
+    step(hr.steps, 0.2, "text", { x: 190, y: 480, "text-anchor": "end", class: "fsm" })
+      .textContent = "1,470 employees";
+
+    for (let i = 0; i < 6; i++) {
+      const y = 318 + i * 23, at = HR_W.crate + i * 0.025;
+      step(hr.steps, at, "path", { d: `M 196 ${y} H 62 V ${y + 17} H 196`, class: "cellr" });
+      const pr = step(hr.steps, at, "text", { x: 36, y: y + 12, class: "prompt" });
+      pr.textContent = "[ ]"; hr.prompts.push(pr);
+      const len = [96, 118, 80, 124, 106, 88][i];
+      const ln = el("path", { d: `M 70 ${y + 8} h ${len}`, class: "cellink" });
+      ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len; ln._len = len;
+      hr.cells.push(ln);
+    }
+
+    const PHY = Array.from({ length: 7 }, (_, i) => 532 + i * 26);
+    const rails = step(hr.track, 0.05, "g", {});
+    el("text", { x: 8, y: 500, class: "lit" }, rails).textContent = "seven phases · workforce triage";
+    el("path", { d: `M ${X} 514 V ${PHY[6]}`, class: "lane" }, rails);
+    hr.deploySeg = el("path", { d: `M ${X} ${PHY[6]} V 720`, class: "lane", "stroke-dasharray": "3 6" }, rails);
+    hr.trail = el("path", { d: `M ${X} 514`, class: "trail" });
+
+    for (let i = 0; i < 7; i++) {
+      const g = step(hr.track, 0.15 + i * 0.09, "g", {});
+      el("path", { d: `M 14 ${PHY[i]} H 46`, class: "lane" }, g);
+      const lbl = el("text", { x: 50, y: PHY[i] + 4, class: i === 6 ? "phlbl deplbl" : "phlbl dim" }, g);
+      lbl.textContent = HR_PHASES[i]; hr.plabels.push(lbl);
+    }
+    for (let i = 0; i < 7; i++) {
+      hr.booms.push(HR_GATES[i]
+        ? step(hr.track, HR_GATES[i] === "human" ? 0.92 : 0.8, "line",
+            { x1: 14, y1: PHY[i], x2: 36, y2: PHY[i], class: HR_BOOM_CLASS[HR_GATES[i]] })
+        : null);
+    }
+    hr.phx = PHY; hr.halt = PHY[6] - 15;
+    hr.ringBottom = hr.halt + 7; hr.vbH = 730;
+    hr.ring = el("circle", { cx: X, r: 6, fill: "none", stroke: "var(--clay-g)", "stroke-width": 2, opacity: 0 });
+    hr.bead = el("circle", { cx: X, r: 3, fill: "var(--ink)", opacity: 0 });
+  }
+
+  hr.tools.forEach((t, i) => {
+    t.addEventListener("pointerenter", () => hr.dots[i].classList.add("hot"));
+    t.addEventListener("pointerleave", () => hr.dots[i].classList.remove("hot"));
+  });
+
+  hr.e = asmFigure("fig08b", { box: () => layoutBox(hr.svg), draw: drawHr, span: hrSpan, window: hrWindow });
+}
+
+function hrWindow(e) {
+  const yA = e.yA, yLaw = e.yB;
+  const yPark = e.top + e.h / 2 - 0.5 * vh;
+  const yStretch = Math.min(yA + (yPark - yA) / HR_PARK, yA + HR_SPAN * (yLaw - yA));
+  const yHalt = e.top + (hr.ringBottom / hr.vbH) * e.h - HR_FOLD * vh;
+  return { yA, yB: Math.max(yLaw, yStretch, yHalt) };
+}
+
+function hrSpan(e) {
+  const p3 = clamp(asmBandP(e, 1), HR_W.track[0], HR_W.track[1]);
+  const p4 = Math.max(HR_W.run, p3 + 0.15);
+  if (p3 !== hr.p3 || p4 !== hr.p4) { hr.p3 = p3; hr.p4 = p4; if (hr.e) hr.e.last = NaN; }
+  return [p4, 1];
+}
+
+function drawHr(p) {
+  const on = (n, b) => a4put(n, "opacity", b ? "1" : "0");
+  for (const [n, at] of hr.steps) on(n, p >= at);
+  const w = clamp((p - hr.p3) / Math.max(1e-3, hr.p4 - hr.p3), 0, 1);
+  for (const [n, at] of hr.track) on(n, w >= at);
+  const e = smooth((p - hr.p4) / (1 - hr.p4));
+  const vert = hr.vert;
+  const HALT = hr.halt;
+  const axis = vert ? "cy" : "cx";
+  const xb = lerp(hr.from, HALT, e);
+  const bs = xb.toFixed(1);
+  a4put(hr.bead, axis, bs);
+  on(hr.bead, p > hr.p4);
+  a4put(hr.ring, axis, String(HALT));
+  on(hr.ring, e >= 1);
+
+  const td = xb > hr.from + 0.6
+    ? (vert ? `M ${hr.railX} ${hr.from} V ${bs}` : `M ${hr.from} ${hr.railY} H ${bs}`)
+    : (vert ? `M ${hr.railX} ${hr.from}` : `M ${hr.from} ${hr.railY}`);
+  a4put(hr.trail, "d", td);
+
+  hr.booms.forEach((b, i) => {
+    if (!b) return;
+    if (HR_GATES[i] === "human") return;
+    const t = clamp((xb - (hr.phx[i] - 34)) / 28, 0, 1);
+    const a = (hr.swing * t).toFixed(1);
+    if (b._a !== a) {
+      b._a = a;
+      b.setAttribute("transform", vert
+        ? `rotate(${a} 14 ${hr.phx[i]})`
+        : `rotate(${a} ${hr.phx[i]} ${hr.railY - 20})`);
+    }
+    const rest = HR_BOOM_CLASS[HR_GATES[i]];
+    const open = t > 0.5;
+    if (b._open !== open) { b._open = open; b.setAttribute("class", open ? `${rest} open` : rest); }
+  });
+
+  let si = 0;
+  for (let i = 0; i < 6; i++) if (xb > hr.phx[i]) si = i;
+  const st = e >= 1 ? "state · validated for retention actions" : `state · ${HR_PHASES[si]}`;
+  if (hr._st !== st) { hr._st = st; hr.state.textContent = st; }
+
+  hr.plabels.forEach((l, i) => {
+    if (i === 6) return;
+    const lit = xb > hr.phx[i];
+    if (l._lit !== lit) { l._lit = lit; l.setAttribute("class", lit ? "phlbl lit" : "phlbl dim"); }
+  });
+
+  const lit = Math.floor(clamp(e * 1.08, 0, 1) * 12);
+  if (hr._lit !== lit) {
+    hr._lit = lit;
+    hr.tools.forEach((t, i) => t.setAttribute("class", i < lit ? "tname on" : "tname"));
+    hr.dots.forEach((d, i) => d.setAttribute("class", i < lit ? "tdot on" : "tdot"));
+  }
+
+  hr.cells.forEach((c, i) => {
+    const t = smooth((e - 0.08 - i * 0.13) / 0.12);
+    const off = (c._len * (1 - t)).toFixed(1);
+    if (c._off !== off) { c._off = off; c.style.strokeDashoffset = off; }
+    const ran = t >= 1, pr = hr.prompts[i];
+    if (pr._on !== ran) {
+      pr._on = ran;
+      pr.textContent = ran ? `[${i + 1}]` : "[ ]";
+      pr.setAttribute("class", ran ? "prompt lit" : "prompt");
+    }
+  });
+}
+
 function buildAml(tight) {
   const s = aml.svg, el = svgIn(s);
   s.textContent = ""; s.classList.toggle("tight", !!tight);
@@ -11313,7 +11637,7 @@ function drawAml(p) {
    Wide 560-unit boxes author at 12 ⟶ need a ≥515px seat; the 440-unit
    climb at 11 ⟶ ≥450 (margin over 405); the net authors at 14.5 on 460
    ⟶ ≥355. Anything narrower rebuilds on its tight 240-unit plate. */
-const editions = { applied: null, jet: null, aml: null, quest: null, net: null, path: null };
+const editions = { applied: null, jet: null, aml: null, hr: null, quest: null, net: null, path: null };
 function innerW(el) {
   const cs = getComputedStyle(el);
   return el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
@@ -11322,6 +11646,7 @@ function chooseEditions() {
   const seats = {
     applied: [innerW(applied.svg.parentElement), 515, buildApplied],
     jet: [innerW(jet.svg.parentElement), 515, buildJet],
+    hr: [innerW(hr.svg.parentElement), 515, buildHr],
     aml: [innerW(aml.svg.parentElement), 515, buildAml],
     quest: [innerW(climb.svg.parentElement), 450, buildClimb],
     net: [netSeat(), 355, buildNet],
