@@ -784,14 +784,9 @@ if (location.hash.length > 1) window.__arrive();
   /* lifequest — the honest ledger + the climb (raw field; dusk happens here).
      The figure carries no plate box: the drawing sits directly on the paper,
      because the drawing stopping IS the content */
-  /* the honest hour anchors its content to the beat's TOP: cacheGeometry
-     derives this beat's height from the dusk contract (show → curtain →
-     darkening → closing line) and writes it back, and flex-start keeps
-     the content's page position independent of that height — centering
-     would move the content every time the runway is resized */
-  .b6, .b6b{align-items:flex-start}
-  .b6b{min-height:120vh}
-  .b6 .beat-inner{grid-template-columns:minmax(0,30rem) minmax(0,1fr); align-items:start}
+  /* Churn Analysis (.b6) and HR Attrition (.b6b) share the standard station height and alignment */
+  .b6, .b6b{min-height:128vh}
+  .b6 .beat-inner, .b6b .beat-inner{grid-template-columns:minmax(0,30rem) minmax(0,1fr); align-items:center}
   .plate.bare{background:none; border:none; box-shadow:none; padding:0; contain:layout}
   /* ····· fig. 08 · the stair, drawn in section ·····
      §4b's note on this plate was that the pencil half "reads as faint clutter
@@ -4771,24 +4766,24 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
        live. The beat's height is derived from the same contract. -->
     <section id="lifequest" class="beat station b6" data-beat="7">
     <!-- 1. CUSTOMER CHURN ANALYSIS -->
-    <div class="beat-inner" style="margin-bottom:6rem;">
+    <div class="beat-inner">
       <div class="prose">
-        <p class="kicker" data-fx="in .05 .28 y 4 | out .94 1.04 y -4" data-fx-sync="dusk">¶ 08 · project 5 of 7 · <i>21:07</i></p>
+        <p class="kicker" data-fx="in .05 .28 y 4 | out .94 1.04 y -4">¶ 08 · project 5 of 7 · <i>21:07</i></p>
         <p class="hourline" data-fx="in .05 .24 y 3 | out .94 1.04 y -3 | drift 8">dusk. isolating subscriber churn before cancellation occurs.</p>
-        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .94 1.04 y -4 | drift 14" data-fx-sync="dusk" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">Churn Analysis<span style="color:var(--clay)">.</span></h2>
+        <h2 class="prose-h" data-fx="in .07 .32 y 5 | out .94 1.04 y -4 | drift 14" style="font-family:var(--display); font-weight:430; font-size:clamp(2rem,4vw,3.1rem); letter-spacing:-.015em">Churn Analysis<span style="color:var(--clay)">.</span></h2>
         <p class="codename">Customer Churn &amp; Subscription Lifetime Value</p>
-        <figure class="borrowed" data-fx="in .09 .32 y 5 | drift 11" data-fx-sync="dusk">
+        <figure class="borrowed" data-fx="in .09 .32 y 5 | drift 11">
           <blockquote>&ldquo;Retention is the only metric that compounds; acquisition without retention is a leaky bucket.&rdquo;</blockquote>
           <figcaption>Customer Analytics Principle &middot; 2026</figcaption>
         </figure>
         <p class="bright" data-fx="in .08 .29 x 7 | out .96 1.06 y -4 | drift 18">Isolating contract tenure hazard and payment friction across 10,000 subscribers.</p>
-        <p class="mutedln" data-fx="in .1 .36 y 5 | out .94 1.04 y -4 | drift 12" data-fx-sync="dusk" style="font-style:italic; color:var(--ink-2); margin-top:.6rem; max-width:52ch">Analyzed 10,000 telecom subscribers using Python (Pandas, Seaborn, NumPy). Segmented contract tenures to isolate the 1-to-6 month vulnerability cliff, correlation between electronic payment friction and churn, and lifetime value decay.</p>
+        <p class="mutedln" data-fx="in .1 .36 y 5 | out .94 1.04 y -4 | drift 12" style="font-style:italic; color:var(--ink-2); margin-top:.6rem; max-width:52ch">Analyzed 10,000 telecom subscribers using Python (Pandas, Seaborn, NumPy). Segmented contract tenures to isolate the 1-to-6 month vulnerability cliff, correlation between electronic payment friction and churn, and lifetime value decay.</p>
         <p class="prov mono" data-fx="in .1 .3 y 4 | out .84 1.02 y -4 | drift 14"><b class="mv">10,000</b> customer cohort records &middot; <b class="mv">27.27%</b> overall churn &middot; Survival tenure curves<br>
           Correlation matrices &middot; Month-to-month vulnerability benchmarked &middot; Python Exploratory Data Analysis (EDA)</p>
         <p class="prov mono">Python &middot; Pandas &middot; NumPy &middot; Seaborn &middot; Matplotlib &middot; Jupyter</p>
-        <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4" data-fx-sync="dusk"><a href="churn-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/Customer_Churn_Analysis_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="churn-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
+        <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4"><a href="churn-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/customer-churn-analysis-python" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/Customer_Churn_Analysis_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="churn-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
-      <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12" data-fx-sync="dusk">
+      <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12">
         <svg id="questFig" class="figsvg" viewBox="0 0 490 410" role="img" aria-label="Customer cohort survival stages: isolating tenure cliff, payment friction, and subscription lifetime value across 10,000 records."></svg>
         <figcaption>fig. 08 &middot; cohort survival stages &amp; tenure cliff &middot; <a href="assets/churn/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
       </figure>
@@ -5708,169 +5703,15 @@ function cacheGeometry() {
      and the beat's own height is derived from that chain and written
      back (flex-start keeps the content's position independent of it),
      so the contract holds at ANY viewport, not only the measured ones. */
+  /* Churn Analysis (beats[7]) keeps standard natural station height.
+     The darkening window transitions smoothly across the departure of Churn
+     into HR Attrition (beats[8]) without an empty wasteland. */
   const bDusk = beats[7];
-  let yShow = 0;
-  for (const f of fx) {
-    if (f.el.dataset.fxSync !== "dusk") continue;
-    /* enter as the fold reveals it: never before its top is on screen
-       (that reads as a pop), never completing below the fold (round 4's
-       Tier-E1 class), and never slower than 0.22vh of scroll */
-    const enter = f.top - vh + 8;
-    /* +28, not +16: op crosses 0.98 ~11% of the window before its end
-       (smoothstep tail + the 1/50 quantiser), measured 4–5px short */
-    const yDone = Math.max(f.top + f.h - vh + 28, enter + vh * 0.15);
-    const y0 = Math.max(enter, yDone - vh * 0.22);
-    f.spec.in[0] = (y0 + vh - f.top) / (vh + f.h);
-    f.spec.in[1] = (yDone + vh - f.top) / (vh + f.h);
-    yShow = Math.max(yShow, yDone);
-  }
-  /* THE CORRIDOR IS SHORTER ON A PHONE, and only on a phone. The chain below
-     is written in viewport fractions, so it scales — but what covers it does
-     NOT. On a laptop ¶08 is about 1605px against a 900px viewport, so while
-     the curtain crosses there is always a neighbouring station in frame and
-     the dark stretch never reads as empty. On a phone ¶08 is 2418px against
-     664px: the corridor is isolated, nothing borders it, and the reader gets
-     most of a screen of bare rail between the last lit line and the closing
-     one. Measured at iPhone size, four consecutive sample positions with
-     NOTHING on screen at all, clocks 21:39 through 21:51 — which is exactly
-     "blank until 22:04".
-
-     So the phone gets a tighter chain. The COLOURS are untouched — the same
-     stops in the same order, so every contrast pair still holds — it is only
-     the scroll distance they are traversed over that shrinks. Desktop keeps
-     its numbers literally: the expressions below are unchanged when !mobile,
-     and the ink census at 1440 and 1280 is asserted identical. */
-  const Y1 = yShow + vh * (mobile ? 0.18 : 0.35);
-  const Y2 = Y1 + vh * (mobile ? 0.16 : 0.24);         /* corridor, curtain */
-  /* the sky's show. 0.4/0.3 bought about 360px of scroll for a twelve-stop
-     choreography that includes the day's one deliberate luminance jump; at
-     0.65/0.45 the same twelve stops get half as much scroll again, which is
-     what "add frames wherever it needs" asks for. The colours are untouched
-     — this is distance, not palette. */
-  const yDark = Y2 + 40, darkSpan = vh * (mobile ? 0.45 : 0.65);
-  const yFlip = yDark + (FLIP_POS / 0.95) * darkSpan;
-  const yEnd = Math.max(yDark + darkSpan, yFlip + 20 + vh * 0.16) + vh * 0.1;
-  for (const f of fx) {
-    if (f.el.dataset.fxSync === "dusk") {
-      const o1 = (Y1 + vh - f.top) / (vh + f.h);
-      const o2 = (Y2 + vh - f.top) / (vh + f.h);
-      /* elements high in the beat have scrolled off the top before the
-         curtain: their window lies past the engine's p≤1.1 apply range,
-         where a fade would freeze mid-value. They PARK lit instead
-         (spec-space out 2 2.5, the same declaration beat 10 uses) —
-         off-screen, so the AA deadline is untouched, and parked-at-1
-         is exactly the settled world's frame. Everything the reader can
-         still see at Y1 leaves on the shared curtain. */
-      if (o2 > 1.06) { f.spec.out[0] = 2; f.spec.out[1] = 2.5; }
-      else { f.spec.out[0] = o1; f.spec.out[1] = o2; }
-    } else if (f.el.dataset.fxSync === "duskin") {
-      /* the closing line is PLACED, not just timed: its seat is wherever
-         the flip lands, half a viewport under the reading line, so the
-         sentence arrives centred in the dark it names */
-      const m0 = parseFloat(getComputedStyle(f.el).marginTop) || 0;
-      let d = yFlip + vh * 0.52 - f.top;
-      /* AND THIS IS THE VOID. The seat is a margin, and on a phone it came out
-         at 743px: ¶08's prose column ended at 828 and this line was pushed to
-         1571, with the LifeQuest plate shoved below it to 1636. That gap IS
-         the "long scroll with just the rail" — the prose before it, the figure
-         after it, and nothing in between for most of a thousand pixels.
-
-         The seat exists so the closing sentence arrives centred in the dark it
-         names, which is worth a margin but not worth a void. On a phone the
-         dark corridor is short next to the content, so the offset buys little
-         and costs a screen and a half. Capped there, and only there; the
-         desktop expression is unchanged and its census is asserted identical. */
-      /* ON A PHONE THE SEAT IS ZERO. Capping it at 0.26vh was not enough:
-         the margin sits INSIDE the prose column and the plate is the column's
-         next sibling, so every pixel of seat pushes the figure further past
-         the curtain that is about to erase it. The reader got the copy, then
-         most of a screen of bare rail, then the figure for a moment, then
-         dark. Four screenshots of it, and three of my own probes called it
-         healthy because they were counting the fixed running head and the
-         corner manifest as station content.
-
-         The seat buys one thing — the closing sentence centred in the dark it
-         names — and on a phone it costs the figure its entire read. The figure
-         wins. */
-      /* A desktop clamp on this seat was drafted and dropped: measured, it
-         MOVES the empty screen rather than removing it, because the dusk
-         corridor itself is what is empty. The corridor rule below is what
-         answers that, and this line stays as it was. */
-      if (mobile) d = 0;
-      if (Math.abs(d) > 2) f.el.style.marginTop = (m0 + d) + "px";
-      f.spec.in[0] = (yFlip + 20 + vh - (f.top + d)) / (vh + f.h);
-      f.spec.in[1] = (yFlip + 20 + vh * 0.16 + vh - (f.top + d)) / (vh + f.h);
-    }
-  }
-  /* write the derived height back and re-measure everything below the
-     beat (its own content does not move — flex-start — so the contract
-     anchors computed above stay true) */
-  /* and the tail it leaves under the closing line, which on a phone was over
-     four hundred px of nothing on its own */
-  /* The desktop tail was 0.62 vh. Its stated job was to centre ¶08's
-     closing line in the dark it names — and the copy cut took that line, so
-     the tail now buys nothing but void: measured at 1440, ¶08 was 1432px
-     tall for 562px of content, and this inline min-height silently
-     out-ranked every corridor rule the stylesheet writes. Dusk is NOT
-     rushed by shrinking it:
-     dusk7.span is darkSpan/bDusk.h, so the darkening still falls over the
-     same darkSpan PIXELS. Verified by the ΔE-per-100px probe. */
-  /* AND THE BEAT MUST OUTLAST ITS OWN WINDOW BY A READING LINE. p is
-     `(y + vh*READ_LINE - top) / h`, so p reaches 1 at
-     `y = top + h - vh*READ_LINE` — READ_LINE of a viewport EARLIER than the
-     beat's own bottom edge. Sizing the beat to yEnd plus a tail therefore
-     closes it while the darkening still has vh*(READ_LINE - tail) of scroll
-     left to run, and arcColor clamps: the sky stops part-way through the
-     choreography and the next beat starts at the colour the choreography was
-     supposed to have ARRIVED at. Measured at 9253066 by labrat:
-
-       1512x982  y 6992 L 0.4299 (beat 7, p 1.000)
-                 y 6993 L 0.3471 (beat 8, p 0.001)   ΔL -0.083 in one pixel
-        390x844  y 9101 L 0.8399 -> y 9102 L 0.3471  ΔL -0.490 in one pixel
-
-     The phone number is 86% of the day's whole luminance range in one pixel
-     of scroll, and it is what the owner was looking at when he asked for the
-     light-to-dark transitions to be smoothed. DUSK stops 8 through 12 never
-     rendered at all on either seat.
-
-     The desktop tail used to be 0.62vh, which is READ_LINE, and it was
-     paying for this offset by coincidence — its stated job was centring a
-     closing line that the copy cut removed. Cutting it to 0.34 took the
-     compensation out with the void. The requirement is stated here instead
-     of being a side effect of a tail: the beat is at least tall enough that
-     p reaches 1 after the last darkening pixel, whatever the tail is. */
-  /* AND THE FLIP MUST LAND BEFORE ¶09 ARRIVES. The curtain contract covers
-     beat 7's OWN elements and has never covered the next station rising into
-     the viewport from below — which did not matter while the crossing was
-     90px on a laptop and did not happen at all on a phone, and matters now
-     that it is a real stretch of scroll on both.
-     Nothing readable can be on screen for it. Measured on the mid band, day
-     ink #26231c reaches 4.49:1 at the top of the crossing (field L 0.64) and
-     3.11:1 by L 0.55; cream #f6efe2 is 2.92:1 at L 0.64 and only recovers
-     near the bottom. There is no ink that holds through it, which is why the
-     design's answer has always been an empty screen rather than a colour.
-     Worse than either: --clay's own luminance sits INSIDE the sweep, so ¶09's
-     clay kicker passes through the field's exact luminance on the way down —
-     measured at WCAG 1.00, text at the same luminance as what is behind it.
-     So the beat is also long enough that ¶09's kicker enters the viewport
-     only after the ink has flipped to night. Derived from that kicker's own
-     offset inside its section rather than tuned, so it holds at any viewport
-     and survives ¶09 being re-typeset. `kick` is the kicker's CENTRE (see
-     its note above), and what enters the viewport first is its top edge, so
-     the 24 covers the half line between the two and a little more. */
-  const kickOff = beats[8].kick - beats[8].top;
-  const yFlipAbs = yDark + (FLIP_POS / 0.95) * darkSpan;
-  const need = Math.ceil(
-    Math.max(yEnd + vh * (mobile ? 0.14 : 0.34),
-             yDark + darkSpan + vh * READ_LINE,
-             yFlipAbs + vh - kickOff + 24) - bDusk.top);
-  if (Math.abs(need - bDusk.h) > 2) bDusk.el.style.minHeight = need + "px";
+  bDusk.el.style.minHeight = "";
   measure();
-
-  /* hand the darkening window to arcColor, as fractions of the beat */
-  dusk7.start = (yDark + vh * READ_LINE - bDusk.top) / bDusk.h;
-  dusk7.span = darkSpan / bDusk.h;
-  window.__world.beats = beats.map((b) => ({ top: b.top, h: b.h, kick: b.kick })); /* probe hook — kick is the masthead clock's anchor */
+  dusk7.start = 0.35;
+  dusk7.span = 0.65;
+  window.__world.beats = beats.map((b) => ({ top: b.top, h: b.h, kick: b.kick }));
   /* ── v6 · window slot, fig. 06 ── */
   /* fig. 06's sheet is laid off the row as it now stands (seatSee: it reads
      layout boxes and writes only inside the svg, so nothing moves under the
