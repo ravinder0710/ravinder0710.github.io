@@ -6032,7 +6032,7 @@ function buildThread() {
      the crossing above spends on clearing ¶10's words. */
   const holdA = (i) => {
     const b = beats[i];
-    return i === 11 && !stacked && lead11
+    return i === 12 && !stacked && lead11
       ? clamp(absTop(lead11) - ROW_LEAD, b.top + b.h * 0.18, b.top + b.h * 0.46)
       : b.top + b.h * 0.18;
   };
@@ -6042,7 +6042,7 @@ function buildThread() {
      direction is a corner, and a guard is cheaper than the gate that would
      have to find it. */
   const corridorVia = (i) => {
-    if (i !== 10 || stacked || !prose10) return null;
+    if (i !== 11 || stacked || !prose10) return null;
     const y = absTop(prose10) + prose10.offsetHeight + PROSE_GAP;
     const x = absLeft(prose10) + prose10.offsetWidth + PROSE_GAP + amp * 1.5;
     return y > holdB(i) && y < holdA(i + 1) && x < beatX(i) && x > beatX(i + 1)
@@ -11117,10 +11117,6 @@ function buildMeta(tight) {
 
     meta.e = asmFigure("fig03b", { box: () => layoutBox(meta.svg), draw: drawMeta, span: metaSpan, window: metaWindow });
 }
-/* Initial boot for meta */
-if (typeof window !== "undefined" && $("metaFig")) {
-  buildMeta(false);
-}
 
 function metaWindow(e) {
   return { yA: e.yA, yB: e.yB };
@@ -11285,7 +11281,7 @@ function buildHr(tight) {
     tOtNote.textContent = "Unmeasured Shift Fatigue";
 
     /* Gate 3: Promotion Velocity Gate */
-    el("rect", { x: 364, y: 124, width: 162, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1.1" }, g2);
+    iso3dBox(el, g2, 364, 124, 162, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
     el("circle", { cx: 376, cy: 137, r: 4, fill: "none", stroke: "var(--pine)", "stroke-width": "1.2" }, g2);
     const tg3 = el("text", { x: 386, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine); letter-spacing:0.05em;" }, g2);
     tg3.textContent = "PROMOTION VELOCITY GATE";
@@ -11309,7 +11305,7 @@ function buildHr(tight) {
     el("path", { d: "M 270 226 V 248", fill: "none", stroke: "var(--hair-strong)", "stroke-width": "1", "stroke-dasharray": "2 2" }, g3);
     el("path", { d: "M 445 226 V 248", fill: "none", stroke: "var(--pine)", "stroke-width": "1", "stroke-dasharray": "2 2" }, g3);
 
-    el("rect", { x: 16, y: 248, width: 508, height: 38, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1.2" }, g3);
+    iso3dBox(el, g3, 16, 248, 508, 38, 8, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--hair-strong)" });
     el("circle", { cx: 32, cy: 267, r: 4, fill: "var(--clay)" }, g3);
     const tDax = el("text", { x: 44, y: 271, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--ink);" }, g3);
     tDax.textContent = "DAX BUSINESS RULE ENGINE";
@@ -11327,7 +11323,7 @@ function buildHr(tight) {
     const g4 = el("g", { opacity: 0 });
     add(hr.stage4, g4);
 
-    el("rect", { x: 16, y: 312, width: 248, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1.3" }, g4);
+    iso3dBox(el, g4, 16, 312, 248, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
     const tRet = el("text", { x: 28, y: 328, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine); letter-spacing:0.06em;" }, g4);
     tRet.textContent = "ACTIONABLE RETENTION LEVER";
     const tFast = el("text", { x: 28, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
@@ -11341,7 +11337,7 @@ function buildHr(tight) {
     const tCost = el("text", { x: 34, y: 400, style: "font-family:var(--mono); font-size:8.5px; font-weight:600; fill:var(--pine);" }, g4);
     tCost.textContent = "✓ $480K Replacement Cost Avoidance";
 
-    el("rect", { x: 276, y: 312, width: 248, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1.3" }, g4);
+    iso3dBox(el, g4, 276, 312, 248, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--clay)" });
     const tInt = el("text", { x: 288, y: 328, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--clay); letter-spacing:0.06em;" }, g4);
     tInt.textContent = "PROACTIVE WORKFORCE INTERVENTION";
     const tRebal = el("text", { x: 288, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
