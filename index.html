@@ -444,16 +444,22 @@ if (location.hash.length > 1) window.__arrive();
   .station{min-height:100vh; height:100vh; display:flex; align-items:center; justify-content:center; padding-top:48px; padding-bottom:20px; box-sizing:border-box; overflow-x:clip}
   .b4{min-height:100vh; height:100vh}
   .bwho, .bpath, .b-meta, .b2, .b3, .b5, .bhow, .bsign{min-height:100vh; height:100vh}
-  .station .beat-inner{max-height:calc(100vh - 70px); align-items:center}
+  .station .beat-inner{
+    max-width:min(1280px, 92vw);
+    max-height:calc(100vh - 60px);
+    align-items:center;
+    gap:clamp(1.5rem, 3.5vw, 3.5rem);
+  }
   .station .plate{
-    max-width:min(560px, 46vw);
-    max-height:calc(100vh - 110px);
+    width:100%;
+    max-width:min(680px, 52vw);
+    max-height:calc(100vh - 80px);
     display:flex; flex-direction:column; justify-content:center;
-    padding:clamp(0.8rem, 1.5vw, 1.25rem);
+    padding:clamp(1rem, 2vw, 1.5rem);
     box-sizing:border-box;
   }
   .station .figsvg{
-    max-height:calc(100vh - 160px);
+    max-height:calc(100vh - 130px);
     width:100%; height:auto;
   }
   .station .prose{
