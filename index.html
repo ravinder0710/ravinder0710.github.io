@@ -395,7 +395,7 @@ if (location.hash.length > 1) window.__arrive();
   .kicker i{font-style:normal; color:var(--ink-2)}
 
   /* beat 1 — the start */
-  .b1{min-height:100vh; height:100vh; display:flex; align-items:center; box-sizing:border-box}
+  .b1{min-height:118vh; display:flex; align-items:center}
   .b1 .beat-inner{padding-top:14vh}
   h1{
     font-family:var(--display); font-weight:365;
@@ -441,51 +441,29 @@ if (location.hash.length > 1) window.__arrive();
      settle drift off at the text column. clip, not hidden: it creates no
      scroll container, so no sticky or fixed descendant is disturbed, and
      overflow-y stays visible — the departure lift still leaves the box. */
-  .station{min-height:100vh; height:100vh; display:flex; align-items:center; justify-content:center; padding-top:48px; padding-bottom:20px; box-sizing:border-box; overflow-x:clip}
-  .b4{min-height:100vh; height:100vh}
-  .bwho, .bpath, .b-meta, .b2, .b3, .b5, .bhow, .bsign{min-height:100vh; height:100vh}
+  .station{min-height:128vh; display:flex; align-items:center; padding-top:6vh; padding-bottom:6vh;
+    overflow-x:clip}
+  .b4{min-height:148vh} /* the interactive station earns its dwell */
   .station .beat-inner{
-    max-width:min(1380px, 94vw);
-    max-height:calc(100vh - 60px);
-    display:grid; grid-template-columns:minmax(0,29.2rem) minmax(0,1fr);
-    gap:clamp(1.5rem, 2.8vw, 2.75rem); align-items:center; width:100%;
+    display:grid; grid-template-columns:minmax(0,30rem) minmax(0,1fr);
+    gap:clamp(2rem, 5vw, 5rem); align-items:center; width:100%;
   }
-  .station.flip .beat-inner{grid-template-columns:minmax(0,1fr) minmax(0,29.2rem)}
+  .station.flip .beat-inner{grid-template-columns:minmax(0,1fr) minmax(0,30rem)}
   .station.flip .prose{order:2}
   .station.flip .plate{order:1}
   .b4 .beat-inner{grid-template-columns:minmax(0,24rem) minmax(0,1fr)} /* the pad+net row needs the width */
-  #netwrap{max-width:min(720px, 100%)}
-  .station .plate{
-    width:100%;
-    max-width:min(730px, 55vw);
-    max-height:calc(100vh - 70px);
-    display:flex; flex-direction:column; justify-content:center;
-    padding:clamp(0.75rem, 1.6vw, 1.25rem);
-    box-sizing:border-box;
-  }
-  .station .figsvg{
-    max-height:calc(100vh - 115px);
-    width:100%; height:auto;
-  }
-  .station .prose{
-    max-height:calc(100vh - 75px);
-    display:flex; flex-direction:column; justify-content:center;
-  }
+  #netwrap{max-width:520px}
   .prose h2{
     font-family:var(--display); font-weight:430; font-variation-settings:"opsz" 100, "SOFT" 40;
-    font-size:clamp(1.9rem, 2.8vw, 2.5rem); letter-spacing:-.015em; line-height:1.05;
-    margin-top:.2rem; margin-bottom:.2rem;
+    font-size:clamp(2.1rem, 4.2vw, 3.4rem); letter-spacing:-.015em; line-height:1.06;
   }
   .prose .bright{
-    font-family:var(--display); font-weight:430; font-size:clamp(0.95rem, 1.25vw, 1.15rem);
-    line-height:1.32; margin-top:.35rem; margin-bottom:.3rem; letter-spacing:-.005em;
+    font-family:var(--display); font-weight:430; font-size:clamp(1.25rem, 1.9vw, 1.6rem);
+    line-height:1.3; margin-top:1.1rem; letter-spacing:-.005em;
   }
-  .prose .mutedln{display:none}
-  .prose .prov{margin-top:.35rem; line-height:1.55; max-width:46ch}
+  .prose .mutedln{font-style:italic; color:var(--ink-2); font-size:1.08rem; margin-top:.5rem; max-width:42ch}
+  .prose .prov{margin-top:1.4rem; line-height:1.9; max-width:46ch}
   .prose .prov b{font-weight:400; color:var(--ink)}
-  .prose .borrowed{margin:.35rem 0; padding-left:.75rem}
-  .prose .borrowed blockquote{font-size:clamp(0.82rem, 1.02vw, 0.92rem); line-height:1.28}
-  .prose .handoff{margin-top:.35rem}
   .plate{
     background:var(--plate); border:1px solid var(--plate-line); box-shadow:var(--shadow);
     padding:clamp(1rem, 2vw, 1.6rem); contain:paint;
@@ -832,8 +810,9 @@ if (location.hash.length > 1) window.__arrive();
      The figure carries no plate box: the drawing sits directly on the paper,
      because the drawing stopping IS the content */
   /* Churn Analysis (.b6) and HR Attrition (.b6b) share the standard station height and alignment */
-  .b6, .b6b{min-height:100vh; height:100vh}
-  .b6 .beat-inner, .b6b .beat-inner{grid-template-columns:minmax(0,30rem) minmax(0,1fr); align-items:center}
+  .b6{align-items:flex-start}
+  .b6 .beat-inner{grid-template-columns:minmax(0,30rem) minmax(0,1fr); align-items:start}
+  .b6b .beat-inner{grid-template-columns:minmax(0,30rem) minmax(0,1fr); align-items:center}
   .plate.bare{background:none; border:none; box-shadow:none; padding:0; contain:layout}
   /* ····· fig. 08 · the stair, drawn in section ·····
      §4b's note on this plate was that the pencil half "reads as faint clutter
@@ -895,7 +874,7 @@ if (location.hash.length > 1) window.__arrive();
   }
 
   /* beat 7 — agentic automl: the notebook worked by tools, at night */
-  .b7{min-height:100vh; height:100vh}
+  .b7{min-height:136vh}
   /* unfired names read at .9 — measured: .55 was Lc 33.8 on the dusk
      plate, half the dim-text floor. The fired state is carried by pine
      and the filled dot, not by sinking the resting ink under Lc 60. */
@@ -4261,7 +4240,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
      empty run trails the station instead of being split either side of it.
      A symmetric 23/23 put half the corridor above the heading, which is
      where every measured near-empty frame was (bp 0.03–0.31). */
-  .station, .b1, .bwho, .bpath, .bhow, .b2, .b3, .b4, .b5, .b6, .b7, .bsign{
+  .station, .b1, .bwho, .bpath, .b-meta, .bhow, .b2, .b3, .b4, .b5, .b6, .b6b, .b7, .bsign{
     min-height:0; align-items:flex-start;
     padding-top:7vh; padding-bottom:25vh}
   .bpath{justify-content:flex-start}
@@ -4399,7 +4378,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
        in the ledger below, where "reached" is the right idea; here it is not.
        "stop" is body face because it is a word; the numerals are mono because
        they are a position read off the run. -->
-  <button id="mtoggle" type="button" aria-expanded="false" aria-controls="manifest"><span class="mlabel">stop &middot; </span><span id="mcount">01 / 13</span></button>
+  <button id="mtoggle" type="button" aria-expanded="false" aria-controls="manifest"><span class="mlabel">stop &middot; </span><span id="mcount">01 / 14</span></button>
 </header>
 
 <!-- The one-time peek. It appears on the reader's first real scroll, says how
@@ -4428,7 +4407,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
      still names the dialog through aria-labelledby. -->
 <div id="manifest" role="dialog" aria-modal="true" aria-labelledby="mtitle" hidden>
   <div class="housing">
-    <span class="htitle" aria-hidden="true">run <i data-machine>042</i>, all thirteen stops</span>
+    <span class="htitle" aria-hidden="true">run <i data-machine>042</i>, all fourteen stops</span>
     <button class="mclose" type="button">close</button>
   </div>
   <div class="clip">
@@ -5466,7 +5445,7 @@ function arcColor(beat, p) {
     const a = WAY[5], b = WAY[6];
     return { rgb: oklchToRgb(lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)), night: true, sun: 6 + t };
   }
-  if (beat < 13) { /* 10–12 — the review, the references and the gate hold night */
+  if (beat < 14) { /* 11–13 — the review, credentials and the approval gate hold night */
     return { rgb: oklchToRgb(WAY[6][0], WAY[6][1], WAY[6][2]), night: true, sun: 7 };
   }
   /* ¶13 — the morning comes back as you travel into it. The window is the
@@ -6042,9 +6021,11 @@ function buildThread() {
   /* every seat but the phone asks where THIS beat's line runs; the phone has
      one lane for the whole run and nothing to negotiate with */
   const deskX = (i) =>
-    i === RUN_BEATS - 1 || i === 13
-      ? dockX
-      : (stx[i] / 100) * vw;
+    i === RUN_BEATS - 1 || i === 12
+      ? dockX /* ¶12 (credentials) rides the dock's own line into ¶13 (gate) */
+      : i === 11 && !stacked && gatesPlate
+        ? absLeft(gatesPlate) + SPINE_IN /* ¶11 (the review) rides fig. 10's spine */
+        : (stx[i] / 100) * vw;
   const beatX = (i) => (mobile ? RAIL_X_MOBILE : deskX(i));
   /* ————— the crossing out of fig. 10 goes ROUND ¶10's words —————
      Every beat holds its x from 18% to 52% of its own height and swings
@@ -6374,7 +6355,7 @@ function seatFigures() {
     const cs11 = getComputedStyle(signsHost);
     const sby = parseFloat(cs11.getPropertyValue("--sby")) || 144;
     const srh = parseFloat(cs11.getPropertyValue("--srh")) || 168;
-    const col = railAnchorX[10] ?? px11;
+    const col = railAnchorX[12] ?? px11;
     let lead = 56;
     for (const smp of samples) {
       if (smp.y < top11) continue;
@@ -6396,8 +6377,8 @@ function seatFigures() {
       signsHost.style.removeProperty("--s1");
     }
   }
-  J10 = seat("gatesFig", ".grow .gj", 9, 10);
-  J11 = seat("signsFig", ".srow .sj", 10, 11);
+  J10 = seat("gatesFig", ".grow .gj", 11, 12);
+  J11 = seat("signsFig", ".srow .sj", 12, 13);
   /* the drawings are rebuilt from the seat they were just given: the track's
      length, the spine's x and each row's junction are all measurements, so
      there is nothing to re-author when the window changes. */
@@ -6420,7 +6401,7 @@ function seatFigures() {
   const foot11 = plate11 ? absTop(plate11) + plate11.offsetHeight : 0;
   EXIT11 = Math.max(
     J11.length ? J11[J11.length - 1].y + 140 : 0,
-    foot11 ? foot11 + vh * 0.45 : beats[11].top + beats[11].h * 0.74
+    foot11 ? foot11 + vh * 0.45 : beats[12].top + beats[12].h * 0.74
   );
   signs.exit = EXIT11;
   window.__world.junctions = junctions;      /* probe hook */
@@ -11078,7 +11059,7 @@ function buildMeta(tight) {
   tFb.textContent = "FACEBOOK AD CAMPAIGNS";
   const tFbVal = el("text", { x: 36, y: 82, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g1);
   tFbVal.textContent = "240K Events · $1.42M";
-  const tFbFmt = el("text", { x: 36, y: 94, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
+  const tFbFmt = el("text", { x: 36, y: 94, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g1);
   tFbFmt.textContent = "Feeds · Desktop/Mobile · Carousel";
 
   // Right 3D Platform Dock: Instagram
@@ -11087,7 +11068,7 @@ function buildMeta(tight) {
   tIg.textContent = "INSTAGRAM AD CAMPAIGNS";
   const tIgVal = el("text", { x: 292, y: 82, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g1);
   tIgVal.textContent = "160K Events · $1.12M";
-  const tIgFmt = el("text", { x: 292, y: 94, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
+  const tIgFmt = el("text", { x: 292, y: 94, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g1);
   tIgFmt.textContent = "Stories · Reels · Video Focus";
 
   // 3D Telemetry Ingestion Pipes
@@ -11143,10 +11124,10 @@ function buildMeta(tight) {
   meta.queryBus = sqlBus;
 
   // Demographic & Funnel Splits
-  const tD1 = el("text", { x: 38, y: 302, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g3);
-  tD1.textContent = "• Audience: Female 54% · Male 46%  |  Peak Cohort: Age 25–34 (48.2% Conversions)";
-  const tD2 = el("text", { x: 38, y: 318, style: "font-family:var(--mono); font-size:10px; fill:var(--pine); font-weight:600;" }, g3);
-  tD2.textContent = "✓ SQL Cross-Tool Reconciliation: CTR 11.79% · Engagement Rate 13.58% · Conversion Rate 4.99%";
+  const tD1 = el("text", { x: 38, y: 302, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g3);
+  tD1.textContent = "• Audience: Female 54% · Male 46% | Peak: 25–34 (48.2% Conversions)";
+  const tD2 = el("text", { x: 38, y: 318, style: "font-family:var(--mono); font-size:8.5px; fill:var(--pine); font-weight:600;" }, g3);
+  tD2.textContent = "✓ SQL Reconciled: CTR 11.79% · Eng Rate 13.58% · CR 4.99%";
 
   /* Stage 4: 3D Format Matrix & Strategic Decisions */
   const g4 = el("g", { opacity: 1 });
@@ -11156,19 +11137,19 @@ function buildMeta(tight) {
   iso3dBox(el, g4, 24, 344, 230, 84, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
   const tA1 = el("text", { x: 36, y: 362, style: "font-family:var(--display); font-size:12px; font-weight:600; fill:var(--ink);" }, g4);
   tA1.textContent = "Carousel & Video Creatives";
-  const tA1s = el("text", { x: 36, y: 378, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
+  const tA1s = el("text", { x: 36, y: 378, style: "font-family:var(--mono); font-size:8.5px; fill:var(--ink-2);" }, g4);
   tA1s.textContent = "• Highest conversion yield & ROAS";
-  const tA1b = el("text", { x: 36, y: 404, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--pine);" }, g4);
-  tA1b.textContent = "✓ 4.99% CR · $2.54M Allocation Guard";
+  const tA1b = el("text", { x: 36, y: 404, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--pine);" }, g4);
+  tA1b.textContent = "✓ 4.99% CR · $2.54M Guard";
 
   // Action Box 2: Viral Amplification
   iso3dBox(el, g4, 280, 344, 234, 84, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--clay)" });
   const tA2 = el("text", { x: 292, y: 362, style: "font-family:var(--display); font-size:12px; font-weight:600; fill:var(--ink);" }, g4);
   tA2.textContent = "Stories & Reels Formats";
-  const tA2s = el("text", { x: 292, y: 378, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
+  const tA2s = el("text", { x: 292, y: 378, style: "font-family:var(--mono); font-size:8.5px; fill:var(--ink-2);" }, g4);
   tA2s.textContent = "• 11.79% CTR · 46.1K Viral Reach";
-  const tA2b = el("text", { x: 292, y: 404, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--clay);" }, g4);
-  tA2b.textContent = "! Fatigue Threshold: 14-Day Cycle";
+  const tA2b = el("text", { x: 292, y: 404, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--clay);" }, g4);
+  tA2b.textContent = "! 14-Day Fatigue Threshold";
 
     meta.e = asmFigure("fig03b", { box: () => layoutBox(meta.svg), draw: drawMeta, span: metaSpan, window: metaWindow });
 }
@@ -11265,8 +11246,8 @@ function buildHr(tight) {
     tSub.textContent = "ENTERPRISE TALENT POOL";
     const tHeadcount = el("text", { x: 26, y: 73, style: "font-family:var(--display); font-size:15px; font-weight:600; fill:var(--ink);" }, g1);
     tHeadcount.textContent = "1,470 Personnel";
-    const tDim = el("text", { x: 26, y: 85, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
-    tDim.textContent = "35 Dimensions · Active Roster";
+    const tDim = el("text", { x: 26, y: 85, style: "font-family:var(--mono); font-size:9.5px; fill:var(--ink-2);" }, g1);
+    tDim.textContent = "35 Dimensions · Roster";
 
     const depts = [
       { name: "R&D:", count: "833", pct: "(56.7%)", col: "var(--clay)", x: 200, w: 98 },
@@ -11280,8 +11261,8 @@ function buildHr(tight) {
     });
 
     el("rect", { x: 200, y: 70, width: 324, height: 22, rx: 2, fill: "none", stroke: "var(--plate-line)", "stroke-width": "0.8", "stroke-dasharray": "3 3" }, g1);
-    const tEtl = el("text", { x: 362, y: 84, "text-anchor": "middle", style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
-    tEtl.textContent = "Power Query M · Distance Bucketing · Early Tenure Segmentation";
+    const tEtl = el("text", { x: 362, y: 84, "text-anchor": "middle", style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g1);
+    tEtl.textContent = "Power Query M · Distance Bucketing · Cohorts";
 
     const p1 = el("path", { d: "M 95 92 V 122", fill: "none", stroke: "var(--clay)", "stroke-width": "1.2", "marker-end": "url(#hrArrClay)" }, g1);
     p1._len = 30; p1.style.strokeDasharray = "30"; p1.style.strokeDashoffset = "30";
@@ -11311,8 +11292,8 @@ function buildHr(tight) {
 
     const tTurnover = el("text", { x: 26, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--clay);" }, g2);
     tTurnover.textContent = "57.1% Turnover Peak";
-    const tTenureNote = el("text", { x: 26, y: 212, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g2);
-    tTenureNote.textContent = "0–2 Yr Early Career Vulnerability";
+    const tTenureNote = el("text", { x: 26, y: 212, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g2);
+    tTenureNote.textContent = "0–2 Yr Early Career Risk";
 
     /* Gate 2: Overtime Fatigue Gate */
     iso3dBox(el, g2, 190, 124, 162, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
@@ -11332,8 +11313,8 @@ function buildHr(tight) {
 
     const tRisk = el("text", { x: 202, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g2);
     tRisk.textContent = "2.9× Risk Multiplier";
-    const tOtNote = el("text", { x: 202, y: 212, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g2);
-    tOtNote.textContent = "Unmeasured Shift Fatigue";
+    const tOtNote = el("text", { x: 202, y: 212, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g2);
+    tOtNote.textContent = "Unmeasured Fatigue";
 
     /* Gate 3: Promotion Velocity Gate */
     iso3dBox(el, g2, 364, 124, 162, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
@@ -11349,8 +11330,8 @@ function buildHr(tight) {
 
     const tStaff = el("text", { x: 376, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g2);
     tStaff.textContent = "144 Flight Risks";
-    const tStaffNote = el("text", { x: 376, y: 212, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g2);
-    tStaffNote.textContent = "Blocked Top Performers";
+    const tStaffNote = el("text", { x: 376, y: 212, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g2);
+    tStaffNote.textContent = "Blocked Performers";
 
     /* Stage 3: DAX Decision Rule Engine */
     const g3 = el("g", { opacity: 1 });
@@ -11364,8 +11345,8 @@ function buildHr(tight) {
     el("circle", { cx: 32, cy: 267, r: 4, fill: "var(--clay)" }, g3);
     const tDax = el("text", { x: 44, y: 271, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--ink);" }, g3);
     tDax.textContent = "DAX BUSINESS RULE ENGINE";
-    const tDaxSub = el("text", { x: 216, y: 271, style: "font-family:var(--mono); font-size:9.5px; fill:var(--ink-2);" }, g3);
-    tDaxSub.textContent = "Flight-Risk Scoring · Comp Parity Calculation · Severance Liability Triage";
+    const tDaxSub = el("text", { x: 216, y: 271, style: "font-family:var(--mono); font-size:8.5px; fill:var(--ink-2);" }, g3);
+    tDaxSub.textContent = "Flight-Risk Scoring · Comp Parity · Triage";
 
     const dstream = el("line", { x1: 24, y1: 284, x2: 516, y2: 284, stroke: "url(#hrBusGrad)", "stroke-width": "2" }, g3);
     dstream._len = 492; dstream.style.strokeDasharray = "492"; dstream.style.strokeDashoffset = "492";
@@ -11383,13 +11364,13 @@ function buildHr(tight) {
     tRet.textContent = "ACTIONABLE RETENTION LEVER";
     const tFast = el("text", { x: 28, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
     tFast.textContent = "144 Fast-Track Promotions";
-    const tRet1 = el("text", { x: 28, y: 364, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
-    tRet1.textContent = "• Compensation Parity & Role Reclassification";
-    const tRet2 = el("text", { x: 28, y: 377, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
-    tRet2.textContent = "• 83.9% Enterprise Talent Retained Baseline";
+    const tRet1 = el("text", { x: 28, y: 364, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g4);
+    tRet1.textContent = "• Comp Parity & Reclassification";
+    const tRet2 = el("text", { x: 28, y: 377, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g4);
+    tRet2.textContent = "• 83.9% Enterprise Retention";
 
     el("rect", { x: 26, y: 386, width: 228, height: 20, rx: 2, fill: "rgba(78,155,111,0.18)" }, g4);
-    const tCost = el("text", { x: 34, y: 400, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--pine);" }, g4);
+    const tCost = el("text", { x: 34, y: 400, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--pine);" }, g4);
     tCost.textContent = "✓ $480K Replacement Cost Avoidance";
 
     iso3dBox(el, g4, 276, 312, 248, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--clay)" });
@@ -11397,23 +11378,23 @@ function buildHr(tight) {
     tInt.textContent = "PROACTIVE WORKFORCE INTERVENTION";
     const tRebal = el("text", { x: 288, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
     tRebal.textContent = "234 Overtime Rebalancings";
-    const tInt1 = el("text", { x: 288, y: 364, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
-    tInt1.textContent = "• Shift Workload Capping & Burnout Monitoring";
-    const tInt2 = el("text", { x: 288, y: 377, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
-    tInt2.textContent = "• 0–2 Yr Mentorship Cohort Routing";
+    const tInt1 = el("text", { x: 288, y: 364, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g4);
+    tInt1.textContent = "• Workload Capping & Retention";
+    const tInt2 = el("text", { x: 288, y: 377, style: "font-family:var(--mono); font-size:9px; fill:var(--ink-2);" }, g4);
+    tInt2.textContent = "• 0–2 Yr Mentorship Routing";
 
     el("rect", { x: 286, y: 386, width: 228, height: 20, rx: 2, fill: "rgba(196,83,46,0.18)" }, g4);
-    const tExit = el("text", { x: 294, y: 400, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--clay);" }, g4);
+    const tExit = el("text", { x: 294, y: 400, style: "font-family:var(--mono); font-size:8.5px; font-weight:600; fill:var(--clay);" }, g4);
     tExit.textContent = "! 16.1% Exit Cliff Contained (236 Exits)";
 
     /* Stage 5: Baseline Footer */
     const g5 = el("g", { opacity: 0 });
     add(hr.stage5, g5);
     el("line", { x1: 16, y1: 428, x2: 524, y2: 428, stroke: "var(--plate-line)", "stroke-width": "0.8" }, g5);
-    const tFoot = el("text", { x: 16, y: 442, style: "font-family:var(--mono); font-size:9.5px; fill:var(--ink-2);" }, g5);
-    tFoot.textContent = "1,470 Personnel · 35 Dimensions · Power BI DAX Analytics Engine";
+    const tFoot = el("text", { x: 16, y: 442, style: "font-family:var(--mono); font-size:8.5px; fill:var(--ink-2);" }, g5);
+    tFoot.textContent = "1,470 Personnel · 35 Dims · Power BI DAX Engine";
     const tFootR = el("text", { x: 524, y: 442, "text-anchor": "end", style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine);" }, g5);
-    tFootR.textContent = "Talent Retention Impact: $480K";
+    tFootR.textContent = "Retention Impact: $480K";
 
   } else {
     /* Tight Edition (Mobile Portrait) */
@@ -12608,9 +12589,9 @@ function setStop(beat) {
 /* ————— masthead clock + phase ————— */
 /* the datelines, minutes — station stops are the site's own. One entry per
    beat: 22:32 is the co-signers, 22:41 the gate. */
-const CLOCKS = [372, 418, 472, 527, 726, 923, 1176, 1267, 1298, 1325, 1343, 1352, 1361, 1812];
-const GATE_BEAT = 12; /* ¶12, the gate: the beat whose name changes when it opens */
-const PHASE_NAMES = ["the start", "who", "honda sales", "healthcare rcm", "bank loan analytics", "fraud intelligence", "emperor cuisine bi", "churn analysis", "hr attrition", "retail & transit", "the review", "credentials", "the approval gate · held", "the next morning"];
+const CLOCKS = [372, 418, 472, 504, 555, 726, 923, 1176, 1267, 1298, 1325, 1343, 1352, 1361, 1812];
+const GATE_BEAT = 13; /* ¶12, the gate: the beat whose name changes when it opens */
+const PHASE_NAMES = ["the start", "who", "honda sales", "meta ad intelligence", "healthcare rcm", "credit risk analytics", "fraud intelligence", "emperor cuisine bi", "churn analysis", "hr attrition", "retail & transit", "the review", "credentials", "the approval gate · held", "the next morning"];
 let lastClock = -1, lastPhase = -1;
 /* THE HOUR ANCHORS ON KICKER CROSSINGS, NOT ON BEAT BOXES.
    Reported 2026-08-08: at scrollY 0, with nothing scrolled, the masthead read
