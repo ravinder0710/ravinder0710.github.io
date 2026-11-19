@@ -4810,8 +4810,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
         <p class="handoff" data-fx="in .14 .4 y 3 | out .94 1.04 y -4"><a href="hr-project.html" target="_blank" rel="noopener">case study <span class="arr">⟶</span></a> &middot; <a href="https://github.com/ravinder0710/hr-workforce-intelligence-powerbi" target="_blank" rel="noopener">source <span class="arr">↗</span></a> &middot; <a href="assets/reports/HR_Analytics_Project_Report.pdf" target="_blank" rel="noopener">report file <span class="arr">⟶</span></a> &middot; <a href="hr-project.html#insights" target="_blank" rel="noopener">project walkthrough <span class="arr">↗</span></a></p>
       </div>
       <figure class="plate bare" data-fx="in .08 .34 y 8 | out .94 1.04 y -4 | drift 12">
-        <svg id="hrFig" class="figsvg" viewBox="0 0 560 556" role="img" aria-label="Workforce flight-risk triage and retention decision architecture across 1,470 enterprise personnel."></svg>
-        <figcaption>fig. 09 &middot; HR workforce telemetry &amp; retention decision architecture &middot; <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
+        <svg id="hrFig" class="figsvg" viewBox="0 0 540 456" role="img" aria-label="Workforce flight-risk triage and retention decision architecture across 1,470 enterprise personnel."></svg>
+        <figcaption>fig. 09 &middot; workforce flight-risk triage &amp; retention decision architecture &middot; <a href="assets/hr/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -10913,328 +10913,355 @@ const AML_TIGHT_SWAP = [
 ];
 
 /* =======================================================================
-   FIGURE 08b / 09: HR ATTRITION WORKFORCE INTELLIGENCE ARCHITECTURE
-   (Matches Retail & Transit architecture theme, fully scroll-driven)
+   FIGURE 08b / 09: HR ATTRITION WORKFORCE INTELLIGENCE & DECISION ARCHITECTURE
+   (Authentic bespoke People Analytics design, fully scroll-driven transition)
    ======================================================================= */
-const HR_TOOLS = [
-  "ingest_talent_census", "profile_dept_cohorts", "sample_early_tenure", "search_flight_risks",
-  "powerquery_m_etl", "commute_distance_bin", "tenure_hazard_scan", "overtime_fatigue_meter",
-  "dax_attrition_calc", "appraisal_stagnation", "comp_parity_eval", "executive_retention_kpis",
-];
-const hr = { svg: $("hrFig"), tools: [], dots: [], cells: [], prompts: [], booms: [], plabels: [],
-  bead: null, ring: null, trail: null, state: null, deploySeg: null,
-  phx: [], vert: false, from: 24, railY: 490, railX: 34, swing: -120, halt: 0, ringBottom: 500, vbH: 556,
-  steps: [], track: [], p3: 0.4, p4: 0.55, e: null, authored: "" };
-const HR_PHASES = ["1.0 talent ingest", "2.0 m-etl engine", "3.0 tenure cliff", "4.0 ot burnout", "5.0 dax rules", "6.0 promotion action", "7.0 $480K saved"];
-const HR_GATES = [null, null, "maybe", null, "always", null, "human"];
-const HR_BOOM_CLASS = { maybe: "boom maybe", always: "boom", human: "boom held" };
-const HR_W = { crate: 0.22, track: [0.37, 0.4], run: 0.45 };
-const HR_SPAN = 1.6;
-const HR_PARK = 0.72;
-const HR_FOLD = 0.88;
-const HR_TIGHT_SWAP = [
-  ["a two-rail track drawn in the same depth, its posts on the near side", "a rail"],
-  ["Both of those arms swing back along the depth ahead of the run.", "Both of those booms lift ahead of the run."],
-  ["a heavy barrier, a bar drawn with volume, that never lifts, standing in the line of the crate's right wall over", "a heavy boom that never lifts, over"],
-  ["the track runs on dashed", "the rail runs on dashed"],
-  ["nothing across the track", "nothing across the rail"],
-];
+const hr = {
+  svg: null,
+  stage1: [], feederPipes: [],
+  stage2: [], cliffPath: null, otBar: null, nonOtBar: null, gaugeNeedle: null, gaugeLine: null,
+  stage3: [], daxStream: null,
+  stage4: [], stage5: [],
+  e: null, authored: ""
+};
 
 function buildHr(tight) {
+  hr.svg = $("hrFig");
   const s = hr.svg;
   if (!s) return;
   const el = svgIn(s);
-  s.textContent = ""; s.classList.toggle("tight", !!tight);
-  hr.tools = []; hr.dots = []; hr.cells = []; hr.prompts = [];
-  hr.booms = []; hr.plabels = []; hr.steps = []; hr.track = [];
-  hr._lit = -1; hr._st = "";
-  hr.vert = !!tight;
-  if (!hr.authored) hr.authored = s.getAttribute("aria-label") || "Workforce flight-risk triage and retention decision architecture across 1,470 enterprise personnel.";
-  s.setAttribute("aria-label", tight
-    ? HR_TIGHT_SWAP.reduce((t, [wide, own]) => t.replace(wide, own), hr.authored)
-    : hr.authored);
+  s.textContent = "";
+  s.classList.toggle("tight", !!tight);
 
-  const hrule = (y, x0, x1, gaps) => {
-    let d = "", cur = x0;
-    for (const [a, b] of gaps || []) { if (a > cur) d += `M ${cur} ${y} H ${a} `; cur = b; }
-    if (x1 > cur) d += `M ${cur} ${y} H ${x1}`;
-    el("path", { d: d.trim(), class: "lane" });
-  };
-  const step = (list, at, t, a, parent) => {
-    const n = el(t, { ...a, opacity: 0 }, parent); list.push([n, at]); return n;
-  };
-  const tipDown = (x, y, list, at) => (list
-    ? step(list, at, "path", { d: `M ${x} ${y} l -4 -8 h 8 z`, class: "wiretip" })
-    : el("path", { d: `M ${x} ${y} l -4 -8 h 8 z`, class: "wiretip" }));
+  hr.stage1 = []; hr.feederPipes = [];
+  hr.stage2 = []; hr.cliffPath = null; hr.otBar = null; hr.nonOtBar = null; hr.gaugeNeedle = null; hr.gaugeLine = null;
+  hr.stage3 = []; hr.daxStream = null;
+  hr.stage4 = []; hr.stage5 = [];
+
+  const add = (list, node) => { list.push(node); return node; };
 
   if (!tight) {
-    s.setAttribute("viewBox", "0 0 560 556");
-    const R = 490;
-    hr.railY = R; hr.from = 24; hr.swing = -120;
+    s.setAttribute("viewBox", "0 0 540 456");
 
-    /* Loop wire */
-    el("path", { d: "M 476 322 H 524 V 172 M 524 152 V 34 H 478", class: "lane" });
-    el("path", { d: "M 472 34 l 8 -4 v 8 z", class: "wiretip" });
-    el("text", { x: 524, y: 162, "text-anchor": "middle", class: "fsm" }).textContent = "returns";
+    const defs = el("defs", {});
+    const grad = el("linearGradient", { id: "hrBusGrad", x1: "0%", y1: "0%", x2: "100%", y2: "0%" }, defs);
+    el("stop", { offset: "0%", "stop-color": "var(--clay)", "stop-opacity": "0.9" }, grad);
+    el("stop", { offset: "50%", "stop-color": "var(--ink)", "stop-opacity": "0.8" }, grad);
+    el("stop", { offset: "100%", "stop-color": "var(--pine)", "stop-opacity": "0.9" }, grad);
 
-    /* Supervisor */
-    el("rect", { x: 24, y: 16, width: 448, height: 52, rx: 3, class: "lane" });
-    el("text", { x: 38, y: 40, class: "lit" }).textContent = "People Analytics & DAX Intelligence Engine";
-    el("text", { x: 38, y: 58, class: "fsm" }).textContent = "Power BI Desktop · Power Query M · VertiPaq Core";
-    hr.state = el("text", { x: 458, y: 58, "text-anchor": "end", class: "lit" });
-    hr.state.textContent = `state · ${HR_PHASES[0]}`;
-    el("path", { d: "M 300 68 V 92", class: "lane" });
-    tipDown(300, 100);
-    el("text", { x: 310, y: 86, class: "fsm" }).textContent = "calls";
+    const mArr = el("marker", { id: "hrArr", viewBox: "0 0 6 6", refX: "5", refY: "3", markerWidth: "4", markerHeight: "4", orient: "auto-start-reverse" }, defs);
+    el("path", { d: "M 0 1 L 5 3 L 0 5 z", fill: "var(--ink-2)" }, mArr);
 
-    /* Registry of 12 tools */
-    el("text", { x: 24, y: 104, class: "lit" }).textContent = "Workforce Diagnostics & Tools ×12";
-    hrule(100, 214, 500, [[293, 307]]);
-    const COL = [24, 200, 330];
-    for (let i = 0; i < 12; i++) {
-      const cx = COL[(i / 4) | 0], y = 130 + (i % 4) * 20;
-      hr.dots.push(el("rect", { x: cx, y: y - 7, width: 5, height: 5, class: "tdot" }));
-      const t = el("text", { x: cx + 13, y, class: "tname" }); t.textContent = HR_TOOLS[i];
-      hr.tools.push(t);
-    }
-    el("text", { x: 24, y: 218, class: "staged" }).textContent = "timing staged · columnar order";
-    hrule(214, 243, 500, [[329, 343]]);
+    const mPine = el("marker", { id: "hrArrPine", viewBox: "0 0 6 6", refX: "5", refY: "3", markerWidth: "4", markerHeight: "4", orient: "auto-start-reverse" }, defs);
+    el("path", { d: "M 0 1 L 5 3 L 0 5 z", fill: "var(--pine)" }, mPine);
 
-    step(hr.steps, 0.37, "path", { d: "M 336 214 V 240", class: "lane" });
-    tipDown(336, 248, hr.steps, 0.37);
-    step(hr.steps, 0.37, "text", { x: 344, y: 232, class: "fsm" }).textContent = "models attrition dimensions";
+    const mClay = el("marker", { id: "hrArrClay", viewBox: "0 0 6 6", refX: "5", refY: "3", markerWidth: "4", markerHeight: "4", orient: "auto-start-reverse" }, defs);
+    el("path", { d: "M 0 1 L 5 3 L 0 5 z", fill: "var(--clay)" }, mClay);
 
-    /* Crate in cabinet oblique */
-    step(hr.steps, 0.04, "path", { d: "M 24 430 H 464 L 505.6 406", class: "wnear" });
-    step(hr.steps, 0.04, "path", { d: "M 65.6 406 H 464 M 48.3 416 L 65.6 406", class: "wfar" });
-    step(hr.steps, 0.08, "path", { class: "wfar",
-      d: "M 65.6 238 H 73 M 183 238 H 329 M 343 238 H 505.6 M 65.6 238 V 406 M 505.6 238 V 316 M 505.6 328 V 406" });
-    step(hr.steps, 0.08, "text", { x: 80, y: 242, class: "lit" }).textContent = "workforce intelligence model";
-    step(hr.steps, 0.12, "path", { d: "M 24 262 V 430 M 24 262 L 65.6 238", class: "wnear" });
-    step(hr.steps, 0.16, "path", { d: "M 464 262 V 430 M 464 262 L 505.6 238", class: "wnear" });
-    step(hr.steps, 0.2, "path", { d: "M 24 416 H 133 M 458 416 H 464", class: "wnear" });
-    step(hr.steps, 0.2, "text", { x: 452, y: 420, "text-anchor": "end", class: "fsm" })
-      .textContent = "1,470 enterprise employees · 16.1% overall attrition";
+    /* Static Header */
+    const gHead = el("g", {});
+    const tHead = el("text", { x: 16, y: 18, class: "lit", style: "font-family:var(--mono); font-size:8.5px; letter-spacing:0.08em; fill:var(--ink-2); font-weight:600;" }, gHead);
+    tHead.textContent = "WORKFORCE INTELLIGENCE & RETENTION DECISION ARCHITECTURE";
 
-    /* 6 Cells on back wall */
-    for (let i = 0; i < 6; i++) {
-      const y = 262 + i * 24, at = HR_W.crate + i * 0.025;
-      step(hr.steps, at, "path", { d: `M 464 ${y} H 106 V ${y + 18} H 464`, class: "cellr" });
-      const pr = step(hr.steps, at, "text", { x: 74, y: y + 13, class: "prompt" });
-      pr.textContent = "[ ]"; hr.prompts.push(pr);
-      const len = [236, 292, 198, 310, 262, 216][i];
-      const ln = el("path", { d: `M 116 ${y + 9} h ${len}`, class: "cellink" });
-      ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len; ln._len = len;
-      hr.cells.push(ln);
-    }
+    el("circle", { cx: 442, cy: 15, r: 3.5, fill: "var(--pine)" }, gHead);
+    const tLive = el("text", { x: 450, y: 18, class: "lit", style: "font-family:var(--mono); font-size:8px; letter-spacing:0.06em; fill:var(--pine); font-weight:600;" }, gHead);
+    tLive.textContent = "LIVE TELEMETRY";
+    el("line", { x1: 16, y1: 28, x2: 524, y2: 28, stroke: "var(--plate-line)", "stroke-width": "0.8" }, gHead);
 
-    /* Track at bottom */
-    const PHX = Array.from({ length: 7 }, (_, i) => (i === 6 ? 496 : 56 + i * 73));
-    const rails = step(hr.track, 0.05, "g", {});
-    el("text", { x: 24, y: 448, class: "lit" }, rails).textContent = "seven phases · workforce lifecycle & retention triage";
-    el("path", { d: `M 24 ${R} H 492`, class: "lane" }, rails);
-    let far = "", cur = 44.8;
-    for (const [a, b] of PHX.slice(0, 6).map((x) => [x - 2.5, x + 2.5]).concat([[491, 504]])) {
-      far += `M ${cur} ${R - 12} H ${a} `; cur = b;
-    }
-    el("path", { d: far.trim(), class: "lane" }, rails);
-    el("path", { d: `M 24 ${R} L 44.8 ${R - 12}`, class: "wfar" }, rails);
-    hr.deploySeg = el("path", { d: `M 500 ${R} H 536 M 504 ${R - 12} H 556.8`, class: "lane", "stroke-dasharray": "3 6" }, rails);
-    hr.trail = el("path", { d: `M 24 ${R}`, class: "trail" });
+    /* Stage 1: Talent Pool & Departments */
+    const g1 = el("g", { opacity: 0 });
+    add(hr.stage1, g1);
 
-    for (let i = 0; i < 7; i++) {
-      const g = step(hr.track, 0.15 + i * 0.09, "g", {});
-      el("path", { class: "lane", d: i === 6
-        ? `M ${PHX[i]} ${R + 6} V ${R + 17}`
-        : `M ${PHX[i]} ${R - 20} V ${i % 2 ? R + 37 : R + 17}` }, g);
-      const lbl = el("text", { x: PHX[i], y: i % 2 ? R + 48 : R + 28, class: i === 6 ? "phlbl deplbl" : "phlbl dim" }, g);
-      lbl.textContent = HR_PHASES[i]; hr.plabels.push(lbl);
-    }
+    el("rect", { x: 16, y: 38, width: 170, height: 54, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1.2" }, g1);
+    const tSub = el("text", { x: 26, y: 53, style: "font-family:var(--mono); font-size:7.5px; letter-spacing:0.08em; fill:var(--clay); font-weight:600;" }, g1);
+    tSub.textContent = "ENTERPRISE TALENT POOL";
+    const tHeadcount = el("text", { x: 26, y: 73, style: "font-family:var(--display); font-size:15px; font-weight:600; fill:var(--ink);" }, g1);
+    tHeadcount.textContent = "1,470 Personnel";
+    const tDim = el("text", { x: 26, y: 85, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g1);
+    tDim.textContent = "35 Dimensions · Active Roster";
 
-    for (let i = 0; i < 7; i++) {
-      hr.booms.push(HR_GATES[i]
-        ? (HR_GATES[i] === "human"
-            ? el("rect", { x: PHX[i] - 5, y: R - 20, width: 10, height: 26, rx: 2, class: "boom held" })
-            : step(hr.track, HR_GATES[i] === "human" ? 0.92 : 0.8, "line",
-                { x1: PHX[i], y1: R - 20, x2: PHX[i] + 28, y2: R - 20, class: HR_BOOM_CLASS[HR_GATES[i]] }))
-        : null);
-    }
-    hr.phx = PHX; hr.halt = PHX[6] - 15;
-    hr.ringBottom = R + 10; hr.vbH = 556;
-    hr.ring = el("circle", { cx: 0, cy: R, r: 9, fill: "none", stroke: "var(--clay-g)", "stroke-width": 2.2, opacity: 0 });
-    hr.bead = el("circle", { cx: 0, cy: R, r: 4.5, fill: "var(--ink)", opacity: 0 });
+    const depts = [
+      { name: "R&D:", count: "833", pct: "(56.7%)", col: "var(--clay)", x: 200, w: 98 },
+      { name: "Sales:", count: "462", pct: "(31.4%)", col: "var(--ink)", x: 310, w: 104 },
+      { name: "HR:", count: "175", pct: "(11.9%)", col: "var(--ink-2)", x: 424, w: 100 }
+    ];
+    depts.forEach(d => {
+      el("rect", { x: d.x, y: 38, width: d.w, height: 26, rx: 2, fill: "var(--plate)", stroke: "var(--plate-line)", "stroke-width": "1" }, g1);
+      const td = el("text", { x: d.x + 8, y: 55, style: `font-family:var(--mono); font-size:8px; fill:${d.col}; font-weight:600;` }, g1);
+      td.textContent = `${d.name} ${d.count} ${d.pct}`;
+    });
+
+    el("rect", { x: 200, y: 70, width: 324, height: 22, rx: 2, fill: "none", stroke: "var(--plate-line)", "stroke-width": "0.8", "stroke-dasharray": "3 3" }, g1);
+    const tEtl = el("text", { x: 362, y: 84, "text-anchor": "middle", style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g1);
+    tEtl.textContent = "Power Query M · Distance Bucketing · Early Tenure Segmentation";
+
+    const p1 = el("path", { d: "M 95 92 V 122", fill: "none", stroke: "var(--clay)", "stroke-width": "1.2", "marker-end": "url(#hrArrClay)" }, g1);
+    p1._len = 30; p1.style.strokeDasharray = "30"; p1.style.strokeDashoffset = "30";
+    hr.feederPipes.push(p1);
+
+    const p2 = el("path", { d: "M 270 92 V 122", fill: "none", stroke: "var(--hair-strong)", "stroke-width": "1.2", "marker-end": "url(#hrArr)" }, g1);
+    p2._len = 30; p2.style.strokeDasharray = "30"; p2.style.strokeDashoffset = "30";
+    hr.feederPipes.push(p2);
+
+    const p3 = el("path", { d: "M 445 92 V 122", fill: "none", stroke: "var(--pine)", "stroke-width": "1.2", "marker-end": "url(#hrArrPine)" }, g1);
+    p3._len = 30; p3.style.strokeDasharray = "30"; p3.style.strokeDashoffset = "30";
+    hr.feederPipes.push(p3);
+
+    /* Stage 2: 3 Attrition Hazard Gates */
+    const g2 = el("g", { opacity: 0 });
+    add(hr.stage2, g2);
+
+    /* Gate 1: Early Tenure Cliff */
+    el("rect", { x: 16, y: 124, width: 162, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1.1" }, g2);
+    const tg1 = el("text", { x: 26, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--clay); letter-spacing:0.05em;" }, g2);
+    tg1.textContent = "TENURE HAZARD GATE";
+    
+    const cpath = el("path", { d: "M 28 174 H 56 V 160 H 90 V 146 H 145", fill: "none", stroke: "var(--clay)", "stroke-width": "1.6", "stroke-linecap": "round" }, g2);
+    cpath._len = 145; cpath.style.strokeDasharray = "145"; cpath.style.strokeDashoffset = "145";
+    hr.cliffPath = cpath;
+    el("circle", { cx: 56, cy: 160, r: 3, fill: "var(--clay)" }, g2);
+
+    const tTurnover = el("text", { x: 26, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--clay);" }, g2);
+    tTurnover.textContent = "57.1% Turnover Peak";
+    const tTenureNote = el("text", { x: 26, y: 212, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g2);
+    tTenureNote.textContent = "0–2 Yr Early Career Vulnerability";
+
+    /* Gate 2: Overtime Fatigue Gate */
+    el("rect", { x: 190, y: 124, width: 162, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1.1" }, g2);
+    el("circle", { cx: 202, cy: 137, r: 4, fill: "none", stroke: "var(--clay)", "stroke-width": "1.2" }, g2);
+    const tg2 = el("text", { x: 212, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--ink); letter-spacing:0.05em;" }, g2);
+    tg2.textContent = "OVERTIME FATIGUE GATE";
+
+    el("rect", { x: 202, y: 156, width: 80, height: 7, rx: 1.5, fill: "rgba(196,83,46,0.15)", stroke: "var(--clay)", "stroke-width": "0.6" }, g2);
+    hr.otBar = el("rect", { x: 202, y: 156, width: 0, height: 7, rx: 1.5, fill: "var(--clay)" }, g2);
+    const tOt = el("text", { x: 288, y: 163, style: "font-family:var(--mono); font-size:7.5px; fill:var(--clay);" }, g2);
+    tOt.textContent = "30.5% OT Attrition";
+
+    el("rect", { x: 202, y: 168, width: 80, height: 7, rx: 1.5, fill: "rgba(78,155,111,0.15)", stroke: "var(--pine)", "stroke-width": "0.6" }, g2);
+    hr.nonOtBar = el("rect", { x: 202, y: 168, width: 0, height: 7, rx: 1.5, fill: "var(--pine)" }, g2);
+    const tNonOt = el("text", { x: 288, y: 175, style: "font-family:var(--mono); font-size:7.5px; fill:var(--pine);" }, g2);
+    tNonOt.textContent = "10.4% Non-OT";
+
+    const tRisk = el("text", { x: 202, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g2);
+    tRisk.textContent = "2.9× Risk Multiplier";
+    const tOtNote = el("text", { x: 202, y: 212, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g2);
+    tOtNote.textContent = "Unmeasured Shift Fatigue";
+
+    /* Gate 3: Promotion Velocity Gate */
+    el("rect", { x: 364, y: 124, width: 162, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1.1" }, g2);
+    el("circle", { cx: 376, cy: 137, r: 4, fill: "none", stroke: "var(--pine)", "stroke-width": "1.2" }, g2);
+    const tg3 = el("text", { x: 386, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine); letter-spacing:0.05em;" }, g2);
+    tg3.textContent = "PROMOTION VELOCITY GATE";
+
+    el("line", { x1: 376, y1: 165, x2: 496, y2: 165, stroke: "var(--plate-line)", "stroke-width": "2.5", "stroke-linecap": "round" }, g2);
+    hr.gaugeLine = el("path", { d: "M 376 165 H 376", stroke: "var(--pine)", "stroke-width": "2.5", "stroke-linecap": "round" }, g2);
+    hr.gaugeNeedle = el("circle", { cx: 376, cy: 165, r: 4, fill: "var(--pine)" }, g2);
+    const tStall = el("text", { x: 456, y: 157, style: "font-family:var(--mono); font-size:7px; fill:var(--pine);" }, g2);
+    tStall.textContent = "5+ yrs";
+
+    const tStaff = el("text", { x: 376, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g2);
+    tStaff.textContent = "144 Flight Risks";
+    const tStaffNote = el("text", { x: 376, y: 212, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g2);
+    tStaffNote.textContent = "Blocked Top Performers";
+
+    /* Stage 3: DAX Decision Rule Engine */
+    const g3 = el("g", { opacity: 0 });
+    add(hr.stage3, g3);
+
+    el("path", { d: "M 95 226 V 248", fill: "none", stroke: "var(--clay)", "stroke-width": "1", "stroke-dasharray": "2 2" }, g3);
+    el("path", { d: "M 270 226 V 248", fill: "none", stroke: "var(--hair-strong)", "stroke-width": "1", "stroke-dasharray": "2 2" }, g3);
+    el("path", { d: "M 445 226 V 248", fill: "none", stroke: "var(--pine)", "stroke-width": "1", "stroke-dasharray": "2 2" }, g3);
+
+    el("rect", { x: 16, y: 248, width: 508, height: 38, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1.2" }, g3);
+    el("circle", { cx: 32, cy: 267, r: 4, fill: "var(--clay)" }, g3);
+    const tDax = el("text", { x: 44, y: 271, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--ink);" }, g3);
+    tDax.textContent = "DAX BUSINESS RULE ENGINE";
+    const tDaxSub = el("text", { x: 216, y: 271, style: "font-family:var(--mono); font-size:8px; fill:var(--ink-2);" }, g3);
+    tDaxSub.textContent = "Flight-Risk Scoring · Comp Parity Calculation · Severance Liability Triage";
+
+    const dstream = el("line", { x1: 24, y1: 284, x2: 516, y2: 284, stroke: "url(#hrBusGrad)", "stroke-width": "2" }, g3);
+    dstream._len = 492; dstream.style.strokeDasharray = "492"; dstream.style.strokeDashoffset = "492";
+    hr.daxStream = dstream;
+
+    el("path", { d: "M 140 286 V 312", fill: "none", stroke: "var(--pine)", "stroke-width": "1.3", "marker-end": "url(#hrArrPine)" }, g3);
+    el("path", { d: "M 400 286 V 312", fill: "none", stroke: "var(--clay)", "stroke-width": "1.3", "marker-end": "url(#hrArrClay)" }, g3);
+
+    /* Stage 4: Actionable Decision Levers */
+    const g4 = el("g", { opacity: 0 });
+    add(hr.stage4, g4);
+
+    el("rect", { x: 16, y: 312, width: 248, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1.3" }, g4);
+    const tRet = el("text", { x: 28, y: 328, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine); letter-spacing:0.06em;" }, g4);
+    tRet.textContent = "ACTIONABLE RETENTION LEVER";
+    const tFast = el("text", { x: 28, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
+    tFast.textContent = "144 Fast-Track Promotions";
+    const tRet1 = el("text", { x: 28, y: 364, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    tRet1.textContent = "• Compensation Parity & Role Reclassification";
+    const tRet2 = el("text", { x: 28, y: 377, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    tRet2.textContent = "• 83.9% Enterprise Talent Retained Baseline";
+
+    el("rect", { x: 26, y: 386, width: 228, height: 20, rx: 2, fill: "rgba(78,155,111,0.18)" }, g4);
+    const tCost = el("text", { x: 34, y: 400, style: "font-family:var(--mono); font-size:8.5px; font-weight:600; fill:var(--pine);" }, g4);
+    tCost.textContent = "✓ $480K Replacement Cost Avoidance";
+
+    el("rect", { x: 276, y: 312, width: 248, height: 102, rx: 3, fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1.3" }, g4);
+    const tInt = el("text", { x: 288, y: 328, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--clay); letter-spacing:0.06em;" }, g4);
+    tInt.textContent = "PROACTIVE WORKFORCE INTERVENTION";
+    const tRebal = el("text", { x: 288, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
+    tRebal.textContent = "234 Overtime Rebalancings";
+    const tInt1 = el("text", { x: 288, y: 364, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    tInt1.textContent = "• Shift Workload Capping & Burnout Monitoring";
+    const tInt2 = el("text", { x: 288, y: 377, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    tInt2.textContent = "• 0–2 Yr Mentorship Cohort Routing";
+
+    el("rect", { x: 286, y: 386, width: 228, height: 20, rx: 2, fill: "rgba(196,83,46,0.18)" }, g4);
+    const tExit = el("text", { x: 294, y: 400, style: "font-family:var(--mono); font-size:8.5px; font-weight:600; fill:var(--clay);" }, g4);
+    tExit.textContent = "! 16.1% Exit Cliff Contained (236 Exits)";
+
+    /* Stage 5: Baseline Footer */
+    const g5 = el("g", { opacity: 0 });
+    add(hr.stage5, g5);
+    el("line", { x1: 16, y1: 428, x2: 524, y2: 428, stroke: "var(--plate-line)", "stroke-width": "0.8" }, g5);
+    const tFoot = el("text", { x: 16, y: 442, style: "font-family:var(--mono); font-size:8px; fill:var(--ink-2);" }, g5);
+    tFoot.textContent = "1,470 Personnel · 35 Dimensions · Power BI DAX Analytics Engine";
+    const tFootR = el("text", { x: 524, y: 442, "text-anchor": "end", style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine);" }, g5);
+    tFootR.textContent = "Talent Retention Impact: $480K";
 
   } else {
-    /* Tight Edition (Mobile) */
-    s.setAttribute("viewBox", "0 0 240 730");
-    const X = 24;
-    hr.railX = X; hr.from = 514; hr.swing = 90;
+    /* Tight Edition (Mobile Portrait) */
+    s.setAttribute("viewBox", "0 0 240 680");
 
-    el("path", { d: "M 208 430 H 228 V 162 M 228 142 V 34 H 212", class: "lane" });
-    el("path", { d: "M 206 34 l 8 -4 v 8 z", class: "wiretip" });
-    el("text", { x: 228, y: 152, "text-anchor": "middle", class: "fsm" }).textContent = "returns";
+    const gHead = el("g", {});
+    const tHead = el("text", { x: 8, y: 16, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2); font-weight:600;" }, gHead);
+    tHead.textContent = "WORKFORCE INTELLIGENCE";
+    el("circle", { cx: 220, cy: 13, r: 3, fill: "var(--pine)" }, gHead);
+    el("line", { x1: 8, y1: 24, x2: 232, y2: 24, stroke: "var(--plate-line)", "stroke-width": "0.8" }, gHead);
 
-    el("rect", { x: 8, y: 16, width: 196, height: 52, rx: 3, class: "lane" });
-    el("text", { x: 18, y: 40, class: "lit" }).textContent = "People Analytics Engine";
-    el("text", { x: 18, y: 58, class: "fsm" }).textContent = "Power BI & DAX Rules";
-    hr.state = el("text", { x: 196, y: 58, "text-anchor": "end", class: "lit" });
-    hr.state.textContent = `state · ${HR_PHASES[0]}`;
-    el("path", { d: "M 130 68 V 92", class: "lane" });
-    tipDown(130, 100);
-    el("text", { x: 140, y: 86, class: "fsm" }).textContent = "calls";
+    const g1 = el("g", { opacity: 0 });
+    add(hr.stage1, g1);
+    el("rect", { x: 8, y: 32, width: 224, height: 46, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1" }, g1);
+    const tSub = el("text", { x: 16, y: 46, style: "font-family:var(--mono); font-size:7px; fill:var(--clay); font-weight:600;" }, g1);
+    tSub.textContent = "1,470 ENTERPRISE TALENT POOL";
+    const tDepts = el("text", { x: 16, y: 64, style: "font-family:var(--mono); font-size:7px; fill:var(--ink);" }, g1);
+    tDepts.textContent = "R&D 833 (56.7%) · Sales 462 · HR 175";
 
-    el("text", { x: 8, y: 104, class: "lit" }).textContent = "Diagnostics Tools ×12";
-    hrule(100, 145, 204, [[123, 137]]);
-    const COL = [8, 114];
-    for (let i = 0; i < 12; i++) {
-      const cx = COL[(i / 6) | 0], y = 126 + (i % 6) * 18;
-      hr.dots.push(el("rect", { x: cx, y: y - 7, width: 5, height: 5, class: "tdot" }));
-      const t = el("text", { x: cx + 11, y, class: "tname" }); t.textContent = HR_TOOLS[i];
-      hr.tools.push(t);
-    }
-    el("text", { x: 8, y: 242, class: "staged" }).textContent = "timing staged";
-    hrule(238, 100, 204, [[145, 159]]);
+    const p1 = el("path", { d: "M 120 78 V 96", fill: "none", stroke: "var(--hair-strong)", "stroke-width": "1", "marker-end": "url(#hrArr)" }, g1);
+    p1._len = 18; p1.style.strokeDasharray = "18"; p1.style.strokeDashoffset = "18";
+    hr.feederPipes.push(p1);
 
-    step(hr.steps, 0.37, "path", { d: "M 152 238 V 296", class: "lane" });
-    tipDown(152, 304, hr.steps, 0.37);
-    step(hr.steps, 0.37, "text", { x: 160, y: 260, class: "fsm" }).textContent = "dimensions";
+    const g2 = el("g", { opacity: 0 });
+    add(hr.stage2, g2);
+    // Gate 1
+    el("rect", { x: 8, y: 98, width: 224, height: 58, rx: 3, fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1" }, g2);
+    const tg1 = el("text", { x: 16, y: 114, style: "font-family:var(--mono); font-size:7.5px; fill:var(--clay); font-weight:600;" }, g2);
+    tg1.textContent = "0–2 YR TENURE CLIFF (57.1% PEAK)";
+    const cpath = el("path", { d: "M 16 138 H 40 V 126 H 70 V 116 H 110", fill: "none", stroke: "var(--clay)", "stroke-width": "1.4" }, g2);
+    cpath._len = 94; cpath.style.strokeDasharray = "94"; cpath.style.strokeDashoffset = "94";
+    hr.cliffPath = cpath;
+    const tg1Sub = el("text", { x: 120, y: 136, style: "font-family:var(--mono); font-size:7px; fill:var(--ink-2);" }, g2);
+    tg1Sub.textContent = "Early Career Cliff";
 
-    step(hr.steps, 0.04, "path", { d: "M 8 468 H 196 L 216.8 456", class: "wnear" });
-    step(hr.steps, 0.04, "path", { d: "M 28.8 456 H 196 M 20.2 461 L 28.8 456", class: "wfar" });
-    step(hr.steps, 0.08, "path", { class: "wfar",
-      d: "M 28.8 298 H 35 M 95 298 H 145 M 159 298 H 216.8 M 28.8 298 V 456 M 216.8 298 V 424 M 216.8 436 V 456" });
-    step(hr.steps, 0.08, "text", { x: 40, y: 302, class: "lit" }).textContent = "workforce model";
-    step(hr.steps, 0.12, "path", { d: "M 8 310 V 468 M 8 310 L 28.8 298", class: "wnear" });
-    step(hr.steps, 0.16, "path", { d: "M 196 310 V 468 M 196 310 L 216.8 298", class: "wnear" });
-    step(hr.steps, 0.2, "path", { d: "M 8 458 H 196", class: "wnear" });
-    step(hr.steps, 0.2, "text", { x: 190, y: 480, "text-anchor": "end", class: "fsm" })
-      .textContent = "1,470 employees";
+    // Gate 2
+    el("rect", { x: 8, y: 162, width: 224, height: 58, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1" }, g2);
+    const tg2 = el("text", { x: 16, y: 178, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink); font-weight:600;" }, g2);
+    tg2.textContent = "OVERTIME FATIGUE (2.9× TURNOVER)";
+    hr.otBar = el("rect", { x: 16, y: 188, width: 0, height: 6, rx: 1, fill: "var(--clay)" }, g2);
+    hr.nonOtBar = el("rect", { x: 16, y: 198, width: 0, height: 6, rx: 1, fill: "var(--pine)" }, g2);
+    const tg2Sub = el("text", { x: 90, y: 195, style: "font-family:var(--mono); font-size:7px; fill:var(--clay);" }, g2);
+    tg2Sub.textContent = "30.5% OT Attrition";
 
-    for (let i = 0; i < 6; i++) {
-      const y = 318 + i * 23, at = HR_W.crate + i * 0.025;
-      step(hr.steps, at, "path", { d: `M 196 ${y} H 62 V ${y + 17} H 196`, class: "cellr" });
-      const pr = step(hr.steps, at, "text", { x: 36, y: y + 12, class: "prompt" });
-      pr.textContent = "[ ]"; hr.prompts.push(pr);
-      const len = [96, 118, 80, 124, 106, 88][i];
-      const ln = el("path", { d: `M 70 ${y + 8} h ${len}`, class: "cellink" });
-      ln.style.strokeDasharray = len; ln.style.strokeDashoffset = len; ln._len = len;
-      hr.cells.push(ln);
-    }
+    // Gate 3
+    el("rect", { x: 8, y: 226, width: 224, height: 58, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1" }, g2);
+    const tg3 = el("text", { x: 16, y: 242, style: "font-family:var(--mono); font-size:7.5px; fill:var(--pine); font-weight:600;" }, g2);
+    tg3.textContent = "144 FLIGHT RISKS (5+ YRS STALLED)";
+    hr.gaugeLine = el("path", { d: "M 16 260 H 16", stroke: "var(--pine)", "stroke-width": "2" }, g2);
+    hr.gaugeNeedle = el("circle", { cx: 16, cy: 260, r: 3.5, fill: "var(--pine)" }, g2);
 
-    const PHY = Array.from({ length: 7 }, (_, i) => 532 + i * 26);
-    const rails = step(hr.track, 0.05, "g", {});
-    el("text", { x: 8, y: 500, class: "lit" }, rails).textContent = "seven phases · workforce triage";
-    el("path", { d: `M ${X} 514 V ${PHY[6]}`, class: "lane" }, rails);
-    hr.deploySeg = el("path", { d: `M ${X} ${PHY[6]} V 720`, class: "lane", "stroke-dasharray": "3 6" }, rails);
-    hr.trail = el("path", { d: `M ${X} 514`, class: "trail" });
+    const g3 = el("g", { opacity: 0 });
+    add(hr.stage3, g3);
+    el("rect", { x: 8, y: 292, width: 224, height: 42, rx: 3, fill: "var(--plate)", stroke: "var(--hair-strong)", "stroke-width": "1" }, g3);
+    const tDax = el("text", { x: 16, y: 310, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--ink);" }, g3);
+    tDax.textContent = "DAX BUSINESS RULE ENGINE";
+    const dstream = el("line", { x1: 14, y1: 324, x2: 226, y2: 324, stroke: "url(#hrBusGrad)", "stroke-width": "2" }, g3);
+    dstream._len = 212; dstream.style.strokeDasharray = "212"; dstream.style.strokeDashoffset = "212";
+    hr.daxStream = dstream;
 
-    for (let i = 0; i < 7; i++) {
-      const g = step(hr.track, 0.15 + i * 0.09, "g", {});
-      el("path", { d: `M 14 ${PHY[i]} H 46`, class: "lane" }, g);
-      const lbl = el("text", { x: 50, y: PHY[i] + 4, class: i === 6 ? "phlbl deplbl" : "phlbl dim" }, g);
-      lbl.textContent = HR_PHASES[i]; hr.plabels.push(lbl);
-    }
-    for (let i = 0; i < 7; i++) {
-      hr.booms.push(HR_GATES[i]
-        ? step(hr.track, HR_GATES[i] === "human" ? 0.92 : 0.8, "line",
-            { x1: 14, y1: PHY[i], x2: 36, y2: PHY[i], class: HR_BOOM_CLASS[HR_GATES[i]] })
-        : null);
-    }
-    hr.phx = PHY; hr.halt = PHY[6] - 15;
-    hr.ringBottom = hr.halt + 7; hr.vbH = 730;
-    hr.ring = el("circle", { cx: X, r: 6, fill: "none", stroke: "var(--clay-g)", "stroke-width": 2, opacity: 0 });
-    hr.bead = el("circle", { cx: X, r: 3, fill: "var(--ink)", opacity: 0 });
+    const g4 = el("g", { opacity: 0 });
+    add(hr.stage4, g4);
+    el("rect", { x: 8, y: 342, width: 224, height: 72, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1" }, g4);
+    const tRTitle = el("text", { x: 16, y: 358, style: "font-family:var(--display); font-size:11px; font-weight:600; fill:var(--ink);" }, g4);
+    tRTitle.textContent = "144 Fast-Track Promotions";
+    const tRNote = el("text", { x: 16, y: 374, style: "font-family:var(--mono); font-size:7px; fill:var(--ink-2);" }, g4);
+    tRNote.textContent = "• Compensation Parity & Reclassification";
+    const tRBadge = el("text", { x: 16, y: 396, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--pine);" }, g4);
+    tRBadge.textContent = "✓ $480K Cost Avoidance (83.9% Retained)";
+
+    el("rect", { x: 8, y: 422, width: 224, height: 72, rx: 3, fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1" }, g4);
+    const tITitle = el("text", { x: 16, y: 438, style: "font-family:var(--display); font-size:11px; font-weight:600; fill:var(--ink);" }, g4);
+    tITitle.textContent = "234 Overtime Rebalancings";
+    const tINote = el("text", { x: 16, y: 454, style: "font-family:var(--mono); font-size:7px; fill:var(--ink-2);" }, g4);
+    tINote.textContent = "• Shift Workload Capping & Mentorship";
+    const tIBadge = el("text", { x: 16, y: 476, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--clay);" }, g4);
+    tIBadge.textContent = "! 16.1% Exit Cliff Contained (236 Exits)";
+
+    const g5 = el("g", { opacity: 0 });
+    add(hr.stage5, g5);
+    const tF = el("text", { x: 8, y: 512, style: "font-family:var(--mono); font-size:7px; fill:var(--ink-2);" }, g5);
+    tF.textContent = "1,470 Personnel · Power BI DAX Model";
   }
-
-  hr.tools.forEach((t, i) => {
-    t.addEventListener("pointerenter", () => hr.dots[i].classList.add("hot"));
-    t.addEventListener("pointerleave", () => hr.dots[i].classList.remove("hot"));
-  });
 
   hr.e = asmFigure("fig08b", { box: () => layoutBox(hr.svg), draw: drawHr, span: hrSpan, window: hrWindow });
 }
 
 function hrWindow(e) {
-  const yA = e.yA, yLaw = e.yB;
-  const yPark = e.top + e.h / 2 - 0.5 * vh;
-  const yStretch = Math.min(yA + (yPark - yA) / HR_PARK, yA + HR_SPAN * (yLaw - yA));
-  const yHalt = e.top + (hr.ringBottom / hr.vbH) * e.h - HR_FOLD * vh;
-  return { yA, yB: Math.max(yLaw, yStretch, yHalt) };
+  return { yA: e.yA, yB: e.yB };
 }
 
 function hrSpan(e) {
-  const p3 = clamp(asmBandP(e, 1), HR_W.track[0], HR_W.track[1]);
-  const p4 = Math.max(HR_W.run, p3 + 0.15);
-  if (p3 !== hr.p3 || p4 !== hr.p4) { hr.p3 = p3; hr.p4 = p4; if (hr.e) hr.e.last = NaN; }
-  return [p4, 1];
+  return [0.05, 0.95];
 }
 
 function drawHr(p) {
-  const on = (n, b) => a4put(n, "opacity", b ? "1" : "0");
-  for (const [n, at] of hr.steps) on(n, p >= at);
-  const w = clamp((p - hr.p3) / Math.max(1e-3, hr.p4 - hr.p3), 0, 1);
-  for (const [n, at] of hr.track) on(n, w >= at);
-  const e = smooth((p - hr.p4) / (1 - hr.p4));
-  const vert = hr.vert;
-  const HALT = hr.halt;
-  const axis = vert ? "cy" : "cx";
-  const xb = lerp(hr.from, HALT, e);
-  const bs = xb.toFixed(1);
-  a4put(hr.bead, axis, bs);
-  on(hr.bead, p > hr.p4);
-  a4put(hr.ring, axis, String(HALT));
-  on(hr.ring, e >= 1);
+  const on = (list, o) => list.forEach(n => a4put(n, "opacity", o > 0 ? String(o) : "0"));
 
-  const td = xb > hr.from + 0.6
-    ? (vert ? `M ${hr.railX} ${hr.from} V ${bs}` : `M ${hr.from} ${hr.railY} H ${bs}`)
-    : (vert ? `M ${hr.railX} ${hr.from}` : `M ${hr.from} ${hr.railY}`);
-  a4put(hr.trail, "d", td);
-
-  hr.booms.forEach((b, i) => {
-    if (!b) return;
-    if (HR_GATES[i] === "human") return;
-    const t = clamp((xb - (hr.phx[i] - 34)) / 28, 0, 1);
-    const a = (hr.swing * t).toFixed(1);
-    if (b._a !== a) {
-      b._a = a;
-      b.setAttribute("transform", vert
-        ? `rotate(${a} 14 ${hr.phx[i]})`
-        : `rotate(${a} ${hr.phx[i]} ${hr.railY - 20})`);
-    }
-    const rest = HR_BOOM_CLASS[HR_GATES[i]];
-    const open = t > 0.5;
-    if (b._open !== open) { b._open = open; b.setAttribute("class", open ? `${rest} open` : rest); }
+  /* Stage 1: p 0.04 to 0.22 */
+  const s1 = clamp((p - 0.04) / 0.18, 0, 1);
+  on(hr.stage1, s1);
+  hr.feederPipes.forEach(pipe => {
+    const len = pipe._len || 30;
+    pipe.style.strokeDashoffset = String(len * (1 - s1));
   });
 
-  let si = 0;
-  for (let i = 0; i < 6; i++) if (xb > hr.phx[i]) si = i;
-  const st = e >= 1 ? "state · validated for retention actions" : `state · ${HR_PHASES[si]}`;
-  if (hr._st !== st) { hr._st = st; hr.state.textContent = st; }
-
-  hr.plabels.forEach((l, i) => {
-    if (i === 6) return;
-    const lit = xb > hr.phx[i];
-    if (l._lit !== lit) { l._lit = lit; l.setAttribute("class", lit ? "phlbl lit" : "phlbl dim"); }
-  });
-
-  const lit = Math.floor(clamp(e * 1.08, 0, 1) * 12);
-  if (hr._lit !== lit) {
-    hr._lit = lit;
-    hr.tools.forEach((t, i) => t.setAttribute("class", i < lit ? "tname on" : "tname"));
-    hr.dots.forEach((d, i) => d.setAttribute("class", i < lit ? "tdot on" : "tdot"));
+  /* Stage 2: p 0.20 to 0.48 */
+  const s2 = clamp((p - 0.20) / 0.24, 0, 1);
+  on(hr.stage2, s2);
+  if (hr.cliffPath) {
+    const clen = hr.cliffPath._len || 145;
+    hr.cliffPath.style.strokeDashoffset = String(clen * (1 - s2));
+  }
+  if (hr.otBar) hr.otBar.setAttribute("width", String((hr.vert ? 55 : 75) * s2));
+  if (hr.nonOtBar) hr.nonOtBar.setAttribute("width", String((hr.vert ? 22 : 28) * s2));
+  if (hr.gaugeNeedle && hr.gaugeLine) {
+    const gx = (hr.vert ? 16 : 376) + (hr.vert ? 60 : 80) * s2;
+    hr.gaugeNeedle.setAttribute("cx", String(gx));
+    hr.gaugeLine.setAttribute("d", `M ${hr.vert ? 16 : 376} ${hr.vert ? 260 : 165} H ${gx}`);
   }
 
-  hr.cells.forEach((c, i) => {
-    const t = smooth((e - 0.08 - i * 0.13) / 0.12);
-    const off = (c._len * (1 - t)).toFixed(1);
-    if (c._off !== off) { c._off = off; c.style.strokeDashoffset = off; }
-    const ran = t >= 1, pr = hr.prompts[i];
-    if (pr._on !== ran) {
-      pr._on = ran;
-      pr.textContent = ran ? `[${i + 1}]` : "[ ]";
-      pr.setAttribute("class", ran ? "prompt lit" : "prompt");
-    }
-  });
+  /* Stage 3: p 0.44 to 0.68 */
+  const s3 = clamp((p - 0.44) / 0.20, 0, 1);
+  on(hr.stage3, s3);
+  if (hr.daxStream) {
+    const slen = hr.daxStream._len || 492;
+    hr.daxStream.style.strokeDashoffset = String(slen * (1 - s3));
+  }
+
+  /* Stage 4: p 0.64 to 0.92 */
+  const s4 = clamp((p - 0.64) / 0.24, 0, 1);
+  on(hr.stage4, s4);
+
+  /* Stage 5: p 0.82 to 1.00 */
+  const s5 = clamp((p - 0.82) / 0.16, 0, 1);
+  on(hr.stage5, s5);
 }
 
 function buildAml(tight) {
