@@ -11067,11 +11067,11 @@ function buildMeta(tight) {
 
   /* Top Static Header */
   const gHead = el("g", {});
-  const tHead = el("text", { x: 16, y: 18, class: "lit", style: "font-family:var(--mono); font-size:8.5px; letter-spacing:0.08em; fill:var(--ink-2); font-weight:600;" }, gHead);
+  const tHead = el("text", { x: 16, y: 18, class: "lit", style: "font-family:var(--mono); font-size:10px; letter-spacing:0.08em; fill:var(--ink-2); font-weight:600;" }, gHead);
   tHead.textContent = "META AD CROSS-PLATFORM ATTRIBUTION & DYNAMIC PARAMETERS";
 
   el("circle", { cx: 442, cy: 15, r: 3.5, fill: "#2563eb" }, gHead);
-  const tLive = el("text", { x: 450, y: 18, class: "lit", style: "font-family:var(--mono); font-size:8px; letter-spacing:0.06em; fill:#2563eb; font-weight:600;" }, gHead);
+  const tLive = el("text", { x: 450, y: 18, class: "lit", style: "font-family:var(--mono); font-size:9.5px; letter-spacing:0.06em; fill:#2563eb; font-weight:600;" }, gHead);
   tLive.textContent = "400K EVENTS";
   el("line", { x1: 16, y1: 28, x2: 524, y2: 28, stroke: "var(--plate-line)", "stroke-width": "0.8" }, gHead);
 
@@ -11081,20 +11081,20 @@ function buildMeta(tight) {
 
   // Left 3D Platform Dock: Facebook
   iso3dBox(el, g1, 24, 46, 230, 56, 12, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
-  const tFb = el("text", { x: 36, y: 64, style: "font-family:var(--mono); font-size:8px; letter-spacing:0.06em; fill:#2563eb; font-weight:700;" }, g1);
+  const tFb = el("text", { x: 36, y: 64, style: "font-family:var(--mono); font-size:9.5px; letter-spacing:0.06em; fill:#2563eb; font-weight:700;" }, g1);
   tFb.textContent = "FACEBOOK AD CAMPAIGNS";
   const tFbVal = el("text", { x: 36, y: 82, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g1);
   tFbVal.textContent = "240K Events · $1.42M";
-  const tFbFmt = el("text", { x: 36, y: 94, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g1);
+  const tFbFmt = el("text", { x: 36, y: 94, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
   tFbFmt.textContent = "Feeds · Desktop/Mobile · Carousel";
 
   // Right 3D Platform Dock: Instagram
   iso3dBox(el, g1, 280, 46, 234, 56, 12, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
-  const tIg = el("text", { x: 292, y: 64, style: "font-family:var(--mono); font-size:8px; letter-spacing:0.06em; fill:var(--clay); font-weight:700;" }, g1);
+  const tIg = el("text", { x: 292, y: 64, style: "font-family:var(--mono); font-size:9.5px; letter-spacing:0.06em; fill:var(--clay); font-weight:700;" }, g1);
   tIg.textContent = "INSTAGRAM AD CAMPAIGNS";
   const tIgVal = el("text", { x: 292, y: 82, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g1);
   tIgVal.textContent = "160K Events · $1.12M";
-  const tIgFmt = el("text", { x: 292, y: 94, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g1);
+  const tIgFmt = el("text", { x: 292, y: 94, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
   tIgFmt.textContent = "Stories · Reels · Video Focus";
 
   // 3D Telemetry Ingestion Pipes
@@ -11111,7 +11111,7 @@ function buildMeta(tight) {
   add(meta.stage2, g2);
 
   iso3dBox(el, g2, 24, 142, 490, 80, 14, { frontFill: "var(--plate-solid)", topFill: "#fffdf8", sideFill: "#e0d6be" });
-  const tSwitch = el("text", { x: 38, y: 158, style: "font-family:var(--mono); font-size:8px; letter-spacing:0.06em; fill:var(--ink); font-weight:700;" }, g2);
+  const tSwitch = el("text", { x: 38, y: 158, style: "font-family:var(--mono); font-size:9.5px; letter-spacing:0.06em; fill:var(--ink); font-weight:700;" }, g2);
   tSwitch.textContent = "DAX DYNAMIC FIELD PARAMETERS  ·  SWITCH(SELECTEDVALUE('Measure'[Order]))";
 
   // 4 Measure Chips in 3D Isometric Pockets
@@ -11125,9 +11125,9 @@ function buildMeta(tight) {
   chips.forEach(ch => {
     const cg = el("g", {}, g2);
     el("rect", { x: ch.x, y: 168, width: ch.w, height: 42, rx: 2, fill: ch.active ? "rgba(196,83,46,0.08)" : "var(--plate)", stroke: ch.active ? "var(--clay)" : "var(--hair-strong)", "stroke-width": ch.active ? "1.4" : "0.8" }, cg);
-    const ct = el("text", { x: ch.x + 8, y: 182, style: `font-family:var(--mono); font-size:7px; letter-spacing:0.04em; fill:${ch.col}; font-weight:600;` }, cg);
+    const ct = el("text", { x: ch.x + 8, y: 182, style: `font-family:var(--mono); font-size:9px; letter-spacing:0.04em; fill:${ch.col}; font-weight:600;` }, cg);
     ct.textContent = ch.title;
-    const cv = el("text", { x: ch.x + 8, y: 200, style: `font-family:var(--mono); font-size:9px; fill:${ch.active ? "var(--clay)" : "var(--ink)"}; font-weight:700;` }, cg);
+    const cv = el("text", { x: ch.x + 8, y: 200, style: `font-family:var(--mono); font-size:12px; fill:${ch.active ? "var(--clay)" : "var(--ink)"}; font-weight:700;` }, cg);
     cv.textContent = ch.val;
     meta.switcherChips.push(cg);
   });
@@ -11142,7 +11142,7 @@ function buildMeta(tight) {
   add(meta.stage3, g3);
 
   iso3dBox(el, g3, 24, 258, 490, 72, 12, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
-  const tSql = el("text", { x: 38, y: 274, style: "font-family:var(--mono); font-size:8px; font-weight:700; fill:var(--ink);" }, g3);
+  const tSql = el("text", { x: 38, y: 274, style: "font-family:var(--mono); font-size:9.5px; font-weight:700; fill:var(--ink);" }, g3);
   tSql.textContent = "POSTGRESQL FORENSIC EVENT BUS  ·  328-LINE PRODUCTION VERIFICATION";
 
   const sqlBus = el("line", { x1: 36, y1: 284, x2: 504, y2: 284, stroke: "url(#metaBusGrad)", "stroke-width": "2" }, g3);
@@ -11150,9 +11150,9 @@ function buildMeta(tight) {
   meta.queryBus = sqlBus;
 
   // Demographic & Funnel Splits
-  const tD1 = el("text", { x: 38, y: 302, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g3);
+  const tD1 = el("text", { x: 38, y: 302, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g3);
   tD1.textContent = "• Audience: Female 54% · Male 46%  |  Peak Cohort: Age 25–34 (48.2% Conversions)";
-  const tD2 = el("text", { x: 38, y: 318, style: "font-family:var(--mono); font-size:7.5px; fill:var(--pine); font-weight:600;" }, g3);
+  const tD2 = el("text", { x: 38, y: 318, style: "font-family:var(--mono); font-size:10px; fill:var(--pine); font-weight:600;" }, g3);
   tD2.textContent = "✓ SQL Cross-Tool Reconciliation: CTR 11.79% · Engagement Rate 13.58% · Conversion Rate 4.99%";
 
   /* Stage 4: 3D Format Matrix & Strategic Decisions */
@@ -11163,18 +11163,18 @@ function buildMeta(tight) {
   iso3dBox(el, g4, 24, 344, 230, 84, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
   const tA1 = el("text", { x: 36, y: 362, style: "font-family:var(--display); font-size:12px; font-weight:600; fill:var(--ink);" }, g4);
   tA1.textContent = "Carousel & Video Creatives";
-  const tA1s = el("text", { x: 36, y: 378, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+  const tA1s = el("text", { x: 36, y: 378, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
   tA1s.textContent = "• Highest conversion yield & ROAS";
-  const tA1b = el("text", { x: 36, y: 404, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--pine);" }, g4);
+  const tA1b = el("text", { x: 36, y: 404, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--pine);" }, g4);
   tA1b.textContent = "✓ 4.99% CR · $2.54M Allocation Guard";
 
   // Action Box 2: Viral Amplification
   iso3dBox(el, g4, 280, 344, 234, 84, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--clay)" });
   const tA2 = el("text", { x: 292, y: 362, style: "font-family:var(--display); font-size:12px; font-weight:600; fill:var(--ink);" }, g4);
   tA2.textContent = "Stories & Reels Formats";
-  const tA2s = el("text", { x: 292, y: 378, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+  const tA2s = el("text", { x: 292, y: 378, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
   tA2s.textContent = "• 11.79% CTR · 46.1K Viral Reach";
-  const tA2b = el("text", { x: 292, y: 404, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--clay);" }, g4);
+  const tA2b = el("text", { x: 292, y: 404, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--clay);" }, g4);
   tA2b.textContent = "! Fatigue Threshold: 14-Day Cycle";
 
     meta.e = asmFigure("fig03b", { box: () => layoutBox(meta.svg), draw: drawMeta, span: metaSpan, window: metaWindow });
@@ -11255,7 +11255,7 @@ function buildHr(tight) {
 
     /* Static Header */
     const gHead = el("g", {});
-    const tHead = el("text", { x: 16, y: 18, class: "lit", style: "font-family:var(--mono); font-size:8.5px; letter-spacing:0.08em; fill:var(--ink-2); font-weight:600;" }, gHead);
+    const tHead = el("text", { x: 16, y: 18, class: "lit", style: "font-family:var(--mono); font-size:10px; letter-spacing:0.08em; fill:var(--ink-2); font-weight:600;" }, gHead);
     tHead.textContent = "WORKFORCE INTELLIGENCE & RETENTION DECISION ARCHITECTURE";
 
     el("circle", { cx: 442, cy: 15, r: 3.5, fill: "var(--pine)" }, gHead);
@@ -11268,11 +11268,11 @@ function buildHr(tight) {
     add(hr.stage1, g1);
 
     iso3dBox(el, g1, 16, 38, 170, 54, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
-    const tSub = el("text", { x: 26, y: 53, style: "font-family:var(--mono); font-size:7.5px; letter-spacing:0.08em; fill:var(--clay); font-weight:600;" }, g1);
+    const tSub = el("text", { x: 26, y: 53, style: "font-family:var(--mono); font-size:9.5px; letter-spacing:0.08em; fill:var(--clay); font-weight:600;" }, g1);
     tSub.textContent = "ENTERPRISE TALENT POOL";
     const tHeadcount = el("text", { x: 26, y: 73, style: "font-family:var(--display); font-size:15px; font-weight:600; fill:var(--ink);" }, g1);
     tHeadcount.textContent = "1,470 Personnel";
-    const tDim = el("text", { x: 26, y: 85, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g1);
+    const tDim = el("text", { x: 26, y: 85, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
     tDim.textContent = "35 Dimensions · Active Roster";
 
     const depts = [
@@ -11282,12 +11282,12 @@ function buildHr(tight) {
     ];
     depts.forEach(d => {
       el("rect", { x: d.x, y: 38, width: d.w, height: 26, rx: 2, fill: "var(--plate)", stroke: "var(--plate-line)", "stroke-width": "1" }, g1);
-      const td = el("text", { x: d.x + 8, y: 55, style: `font-family:var(--mono); font-size:8px; fill:${d.col}; font-weight:600;` }, g1);
+      const td = el("text", { x: d.x + 8, y: 55, style: `font-family:var(--mono); font-size:9.5px; fill:${d.col}; font-weight:600;` }, g1);
       td.textContent = `${d.name} ${d.count} ${d.pct}`;
     });
 
     el("rect", { x: 200, y: 70, width: 324, height: 22, rx: 2, fill: "none", stroke: "var(--plate-line)", "stroke-width": "0.8", "stroke-dasharray": "3 3" }, g1);
-    const tEtl = el("text", { x: 362, y: 84, "text-anchor": "middle", style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g1);
+    const tEtl = el("text", { x: 362, y: 84, "text-anchor": "middle", style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g1);
     tEtl.textContent = "Power Query M · Distance Bucketing · Early Tenure Segmentation";
 
     const p1 = el("path", { d: "M 95 92 V 122", fill: "none", stroke: "var(--clay)", "stroke-width": "1.2", "marker-end": "url(#hrArrClay)" }, g1);
@@ -11308,7 +11308,7 @@ function buildHr(tight) {
 
     /* Gate 1: Early Tenure Cliff */
     iso3dBox(el, g2, 16, 124, 162, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--clay)" });
-    const tg1 = el("text", { x: 26, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--clay); letter-spacing:0.05em;" }, g2);
+    const tg1 = el("text", { x: 26, y: 140, style: "font-family:var(--mono); font-size:9.5px; font-weight:600; fill:var(--clay); letter-spacing:0.05em;" }, g2);
     tg1.textContent = "TENURE HAZARD GATE";
     
     const cpath = el("path", { d: "M 28 174 H 56 V 160 H 90 V 146 H 145", fill: "none", stroke: "var(--clay)", "stroke-width": "1.6", "stroke-linecap": "round" }, g2);
@@ -11318,13 +11318,13 @@ function buildHr(tight) {
 
     const tTurnover = el("text", { x: 26, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--clay);" }, g2);
     tTurnover.textContent = "57.1% Turnover Peak";
-    const tTenureNote = el("text", { x: 26, y: 212, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g2);
+    const tTenureNote = el("text", { x: 26, y: 212, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g2);
     tTenureNote.textContent = "0–2 Yr Early Career Vulnerability";
 
     /* Gate 2: Overtime Fatigue Gate */
     iso3dBox(el, g2, 190, 124, 162, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb" });
     el("circle", { cx: 202, cy: 137, r: 4, fill: "none", stroke: "var(--clay)", "stroke-width": "1.2" }, g2);
-    const tg2 = el("text", { x: 212, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--ink); letter-spacing:0.05em;" }, g2);
+    const tg2 = el("text", { x: 212, y: 140, style: "font-family:var(--mono); font-size:9.5px; font-weight:600; fill:var(--ink); letter-spacing:0.05em;" }, g2);
     tg2.textContent = "OVERTIME FATIGUE GATE";
 
     el("rect", { x: 202, y: 156, width: 80, height: 7, rx: 1.5, fill: "rgba(196,83,46,0.15)", stroke: "var(--clay)", "stroke-width": "0.6" }, g2);
@@ -11339,24 +11339,24 @@ function buildHr(tight) {
 
     const tRisk = el("text", { x: 202, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g2);
     tRisk.textContent = "2.9× Risk Multiplier";
-    const tOtNote = el("text", { x: 202, y: 212, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g2);
+    const tOtNote = el("text", { x: 202, y: 212, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g2);
     tOtNote.textContent = "Unmeasured Shift Fatigue";
 
     /* Gate 3: Promotion Velocity Gate */
     iso3dBox(el, g2, 364, 124, 162, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
     el("circle", { cx: 376, cy: 137, r: 4, fill: "none", stroke: "var(--pine)", "stroke-width": "1.2" }, g2);
-    const tg3 = el("text", { x: 386, y: 140, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine); letter-spacing:0.05em;" }, g2);
+    const tg3 = el("text", { x: 386, y: 140, style: "font-family:var(--mono); font-size:9.5px; font-weight:600; fill:var(--pine); letter-spacing:0.05em;" }, g2);
     tg3.textContent = "PROMOTION VELOCITY GATE";
 
     el("line", { x1: 376, y1: 165, x2: 496, y2: 165, stroke: "var(--plate-line)", "stroke-width": "2.5", "stroke-linecap": "round" }, g2);
     hr.gaugeLine = el("path", { d: "M 376 165 H 376", stroke: "var(--pine)", "stroke-width": "2.5", "stroke-linecap": "round" }, g2);
     hr.gaugeNeedle = el("circle", { cx: 376, cy: 165, r: 4, fill: "var(--pine)" }, g2);
-    const tStall = el("text", { x: 456, y: 157, style: "font-family:var(--mono); font-size:7px; fill:var(--pine);" }, g2);
+    const tStall = el("text", { x: 456, y: 157, style: "font-family:var(--mono); font-size:9px; fill:var(--pine);" }, g2);
     tStall.textContent = "5+ yrs";
 
     const tStaff = el("text", { x: 376, y: 198, style: "font-family:var(--display); font-size:14px; font-weight:600; fill:var(--ink);" }, g2);
     tStaff.textContent = "144 Flight Risks";
-    const tStaffNote = el("text", { x: 376, y: 212, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g2);
+    const tStaffNote = el("text", { x: 376, y: 212, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g2);
     tStaffNote.textContent = "Blocked Top Performers";
 
     /* Stage 3: DAX Decision Rule Engine */
@@ -11371,7 +11371,7 @@ function buildHr(tight) {
     el("circle", { cx: 32, cy: 267, r: 4, fill: "var(--clay)" }, g3);
     const tDax = el("text", { x: 44, y: 271, style: "font-family:var(--mono); font-size:9px; font-weight:600; fill:var(--ink);" }, g3);
     tDax.textContent = "DAX BUSINESS RULE ENGINE";
-    const tDaxSub = el("text", { x: 216, y: 271, style: "font-family:var(--mono); font-size:8px; fill:var(--ink-2);" }, g3);
+    const tDaxSub = el("text", { x: 216, y: 271, style: "font-family:var(--mono); font-size:9.5px; fill:var(--ink-2);" }, g3);
     tDaxSub.textContent = "Flight-Risk Scoring · Comp Parity Calculation · Severance Liability Triage";
 
     const dstream = el("line", { x1: 24, y1: 284, x2: 516, y2: 284, stroke: "url(#hrBusGrad)", "stroke-width": "2" }, g3);
@@ -11386,38 +11386,38 @@ function buildHr(tight) {
     add(hr.stage4, g4);
 
     iso3dBox(el, g4, 16, 312, 248, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--pine)" });
-    const tRet = el("text", { x: 28, y: 328, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine); letter-spacing:0.06em;" }, g4);
+    const tRet = el("text", { x: 28, y: 328, style: "font-family:var(--mono); font-size:9.5px; font-weight:600; fill:var(--pine); letter-spacing:0.06em;" }, g4);
     tRet.textContent = "ACTIONABLE RETENTION LEVER";
     const tFast = el("text", { x: 28, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
     tFast.textContent = "144 Fast-Track Promotions";
-    const tRet1 = el("text", { x: 28, y: 364, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    const tRet1 = el("text", { x: 28, y: 364, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
     tRet1.textContent = "• Compensation Parity & Role Reclassification";
-    const tRet2 = el("text", { x: 28, y: 377, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    const tRet2 = el("text", { x: 28, y: 377, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
     tRet2.textContent = "• 83.9% Enterprise Talent Retained Baseline";
 
     el("rect", { x: 26, y: 386, width: 228, height: 20, rx: 2, fill: "rgba(78,155,111,0.18)" }, g4);
-    const tCost = el("text", { x: 34, y: 400, style: "font-family:var(--mono); font-size:8.5px; font-weight:600; fill:var(--pine);" }, g4);
+    const tCost = el("text", { x: 34, y: 400, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--pine);" }, g4);
     tCost.textContent = "✓ $480K Replacement Cost Avoidance";
 
     iso3dBox(el, g4, 276, 312, 248, 102, 10, { frontFill: "var(--plate)", topFill: "#fffdf8", sideFill: "#e8dfcb", stroke: "var(--clay)" });
-    const tInt = el("text", { x: 288, y: 328, style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--clay); letter-spacing:0.06em;" }, g4);
+    const tInt = el("text", { x: 288, y: 328, style: "font-family:var(--mono); font-size:9.5px; font-weight:600; fill:var(--clay); letter-spacing:0.06em;" }, g4);
     tInt.textContent = "PROACTIVE WORKFORCE INTERVENTION";
     const tRebal = el("text", { x: 288, y: 348, style: "font-family:var(--display); font-size:13px; font-weight:600; fill:var(--ink);" }, g4);
     tRebal.textContent = "234 Overtime Rebalancings";
-    const tInt1 = el("text", { x: 288, y: 364, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    const tInt1 = el("text", { x: 288, y: 364, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
     tInt1.textContent = "• Shift Workload Capping & Burnout Monitoring";
-    const tInt2 = el("text", { x: 288, y: 377, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2);" }, g4);
+    const tInt2 = el("text", { x: 288, y: 377, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2);" }, g4);
     tInt2.textContent = "• 0–2 Yr Mentorship Cohort Routing";
 
     el("rect", { x: 286, y: 386, width: 228, height: 20, rx: 2, fill: "rgba(196,83,46,0.18)" }, g4);
-    const tExit = el("text", { x: 294, y: 400, style: "font-family:var(--mono); font-size:8.5px; font-weight:600; fill:var(--clay);" }, g4);
+    const tExit = el("text", { x: 294, y: 400, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--clay);" }, g4);
     tExit.textContent = "! 16.1% Exit Cliff Contained (236 Exits)";
 
     /* Stage 5: Baseline Footer */
     const g5 = el("g", { opacity: 0 });
     add(hr.stage5, g5);
     el("line", { x1: 16, y1: 428, x2: 524, y2: 428, stroke: "var(--plate-line)", "stroke-width": "0.8" }, g5);
-    const tFoot = el("text", { x: 16, y: 442, style: "font-family:var(--mono); font-size:8px; fill:var(--ink-2);" }, g5);
+    const tFoot = el("text", { x: 16, y: 442, style: "font-family:var(--mono); font-size:9.5px; fill:var(--ink-2);" }, g5);
     tFoot.textContent = "1,470 Personnel · 35 Dimensions · Power BI DAX Analytics Engine";
     const tFootR = el("text", { x: 524, y: 442, "text-anchor": "end", style: "font-family:var(--mono); font-size:8px; font-weight:600; fill:var(--pine);" }, g5);
     tFootR.textContent = "Talent Retention Impact: $480K";
@@ -11427,7 +11427,7 @@ function buildHr(tight) {
     s.setAttribute("viewBox", "0 0 240 680");
 
     const gHead = el("g", {});
-    const tHead = el("text", { x: 8, y: 16, style: "font-family:var(--mono); font-size:7.5px; fill:var(--ink-2); font-weight:600;" }, gHead);
+    const tHead = el("text", { x: 8, y: 16, style: "font-family:var(--mono); font-size:10.5px; fill:var(--ink-2); font-weight:600;" }, gHead);
     tHead.textContent = "WORKFORCE INTELLIGENCE";
     el("circle", { cx: 220, cy: 13, r: 3, fill: "var(--pine)" }, gHead);
     el("line", { x1: 8, y1: 24, x2: 232, y2: 24, stroke: "var(--plate-line)", "stroke-width": "0.8" }, gHead);
@@ -11467,7 +11467,7 @@ function buildHr(tight) {
 
     // Gate 3
     el("rect", { x: 8, y: 226, width: 224, height: 58, rx: 3, fill: "var(--plate)", stroke: "var(--pine)", "stroke-width": "1" }, g2);
-    const tg3 = el("text", { x: 16, y: 242, style: "font-family:var(--mono); font-size:7.5px; fill:var(--pine); font-weight:600;" }, g2);
+    const tg3 = el("text", { x: 16, y: 242, style: "font-family:var(--mono); font-size:10px; fill:var(--pine); font-weight:600;" }, g2);
     tg3.textContent = "144 FLIGHT RISKS (5+ YRS STALLED)";
     hr.gaugeLine = el("path", { d: "M 16 260 H 16", stroke: "var(--pine)", "stroke-width": "2" }, g2);
     hr.gaugeNeedle = el("circle", { cx: 16, cy: 260, r: 3.5, fill: "var(--pine)" }, g2);
@@ -11488,7 +11488,7 @@ function buildHr(tight) {
     tRTitle.textContent = "144 Fast-Track Promotions";
     const tRNote = el("text", { x: 16, y: 374, style: "font-family:var(--mono); font-size:7px; fill:var(--ink-2);" }, g4);
     tRNote.textContent = "• Compensation Parity & Reclassification";
-    const tRBadge = el("text", { x: 16, y: 396, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--pine);" }, g4);
+    const tRBadge = el("text", { x: 16, y: 396, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--pine);" }, g4);
     tRBadge.textContent = "✓ $480K Cost Avoidance (83.9% Retained)";
 
     el("rect", { x: 8, y: 422, width: 224, height: 72, rx: 3, fill: "var(--plate)", stroke: "var(--clay)", "stroke-width": "1" }, g4);
@@ -11496,7 +11496,7 @@ function buildHr(tight) {
     tITitle.textContent = "234 Overtime Rebalancings";
     const tINote = el("text", { x: 16, y: 454, style: "font-family:var(--mono); font-size:7px; fill:var(--ink-2);" }, g4);
     tINote.textContent = "• Shift Workload Capping & Mentorship";
-    const tIBadge = el("text", { x: 16, y: 476, style: "font-family:var(--mono); font-size:7.5px; font-weight:600; fill:var(--clay);" }, g4);
+    const tIBadge = el("text", { x: 16, y: 476, style: "font-family:var(--mono); font-size:10.5px; font-weight:600; fill:var(--clay);" }, g4);
     tIBadge.textContent = "! 16.1% Exit Cliff Contained (236 Exits)";
 
     const g5 = el("g", { opacity: 0 });
