@@ -3821,7 +3821,7 @@ body{font-synthesis:none}
 #manifest .line li:first-child :is(.mt, .lab){transform:translateX(-1px); align-items:flex-start; text-align:left}
 #manifest .line li:last-child :is(.mt, .lab){transform:translateX(calc(-100% + 2px)); align-items:flex-end; text-align:right}
 #manifest .line li .lab > b{font-family:var(--body); font-weight:400; font-size:var(--fs-note);
-  line-height:20px; color:var(--ink); white-space:nowrap}
+  line-height:18px; color:var(--ink); text-align:center; white-space:normal; max-width:115px}
 #manifest .line li .lab .mnoun{font-family:var(--body); font-style:italic; font-size:var(--fs-small);
   line-height:17px; color:var(--ink-2); text-wrap:balance}
 #manifest .line li .lab .m{margin:0; font-family:var(--body); font-size:var(--fs-small); letter-spacing:0;
@@ -3933,7 +3933,7 @@ body{font-synthesis:none}
   #manifest .line li .lab{display:contents}
   #manifest .line li .lab .mnoun{display:none}
   #manifest .line li:not(.stamped) .lab .mnoun{display:inline; margin-left:auto; line-height:20px}
-  #manifest .line li .lab > b{line-height:20px}
+  #manifest .line li .lab > b{line-height:20px; white-space:nowrap; max-width:none}
   #manifest .line li .lab .m{margin-left:auto; line-height:20px}
   #manifest .line li .foot{position:static; display:block; padding:0 12px 12px 32px; white-space:normal}
   /* the row's ring starts right of the line, so it crosses nothing */
@@ -4423,7 +4423,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <li><a class="mrow" href="#start"><i class="mt">06:12</i><span class="lab"><b>the start</b></span></a><span class="title" id="mtitle" aria-hidden="true">run <i data-machine>042</i>, all fourteen stops</span></li>
           <li><a class="mrow" href="#who"><i class="mt">06:58</i><span class="lab"><b>who</b></span></a></li>
           <li data-proj="1"><a class="mrow" href="#path"><i class="mt">07:52</i><span class="lab"><b>honda sales</b><span class="mnoun">Dealership Telemetry</span><span class="m"><b class="mv">₹59.63 Cr</b> pipeline</span></span></a></li>
-          <li data-proj="2"><a class="mrow" href="#meta-station"><i class="mt">08:24</i><span class="lab"><b>meta ad intelligence</b><span class="mnoun">Dynamic Parameter Engine</span><span class="m"><b class="mv">400,000</b> events</span></span></a></li>
+          <li data-proj="2"><a class="mrow" href="#meta-station"><i class="mt">08:24</i><span class="lab"><b>meta ads</b><span class="mnoun">Dynamic Parameter Engine</span><span class="m"><b class="mv">400,000</b> events</span></span></a></li>
           <li data-proj="3"><a class="mrow" href="#work"><i class="mt">09:15</i><span class="lab"><b>healthcare rcm</b><span class="mnoun">Clinical Encounters</span><span class="m"><b class="mv">5,000</b> encounters</span></span></a></li>
           <li data-proj="4"><a class="mrow" href="#cadence"><i class="mt">12:06</i><span class="lab"><b>credit risk</b><span class="mnoun">Bank Loan Portfolio</span><span class="m"><b class="mv">$435.8M</b> portfolio</span></span></a></li>
           <li data-proj="5"><a class="mrow" href="#glyph"><i class="mt">15:23</i><span class="lab"><b>fraud intelligence</b><span class="mnoun">FastMCP + Claude AI</span><span class="m"><b class="mv">10.2×</b> anomaly</span></span></a></li>
