@@ -1022,12 +1022,13 @@ if (location.hash.length > 1) window.__arrive();
      60px at 1512×982, 31px at 1456×949, 21px at 1440×900 and 10px at both
      1375×800 and 1280×800: a breath before the last act on the tall seats,
      and one continuous board on the short ones. */
-  .ladder{--row:clamp(24px, 3.8vh, 44px); list-style:none;
+  .ladder{list-style:none;
     font-family:var(--mono); font-size:.78rem; letter-spacing:.055em;
     color:var(--ink-2); margin:0;
     display:flex; flex-direction:column}
   .ladder li{display:grid; grid-template-columns:56px 130px 88px 1fr;
-    align-items:center; height:var(--row); margin:0}
+    align-items:center; margin:0}
+  .ladder li:not(.approvebar){flex:1 1 0; min-height:clamp(26px, 4vh, 48px)}
   .ladder li span{transition:color .4s ease}
   .ladder li.lit span{color:var(--ink)}
   /* the stop's name is a name, in the text face; the time beside it is a
@@ -2603,7 +2604,7 @@ if (location.hash.length > 1) window.__arrive();
        colophon is set to; 100% is only the floor under it at 390 and 320. */
     .b8 footer{max-width:min(100%, 27.5rem)}
     .ladder li{grid-template-columns:56px minmax(0,1fr); height:auto;
-      align-items:baseline; padding:.3rem 0}
+      align-items:baseline; padding:.3rem 0; flex:none}
     .ladder .pr{grid-column:2; padding-left:0; white-space:normal}
     /* THE SOCKET STAYS IN THE RAIL'S LANE. It is pulled 34px left of the
        column's own edge so its centre lands on x 26 — the gutter the phone
