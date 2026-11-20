@@ -1700,8 +1700,8 @@ if (location.hash.length > 1) window.__arrive();
     body.atmorning .dawnwrap .dawnrow{transition-delay:1s}
     body.atmorning .dawnwrap .dawnrun{transition-delay:1.14s}
   }
-  .bdawn .kicker{color:var(--clay)}
-  .bdawn .hourline{max-width:none; margin:.5rem auto 0; font-style:italic}
+  .bdawn .kicker{position:absolute; top:clamp(1.1rem, 3.5vh, 2.4rem); left:0; right:0; margin:0 auto; text-align:center; width:max-content; color:var(--clay); z-index:2}
+  .bdawn .hourline{max-width:none; margin:0 auto; font-style:italic}
 
   /* wide enough that each line of the poem is one line: at 38rem the
      column broke it mid-clause and the <br> stopped meaning anything */
@@ -15205,7 +15205,7 @@ function layMorning(wrap, W, H, hz) {
   const cap = wrap.querySelector(".endquote figcaption"), rowEl = wrap.querySelector(".dawnrow");
   const capGap = cap ? px(cap, "marginTop") : 0, rowGap = rowEl ? px(rowEl, "marginTop") : 0;
   const lines = [];
-  for (const el of wrap.querySelectorAll(".kicker, .hourline, .endquote blockquote, .endquote figcaption, .dawnsay, .dawnrow")) {
+  for (const el of wrap.querySelectorAll(".hourline, .endquote blockquote, .endquote figcaption, .dawnsay, .dawnrow")) {
     const rg = document.createRange();
     rg.selectNodeContents(el);
     const rs = [...rg.getClientRects()].filter((q) => q.width && q.height);
@@ -15336,7 +15336,8 @@ function layPhone(wrap, W, H) {
   const box = wrap.getBoundingClientRect();
   const C0 = box.height;
   const rg = document.createRange();
-  rg.selectNodeContents(wrap.querySelector(".kicker"));
+  const headEl = wrap.querySelector(".hourline") || wrap.querySelector(".kicker");
+  rg.selectNodeContents(headEl);
   const kr = [...rg.getClientRects()].filter((q) => q.width && q.height);
   const kickOff = (kr.length ? Math.min(...kr.map((q) => q.top)) : box.top) - box.top;
   wrap.classList.remove("measuring");
