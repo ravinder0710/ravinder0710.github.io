@@ -775,9 +775,10 @@ if (location.hash.length > 1) window.__arrive();
      (`.brow.simd .bfill`). A second accent here and neither reads as the
      mark. The <a> keeps the run's pine link register, which is not an accent
      — every handoff on the page uses it. */
-  .bench .shead{display:flex; justify-content:space-between; gap:1rem; align-items:baseline;
+  .bench .shead{display:flex; justify-content:space-between; gap:1rem; align-items:baseline; flex-wrap:wrap;
     font-family:var(--mono); font-size:.7rem; letter-spacing:.05em; color:var(--ink-2)}
-  .bench .brow{display:grid; grid-template-columns:7.6rem 1fr 3rem; gap:.6rem; align-items:center;
+  .bench .shead > span:first-child{white-space:nowrap}
+  .bench .brow{display:grid; grid-template-columns:16.8rem 1fr 3rem; gap:.6rem; align-items:center;
     font-family:var(--mono); font-size:.7rem; color:var(--ink-2); margin-top:.4rem}
   .bench.jet .brow{grid-template-columns:9.4rem 1fr 4.6rem} /* "422 mb/s" + the lane names */
   /* THE LABEL COLUMN MEASURES ITSELF. It was 7.6rem here and 10.6rem on the
@@ -790,7 +791,7 @@ if (location.hash.length > 1) window.__arrive();
      or a size changes: the column is whatever the label needs, and the bar
      track takes what is left, with a 4rem floor so it stays a bar. */
   @media (min-width:821px){
-    .bench .brow{grid-template-columns:max-content minmax(4rem,1fr) 3rem}
+    .bench .brow{grid-template-columns:16.8rem minmax(4rem,1fr) 3rem}
     .bench.jet .brow{grid-template-columns:max-content minmax(4rem,1fr) 4.6rem}
     .bench .brow>span:first-child{white-space:nowrap}
   }
@@ -4732,7 +4733,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
               <span class="big idle" id="verdict">·</span>
               <span>conf <b id="conf">·</b></span>
               <span>forward <b id="fwd">·</b></span>
-              <span>Power BI MCP Connect with VS Code via Claude <b>sandbox</b> · zero leakage</span>
+              <span>Power BI MCP &bull; Zero leakages</span>
             </div>
           </div>
         </div>
@@ -4754,7 +4755,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
           <div class="brow simd"><span>foreign IP anomaly spike (24.8% fraud)</span><span class="btrack" aria-hidden="true"><span class="bfill" style="transform:scaleX(1)"></span></span><span class="bval">10.2×</span></div>
           <p class="bfoot">verified forensic telemetry &middot; 37,890 banking access logs</p>
         </div>
-        <figcaption>fig. 06 &middot; Power BI MCP Connect with VS Code via Claude forensic audit engine; 37,890 banking logs audited &middot; <a href="assets/fraud/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
+        <figcaption>fig. 06 &middot; Power BI MCP with VS code + Claude forensic audit engine; 37K+ banking logs audited &middot; <a href="assets/fraud/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
