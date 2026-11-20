@@ -2907,6 +2907,12 @@ if (location.hash.length > 1) window.__arrive();
      (and the scan matches the class name even inside a comment, so this one
      does not spell it). */
   #jetFig .jface{fill:var(--plate)}
+  .figsvg#jetFig .rwall-front{fill:#ffffff; stroke:var(--ink); stroke-width:1.3}
+  .figsvg#jetFig .rwall-side{fill:#f3ebd9; stroke:var(--ink); stroke-width:1.1}
+  .figsvg#jetFig .rroof-front{fill:#b34724; stroke:var(--ink); stroke-width:1.2}
+  .figsvg#jetFig .rroof-side{fill:#c4532e; stroke:var(--ink); stroke-width:1.1}
+  .figsvg#jetFig .rawn{fill:#c4532e; stroke:var(--ink); stroke-width:1}
+  .figsvg#jetFig .rdoor{fill:#f4ebd9; stroke:var(--ink); stroke-width:1}
   .figsvg#jetFig .jlid{fill:none; stroke:var(--ink); stroke-width:1.2}
   .figsvg#jetFig .jnib{fill:var(--ink)}
   .figsvg#jetFig .jlead{fill:none; stroke:var(--ink); stroke-width:1}
@@ -10148,26 +10154,34 @@ function buildJetSolid(g, host) {
   /* ── the gather pipe collecting outputs from all 5 branches ── */
   const gather = part(ink, [outlet(N_BRANCH - 1), outlet(0), [sx(0), g.stitchY]], "lane", { pencil: "jpenh" });
 
-  /* ── the five branch machines: KL, Klang, Subang, Puchong, Cheras ── */
+  /* ── the five physical restaurant pavilions: KL Flagship, Klang, Subang, Puchong, Cheras ── */
   const lanes = [];
   for (let k = N_BRANCH - 1; k >= 0; k--) {
     const x = sx(k), z = zOf(k), z2 = z + g.mz, zc = zMid(k);
     const lg = mk("g", { class: "jmach" }, ink);
-    const t0 = jetP(x, g.manY, zc), t1 = jetP(x, top, zc);
-    const wall = (sgn) => [
-      jetP(x + sgn * g.mouth, top, z), jetP(x + sgn * g.mouth, sh, z), jetP(x + sgn * g.throat, th, z), jetP(x + sgn * g.throat, bot, z),
-      jetP(x + sgn * g.throat, bot, z2), jetP(x + sgn * g.throat, th, z2), jetP(x + sgn * g.mouth, sh, z2), jetP(x + sgn * g.mouth, top, z2)];
-    const rim = (hw, y) => [jetP(x - hw, y, z), jetP(x + hw, y, z), jetP(x + hw, y, z2), jetP(x - hw, y, z2)];
-    /* in the DOM back to front (throat rim, walls, mouth rim), and drawn the
-       way the material goes through: down the feed, round the mouth, down
-       each wall, and out at the throat */
+    const t0 = jetP(x, g.manY, zc), t1 = jetP(x, top - 24, zc);
+
+    const hw = g.mouth, bh_mid = (bot - top);
+    const frontWall = [jetP(x - hw, top, z), jetP(x + hw, top, z), jetP(x + hw, bot, z), jetP(x - hw, bot, z)];
+    const sideWall = [jetP(x + hw, top, z), jetP(x + hw, top, z2), jetP(x + hw, bot, z2), jetP(x + hw, bot, z)];
+    const apex = jetP(x, top - 22, z);
+    const apexSide = jetP(x, top - 22, z2);
+    const roofFront = [apex, jetP(x + hw + 2, top, z), jetP(x - hw - 2, top, z)];
+    const roofSide = [apex, apexSide, jetP(x + hw + 2, top, z2), jetP(x + hw + 2, top, z)];
+    const awnY = top + bh_mid * 0.44;
+    const awning = [jetP(x - hw, awnY, z), jetP(x + hw, awnY, z), jetP(x + hw, awnY + 5, z), jetP(x - hw, awnY + 5, z)];
+    const doorW = hw * 0.45, doorH = bh_mid * 0.38;
+    const door = [jetP(x - doorW, bot - doorH, z), jetP(x + doorW, bot - doorH, z), jetP(x + doorW, bot, z), jetP(x - doorW, bot, z)];
+
     const dropA = part(lg, [t0, [t0[0], t0[1] + g.drop[0]]], "lane", { pencil: "jpenh" });
     const dropB = part(lg, [[t0[0], t0[1] + g.drop[1]], t1], "lane", { pencil: "jpenh" });
-    const rimT = part(lg, rim(g.throat, th), "die", { closed: true });
-    const wl = part(lg, wall(-1), "die jface", { closed: true, face: true });
-    const wr = part(lg, wall(1), "die jface", { closed: true, face: true });
-    const rimM = part(lg, rim(g.mouth, top), "die", { closed: true });
-    lanes[k] = { k, x, z, z2, t0, items: [dropA, dropB, rimM, wl, wr, rimT] };
+    const sWall = part(lg, sideWall, "die rwall-side", { closed: true, face: true });
+    const fWall = part(lg, frontWall, "die rwall-front", { closed: true });
+    const rSide = part(lg, roofSide, "die rroof-side", { closed: true });
+    const rFront = part(lg, roofFront, "die rroof-front", { closed: true });
+    const awn = part(lg, awning, "die rawn", { closed: true });
+    const dr = part(lg, door, "die rdoor", { closed: true });
+    lanes[k] = { k, x, z, z2, t0, items: [dropA, dropB, sWall, fWall, rSide, rFront, awn, dr] };
   }
 
   /* ── the gathering rail, closed at both ends, and the member: a header,
