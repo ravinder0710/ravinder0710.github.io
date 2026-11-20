@@ -581,7 +581,20 @@ if (location.hash.length > 1) window.__arrive();
      not on the padding around them, so a pointer inside the target would
      start the trace and fail to light the label that started it. Both
      rules are hung on the group instead. */
-  #appliedFig .desklab, #jetFig .jlab{cursor:pointer}
+  #appliedFig .desklab{cursor:pointer}
+  #jetFig .jlab-bg{fill:var(--bg); stroke:var(--ink); stroke-width:1.1px; cursor:pointer}
+  #jetFig .jlab{
+    cursor:pointer;
+    font-family:var(--mono);
+    font-size:10.5px;
+    font-weight:700;
+    fill:var(--ink) !important;
+    paint-order:stroke fill;
+    stroke:var(--bg);
+    stroke-width:2.5px;
+    stroke-linejoin:round;
+    letter-spacing:.04em;
+  }
   .figsvg .tracebtn, .figsvg .tracebtn *{cursor:pointer}
   #jetFig.tracing g.blk:not(.hot) .mk{stroke:var(--ink-2); stroke-width:.8}
   #appliedFig.tracing g.mkg:not(.hot) .mk,
@@ -591,7 +604,8 @@ if (location.hash.length > 1) window.__arrive();
      the state has to be carried by what is NOT hovered. --ink-2 is 5.79:1 /
      Lc 70.1 on the day field, over the Lc 60 dim floor. */
   #appliedFig.tracing .tracebtn:not(:hover) text.desklab{fill:var(--ink-2)}
-  #jetFig .tracebtn:hover .jlab{fill:var(--ink)}
+  #jetFig .tracebtn:hover .jlab-bg, #jetFig .tracebtn.hot .jlab-bg{fill:var(--ink); stroke:var(--ink)}
+  #jetFig .tracebtn:hover .jlab, #jetFig .tracebtn.hot .jlab{fill:var(--bg) !important; stroke:var(--ink)}
   #amlFig text.tname:hover, #hrFig text.tname:hover{fill:var(--ink); cursor:default}
   #amlFig .tdot.hot, #hrFig .tdot.hot{stroke:var(--ink)}
 
@@ -9979,7 +9993,7 @@ const JET_SOLID_WIDE = {
   heads: [[8, 22, "45K POS bill stream", 0], [456, 22, "5-branch revenue consolidation", 1]],
   railY: 58, railX0: -56, streamEnd: 456,
   mouth: 30, throat: 18, die: [0, 12, 36, 48], mx: 110, mstep: 10, mTop: 280, zPitch: 58, mz: 26,
-  manY: 241, drop: [14, 30], labY: 26,
+  manY: 241, drop: [0, 16], labY: 8.5,
   stitchY: 308, cap: 6, memX: 108, memY: 330, head: 84, trail: 124, tail: "RM799K recovered", memZ: 22,
   deflateY: 272, lead: [72, 160], ground: 352, groundX: [8, 552],
   foot: [[8, 386, "branch target pacing and daily sales allocation are consolidated across 5 Malaysia locations"]],
@@ -9990,7 +10004,7 @@ const JET_SOLID_TIGHT = {
   heads: [[8, 14, "45K POS stream", 0], [8, 30, "5-branch consolidation", 0]],
   railY: 60, railX0: -40, streamEnd: 224,
   mouth: 17, throat: 11, die: [0, 10, 32, 42], mx: 10, mstep: 4, mTop: 210, zPitch: 40, mz: 15,
-  manY: 182, drop: [9.5, 22.5], labY: 20,
+  manY: 182, drop: [0, 14], labY: 7,
   stitchY: 240, cap: 6, memX: 8, memY: 260, head: 65, trail: 44, tail: "RM799K", memZ: 11,
   deflateY: 128, lead: null, ground: 278, groundX: [8, 232],
   foot: [[8, 306, "branch sales pacing"], [8, 320, "consolidated across 5 outlets"]],
@@ -10247,6 +10261,19 @@ function buildJetSolid(g, host) {
      machine's own box, held one unit short of the next machine's so no two
      targets overlap and the tab order can stay vt-0 to vt-3 */
   for (const [t, k] of jlabs) {
+    if (t.parentNode.classList.contains("tracebtn")) {
+      const lx = parseFloat(t.getAttribute("x")), ly = parseFloat(t.getAttribute("y"));
+      const bw = bnames[k].length > 4 ? 46 : (bnames[k].length > 2 ? 38 : 28);
+      const bgRect = mk("rect", {
+        x: r2(lx - bw / 2),
+        y: r2(ly - 9.5),
+        width: bw,
+        height: 13,
+        rx: 2,
+        class: "jlab-bg"
+      });
+      t.parentNode.insertBefore(bgRect, t);
+    }
     const L = lanes[k], x0 = jetP(L.x - g.mouth, top, L.z)[0];
     const x1 = k < 4 ? Math.min(x0 + 2 * g.mouth + 0.8 * g.mz, jetP(sx(k + 1) - g.mouth, top, zOf(k + 1))[0] - 1)
       : x0 + 2 * g.mouth + 0.8 * g.mz;
