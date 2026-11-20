@@ -583,18 +583,21 @@ if (location.hash.length > 1) window.__arrive();
      start the trace and fail to light the label that started it. Both
      rules are hung on the group instead. */
   #appliedFig .desklab{cursor:pointer}
-  #jetFig .jlab-bg{fill:var(--bg); stroke:var(--ink); stroke-width:1.1px; cursor:pointer}
+  #jetFig .jlab-bg{
+    fill: #181614 !important;
+    stroke: #181614 !important;
+    stroke-width: 1px;
+    cursor: pointer;
+  }
   #jetFig .jlab{
-    cursor:pointer;
-    font-family:var(--mono);
-    font-size:10.5px;
-    font-weight:700;
-    fill:var(--ink) !important;
-    paint-order:stroke fill;
-    stroke:var(--bg);
-    stroke-width:2.5px;
-    stroke-linejoin:round;
-    letter-spacing:.04em;
+    cursor: pointer;
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 700;
+    fill: #faf6ee !important;
+    stroke: none !important;
+    letter-spacing: .04em;
+    pointer-events: none;
   }
   .figsvg .tracebtn, .figsvg .tracebtn *{cursor:pointer}
   #jetFig.tracing g.blk:not(.hot) .mk{stroke:var(--ink-2); stroke-width:.8}
@@ -605,8 +608,8 @@ if (location.hash.length > 1) window.__arrive();
      the state has to be carried by what is NOT hovered. --ink-2 is 5.79:1 /
      Lc 70.1 on the day field, over the Lc 60 dim floor. */
   #appliedFig.tracing .tracebtn:not(:hover) text.desklab{fill:var(--ink-2)}
-  #jetFig .tracebtn:hover .jlab-bg, #jetFig .tracebtn.hot .jlab-bg{fill:var(--ink); stroke:var(--ink)}
-  #jetFig .tracebtn:hover .jlab, #jetFig .tracebtn.hot .jlab{fill:var(--bg) !important; stroke:var(--ink)}
+  #jetFig .tracebtn:hover .jlab-bg, #jetFig .tracebtn.hot .jlab-bg{fill:var(--clay) !important; stroke:var(--clay) !important}
+  #jetFig .tracebtn:hover .jlab, #jetFig .tracebtn.hot .jlab{fill:#ffffff !important; stroke:none !important}
   #amlFig text.tname:hover, #hrFig text.tname:hover{fill:var(--ink); cursor:default}
   #amlFig .tdot.hot, #hrFig .tdot.hot{stroke:var(--ink)}
 
@@ -9864,8 +9867,11 @@ function buildJetFlat(tight, host) {
     el("path", { d: `M ${lx + g.mouth} ${dTop} V ${dSh} L ${lx + g.throat} ${dThr} V ${dBot}`, class: "die", "aria-hidden": "true" }, lw);
     /* centred ABOVE the rail, where no block ever travels — beside the lane it
        sat inside the raw block's own footprint at every width */
-    const t = el("text", { x: lx, y: g.railY - 18, "text-anchor": "middle", class: "jlab" }, lw);
-    const fbnames = ["KL", "Klang", "Subang", "Puchong", "Cheras"]; t.textContent = fbnames[i]; jlabs.push([t, i]);
+    const fbnames = ["KL", "Klang", "Subang", "Puchong", "Cheras"];
+    const bw = fbnames[i].length > 6 ? 54 : (fbnames[i].length > 4 ? 48 : (fbnames[i].length > 2 ? 38 : 28));
+    el("rect", { x: r2(lx - bw / 2), y: r2(g.railY - 27.5), width: bw, height: 13, rx: 2.5, class: "jlab-bg", fill: "#181614" }, lw);
+    const t = el("text", { x: lx, y: g.railY - 18, "text-anchor": "middle", class: "jlab", fill: "#faf6ee" }, lw);
+    t.textContent = fbnames[i]; jlabs.push([t, i]);
   });
   /* the deflate register: the word at the left, and the four throats sharing
      one y. Wide runs a leader from the word to the first die because its
@@ -10265,7 +10271,7 @@ function buildJetSolid(g, host) {
      pipe breaks for it, in lane order so the keyboard meets vt-0 first ── */
   const bnames = ["KL", "Klang", "Subang", "Puchong", "Cheras"];
   const jlabs = Array.from({length: 5}, (_, k) => {
-    const t = mk("text", { x: r2(lanes[k].t0[0]), y: r2(lanes[k].t0[1] + g.labY), "text-anchor": "middle", class: "jlab" }, names);
+    const t = mk("text", { x: r2(lanes[k].t0[0]), y: r2(lanes[k].t0[1] + g.labY), "text-anchor": "middle", class: "jlab", fill: "#faf6ee" }, names);
     t.textContent = bnames[k];
     return [t, k];
   });
@@ -10276,13 +10282,14 @@ function buildJetSolid(g, host) {
   for (const [t, k] of jlabs) {
     if (t.parentNode.classList.contains("tracebtn")) {
       const lx = parseFloat(t.getAttribute("x")), ly = parseFloat(t.getAttribute("y"));
-      const bw = bnames[k].length > 4 ? 46 : (bnames[k].length > 2 ? 38 : 28);
+      const bw = bnames[k].length > 6 ? 54 : (bnames[k].length > 4 ? 48 : (bnames[k].length > 2 ? 38 : 28));
       const bgRect = mk("rect", {
         x: r2(lx - bw / 2),
         y: r2(ly - 9.5),
         width: bw,
         height: 13,
-        rx: 2,
+        rx: 2.5,
+        fill: "#181614",
         class: "jlab-bg"
       });
       t.parentNode.insertBefore(bgRect, t);
