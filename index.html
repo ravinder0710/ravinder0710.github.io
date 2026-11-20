@@ -458,7 +458,8 @@ if (location.hash.length > 1) window.__arrive();
   .station.flip .prose{order:2}
   .station.flip .plate{order:1}
   .b4 .beat-inner{grid-template-columns:minmax(0,24rem) minmax(0,1fr)} /* the pad+net row needs the width */
-  #netwrap{max-width:520px}
+  #netwrap{max-width:480px}
+  #glyph .plate{max-width:680px}
   .prose h2{
     font-family:var(--display); font-weight:430; font-variation-settings:"opsz" 100, "SOFT" 40;
     font-size:clamp(2.1rem, 4.2vw, 3.4rem); letter-spacing:-.015em; line-height:1.06;
@@ -776,6 +777,18 @@ if (location.hash.length > 1) window.__arrive();
     @keyframes stamp{0%{transform:scale(1.5); opacity:0}60%{transform:scale(.95); opacity:1}100%{transform:scale(1)}}
   }
   .verdictline b{font-weight:400; color:var(--ink)}
+  .verdictline .mcp-badge{
+    background:#ece1cf;
+    border:1px solid rgba(38,35,28,0.16);
+    border-radius:4px;
+    padding:2px 10px;
+    font-family:var(--sans, 'Plus Jakarta Sans', sans-serif);
+    font-size:var(--fs-micro);
+    font-weight:700;
+    color:var(--ink);
+    letter-spacing:.02em;
+    margin-left:auto;
+  }
   /* THE BENCH IS A RECORD, AND THE HAIR RULE IS THE SEAM. No new border:
      `.bench` already wears `border-top:1px solid var(--hair); padding-top`,
      which is the ruled-filing grammar `.schoolrec` uses — and `.plate` around
@@ -4753,7 +4766,7 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
               <span class="big idle" id="verdict">·</span>
               <span>conf <b id="conf">·</b></span>
               <span>forward <b id="fwd">·</b></span>
-              <span>Power BI MCP &bull; Zero leakages</span>
+              <span class="mcp-badge">Power BI MCP &bull; Zero leakages</span>
             </div>
           </div>
         </div>
