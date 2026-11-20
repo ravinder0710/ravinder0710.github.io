@@ -204,12 +204,70 @@
       </div>
 
       <figure class="plate-fig">
-        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06); text-align:center;">
-          <div class="arch-diagram-wrap" style="background:#ffffff; border:1px solid var(--plate-line, #d9cfbe); border-radius:6px; padding:1.5rem; display:inline-block; max-width:100%; box-shadow:0 2px 10px rgba(0,0,0,0.03);">
-            <a href="assets/healthcare/data_architecture_pipeline.png" target="_blank" rel="noopener noreferrer" title="Click to view full architecture diagram">
-              <img src="assets/healthcare/data_architecture_pipeline.png" alt="Clinical Encounters & RCM Data Architecture Pipeline" style="max-width:100%; width:540px; height:auto; display:block; margin:0 auto; border-radius:4px;">
-            </a>
+        <div class="plate-paper" style="padding:1.5rem; background:var(--paper, #fbf3e7); border:1px solid var(--hair); border-radius:4px; box-shadow:0 4px 20px rgba(0,0,0,0.06);">
+          <div class="arch-diagram-wrap">
+            <div class="arch-flow">
+
+              <!-- Stage 1: Raw Clinical Ingestion -->
+              <div class="arch-card">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Clinical Encounters Ledger</span>
+                  <span class="arch-metric-pill">5,000 Records &middot; &pound;3.36M Gross Billing</span>
+                </div>
+                <div class="arch-title">Raw Clinical Encounters &amp; EHR Registry</div>
+                <div class="arch-detail">Comprehensive clinical admission logs tracking inpatient bed days, emergency triage, elective procedures, attending consultants, and insurance reimbursement claims.</div>
+              </div>
+
+              <!-- Connector 1 -->
+              <div class="arch-arrow">&darr; <span>Data Ingestion &amp; Star Schema Normalization (8 Entities)</span></div>
+
+              <!-- Stage 2: Dual Branch (SQL Warehousing + Power BI Semantic Engine) -->
+              <div class="arch-grid-2">
+                <div class="arch-card" style="border-left:3px solid var(--clay);">
+                  <div class="arch-kicker">Relational SQL Warehousing</div>
+                  <div class="arch-title" style="font-size:0.95rem;">SQL Analytical Views</div>
+                  <div class="arch-detail">6 relational SQL views normalizing doctor specialties, ICD-10 diagnosis taxonomies, room tier daily rates, and clinical department billing.</div>
+                </div>
+
+                <div class="arch-card" style="border-left:3px solid var(--pine, #2d5a27);">
+                  <div class="arch-kicker" style="color:var(--pine);">Semantic Engine</div>
+                  <div class="arch-title" style="font-size:0.95rem;">Power BI Tabular Modeling</div>
+                  <div class="arch-detail">DAX iterators &amp; dynamic field parameters modeling length of stay (LOS), room rate variance, and inpatient service split allocation.</div>
+                </div>
+              </div>
+
+              <!-- Connector 2 -->
+              <div class="arch-arrow">&darr; <span>Department &amp; Procedure Revenue Analysis &middot; Dynamic LOS Triage</span></div>
+
+              <!-- Stage 3: Executive BI Architecture -->
+              <div class="arch-card" style="border:1.5px solid var(--clay);">
+                <div class="arch-card-header">
+                  <span class="arch-kicker">Executive Clinical Cockpit</span>
+                  <span class="arch-metric-pill">Star Schema Modeling</span>
+                </div>
+                <div class="arch-title">Executive Healthcare &amp; RCM Architecture (Light &amp; Dark)</div>
+                <div class="arch-detail">Dual-theme clinical governance dashboards meeting WCAG AAA contrast compliance for 24/7 hospital ward workstations and C-suite controllers.</div>
+              </div>
+
+              <!-- Connector 3 -->
+              <div class="arch-arrow">&darr; <span>Payor Settlement &amp; Patient Revenue Classification</span></div>
+
+              <!-- Stage 4: Outcomes Grid -->
+              <div class="arch-grid-2">
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--pine, #2d5a27);">
+                  <div class="arch-subcard-title" style="color:var(--pine);">Payor Settlements: &pound;2.23M (66.4% Insured)</div>
+                  <div class="arch-subcard-desc">Commercial contract recoveries across major private health insurance networks (Bupa, Axa, Aviva) and NHS trust direct payments.</div>
+                </div>
+
+                <div class="arch-subcard" style="background:#ffffff; border-left:3px solid var(--clay);">
+                  <div class="arch-subcard-title" style="color:var(--clay);">Out of Pocket: &pound;1.13M (33.6% Self-Pay)</div>
+                  <div class="arch-subcard-desc">Direct patient self-pay collections, elective cosmetic co-pays, and private room rate differentials reconciled with zero leakage.</div>
+                </div>
+              </div>
+
+            </div>
           </div>
+
           <p style="font-family:var(--mono); font-size:0.75rem; color:var(--ink-2); margin-top:1.2rem; text-align:center;">
             <span>fig. 01 &middot; the clinical encounters &amp; rcm data architecture pipeline &middot; </span>
             <a href="assets/healthcare/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay); font-weight:600;">open full diagram &#8599;</a>
