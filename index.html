@@ -4636,8 +4636,8 @@ figure.borrowed>figcaption, figure.borrowed>figcaption i,
              is still what a reader gets for the plate, but the four desk
              controls inside it now exist. Each carries its own name.
              `check-figures.mjs` §1 encodes the pair of rules. -->
-        <svg id="appliedFig" class="figsvg" viewBox="0 0 560 400" role="group" aria-label="5,000 patient clinical encounters ride the intake line past three analytical triage desks: Clinical Triage, which settles inpatient, outpatient, emergency, and day care admissions; the Star Schema Engine linking claims to payers and diagnoses; and Field Parameters dynamic cohort switching. The eighth record is flagged for claim denial mitigation and audits."></svg>
-        <figcaption>fig. 04 &middot; clinical encounter triage line; 5,000 patient encounters classified through Star Schema &amp; denial mitigation engine &middot; <a href="assets/healthcare/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
+        <svg id="appliedFig" class="figsvg" viewBox="0 0 560 400" role="group" aria-label="5,000 patient clinical encounters ride the intake line past three analytical triage desks: Clinical Triage, which settles inpatient, outpatient, emergency, and day care admissions; the Star Schema Engine linking claims to payers and diagnoses; and Field Parameters dynamic cohort switching. The eighth record shows a successful surgical operation and recovery discharge."></svg>
+        <figcaption>fig. 04 &middot; clinical encounter triage line; 5,000 patient encounters classified through Star Schema &amp; surgical recovery workflow &middot; <a href="assets/healthcare/data_architecture_pipeline.png" target="_blank" style="color:var(--clay); text-decoration:none; border-bottom:1px solid var(--clay);">open pipeline architecture &#8599;</a></figcaption>
       </figure>
     </div>
   </section>
@@ -6774,8 +6774,8 @@ function segInQuad(u0, v0, u1, v1, Q) {
 const applied = { marks: [], svg: $("appliedFig"), m: null };
 const APPLIED_DESKS = [
   ["Clinical Triage", ["rules settle >90% encounters"]],
-  ["Star Schema Engine", ["1:N dimensional relationships", "claims linked to diagnosis"]],
-  ["Field Parameters", ["dynamic cohort switching"]],
+  ["Star Schema Engine", ["1:N star schema", "claims to diagnosis"]],
+  ["Field Parameters", ["cohort switching"]],
 ];
 /* [the desk that settles it, the words on its hole], in ENTRY order. Desk 3
    is no desk at all: it is the hold. "pending application" is the alt text's
@@ -6786,10 +6786,10 @@ const APPLIED_PLAN = [
   [0, ["inpatient"]], [0, ["outpatient"]], [0, ["emergency"]], [0, ["day care"]],
   [1, ["paid claim"]], [1, ["remittance"]],
   [2, ["adjudication", "pending"]],
-  [3, ["denial audit"]],
+  [3, ["surgery", "successful"]],
 ];
 const APPLIED_MODELS = "dimensional star & snowflake schemas";
-const APPLIED_REASON = ["flagged for claim denial mitigation: ", "code mismatch & appeal needed"];
+const APPLIED_REASON = ["surgical procedure completed:", "recovery verified & discharged"];
 /* motion, in the local u: a piece is let go every STAGGER, every leg of every
    path runs at one speed, the held piece arrives at HELD and its ring is
    inked over RING; what is left of u is rest */
@@ -7012,8 +7012,7 @@ function appliedText(el, parent, x, y, words, cls, anchor) {
 /* the reason, bound under the held piece; the guess it keeps is ink */
 function appliedReason(el, parent, x, y0, lines, anchor) {
   lines.forEach((ln, i) => {
-    const t = appliedText(el, parent, x, y0 + i * (parent.ownerSVGElement?.classList.contains("tight") ? 14 : 16), ln, null, anchor);
-    if (i === lines.length - 1) el("tspan", { class: "lit" }, t).textContent = "follow up";
+    appliedText(el, parent, x, y0 + i * (parent.ownerSVGElement?.classList.contains("tight") ? 14 : 16), ln, null, anchor);
   });
 }
 /* a piece: waypoints [x, y of its bottom edge, depth], walked by true 3D arc
@@ -7135,7 +7134,7 @@ function appliedWide(s, el) {
   el("path", { class: "lane", d: `M ${a4n(sx(1) + APPLIED_MODELS.length * 8.012 + 10)} ${ym - 4} H 552` }, T);
   appliedText(el, T, 8, G.yb + 44, "5,000 clinical encounters", "lit");
   const hy = G.yb + 46;
-  M.signs.push([appliedText(el, s, 552, hy, "denial audit", "lit desklab", "end"), 3]);
+  M.signs.push([appliedText(el, s, 552, hy, "surgery successful", "lit desklab", "end"), 3]);
   appliedReason(el, T, 552, hy + 16, APPLIED_REASON, "end");
   appliedText(el, T, 8, G.yb + 104, "5,000 encounters modeled across departments");
   appliedText(el, T, 8, G.yb + 120, "field parameters enable executive switching across specialties");
@@ -7240,9 +7239,9 @@ function appliedTight(s, el) {
     for (const yy of [y0 + G.rw, y1 - G.rw]) el("circle", { cx: G.rx, cy: yy, r: 2.2, class: "a4belt" }, L.belt);
   }
   const ring = appliedP(G.rx, yEnd - 7, G.ride);
-  M.signs.push([appliedText(el, s, 54, ring[1] + 4, "denial audit", "lit desklab"), 3]);
+  M.signs.push([appliedText(el, s, 54, ring[1] + 4, "surgery successful", "lit desklab"), 3]);
   const ny = ring[1] + 34;
-  appliedReason(el, T, 8, ny, ["flagged for denial mitigation: ", "code mismatch audit", ""]);
+  appliedReason(el, T, 8, ny, APPLIED_REASON);
   appliedText(el, T, 8, ny + 54, "5,000 encounters modeled");
   appliedText(el, T, 8, ny + 70, "star & snowflake schema");
   appliedText(el, T, 8, ny + 84, "field parameters slicing");
@@ -7302,9 +7301,9 @@ function makePatientFigure(el, g, idx) {
     /* 6: Adjudication Pending (Amber badge) */
     el("circle", { cx: "3.5", cy: "-8.5", r: "1.8", fill: "var(--clay)" }, g);
   } else {
-    /* 7: Denial Audit (Red appeal flag) */
-    el("line", { x1: "3", y1: "-10", x2: "3", y2: "1", stroke: "var(--clay)", "stroke-width": "1" }, g);
-    el("polygon", { points: "3,-10 7.5,-7.5 3,-5", fill: "var(--clay)" }, g);
+    /* 7: Surgery Successful (Green recovery flag) */
+    el("line", { x1: "3", y1: "-10", x2: "3", y2: "1", stroke: "var(--pine)", "stroke-width": "1" }, g);
+    el("polygon", { points: "3,-10 7.5,-7.5 3,-5", fill: "var(--pine)" }, g);
   }
 }
 
